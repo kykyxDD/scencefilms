@@ -210,7 +210,7 @@
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	font-size: 18px;
+	font-size: 24px;
 	font-weight: bold;
 }
 
@@ -269,21 +269,21 @@
 	        transform: translateX(150px);
 }
 .title_text{
-	line-height: 20px;
+	font-size: 24px;
+	line-height: 24px;
 	margin-left: 5px;
 }
 
 
 .title_menu .cont_title_menu .line_menu_title {
 	position: relative;
-	height: 15px;
-	width: 15px;
+	height: 30px;
+	width: 24px;
 }
 .line_menu_title .line{
 	background-color: #000;
-	height: 3px;
+	height: 5px;
 	width: 100%;
-	margin: 2px 0;
 	position: absolute;
 	
 }
@@ -291,10 +291,10 @@
 	top: 0;
 }
 .line_menu_title .line2 {
-	top: 5px;
+	top: 7px;
 }
 .line_menu_title .line3 {
-	top: 10px;
+	top: 14px;
 }
 .line_menu_title .line {
 	-webkit-transform: translateX(-100px);
@@ -390,8 +390,6 @@
 
 #cont_menu  .list_menu .cont_list_menu{
 	padding-left: 20px;
-	width: 110px;
-    height: 140px;
 }
 #cont_menu .list_menu ul {
 	list-style-type: none;
