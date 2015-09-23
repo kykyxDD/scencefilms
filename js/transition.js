@@ -109,9 +109,11 @@ Transition.prototype = {
     
         if (this.debug) console.log("expand")
         
-        this.current_state = 'expanded'
-        TweenLite.to(this.cont, 0.35*this.time_scale, {y: 425, ease: Power1.easeOut, onComplete: function() {if (this.debug) console.log("onExpanded"); this.onExpanded()}, onCompleteScope: this})
-        TweenLite.to(this.cont, 1*this.time_scale, {y: 450, ease: Power1.easeOut, delay: 0.35*this.time_scale})
+        this.current_state = 'expanded';
+
+        TweenLite.to(this.cont, 0.35*this.time_scale, {y: 350, ease: Power1.easeOut, onComplete: function() {if (this.debug) console.log("onExpanded"); this.onExpanded()}, onCompleteScope: this})
+        TweenLite.to(this.cont, 1*this.time_scale, {y: 380, ease: Power1.easeOut, delay: 0.35*this.time_scale})
+
     },
     
     open: function() {

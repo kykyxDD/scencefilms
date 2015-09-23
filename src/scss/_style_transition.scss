@@ -1,8 +1,4 @@
 @font-face {
-    font-family: Scada; /* Имя шрифта */
-    src: url(fonts/Scada.ttf); /* Путь к файлу со шрифтом */
-}
-@font-face {
     font-family: 'scadaregular';
     src: url('fonts_scade/scada-webfont.eot');
     src: url('fonts_scade/scada-webfont.eot?#iefix') format('embedded-opentype'),
@@ -129,8 +125,8 @@
 
 .transition {
     position: fixed;
-    top: -530px;
-    left: 60px;
+    top: -485px;
+    left: 85px;
 }
 
 .transition .element {
@@ -210,7 +206,7 @@
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	font-size: 24px;
+	font-size: 26px;
 	font-weight: bold;
 }
 
@@ -223,7 +219,7 @@
 	cursor: pointer;	
 }
 .title_menu .cont_title_menu{
-	margin: 20px 0 0 20px;
+	margin: 35px 0 0 35px;
 	display: inline-flex;
 	position: absolute;
 }
@@ -360,17 +356,17 @@
 }
 
 .list_menu .close_menu{
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	position: absolute;
-	left: 250px;
+	left: 390px;
 	top: 15px;
 	cursor: pointer;
-	-webkit-transition: all 0.3s ease-in-out;
-	   -moz-transition: all 0.3s ease-in-out;
-	    -ms-transition: all 0.3s ease-in-out;
-	     -o-transition: all 0.3s ease-in-out;
-	        transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out 0.3s;
+	   -moz-transition: all 0.3s ease-in-out 0.3s;
+	    -ms-transition: all 0.3s ease-in-out 0.3s;
+	     -o-transition: all 0.3s ease-in-out 0.3s;
+	        transition: all 0.3s ease-in-out 0.3s;
 }
 #cont_menu .list_menu .close_menu {
 	-webkit-transform: translateY(-50px);
@@ -389,7 +385,10 @@
 
 
 #cont_menu  .list_menu .cont_list_menu{
-	padding-left: 20px;
+	padding-left: 28px;
+	padding-top: 60px;
+	height: 180px;
+	width: 150px;
 }
 #cont_menu .list_menu ul {
 	list-style-type: none;
@@ -397,7 +396,6 @@
 	height: 100%;
 	padding: 0;
 	margin: 0;
-	margin-top: 20px;
 	position: relative;
 }
 .list_menu ul li.itm{
@@ -415,7 +413,7 @@
 }
 
 .list_menu ul li.l_itm1 {
-	top: 15px;
+	top: 0px;
 	-webkit-transition: all 0.2s ease-in-out;
 	   -moz-transition: all 0.2s ease-in-out;
 	    -ms-transition: all 0.2s ease-in-out;
@@ -431,7 +429,7 @@
 	        transition: all 0.2s ease-in-out 0.1s;
 }
 .list_menu ul li.l_itm3 {
-	top: 85px;
+	top: 100px;
 	-webkit-transition: all 0.2s ease-in-out 0.2s;
 	   -moz-transition: all 0.2s ease-in-out 0.2s;
 	    -ms-transition: all 0.2s ease-in-out 0.2s;
@@ -439,7 +437,7 @@
 	        transition: all 0.2s ease-in-out 0.2s;
 }
 .list_menu ul li.l_itm4 {
-	top: 120px;
+	top: 150px;
 	-webkit-transition: all 0.2s ease-in-out 0.3s;
 	   -moz-transition: all 0.2s ease-in-out 0.3s;
 	    -ms-transition: all 0.2s ease-in-out 0.3s;
@@ -465,9 +463,9 @@
 
 .line_menu{
 	position: absolute;	
-	bottom: -5px;
+	bottom: -10px;
 	width: 0;
-	height: 3px;
+	height: 5px;
 	pointer-events: none;
 	background-color: #000;
 	-webkit-transition: all 0.3s ease-in-out;
@@ -478,18 +476,21 @@
 }
 
 li.itm:hover .line_menu{
-	width: 100px;
+	width:100%;
 }
 li.over .line_menu{
-	left: 0;
+	left: 0;	
 }
 li.out .line_menu{
-	right: 0;
+	right: 0;	
 }
 /*
 .cont_line {
+	position: absolute;	
+	bottom: -10px;
+	width: 0;
+	height: 5px;
 	width: 100%;
-	height: 3px;
 	overflow: hidden;
 	pointer-events: none;
 }
@@ -497,8 +498,6 @@ li.out .line_menu{
 	width: 100%;
 	height: 100%;
 	background-color: #000;
-
-
 }
 .list_menu ul li.over .cont_line .line_menu,
 .list_menu ul li.out .cont_line .line_menu{
