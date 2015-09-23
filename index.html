@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/style_transition.css">
+	<script src='js/script.js'></script>
+	<script src='js/TweenLite.min.js'></script>
+    <script src='js/screen_object.js'></script>
+    <script src='js/transition.js'></script>
+	
+</head>
+<body>
+
+	<div id='bg' class="home"></div>
+
+	<div id='content' ></div>
+	<div id="title_page"></div>
+
+	<div class="transition rot45deg"> 
+        <div id="yellow_part" class="element">
+            <div class="bg yellow"></div>
+        </div>
+        <div id="black_part" class="element">
+            <div class="bg black"></div>
+        </div>
+    </div>
+
+	<div id='load' class='not_load'>
+		<div class="cont_load">
+			<div class='circle'></div>
+			<div class='num_load'></div>
+			<div class='text_load'>loading</div>
+		</div>
+	</div>
+	<div id='cont_menu'>
+		<div class="title_menu">
+			<div class="cont_title_menu">
+				<div class="line_menu_title">
+					<div class='line line1 slow-03'></div>
+					<div class='line line2 slow-05'></div>
+					<div class='line line3 slow-07'></div>
+				</div>
+				<div class="title_text">menu</div>
+			</div>
+		</div>
+		<div class='list_menu'>
+			<div class='close_menu'>&#10006;</div>
+			<div class="cont_list_menu">
+				<ul>
+					<li class='itm l_itm1 out'>
+						<div class='itm0'> News </div> 
+						<div class='line_menu'></div>
+					</li>
+					<li class='itm l_itm2 over'>
+						<div class='itm1'> Cast </div> 
+						<div class="cont_line">
+							<div class='line_menu'></div>
+						</div>
+					</li>
+					<li class='itm l_itm3'>
+						<div class='itm2'> Filmmakers </div> 
+						<div class='line_menu'></div>
+					</li>
+					<li class='itm l_itm4'>
+						<div class='itm3'> Multimedia </div> 
+						<div class='line_menu'></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>	
+
+	<script type="text/javascript">
+		window.requestAnimationFrame =
+			window.      requestAnimationFrame ||
+			window.     ORequestAnimationFrame ||
+			window.    msRequestAnimationFrame ||
+			window.   mozRequestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			function(fn) { return setTimeout(fn, 1000/60) }
+
+		window.cancelAnimationFrame =
+			window.      cancelAnimationFrame ||
+			window.     OCancelAnimationFrame ||
+			window.    msCancelAnimationFrame ||
+			window.   mozCancelAnimationFrame ||
+			window.webkitCancelAnimationFrame ||
+			window.clearTimeout
+		var anim_menu = new Anim_menu();
+	</script>
+</body>
+</html>
