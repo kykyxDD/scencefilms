@@ -53,9 +53,14 @@
     @if ($relative == false) {
         display: block;
         position: absolute;
-    } @else {
-        @include inline;
-        position: relative;
+    } 
+    @if ($relative == true) {
+       @include inline;
+       position: relative;
+    }
+    @if ($relative == none) {
+      display: none;
+      position: absolute;
     }
 
     @if ($top) {
