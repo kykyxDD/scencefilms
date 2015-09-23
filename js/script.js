@@ -149,14 +149,11 @@ Anim_menu.prototype = {
 				requestAnimationFrame(animation)
 			} else {
 				self.transition.close();
-				self.remclass(self.load,'visib');
-
-				setTimeout(function(){
-					// self.title_page.y = 20;
-					// self.remclass(self.title_page, text);
-					self.addclass(self.cont_menu, 'vis_title');
+                self.transition.onClosed = function() {
+                    self.addclass(self.cont_menu, 'vis_title');
 					self.transition.show();
-				}, 2000);
+                }
+				self.remclass(self.load,'visib');
 			}
 		}
 	}
