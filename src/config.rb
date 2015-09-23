@@ -8,7 +8,7 @@ sass_dir = 'scss'
 images_dir = '../images'
 
 # You can select your preferred output style here (can be overridden via the command line):
-environment = :expanded #:production #:development
+environment = :production #:production #:development
 output_style = (environment == :production) ? :compressed : :expanded
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
@@ -18,3 +18,18 @@ relative_assets = true
 line_comments = false
 
 asset_cache_buster :none
+
+sfx_suffix = 'ie8:ie, ie8lte:ie, print:css/print'
+sfx_files = 'style_front'
+
+# :invalid => :replace, :undef => :replace, :replace => "?"
+#custom functions
+module Sass::Script::Functions
+  def unicode(string)
+    Sass::Script::String.new(
+      '"' + string.to_s()[1..-2].split(//).map{ |c|
+			'\\' + c.ord.to_s(16)
+		}.join + '"'
+    )
+  end
+end
