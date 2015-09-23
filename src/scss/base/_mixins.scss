@@ -1,0 +1,124 @@
+
+@mixin valign-content {
+    display: inline-block;
+    vertical-align: top;
+}
+
+@mixin font-size($pxval, $baseline : $base_fs_px) {
+    font-size: ($pxval / $baseline) * 1em
+}
+
+@mixin hide-text($img: false, $position: false) {
+    white-space: nowrap;
+    overflow: hidden;
+    @if $img == true {
+        line-height: 0;
+    }
+    @if $position == true {
+        text-indent: -9999px;
+    }
+    @if $position == false {
+        text-indent: 100%;
+    }
+}
+
+@mixin retina {
+    @media #{$retina-media} {
+        @content;
+    }
+}
+
+@mixin oneline-sprite($map, $name, $repeat: no-repeat, $bg-color: '', $retina : false) {
+    @if $retina {
+        $pos : sprite-position($map, $name);
+        $path : sprite_path($map);
+        background: #{$bg-color} sprite-url($map) #{$repeat} nth($pos, 1)/2 nth($pos, 2)/2;
+        background-size: image-width($path)/2 image-height($path)/2;
+    }
+    @else {
+        background: #{$bg-color} sprite-url($map) sprite-position($map, $name) #{$repeat};
+    }
+}
+@mixin oneline-sprite-box($map, $name, $repeat: no-repeat, $bg-color: '', $text: true) {
+    @if $text != true {
+        @include hide-text;
+    }
+    @include sprite-dimensions($map, $name);
+    @include oneline-sprite($map, $name, $repeat, $bg-color);
+}
+
+@mixin pseudo-block($top: false, $right: false, $bottom: false, $left: false, $relative: false) {
+    content: "";
+
+    @if ($relative == false) {
+        display: block;
+        position: absolute;
+    } @else {
+        @include inline;
+        position: relative;
+    }
+
+    @if ($top) {
+        top: $top;
+    }
+    @if ($right) {
+        right: $right;
+    }
+    @if ($bottom) {
+        bottom: $bottom;
+    }
+    @if ($left) {
+        left: $left;
+    }
+}
+
+@mixin image($path, $repeat: no-repeat, $bg-color: '', $height: true, $width: true, $position: '', $inline: true, $bg-img: false) {
+    @if ($inline) {
+        background: #{$bg-color} inline-image($path) #{$repeat} #{$position};
+    } @else if ($bg-img != false) {
+        background-image: inline-image($path);
+        background-repeat: $repeat;
+        background-position: #{$position};
+    } @else {
+        background: #{$bg-color} image-url($path) #{$repeat} #{$position};
+    }
+
+    @if $width {
+        @if $width == true and $repeat != repeat-x {
+            $width: image-width($path);
+        }
+        @if $width and true != $width {
+            width: $width;
+        }
+    }
+
+    @if $height {
+        @if $height == true and $repeat != repeat-y {
+            $height: image-height($path);
+        }
+        @if $height and true != $height {
+            height: $height;
+        }
+    }
+}
+
+//MEDIA
+@mixin media-respond_to($media) {
+    @if $media == mobile {
+        @media only screen and (max-width: 765px) { @content; }
+    } @else if $media == table {
+        @media only screen and (min-width: 768px) and (max-width: 1120px) { @content; }
+    } @else if $media == middle {
+        @media only screen and (max-width: 1120px) { @content; }
+    } @else if $media == desktop {
+        @media only screen and (min-width: 1120px) { @content; }
+    }
+}
+
+@mixin media-max_width($width) {
+    @if unitless($width) {
+        $width: $width + px;
+    }
+
+    @media only screen and (max-width: #{$width}) { @content; }
+}

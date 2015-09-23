@@ -1,0 +1,30 @@
+//$experimental-support-for-svg: true;
+
+@import "compass/css3/images";
+@import "compass/css3/box-shadow";
+@import "compass/css3/box-sizing";
+@import "compass/css3/opacity";
+@import "compass/css3/background-size";
+@import "compass/css3/user-interface";
+@import "compass/css3/border-radius";
+@import "compass/typography/text/ellipsis";
+@import "compass/utilities/sprites/base";
+@import "compass/css3/transition";
+@import "compass/css3/transform";
+
+//width
+$width_content  : 100%;
+
+//fonts
+$roboto_regular : 'robotoregular';
+$roboco_light : 'robotolight';
+
+//$icons: sprite-map("smart_sprite/*.png", $layout: 'smart');
+//$icons_x2: sprite-map("smart_sprite_x2/*.png", $layout: 'smart');
+
+$retina-media: "only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio : 1.5)";
+
+//@include media-max_width(1200px)
+//@include media-max_width(1100px)
+//@include media-max_width(1000px)
+//@include media-max_width(890px)
