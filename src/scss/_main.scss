@@ -9,6 +9,7 @@ html, body {
 
 #content {
   height: 100%;
+  width: 100%;
   display: table;
 }
 
@@ -26,7 +27,7 @@ html, body {
 }
 
 .b-content {
-  width: 60.8%;
+  //width: 60.8%;
   float: right;
   padding: 0 120px 0 0;
   @include box-sizing(border-box);
