@@ -159,9 +159,9 @@ body {
 
 @media #{$mediaD} {
   .w-tab {
- 
-    li {
     
+    li {
+      
     }
     
     a {
@@ -331,12 +331,7 @@ body {
     }
 
     .w-text {
-      display: table;
-    }
-
-    .b-text,
-    .b-img {
-      display: table-cell;
+      display: block;
     }
   }
 
@@ -371,9 +366,9 @@ body {
       }
 
       &.active, &:hover {
-        background: #ffd800;
-        color: #000;
-      }
+                  background: #ffd800;
+                  color: #000;
+                }
     }
 
     span {
@@ -382,8 +377,9 @@ body {
     }
   }
 
-  .w-img {
-    display: block;
+  .w-text {
+    border: none;
+    background: #000;
   }
 }
 
@@ -392,7 +388,58 @@ body {
 }
 
 @media #{$mediaCL} {
+  .b-content_inside {
+    display: block;
+
+    .w-text {
+      display: table;
+    }
+  }
   
+  .w-img,
+  .b-text {
+    display: table-cell;
+  }
+
+  .w-text {
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+
+    .t-title {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 38px;
+      margin-bottom: 0;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+
+  .b-text {
+    width: 60%;
+    vertical-align: middle;
+  }
+
+  .w-img {
+    width: 40%;
+  }
+
+  .b-img {
+    padding-bottom: 1000px;
+    margin-bottom: -1000px;
+  }
+
+  .b-img__landscape {
+    display: block;
+    @include background-size(100% auto);
+    background-repeat: no-repeat;
+  }
 }
 
 
