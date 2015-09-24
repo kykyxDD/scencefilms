@@ -1,3 +1,52 @@
+@font-face {
+  font-family: 'scadaregular';
+  src: url('../fonts/scada-webfont.eot');
+  src: url('../fonts/scada-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/scada-webfont.woff2') format('woff2'),
+  url('../fonts/scada-webfont.woff') format('woff'),
+  url('../fonts/scada-webfont.ttf') format('truetype'),
+  url('../fonts/scada-webfont.svg#scadaregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'scadabold';
+  src: url('../fonts/scada_bold-webfont.eot');
+  src: url('../fonts/scada_bold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/scada_bold-webfont.woff2') format('woff2'),
+  url('../fonts/scada_bold-webfont.woff') format('woff'),
+  url('../fonts/scada_bold-webfont.ttf') format('truetype'),
+  url('../fonts/scada_bold-webfont.svg#scadabold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'scadabold_italic';
+  src: url('../fonts/scada_bold_italic-webfont.eot');
+  src: url('../fonts/scada_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/scada_bold_italic-webfont.woff2') format('woff2'),
+  url('../fonts/scada_bold_italic-webfont.woff') format('woff'),
+  url('../fonts/scada_bold_italic-webfont.ttf') format('truetype'),
+  url('../fonts/scada_bold_italic-webfont.svg#scadabold_italic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'scadaitalic';
+  src: url('../fonts/scada_italic-webfont.eot');
+  src: url('../fonts/scada_italic-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/scada_italic-webfont.woff2') format('woff2'),
+  url('../fonts/scada_italic-webfont.woff') format('woff'),
+  url('../fonts/scada_italic-webfont.ttf') format('truetype'),
+  url('../fonts/scada_italic-webfont.svg#scadaitalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,16 +56,17 @@ html, body {
   height: 100%;
 }
 
-#content {
-  height: 100%;
-  display: table;
+body {
+  position: relative;
 }
 
-.w-content {
-  display: table-cell;
-  vertical-align: middle;
-
+.p-title {
+  margin: 0 0 80px 0;
+  position: absolute;
+  top: 146px;
+  
   h1 {
+    font-family: $scadaR;
     font-size: 136px;
     color: #fff;
     text-transform: uppercase;
@@ -25,8 +75,19 @@ html, body {
   }
 }
 
+#content {
+  height: 100%;
+  width: 100%;
+  display: table;
+}
+
+.w-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .b-content {
-  width: 60.8%;
+  //width: 60.8%;
   float: right;
   padding: 0 120px 0 0;
   @include box-sizing(border-box);
@@ -34,22 +95,34 @@ html, body {
   ul {
     list-style: none;
   }
+}
 
-  .title {
-    margin: 0 0 80px 0;
+.b-content_inside {
+  display: table;
+
+  .w-tab,
+  .w-text {
+    display: table-cell;
+    vertical-align: top;
   }
 }
 
 .w-tab {
-  float: left;
   min-height: 416px;
+  min-width: 210px;
+  padding: 0 14px 0 0;
 
+  li {
+    margin: 0 0 2px 0;
+  }
+  
   a {
+    font-family: $scadaR;
     font-size: 24px;
     text-transform: uppercase;
     text-decoration: none;
     padding: 8px 10px 8px 20px;
-    line-height: 32px;
+    line-height: 30px;
     display: block;
     color: #fff;
     margin: 0 10px 0 0;
@@ -69,7 +142,7 @@ html, body {
       @include transition(opacity 300ms);
     }
     
-    &:hover {
+    &:hover, &.active {
       background: #000;
       color: #ffd800;
 
@@ -80,22 +153,215 @@ html, body {
   }
 }
 
+@media #{$mediaD} {
+  .w-tab {
+ 
+    li {
+    
+    }
+    
+    a {
+
+    }
+  }
+}
+
+
 .w-text {
   color: #fff;
+  border-left: 2px solid #fff;
+  margin: 0;
+  padding: 0 0 0 18px;
+
+  &.hidden {
+    display: none;
+  }
+  
+  .t-title {
+    margin: 0 0 46px 0;
+  }
   
   h2 {
+    font-family: $scadaR;
     font-size: 52px;
     text-transform: uppercase;
     font-weight: normal;
+    line-height: 52px;
   }
 
   h3 {
+    font-family: $scadaI;
     font-size: 24px;
     font-weight: normal;
   }
 
   p {
-    font-size: 24px;
-    line-height: 30px;
+    font-family: $scadaR;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: right;
+  padding: 12px 0;
+
+  ul {
+    list-style: none;
+    display: block;
+    clear: both;
+    overflow: hidden;
+  }
+
+  li {
+    display: block;
+    float: left;
+  }
+
+  .w-share,
+  .w-nav {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .l-nav {
+    a {
+      font-family: $scadaB;
+      font-size: 14px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      line-height: 22px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    li {
+      margin: 0 34px 0 0;
+    }
+  }
+
+  .l-share {
+    margin: 0 30px 0 0;
+    a {
+      @include hide-text();
+      outline: none;
+      display: block;
+      width: 21px;
+      height: 21px;
+      @include transition(opacity 300ms);
+
+      &:hover {
+        @include opacity(0.8);
+      }
+    }
+
+    li {
+      margin: 1px 20px 0 0;
+    }
+  }
+
+  .i-facebook {
+    @include oneline-sprite($icons_x2, facebook, $retina: true);
+  }
+
+  .i-twitter {
+    @include oneline-sprite($icons_x2, twitter, $retina: true);
+  }
+
+  .i-instagram {
+    @include oneline-sprite($icons_x2, instagram, $retina: true);
+  }
+
+  .i-google_plus {
+    @include oneline-sprite($icons_x2, google_plus, $retina: true);
+  }
+}
+
+
+@media #{$mediaC} {
+  #bg {
+    display: none;
+  }
+
+  body {
+    background-color: #000;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    @include background-size(100% auto);
+  }
+  
+  .p-title {
+    position: static;
+
+    h1 {
+      font-size: 100px;
+    }
+  }
+
+  #content {
+    display: block;
+  }
+
+  .w-content {
+    display: block;
+    vertical-align: top;
+  }
+
+  .b-content {
+    float: none;
+    padding: 0;
+  }
+  
+  .b-content_inside {
+    display: block;
+
+    .w-tab,
+    .w-text {
+      display: block;
+    }
+  }
+
+  .w-tab {
+    min-height: 0;
+    min-width: 0;
+    padding: 0 30px;
+
+    .tab {
+      clear: both;
+      overflow: hidden;
+      padding: 0 20px;
+    }
+
+    li {
+      float: left;
+      width: 50%;
+      @include box-sizing(border-box);
+      padding: 0 10px 12px;
+      margin: 0;
+    }
+
+    a {
+      text-align: center;
+      background: #000;
+      margin: 0;
+      @include transform(skewX(-45deg));
+      @include border-radius(0);
+
+      &:before {
+        display: none !important;
+      }
+    }
+
+    span {
+      display: block;
+      @include transform(skewX(45deg));
+    }
   }
 }

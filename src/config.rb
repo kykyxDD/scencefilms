@@ -5,7 +5,7 @@ Encoding.default_external = "utf-8"
 # Set this to the root of your project when deployed:
 css_dir = '../css'
 sass_dir = 'scss'
-images_dir = '../images'
+images_dir = '../image'
 
 # You can select your preferred output style here (can be overridden via the command line):
 environment = :production #:production #:development
