@@ -97,6 +97,10 @@ body {
   }
 }
 
+.b-img {
+  display: none;
+}
+
 .b-content_inside {
   display: table;
 
@@ -322,9 +326,17 @@ body {
   .b-content_inside {
     display: block;
 
-    .w-tab,
-    .w-text {
+    .w-tab {
       display: block;
+    }
+
+    .w-text {
+      display: table;
+    }
+
+    .b-text,
+    .b-img {
+      display: table-cell;
     }
   }
 
@@ -357,6 +369,11 @@ body {
       &:before {
         display: none !important;
       }
+
+      &.active, &:hover {
+        background: #ffd800;
+        color: #000;
+      }
     }
 
     span {
@@ -364,4 +381,18 @@ body {
       @include transform(skewX(45deg));
     }
   }
+
+  .w-img {
+    display: block;
+  }
 }
+
+@media #{$mediaCP} {
+  
+}
+
+@media #{$mediaCL} {
+  
+}
+
+
