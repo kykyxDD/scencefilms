@@ -1,21 +1,9 @@
-@font-face {
-    font-family: 'scadaregular';
-    src: url('fonts_scade/scada-webfont.eot');
-    src: url('fonts_scade/scada-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts_scade/scada-webfont.woff2') format('woff2'),
-         url('fonts_scade/scada-webfont.woff') format('woff'),
-         url('fonts_scade/scada-webfont.ttf') format('truetype'),
-         url('fonts_scade/scada-webfont.svg#scadaregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
 *, body{
 	margin: 0;
 	padding: 0;
 	font-family: scadaregular;
 }
+
 #bg {
 	height: 100%;
 	width: 100%;

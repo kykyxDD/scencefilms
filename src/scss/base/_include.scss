@@ -16,11 +16,12 @@
 $width_content  : 100%;
 
 //fonts
-$roboto_regular : 'robotoregular';
-$roboco_light : 'robotolight';
-
+$scadaR  : 'scadaregular';
+$scadaB  : 'scadabold';
+$scadaBI : 'scadabold_italic';
+$scadaI  : 'scadaitalic';
 //$icons: sprite-map("smart_sprite/*.png", $layout: 'smart');
-//$icons_x2: sprite-map("smart_sprite_x2/*.png", $layout: 'smart');
+$icons_x2: sprite-map("icon_x2/*.png", $layout: 'smart');
 
 $retina-media: "only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio : 1.5)";
 
