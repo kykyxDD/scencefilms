@@ -17,8 +17,98 @@
 <body ng-app="app" ng-controller="appController">
 	<div id='bg' class="home"></div>
 
-	  <div id='content' ></div>
-	  <div id="title_page"></div>
+	<div id='content' >
+		<div class="w-content">
+        <div class="b-content" style="width: 1166px;">
+          <!-- <div class="p-title">
+          <h1>cast</h1>
+          </div> -->
+          <div class="b-content_inside">
+            <div class="w-tab">
+              <ul class="tab">
+                <li><a href="#" class="active"><span>MAGIE GRACE</span></a></li>
+                <li><a href="#"><span>BOB CARTER</span></a></li>
+                <li><a href="#"><span>MIAKA MONROE</span></a></li>
+                <li><a href="#"><span>MAGIE GRACE</span></a></li>
+                <li><a href="#"><span>BOB CARTER</span></a></li>
+                <li><a href="#"><span>MAGIE GRACE</span></a></li>
+              </ul>
+            </div>
+            <div class="w-text">
+              <div class="img">
+                
+              </div>
+              <div class="b-text">
+                <div class="t-title">
+                  <h2>MAGIE GRACE</h2>
+                  <h3>Laurie</h3>
+                </div>
+                <div class="text">
+                  <p>Grace was born Margaret Grace Denig in Worthington, Ohio, one of
+                    threchildren of parents Valinn (née Everett) and Rick Denig, who ran
+                    a family jewelry business. Her family lived in a 200-year-old house, the
+                    first saltbox house in central Ohio.  She attended Worthington Christian
+                    Schools from kindergarte...of parents Valinn (née Everett) and Rick Denig,
+                    who ran a family jewelry business. Her family lived in a 200-year-old house,
+                    the first saltbox house in central Ohio. She attended Worthington
+                    Christian Schools from kindergarte...who ran a family jewelry business. Her
+                    family lived in a 200-year-old house, the first saltbox house in central Ohio.
+                  </p>
+                </div>
+                
+              </div>
+            </div>
+            
+            <div class="w-text hidden">
+              <div class="b-text">
+                <div class="t-title">
+                  <h2>BRAD CARTER</h2>
+                  <h3>Name</h3>
+                </div>
+                <div class="text">
+                  <p>Brad Carter (born 1973) is an American film and television actor,
+                    guitarist, painter, sculptor, and photographer, known for playing
+                    Charlie Lange in True Detective and Leland Gruen in Sons of Anarchy. 
+                    After suffering from brain disease and tremors that caused his hands
+                    to shake, he underwent brain surgery in 2013, which he recorded and
+                    posted on YouTube. The video went viral, and he became known as the
+                    "guy playing guitar during brain surgery".</p>
+                  <p>Brad Carter (born 1973) is an American film and television actor,
+                    guitarist, painter, sculptor, and photographer, known for playing</p>
+                </div>
+                
+              </div>
+            </div>
+            
+            <div class="w-text hidden">
+              <div class="b-text">
+                <div class="t-title">
+                  <h2>MIAKA MONROE</h2>
+                  <h3>Jody</h3>
+                </div>
+                <div class="text">
+                  <p>Maika Monroe is a professional kiteboarder turned actress who is taking
+                    Hollywood by storm. Garnering comparisons to some of the top names in
+                    the industry, she made her acting debut in the 2012 film AT ANY PRICE,
+                    co-starring Zac Effron and Dennis Quaid. In April 2012, Monroe signed up
+                    for the drama LABOR DAY, an adaptation of the hit novel, starring Josh
+                    Brolin and Kate Winslet. In June 2013, she joined the cast of the 
+                    psychological thriller film THE GUEST, which gained almost unprecedented
+                    acclaim from audiences after playing at numerous film festivals, including
+                    the prestigious Sundance Film Festival. In August 2014, she joined the alien
+                    invasion thriller film THE 5TH WAVE, the first in a best-selling series of Young</p>
+                </div>
+                
+              </div>
+            </div>
+
+            
+            
+          </div>
+        </div>
+      </div>
+	</div>
+	<div id="title_page"></div>
 	<div class="transition rot45deg">
         <div id="yellow_part" class="element">
             <div class="bg yellow"></div>
@@ -49,13 +139,21 @@
         <div class='close_btn' ng-click="onMenuCloseClick()">&#10006;</div>
 	</div>
 
-	<div id="footer">
-		<div class="icon fb"></div>
-		<div class="icon tw"></div>
-		<div class="icon ing"></div>
-		<div class="icon gl"></div>
-		<div ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
-			{{page.name}}
+	<div class="footer">
+		<div class="w-share">
+	        <ul class="l-share">
+	          <li><a class="i-facebook" href="#">facebook</a></li>
+	          <li><a class="i-twitter" href="#">twitter</a></li>
+	          <li><a class="i-instagram" href="#">instagram</a></li>
+	          <li><a class="i-google_plus" href="#">google plus</a></li>
+	        </ul>
+	    </div> 
+	    <div class="w-nav">
+		    <ul class="l-nav">
+				<li ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
+					<span>{{page.name}}</span>
+				</li>
+			</ul>
 		</div>
 
 	</div>

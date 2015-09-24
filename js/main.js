@@ -1,22 +1,24 @@
 var app = angular.module('app', [])
 .controller('appController', ['$scope', '$http', '$location', '$document', function($s, $http, $location, $doc){
 
-    console.log("controller", $doc)
-    
     var transition = new Transition($doc[0].querySelector('.transition'))
     var main_menu = new Anim_menu($doc[0].querySelector('#main_menu'))
+    var all_div_text = $doc[0].querySelectorAll('.w-text');
+    var all_tab = $doc[0].querySelectorAll('.tab li a');
     
     main_menu.onClick = function(page) {
         // transition.open()
         console.log(page)
-        $s.change_page(page)
+        $s.change_page(page);
+        
     }
 
     $s.change_page = function(page){
         
         main_menu.collapse();
-        transition.open();
+        // transition.open();
         console.log('change_page', page);
+
     }
     
     $s.$on('$locationChangeSuccess', function(event){

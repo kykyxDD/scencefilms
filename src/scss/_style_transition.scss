@@ -23,7 +23,7 @@
 
 
 #bg.home{
-	background-image: url('../image/home.png');
+	background-image: url('../image/bg/filmmakers_debora.jpg');
 }
 #bg.news{
 	background-image: url('../image/news.png');
@@ -220,6 +220,8 @@
 
 #main_menu {
     position: absolute;
+    top: 0;
+    left: 0;
     font-size: 26px;
     font-weight: bold;
     text-transform: uppercase;
@@ -233,6 +235,7 @@
     position: absolute;
     width: 190px;
     height: 150px;
+    cursor: pointer;
 }
 
 .header_cont .lines_cont {
@@ -279,17 +282,9 @@
     left: 361px;
     top: 15px;
     font-size: 24px;
+    cursor: pointer;
 }
 
-#footer{
-	position:absolute;
-	display:inline-flex;
-	bottom:0;
-	right:0;
-	color:#fff;
-	text-transform: uppercase;
-}
-#footer div{
-	margin: 10px 10px;
+.footer_menu{
 	cursor: pointer;
 }
