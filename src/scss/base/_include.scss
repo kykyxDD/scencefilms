@@ -28,5 +28,7 @@ $retina-media: "only screen and (-webkit-min-device-pixel-ratio: 1.5), only scre
 $mediaA : "only screen and (max-width: 1920px)";
 $madiaB : "only screen and (max-width: 1200px)";
 $mediaC : "only screen and (max-width: 1024px)";
+$mediaCP : "only screen and (max-width: 1024px) and (orientation : portrait)";
+$mediaCL : "only screen and (max-width: 1024px) and (orientation : landscape)";
 $mediaD : "only screen and (max-width: 640px)";
 $mediaE : "only screen and (max-width: 480px)";
