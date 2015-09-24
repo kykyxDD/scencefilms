@@ -19,22 +19,8 @@ function Anim_menu (cont) {
         ScreenObject.decorate_element.apply(this.lines[i])
     }
     
-    this.items = []
-    
-    /*
-	this.title_menu.addEventListener('click', function(){
-		self.hiddenTitleMenu()
-		self.transition.expand()
-	});
-	this.close_menu.addEventListener('click', function(){
-		self.hiddenListMenu()
-		self.transition.collapse()
-		
-	})
-	window.addEventListener('resize', function(){
-		self.centerScreen()
-	})
-    */
+    this.items = [];
+   
 }
 Anim_menu.prototype = {
     
@@ -83,7 +69,6 @@ Anim_menu.prototype = {
 
 		
 		var line = elem.line;
-		console.log(line.w);
 		line.x = -150; 
 		line.scaleX = 0;
 		TweenLite.to(line, 0.2, {x:0, scaleX:1})
@@ -95,16 +80,8 @@ Anim_menu.prototype = {
 		line.scaleX = 1;
 		TweenLite.to(line, 0.4, {x:line.w, scaleX:0});
 	},
-
-	onClickItem:function( index){
-		console.log('click')
-		// console.log(this.items)		
-
-	},
     
     reset: function() {
-        
-        console.log('reset')
         
         for (var i=0; i<this.lines.length; i++) {
             var line = this.lines[i]
