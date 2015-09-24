@@ -56,16 +56,15 @@ html, body {
   height: 100%;
 }
 
-#content {
-  height: 100%;
-  width: 100%;
-  display: table;
+body {
+  position: relative;
 }
 
-.w-content {
-  display: table-cell;
-  vertical-align: middle;
-
+.p-title {
+  margin: 0 0 80px 0;
+  position: absolute;
+  top: 146px;
+  
   h1 {
     font-family: $scadaR;
     font-size: 136px;
@@ -76,6 +75,17 @@ html, body {
   }
 }
 
+#content {
+  height: 100%;
+  width: 100%;
+  display: table;
+}
+
+.w-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .b-content {
   //width: 60.8%;
   float: right;
@@ -84,10 +94,6 @@ html, body {
 
   ul {
     list-style: none;
-  }
-
-  .p-title {
-    margin: 0 0 80px 0;
   }
 }
 
@@ -173,7 +179,89 @@ html, body {
 
   p {
     font-family: $scadaR;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 28px;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: right;
+  padding: 12px 0;
+
+  ul {
+    list-style: none;
+    display: block;
+    clear: both;
+    overflow: hidden;
+  }
+
+  li {
+    display: block;
+    float: left;
+  }
+
+  .w-share,
+  .w-nav {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .l-nav {
+    a {
+      font-family: $scadaB;
+      font-size: 14px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      line-height: 22px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    li {
+      margin: 0 34px 0 0;
+    }
+  }
+
+  .l-share {
+    margin: 0 30px 0 0;
+    a {
+      @include hide-text();
+      outline: none;
+      display: block;
+      width: 21px;
+      height: 21px;
+      @include transition(opacity 300ms);
+
+      &:hover {
+        @include opacity(0.8);
+      }
+    }
+
+    li {
+      margin: 1px 20px 0 0;
+    }
+  }
+
+  .i-facebook {
+    @include oneline-sprite($icons_x2, facebook, $retina: true);
+  }
+
+  .i-twitter {
+    @include oneline-sprite($icons_x2, twitter, $retina: true);
+  }
+
+  .i-instagram {
+    @include oneline-sprite($icons_x2, instagram, $retina: true);
+  }
+
+  .i-google_plus {
+    @include oneline-sprite($icons_x2, google_plus, $retina: true);
   }
 }
