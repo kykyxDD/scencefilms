@@ -4,28 +4,28 @@
         {
             "name": "Home",
             "id": 1,
-            "route": "home"
+            "page": "home"
         },
         {
             "name": "NEWS",
             "id": 2,
-            "route": "new"
+            "page": "news"
         },
         {
             "name": "CAST",
             "id": 3,
-            "route": "cast"
+            "page": "cast"
         },
         {
             "name": "FILMMAKERS",
             "id": 4,
-            "route": "filmmakers"
+            "page": "makers"
         },
     
         {
             "name": "MULTIMEDIA",
             "id": 5,
-            "route": "multimedia"
+            "page": "media"
         }
         
     ]

@@ -236,6 +236,7 @@
     width: 190px;
     height: 150px;
     cursor: pointer;
+    
 }
 
 .header_cont .lines_cont {
@@ -287,4 +288,20 @@
 
 .footer_menu{
 	cursor: pointer;
+}
+
+#content .selected {
+    display: table-cell !important;
+}
+
+#content .page {
+    display: none;
+}
+
+.page .underconstruction {
+    font-size: 100px;
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20%;
 }

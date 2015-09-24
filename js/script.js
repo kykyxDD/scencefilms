@@ -123,6 +123,8 @@ Anim_menu.prototype = {
     
     show_header: function(show_delay) {
 
+        this.align_header()
+    
         var show_delay = show_delay || 0
     
         TweenLite.to(this.header_label, 0.42, {y: 0, delay: show_delay})
