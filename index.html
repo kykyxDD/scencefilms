@@ -44,11 +44,22 @@
             </div>
             <div class="haeder_label">menu</div>
 		</div>
-		<div class='menu_cont'>
-		</div>
+		<div class='menu_cont'></div>
         
         <div class='close_btn' ng-click="onMenuCloseClick()">&#10006;</div>
 	</div>
 
+	<div id="footer">
+		<div class="icon fb"></div>
+		<div class="icon tw"></div>
+		<div class="icon ing"></div>
+		<div class="icon gl"></div>
+		<div ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
+			{{page.name}}
+		</div>
+
+	</div>
+
 </body>
 </html>
+
