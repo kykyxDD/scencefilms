@@ -1,0 +1,32 @@
+{
+    "pages": [
+    
+        {
+            "name": "Home",
+            "id": 1,
+            "route": "home"
+        },
+        {
+            "name": "NEWS",
+            "id": 2,
+            "route": "new"
+        },
+        {
+            "name": "CAST",
+            "id": 3,
+            "route": "cast"
+        },
+        {
+            "name": "MULTIMEDIA",
+            "id": 4,
+            "route": "multimedia"
+        },
+        {
+            "name": "FILMMAKERS",
+            "id": 5,
+            "route": "filmmakers"
+        }
+    
+    ]
+
+}

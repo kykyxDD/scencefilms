@@ -31,6 +31,7 @@
         this._visible = "visible" in this ? this.visible : true
         this._display = "display" in this ? this.display : true
         this._rotation = "rotation" in this ? this.rotation : 0
+        this._alpha = "alpha" in this ? this.alpha : 1
 	}
 
 	function set_defaults_for_element() {
@@ -44,6 +45,7 @@
         this._visible = "visible" in this ? this.visible : true
         this._display = "display" in this ? this.display : true
         this._rotation = "rotation" in this ? this.rotation : 0
+        this._alpha = "alpha" in this ? this.alpha : 1
 	}
 	
 	function get_integer_from_value(val)
@@ -127,6 +129,15 @@
     function get_rotation(){
         return this._rotation
     }
+    
+    function set_alpha (value){
+        this._alpha = value
+        this.view.style.opacity = this._alpha
+	}
+    
+    function get_alpha(){
+        return this._alpha
+    }
 
 	function setup() {
     
@@ -146,6 +157,9 @@
         
         this.get_scaleY = get_scaleY
         this.set_scaleY = set_scaleY
+        
+        this.get_alpha = get_alpha
+        this.set_alpha = set_alpha
 		
 		this.get_top = function(){
 			return this._y
@@ -210,6 +224,7 @@
 		Object.defineProperty(this, 'scaleY'  , { get: this.get_scaleY  , set: this.set_scaleY, configurable: true   })
 		Object.defineProperty(this, 'visible'  , { get: this.get_visible  , set: this.set_visible, configurable: true   })
 		Object.defineProperty(this, 'display'  , { get: this.get_display  , set: this.set_display, configurable: true   })
+		Object.defineProperty(this, 'alpha'  , { get: this.get_alpha  , set: this.set_alpha, configurable: true   })
 
 		this.disable_transitions = function() {
 		
