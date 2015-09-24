@@ -7,8 +7,16 @@ var app = angular.module('app', [])
     var main_menu = new Anim_menu($doc[0].querySelector('#main_menu'))
     
     main_menu.onClick = function(page) {
-        transition.open()
-        change_page(page)
+        // transition.open()
+        console.log(page)
+        $s.change_page(page)
+    }
+
+    $s.change_page = function(page){
+        
+        main_menu.collapse();
+        transition.open();
+        console.log('change_page', page);
     }
     
     $s.$on('$locationChangeSuccess', function(event){
@@ -26,8 +34,15 @@ var app = angular.module('app', [])
     }
     
     $s.onMenuCloseClick = function() {
-        main_menu.collapse()
-        transition.collapse()  
+        main_menu.align_header();
+        main_menu.collapse();
+        main_menu.show_header(0.3);
+        transition.collapse();
+    }
+    $s.readyHtml = function(){
+        main_menu.align_header();
+        main_menu.show_header(0.3);
+        transition.close();
     }
 
     $http.get("data.json", {})
@@ -35,7 +50,7 @@ var app = angular.module('app', [])
         console.log("loaded", transition.show())
         $s.data = data
         
-        main_menu.init(data.pages)
+        main_menu.init(data.pages, 1)
         main_menu.show_header(0.3)
     }))
     
@@ -58,7 +73,7 @@ var app = angular.module('app', [])
         link: function(scope, element, attr) {
             scope.isOver = -1;
             scope.onOver = function(index) {
-                scope.isOver = index
+                scope.isOver = index;
             }
             scope.onOut = function() {
                 scope.isOver = -1

@@ -9,61 +9,6 @@
     <script src='js/screen_object.js'></script>
     <script src='js/transition.js'></script>
     <script src='js/main.js'></script>
-    
-    <style>
-        #main_menu {
-            position: absolute;
-            font-size: 26px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        
-        .menu_cont {
-            position: absolute;            
-        }
-        
-        .header_cont {
-            position: absolute;
-            width: 190px;
-            height: 150px;
-        }
-        
-        .header_cont .lines_cont {
-            position: absolute;
-            left: 25px;
-            top: 40px;
-        }
-        
-        .header_cont .lines_cont .line {
-            position: relative;
-            width: 27px;
-            height: 6px;
-            margin-bottom: 3px;
-            background-color: #000000;
-        }
-        
-        .header_cont .haeder_label {
-            position: absolute;
-            top: 33px;
-            left: 70px;
-            font-size: 32px;
-        }
-        
-        .menu_cont {
-            position: absolute;
-            left: 35px;
-            top: 71px;
-        }
-        
-        .close_btn {
-            position: absolute;
-            left: 361px;
-            top: 20px;
-            font-size: 24px;            
-        }
-        
-    </style>
-
 </head>
 <body ng-app="app" ng-controller="appController">
 	<div id='bg' class="home"></div>
@@ -96,11 +41,22 @@
             </div>
             <div class="haeder_label">menu</div>
 		</div>
-		<div class='menu_cont'>
-		</div>
+		<div class='menu_cont'></div>
         
         <div class='close_btn' ng-click="onMenuCloseClick()">&#10006;</div>
 	</div>
 
+	<div id="footer">
+		<div class="icon fb"></div>
+		<div class="icon tw"></div>
+		<div class="icon ing"></div>
+		<div class="icon gl"></div>
+		<div ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
+			{{page.name}}
+		</div>
+
+	</div>
+
 </body>
 </html>
+
