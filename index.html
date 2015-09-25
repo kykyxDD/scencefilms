@@ -14,6 +14,7 @@
     <script src='js/lib/dom.js'></script>
     <script src='js/screen_object.js'></script>
     <script src='js/preloader.js'></script>
+    <script src='js/particles.js'></script>
     <script src='js/intro_text.js'></script>
     <script src='js/transition.js'></script>
     <script src='js/main.js'></script>
@@ -23,7 +24,7 @@
 
 	<div id='content'>
         <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
-            
+            <div class="paricles"></div>
         </div>
         <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}">
             <div class="underconstruction">NEWS</div>
@@ -55,6 +56,11 @@
                     </div>
                 </div>
             </div>
+            <!--ng-if="selectedCast.video">
+            <video class="video_bg">
+                <source ng-repeat="file in selectedCast.video.files" src="{{file}}" type="video/ogg"></source>
+            </video>
+            </ng-if-->
         </div>
         
 		<div id="makers" style="background-image: url('{{selectedMaker.bg}}');" ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
@@ -82,6 +88,10 @@
             </div>
         </div>
     </div>
+    <div id='side_page_right'>
+	</div>
+	<div id='side_page_left'>
+	</div>
 
     <div id="title_page"></div>
     
@@ -93,6 +103,8 @@
         <div class="bg black"></div>
       </div>
     </div>
+
+
     
     <div id='main_menu'>
         <div class="header_cont" ng-click="onMenuHeaderClick()">

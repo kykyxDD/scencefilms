@@ -5,7 +5,27 @@ var app = angular.module('app', [])
     var transition = new Transition(doc.querySelector('.transition'))
     var main_menu = new Anim_menu(doc.querySelector('#main_menu'))
     var preloader = new Preloader(doc.querySelector('#preloader'))
+    var particles = new Particles(doc.querySelector('.paricles'))
     var intro_bg = doc.querySelector('#intro_bg')
+    var cont_rhom_right = doc.querySelector('#side_page_right');
+    var cont_rhom_left = doc.querySelector('#side_page_left');
+
+    var sq_arr_right = [
+        {i: 0, j: 3, imgPath:'image/main/5.jpg', 'type':'type'},
+        {i: 2, j: 3, imgPath: 'image/main/4.jpg', 'type':'type'},
+        {i: 0, j: 2, imgPath: 'image/main/7.jpg', 'type':'type'},
+        {i: 1, j: 1, imgPath: 'image/main/1.jpg', 'type':'type'},
+        {i: 1, j: 5, imgPath: 'image/main/11.jpg', 'type':'type'}, 
+        {i: 1, j: 2, imgPath: 'image/main/6.jpg', 'type':'type'},
+        {i: 1, j: 4, imgPath: 'image/main/9.jpg', 'type':'type'},
+        {i: 2, j: 2, imgPath: 'image/main/2.jpg', 'type':'type'}, 
+        {i: 1, j: 0, imgPath: 'image/main/12.jpg', 'type':'type'}
+    ];
+    var sq_arr_left = [
+        {i: 0, j: 0, imgPath: 'image/main/10.jpg', 'type':'type'}, 
+        {i: 1, j: 0, imgPath: 'image/main/3.jpg', 'type':'type'},
+        {i: 1, j: 1, imgPath: 'image/main/8.jpg', 'type':'type'} 
+    ];
     
     if (intro_bg) {
         var intro = new IntroText(document.querySelector("#intro"))
@@ -16,21 +36,20 @@ var app = angular.module('app', [])
 
         play_intro()
     }
-    
+
     $s.selectedPage = 'home'
 
     onResize()
     angular.element($window).bind('resize', onResize)
-    
 
     $http.get("data.json", {})
     .success(angular.bind(null, function(data, status) {
         $s.data = data
-        
+
         $s.selectedMaker = $s.data.pages[3].pages[0]
 
         transition.show()
-        main_menu.init(data.pages, 1)
+        main_menu.init(data.pages, 0)
         main_menu.show_header(0.3)       
         
     }))
@@ -43,23 +62,24 @@ var app = angular.module('app', [])
 
         $s.selectedPage = $s.pageToChange
         $s.$apply();
-        
+
         preloader.show()
         preloader.make_white()
         simulate_page_load(1, onPageLoaded)
-        
+
         //transition.close()
     }
-    
+
     transition.onClosed = function() {
         transition.show()
         main_menu.show_header(0.3)
-        
+
         if ($s.selectedPage == 'home') {
             intro && intro.runRepaint()            
+            particles && particles.runRepaint()
         }
     }
-    
+
     function play_intro() {
         preloader.show()
         simulate_page_load(1, show_intro_text)
@@ -99,8 +119,9 @@ var app = angular.module('app', [])
         intro.percent = 0
         intro.runRepaint()
         
-        TweenLite.to(intro, 2, {
+        TweenLite.to(intro, 4, {
             percent: 100,
+            ease: Power1.easeOut,
             onUpdate: function(){ intro.repaintCanvas() },
             onComplete: hide_intro,
             onCompleteScope: this
@@ -114,10 +135,91 @@ var app = angular.module('app', [])
             var home_page = doc.querySelector('#home')
             home_page.appendChild(intro.cont)
         }})
+        
+        particles.runRepaint()
+        TweenLite.to(particles, 2, {kalpha: 3})
+        add_rhom()
     }
-    
+
+    function add_rhom(){
+
+        
+        // var sq_width = 310
+        var sq_width = Math.round(document.body.clientWidth/6);
+        var scape_text = 1.45;
+        var _delay = 1;
+
+        ScreenObject.decorate_element.apply(cont_rhom_right)
+        ScreenObject.decorate_element.apply(cont_rhom_left)
+        cont_rhom_right.style.right = Math.round((sq_width*scape_text*3)*0.95) + 'px';
+        cont_rhom_left.style.left = Math.round((-sq_width)*0.4) + 'px';
+        cont_rhom_left.style.bottom = Math.round((-sq_width)*0.4) + 'px';
+
+        for(var k = 0; k < sq_arr_right.length; k++){
+            add_elem(cont_rhom_right , sq_arr_right[k], k);
+        }
+
+        for(var k = 0; k < sq_arr_left.length; k++){
+            add_elem(cont_rhom_left , sq_arr_left[k], k);
+        }
+
+        function add_elem(parent, page, index){
+
+            var itm_arr = page;
+
+            var itm_elem = doc.createElement('div');
+            itm_elem.className = 'cont_rhom';
+            var rhom_before = doc.createElement('div');
+            rhom_before.className = 'rhom_before';
+            itm_elem.appendChild(rhom_before);
+            var rhom_after =  doc.createElement('div');
+            var className = 'rhom_after';
+            rhom_after.className = className; 
+            rhom_before.appendChild(rhom_after);
+            var text = doc.createElement('div');
+            text.className = 'text_rhom';
+
+            rhom_after.appendChild(text);
+            parent.appendChild(itm_elem);
+            ScreenObject.decorate_element.apply(itm_elem);
+            ScreenObject.decorate_element.apply(rhom_before);
+            ScreenObject.decorate_element.apply(rhom_after);
+            ScreenObject.decorate_element.apply(text);
+            text.w = sq_width*scape_text;
+            text.h = sq_width*scape_text;
+          
+            text.style.backgroundImage = 'url("'+page.imgPath+'")'; 
+
+            text.style.bottom = Math.round(-sq_width*0.23) + 'px';
+            text.style.right = Math.round(-sq_width*0.23) + 'px';
+
+            itm_elem.w = sq_width;
+            itm_elem.h = sq_width;
+
+            itm_elem.x = sq_width*itm_arr.i;
+            itm_elem.y = sq_width*itm_arr.j;
+
+            rhom_before.scaleX = 0;
+            rhom_before.scaleY = 0;
+
+            rhom_after.scaleX = 0;
+            rhom_after.scaleY = 0;
+
+
+            TweenLite.to(rhom_before, _delay, {scaleX: 1 , scaleY: 1 , delay: 0.3*index})
+            TweenLite.to(rhom_after, _delay, {scaleX: 1 , scaleY: 1 , delay: (0.3*index)+(_delay*0.5)})
+        }
+
+    }
+   
+    function hide_rhom(){  
+        cont_rhom_right.visible = false
+        cont_rhom_left .visible =  false    
+    }
+
     function onResize() {
         transition.resize($window.innerWidth, $window.innerHeight)
+        particles.resize($window.innerWidth, $window.innerHeight)
         
         var conts = doc.querySelectorAll("#cast .b-content, #makers .b-content")
         for (var i=0; i<conts.length; i++) {
@@ -153,10 +255,12 @@ var app = angular.module('app', [])
         $s.pageToChange = data.page
         
         intro && intro.stopRepaint()
+        particles && particles.stopRepaint()
         
         main_menu.collapse()
         main_menu.hide_header()
         transition.open()
+        hide_rhom();
     }
 
     $s.$on('$locationChangeSuccess', function(event){
