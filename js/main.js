@@ -8,6 +8,7 @@ var app = angular.module('app', [])
     var intro_bg = doc.querySelector('#intro_bg')
     var cont_rhom_right = doc.querySelector('#side_page_right');
     var cont_rhom_left = doc.querySelector('#side_page_left');
+    var video = jwplayer('video-player')
 
     var sq_arr_right = [
         {i: 0, j: 3, imgPath:'image/main/5.jpg', 'type':'type'},
@@ -47,6 +48,7 @@ var app = angular.module('app', [])
     .success(angular.bind(null, function(data, status) {
         $s.data = data
 
+        $s.selectedCast = $s.data.pages[2].pages[0]
         $s.selectedMaker = $s.data.pages[3].pages[0]
 
         main_menu.init(data.pages, 0)
@@ -81,6 +83,26 @@ var app = angular.module('app', [])
             intro && intro.runRepaint()            
             particles && particles.runRepaint()
         }
+        else if ($s.selectedPage == 'cast') {
+            load_video($s.selectedCast.video.files)
+            
+        }
+        else if ($s.selectedPage == 'makers') {
+            load_video($s.selectedMaker.video.files)
+        }
+    }
+    
+    function load_video(files) {
+        video.setup(
+            {   sources:
+                [{   file: files[0] }
+                ,{   file: files[1] }
+                ,{   file: files[2] }
+                ]
+            ,   width: $window.innerWidth
+            ,   height: $window.innerWidth
+            ,   autostart: true
+            })
     }
 
     function play_intro() {
@@ -122,7 +144,7 @@ var app = angular.module('app', [])
         intro.percent = 0
         intro.runRepaint()
         
-        TweenLite.to(intro, 4, {
+        TweenLite.to(intro, 3, {
             percent: 100,
             ease: Power1.easeOut,
             onUpdate: function(){ intro.repaintCanvas() },
@@ -233,6 +255,13 @@ var app = angular.module('app', [])
             div.style.width = Math.round($window.innerWidth*0.66) + "px"
         }
         
+        if (video) {
+            var w = 1920
+            var h = 1080
+            var k = Math.max($window.innerWidth/w, $window.innerHeight/h)
+            video.resize(Math.round(w*k) + "px", Math.round(h*k) + "px")
+        }
+        
         preloader.set_size(200, 200)
     }
     
@@ -262,6 +291,7 @@ var app = angular.module('app', [])
         
         intro && intro.stopRepaint()
         particles && particles.stopRepaint()
+        video.ready && video.remove()
         
         main_menu.collapse()
         main_menu.hide_header()
@@ -295,23 +325,9 @@ var app = angular.module('app', [])
     $s.changeMaker = function(page) {
         $s.selectedMaker = page
     }
-}])
-.controller("castController", ['$scope', function($s) {
     
-    $s.$parent.$watch("data", onData)
-    
-    function onData(n, p) {
-        for (var i=0; n && i<n.pages.length; i++) {
-            if (n.pages[i].page == 'cast') {
-                $s.data = n.pages[i]
-                $s.selectedCast = $s.data.pages[0]
-                //$s.$apply()
-                break
-            }
-        }
-    }
-    
-    this.changeCast = function(page) {
-        $s.selectedCast = page        
+    $s.changeCast = function(page) {
+        $s.selectedCast = page
     }
 }])
+
