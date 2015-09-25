@@ -4,6 +4,10 @@
 	font-family: $scadaR;
 }
 
+body {
+  background-color: #000;
+}
+
 #bg {
 	height: 100%;
 	width: 100%;
@@ -29,7 +33,7 @@
   
 }
 #news {
-	background-image: url('../image/bg/news_all.jpg');
+	background-image: url('../image/news_1.jpg');
   background-repeat:no-repeat;
   background-size: auto 100%;
 }
@@ -62,7 +66,7 @@
 }
 
 #media {
-	background-image: url('../image/bg/multimedia_photo.jpg');
+	background-image: url('../image/multimedia_video.jpg');
   background-repeat:no-repeat;
   background-size: auto 100%;
 }
