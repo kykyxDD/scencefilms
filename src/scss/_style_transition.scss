@@ -305,3 +305,43 @@
     text-align: center;
     margin-top: 20%;
 }
+
+#preloader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+#preloader .label{
+    position: absolute;
+    width: 50px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 12px;
+    font-family: sans-serif;
+    left: 50%;
+    top: 50%;
+    margin-top: -10px;
+    margin-left: -25px;
+}
+
+#preloader.white {
+    color: #ffffff;
+}
+
+#preloader.black {
+    color: #000000;
+}
+
+#intro {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 900px;
+    height: 350px;
+    margin-left: -450px;
+    margin-top: -175px;
+}
