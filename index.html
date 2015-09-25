@@ -19,12 +19,11 @@
     <script src='js/main.js'></script>
   </head>
   <body ng-app="app" ng-controller="appController">
-
 	<div id='bg' class="home"></div>
 
 	<div id='content'>
         <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
-            <div class="underconstruction">Home</div>
+            
         </div>
         <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}">
             <div class="underconstruction">NEWS</div>
@@ -126,11 +125,12 @@
         </div>
     </div>
     
-    <div id="preloader">
-      <div class='label'>0%</div>
-    </div>
-    
+    <div id="intro_bg"></div>
     <div id="intro"></div>
+
+    <div id="preloader">
+        <div class='label'>0%</div>
+    </div>
 
   </body>
 </html>

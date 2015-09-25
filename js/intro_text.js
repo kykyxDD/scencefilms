@@ -1,6 +1,7 @@
 function IntroText(cont)
 {
     this.cont = cont
+    ScreenObject.decorate_element.apply(this.cont)
     this.canvas = document.createElement('canvas')
     this.cont.appendChild(this.canvas)
     
@@ -147,7 +148,18 @@ IntroText.prototype = {
         return ret;
     },
     
+    runRepaint: function() {
+        clearInterval(this.repaintInterval)
+        this.repaintCanvas()
+        this.repaintInterval = setInterval(angular.bind(this, this.repaintCanvas), 30)
+    },
+    
+    stopRepaint: function() {
+        clearInterval(this.repaintInterval)
+    },
+    
     repaintCanvas: function() {
+        
         this.updateDistortionField()        
         
         var ctx = this.canvas.getContext('2d')
