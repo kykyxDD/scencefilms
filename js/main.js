@@ -30,7 +30,7 @@ var app = angular.module('app', [])
         $s.selectedMaker = $s.data.pages[3].pages[0]
 
         transition.show()
-        main_menu.init(data.pages, 1)
+        main_menu.init(data.pages, 0)
         main_menu.show_header(0.3)       
         
     }))

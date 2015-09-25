@@ -39,7 +39,7 @@ Anim_menu.prototype = {
 
 			itm.line.scaleX = 0;
             
-            itm.y = 25 * (i-index);
+            itm.y = 12 * (i-index);
 
             this.create_event(itm, i-index, page);
            

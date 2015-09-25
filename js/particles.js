@@ -62,7 +62,7 @@ Particles.prototype = {
         var scrh = this.oldScreenSizeH
         var arr = [];
         arr[0] = scrw*Math.random();
-        arr[1] = 200*Math.random()+scrh/3;
+        arr[1] = 200*Math.random()+scrh/2;
         var depth = scrh*Math.random();
         arr[2] = depth * Math.random();
         return arr;
@@ -93,7 +93,7 @@ Particles.prototype = {
         //console.log("repaint")
         this.updateParticlesPosition()
         
-        var c = new Point(0, 100)
+        var c = new Point(0, 0)
     
         var ctx = this.canvas.getContext('2d')
         ctx.clearRect(0, 0, this.oldScreenSizeW, this.oldScreenSizeH)
