@@ -430,6 +430,20 @@ body {
   .text {
     margin-bottom: 4%;
   }
+
+  .footer {
+    position: static;
+    text-align: center;
+
+    .w-nav,
+    .w-share {
+      margin-bottom: 10px;
+    }
+  }
+
+  html, body {
+    height: auto;
+  }
 }
 
 @media #{$mediaCP} {
