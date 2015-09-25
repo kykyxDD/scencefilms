@@ -9,8 +9,10 @@
 	  <link rel="stylesheet" type="text/css" href="css/screen.css">
 	  <script src='js/script.js'></script>
 	  <script src='js/lib/gs/TweenLite.min.js'></script>
+	  <script src='js/lib/angular/angular.min.js'></script>
     <script src='js/screen_object.js'></script>
     <script src='js/transition.js'></script>
+    <script src='js/main.js'></script>
   </head>
   <body class="cast_mobile">
 	  <div id='bg' class="cast_mobile"></div>
@@ -159,6 +161,18 @@
 			  </div>
 		  </div>
 	  </div>
+    <div id='main_menu'>
+		  <div class="header_cont" ng-click="onMenuHeaderClick()">
+        <div class='lines_cont'>
+          <div class='line'></div>
+          <div class='line'></div>
+          <div class='line'></div>
+        </div>
+        <div class="haeder_label">menu</div>
+		  </div>
+		  <div class='menu_cont'></div>
+      <div class='close_btn' ng-click="onMenuCloseClick()">&#10006;</div>
+	  </div>
     <footer class="footer">
       <div class="w-share">
         <ul class="l-share">
@@ -170,32 +184,11 @@
       </div>      
       <div class="w-nav">
         <ul class="l-nav">
-          <li><a href="#">HOME</a></li>
-          <li><a href="#">NEWS</a></li>
-          <li><a href="#">CAST</a></li>
-          <li><a href="#">FILMMAKERS</a></li>
-          <li><a href="#">MULTIMEDIA</a></li>
+          <li ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
+					  <span>{{page.name}}</span>
+				  </li>
         </ul>
       </div>
     </footer>
-
-	  <script type="text/javascript">
-		 window.requestAnimationFrame =
-		 window.      requestAnimationFrame ||
-		 window.     ORequestAnimationFrame ||
-		 window.    msRequestAnimationFrame ||
-		 window.   mozRequestAnimationFrame ||
-		 window.webkitRequestAnimationFrame ||
-		 function(fn) { return setTimeout(fn, 1000/60) }
-
-		 window.cancelAnimationFrame =
-		 window.      cancelAnimationFrame ||
-		 window.     OCancelAnimationFrame ||
-		 window.    msCancelAnimationFrame ||
-		 window.   mozCancelAnimationFrame ||
-		 window.webkitCancelAnimationFrame ||
-		 window.clearTimeout
-		 var anim_menu = new Anim_menu();
-	  </script>
   </body>
 </html>
