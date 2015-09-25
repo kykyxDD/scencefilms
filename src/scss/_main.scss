@@ -318,6 +318,10 @@ body {
 }
 
 @media #{$mediaCL} {
+
+  #cast_mobile {
+    background-image: none;
+  }
   .w-content {
     vertical-align: bottom;
     //margin-bottom: 40px;
