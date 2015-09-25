@@ -314,6 +314,12 @@ body {
   .btn_top {
     display: block;
   }
+
+  .w-tab {
+    .tab {
+      max-width: none;
+    }
+  }
   
   #bg {
     display: none;
@@ -547,7 +553,7 @@ body {
     li {
       float: none;
       width: 100%;
-     }
+    }
   }
 }
 
