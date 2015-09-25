@@ -5,6 +5,7 @@ var app = angular.module('app', [])
     var transition = new Transition(doc.querySelector('.transition'))
     var main_menu = new Anim_menu(doc.querySelector('#main_menu'))
     var preloader = new Preloader(doc.querySelector('#preloader'))
+    var particles = new Particles(doc.querySelector('.paricles'))
     var intro_bg = doc.querySelector('#intro_bg')
     
     if (intro_bg) {
@@ -16,17 +17,16 @@ var app = angular.module('app', [])
 
         play_intro()
     }
-    
+
     $s.selectedPage = 'home'
 
     onResize()
     angular.element($window).bind('resize', onResize)
-    
 
     $http.get("data.json", {})
     .success(angular.bind(null, function(data, status) {
         $s.data = data
-        
+
         $s.selectedMaker = $s.data.pages[3].pages[0]
 
         transition.show()
@@ -43,23 +43,24 @@ var app = angular.module('app', [])
 
         $s.selectedPage = $s.pageToChange
         $s.$apply();
-        
+
         preloader.show()
         preloader.make_white()
         simulate_page_load(1, onPageLoaded)
-        
+
         //transition.close()
     }
-    
+
     transition.onClosed = function() {
         transition.show()
         main_menu.show_header(0.3)
-        
+
         if ($s.selectedPage == 'home') {
             intro && intro.runRepaint()            
+            particles && particles.runRepaint()
         }
     }
-    
+
     function play_intro() {
         preloader.show()
         simulate_page_load(1, show_intro_text)
@@ -99,8 +100,9 @@ var app = angular.module('app', [])
         intro.percent = 0
         intro.runRepaint()
         
-        TweenLite.to(intro, 2, {
+        TweenLite.to(intro, 4, {
             percent: 100,
+            ease: Power1.easeOut,
             onUpdate: function(){ intro.repaintCanvas() },
             onComplete: hide_intro,
             onCompleteScope: this
@@ -114,10 +116,14 @@ var app = angular.module('app', [])
             var home_page = doc.querySelector('#home')
             home_page.appendChild(intro.cont)
         }})
+        
+        particles.runRepaint()
+        TweenLite.to(particles, 2, {kalpha: 3})
     }
     
     function onResize() {
         transition.resize($window.innerWidth, $window.innerHeight)
+        particles.resize($window.innerWidth, $window.innerHeight)
         
         var conts = doc.querySelectorAll("#cast .b-content, #makers .b-content")
         for (var i=0; i<conts.length; i++) {
@@ -153,6 +159,7 @@ var app = angular.module('app', [])
         $s.pageToChange = data.page
         
         intro && intro.stopRepaint()
+        particles && particles.stopRepaint()
         
         main_menu.collapse()
         main_menu.hide_header()

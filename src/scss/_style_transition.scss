@@ -307,6 +307,7 @@
 
 #content .selected {
   display: table-cell !important;
+  overflow: hidden;
 }
 
 #content .page {
@@ -381,4 +382,15 @@
     width: 80px;
     height: 80px;
     background-repeat: no-repeat;    
+}
+
+.video_bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.paricles {
+    
 }

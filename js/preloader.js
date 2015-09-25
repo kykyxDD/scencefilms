@@ -12,7 +12,7 @@ function Preloader(cont)
     
     this.innerRadius = 35;
     this.startRadius = this.innerRadius;
-    this.circleWidth = 10;
+    this.circleWidth = 5;
     this.segments = 30;
     this.offsetArr = []
     this.distortionField = []
@@ -98,7 +98,7 @@ Preloader.prototype = {
     setPercent: function(val) {
         this.percent = val
         this.innerRadius = (val/100 + 1)*17;
-        this.label.innerText = Math.round(this.percent) + "%"
+        this.label.textContent = Math.round(this.percent) + "%"
     },
 
     getCoord: function(ang,rad) {
