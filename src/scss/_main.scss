@@ -311,6 +311,11 @@ body {
 
 
 @media #{$mediaC} {
+  #cont_menu,
+  #main_menu {
+    position: fixed !important;
+  }
+  
   .p-title {
     padding-top: 30%;
     padding-left: 30px;
