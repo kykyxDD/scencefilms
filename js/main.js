@@ -43,6 +43,18 @@ var app = angular.module('app', [])
 
     onResize()
     angular.element($window).bind('resize', onResize)
+    
+    $s.$watch("selectedCast", function(cast){
+        if (cast && 'video' in cast) {
+            load_video(cast.video)
+        }
+    })
+
+    $s.$watch("selectedMakers", function(maker){
+        if (maker && 'video' in maker) {
+            load_video(maker.video)
+        }        
+    })
 
     $http.get("data.json", {})
     .success(angular.bind(null, function(data, status) {
@@ -102,7 +114,30 @@ var app = angular.module('app', [])
             ,   width: $window.innerWidth
             ,   height: $window.innerWidth
             ,   autostart: true
+            ,   stretching: "fill"
+            ,   events: {
+                onTime: function(ev) {
+                    console.log('on time', ev)
+                    if (ev.position > 5.5) {
+                        console.log("here")
+                        video.pause(true)
+                    }
+                }                
+            }
             })
+    }
+    
+    function create_video(files) {
+        var vid = doc.createElement("video")
+        vid.setAttribute("autoplay", "autoplay")
+        
+        for (var i=0; i<files.length; i++) {
+            var s = doc.createElement("source")
+            s.src = files[i]
+            vid.appendChild(s)
+        }
+        
+        doc.querySelector("#bg").appendChild(vid)
     }
 
     function play_intro() {
@@ -253,13 +288,6 @@ var app = angular.module('app', [])
         for (var i=0; i<conts.length; i++) {
             var div = conts[i]
             div.style.width = Math.round($window.innerWidth*0.66) + "px"
-        }
-        
-        if (video) {
-            var w = 1920
-            var h = 1080
-            var k = Math.max($window.innerWidth/w, $window.innerHeight/h)
-            video.resize(Math.round(w*k) + "px", Math.round(h*k) + "px")
         }
         
         preloader.set_size(200, 200)
