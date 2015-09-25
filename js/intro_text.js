@@ -18,6 +18,15 @@ IntroText.prototype = {
     init: function() {
         this.set_size(900, 350)
         this.prepare()
+        this.hide()
+    },
+    
+    show: function() {
+        dom.display(this.cont, true)
+    },
+    
+    hide: function() {
+        dom.display(this.cont, false)
     },
     
     set_size: function(w, h) {
