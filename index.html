@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-	<meta charset="utf-8" />
+  <head>
+	  <title></title>
+	  <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1">
     <meta content="telephone=no" name="format-detection" />
     <meta content="address=no" name="format-detection" />
-	<link rel="stylesheet" type="text/css" href="css/screen.css">
-	<script src='js/script.js'></script>
-	<script src='js/lib/gs/TweenLite.min.js'></script>
-	<script src='js/lib/angular/angular.min.js'></script>
-	<script src='js/lib/f.js'></script>
-	<script src='js/lib/dom.js'></script>
+    <link rel="stylesheet" type="text/css" href="css/screen.css">
+    <script src='js/script.js'></script>
+    <script src='js/lib/gs/TweenLite.min.js'></script>
+    <script src='js/lib/angular/angular.min.js'></script>
+    <script src='js/lib/f.js'></script>
+    <script src='js/lib/dom.js'></script>
     <script src='js/screen_object.js'></script>
     <script src='js/preloader.js'></script>
     <script src='js/intro_text.js'></script>
     <script src='js/transition.js'></script>
     <script src='js/main.js'></script>
-</head>
-<body ng-app="app" ng-controller="appController">
-	<div id='bg' class="home"></div>
+  </head>
+  <body ng-app="app" ng-controller="appController">
+	  <div id='bg' class="home"></div>
 
 	<div id='content' >
         <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
@@ -60,79 +60,66 @@
                     
                   </div>
                 </div>
-                
-                <div class="w-text hidden">
-                  <div class="b-text">
-                    <div class="t-title">
-                      <h2>BRAD CARTER</h2>
-                      <h3>Name</h3>
-                    </div>
-                    <div class="text">
-                      <p></p>
-                    </div>
-                    
-                  </div>
-                </div>
-
-                </div>
               </div>
             </div>
+          </div>
         </div>
-	</div>
-	<div id="title_page"></div>
-	<div class="transition rot45deg">
-        <div id="yellow_part" class="element">
-            <div class="bg yellow"></div>
-        </div>
-        <div id="black_part" class="element">
-            <div class="bg black"></div>
-        </div>
+      </div>
+	  </div>
+	  <div id="title_page"></div>
+	  <div class="transition rot45deg">
+      <div id="yellow_part" class="element">
+        <div class="bg yellow"></div>
+      </div>
+      <div id="black_part" class="element">
+        <div class="bg black"></div>
+      </div>
     </div>
-	<div id='load' class='not_load'>
-		<div class="cont_load">
-			<div class='circle'></div>
-			<div class='num_load'></div>
-			<div class='text_load'>loading</div>
-		</div>
-	</div>
-	<div id='main_menu'>
-		<div class="header_cont" ng-click="onMenuHeaderClick()">
-            <div class='lines_cont'>
-                <div class='line'></div>
-                <div class='line'></div>
-                <div class='line'></div>
-            </div>
-            <div class="haeder_label">menu</div>
-		</div>
-		<div class='menu_cont'></div>
-        
-        <div class='close_btn' ng-click="onMenuCloseClick()">&#10006;</div>
-	</div>
+	  <div id='load' class='not_load'>
+		  <div class="cont_load">
+			  <div class='circle'></div>
+			  <div class='num_load'></div>
+			  <div class='text_load'>loading</div>
+		  </div>
+	  </div>
+	  <div id='main_menu'>
+		  <div class="header_cont" ng-click="onMenuHeaderClick()">
+        <div class='lines_cont'>
+          <div class='line'></div>
+          <div class='line'></div>
+          <div class='line'></div>
+        </div>
+        <div class="haeder_label">menu</div>
+		  </div>
+		  <div class='menu_cont'></div>
+      
+      <div class='close_btn' ng-click="onMenuCloseClick()">&#10006;</div>
+	  </div>
 
-	<div class="footer">
-		<div class="w-share">
-	        <ul class="l-share">
-	          <li><a class="i-facebook" href="#">facebook</a></li>
-	          <li><a class="i-twitter" href="#">twitter</a></li>
-	          <li><a class="i-instagram" href="#">instagram</a></li>
-	          <li><a class="i-google_plus" href="#">google plus</a></li>
-	        </ul>
+	  <div class="footer">
+		  <div class="w-share">
+	      <ul class="l-share">
+	        <li><a class="i-facebook" href="#">facebook</a></li>
+	        <li><a class="i-twitter" href="#">twitter</a></li>
+	        <li><a class="i-instagram" href="#">instagram</a></li>
+	        <li><a class="i-google_plus" href="#">google plus</a></li>
+	      </ul>
 	    </div>
 	    <div class="w-nav">
 		    <ul class="l-nav">
-				<li ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
-					<span>{{page.name}}</span>
-				</li>
-			</ul>
-		</div>
-	</div>
+				  <li ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
+					  <span>{{page.name}}</span>
+				  </li>
+			  </ul>
+		  </div>
+	  </div>
     
     <div id="preloader">
-        <div class='label'>0%</div>
+      <div class='label'>0%</div>
     </div>
     
     <div id="intro"></div>
 
-</body>
+  </body>
 </html>
 

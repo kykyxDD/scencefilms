@@ -8,9 +8,13 @@
     <meta content="address=no" name="format-detection" />
 	  <link rel="stylesheet" type="text/css" href="css/screen.css">
 	  <script src='js/script.js'></script>
-    <script src='js/lib/gs/TweenLite.min.js'></script>
-    <script src='js/lib/angular/angular.min.js'></script>
+	  <script src='js/lib/gs/TweenLite.min.js'></script>
+	  <script src='js/lib/angular/angular.min.js'></script>
+	  <script src='js/lib/f.js'></script>
+	  <script src='js/lib/dom.js'></script>
     <script src='js/screen_object.js'></script>
+    <script src='js/preloader.js'></script>
+    <script src='js/intro_text.js'></script>
     <script src='js/transition.js'></script>
     <script src='js/main.js'></script>
   </head>
@@ -205,5 +209,10 @@
         </ul>
       </div>
     </footer>
+    <div id="preloader">
+      <div class='label'>0%</div>
+    </div>
+    
+    <div id="intro"></div>
   </body>
 </html>
