@@ -57,7 +57,7 @@ Transition.prototype = {
         var tan_b = this.WIDTH / this.HEIGHT
         var projection_b = Math.cos(Math.atan(tan_b)) * this.HEIGHT
         
-        this.exp_rad = projection_a //Math.max(projection_a, projection_b)
+        this.exp_rad = Math.max(projection_a, projection_b)
         var half_size = this.SQUARE_SIZE/2
         this.yellow_exp_scale = this.exp_rad*2 / half_size
         this.black_exp_scale = (488+this.exp_rad) / half_size

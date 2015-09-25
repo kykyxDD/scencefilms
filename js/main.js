@@ -1,17 +1,27 @@
 var app = angular.module('app', [])
 .controller('appController', ['$scope', '$http', '$location', '$document', '$window', function($s, $http, $location, $doc, $window){
 
-    var transition = new Transition($doc[0].querySelector('.transition'))
-    var main_menu = new Anim_menu($doc[0].querySelector('#main_menu'))
-    var preloader = new Preloader($doc[0].querySelector('#preloader'))
-    var intro = new IntroText(document.querySelector("#intro"))
-
-    this.blah = "AAAA!"
+    var doc = $doc[0]
+    var transition = new Transition(doc.querySelector('.transition'))
+    var main_menu = new Anim_menu(doc.querySelector('#main_menu'))
+    var preloader = new Preloader(doc.querySelector('#preloader'))
+    var intro_bg = doc.querySelector('#intro_bg')
     
+    if (intro_bg) {
+        var intro = new IntroText(document.querySelector("#intro"))
+        intro.cont.x = 0
+        intro.cont.y = 0
+        intro.cont.scaleX = intro.cont.scaleY = 0.8
+        ScreenObject.decorate_element.apply(intro_bg)
+
+        play_intro()
+    }
+    
+    $s.selectedPage = 'home'
+
     onResize()
     angular.element($window).bind('resize', onResize)
-
-    $s.selectedPage = 'home'
+    
 
     $http.get("data.json", {})
     .success(angular.bind(null, function(data, status) {
@@ -36,7 +46,7 @@ var app = angular.module('app', [])
         
         preloader.show()
         preloader.make_white()
-        simulate_page_load()
+        simulate_page_load(1, onPageLoaded)
         
         //transition.close()
     }
@@ -44,6 +54,66 @@ var app = angular.module('app', [])
     transition.onClosed = function() {
         transition.show()
         main_menu.show_header(0.3)
+        
+        if ($s.selectedPage == 'home') {
+            intro && intro.runRepaint()            
+        }
+    }
+    
+    function play_intro() {
+        preloader.show()
+        simulate_page_load(1, show_intro_text)
+        
+        var drops = []
+        var duration = 1200
+        var drops_count = 20
+        var grid_size = $window.innterWidth
+        var delay = duration/drops_count
+        
+        setTimeout(makeDrop, delay)
+        
+        function makeDrop() {
+            
+            var border = 50
+            var rnd_x = border + ($window.innerWidth - border*2) * Math.random()
+            var rnd_y = border + ($window.innerHeight - border*2) * Math.random()
+            
+            var drop = doc.createElement("div")
+            drop.style.background = "url('image/waterdrops/$.png') no-repeat".replace("$", 1+drops_count%14)
+            drop.style.left = Math.round(rnd_x) + "px"
+            drop.style.top = Math.round(rnd_y) + "px"
+            drop.className = "waterdrop"
+            intro_bg.appendChild(drop)
+            
+            if (--drops_count > 0) {
+                setTimeout(makeDrop, delay)
+            }
+        }
+        
+    }
+    
+    function show_intro_text() {
+        preloader.hide()
+        
+        intro.show()
+        intro.percent = 0
+        intro.runRepaint()
+        
+        TweenLite.to(intro, 2, {
+            percent: 100,
+            onUpdate: function(){ intro.repaintCanvas() },
+            onComplete: hide_intro,
+            onCompleteScope: this
+        })
+    }
+    
+    function hide_intro() {
+        TweenLite.to(intro_bg, 1, {alpha: 0, onComplete: function() {intro_bg.visible = false}})
+        
+        TweenLite.to(intro.cont, 1, {x: -300, onComplete: function(){
+            var home_page = doc.querySelector('#home')
+            home_page.appendChild(intro.cont)
+        }})
     }
     
     function onResize() {
@@ -51,8 +121,9 @@ var app = angular.module('app', [])
         preloader.set_size(200, 200)
     }
     
-    function simulate_page_load() {
+    function simulate_page_load(duration, callback) {
         
+        var duration = duration || 1
         preloader.fake_pc = 0
         
         var f = function() {
@@ -62,7 +133,7 @@ var app = angular.module('app', [])
         
         f()
         
-        TweenLite.to(preloader, 1, {fake_pc: 100, onUpdate: f, onComplete: onPageLoaded, onCompleteScope: this})
+        TweenLite.to(preloader, duration, {fake_pc: 100, onUpdate: f, onComplete: callback, onCompleteScope: this})
     }
     
     function onPageLoaded() {
@@ -73,6 +144,8 @@ var app = angular.module('app', [])
     $s.change_page = function(data){
         
         $s.pageToChange = data.page
+        
+        intro && intro.stopRepaint()
         
         main_menu.collapse()
         main_menu.hide_header()
@@ -113,7 +186,6 @@ var app = angular.module('app', [])
     function onData(n, p) {
         for (var i=0; n && i<n.pages.length; i++) {
             if (n.pages[i].page == 'cast') {
-                console.log('set data', n.pages[i], $s)
                 $s.data = n.pages[i]
                 $s.selectedCast = $s.data.pages[0]
                 //$s.$apply()
