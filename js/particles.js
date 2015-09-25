@@ -62,7 +62,7 @@ Particles.prototype = {
         var scrh = this.oldScreenSizeH
         var arr = [];
         arr[0] = scrw*Math.random();
-        arr[1] = 200*Math.random()+scrh/2;
+        arr[1] = 200*Math.random()+scrh/3*2;
         var depth = scrh*Math.random();
         arr[2] = depth * Math.random();
         return arr;
@@ -103,7 +103,7 @@ Particles.prototype = {
 
         for(var i=0; i<this.particlesArray.length; i++){
             var alpha = (this.particlesArray[i].k-0.5)*3*this.kalpha
-            ctx.strokeStyle = "rgba(255, 255, 255, alpha)".replace("alpha", alpha)
+            ctx.strokeStyle = "rgba(204, 195, 156, alpha)".replace("alpha", alpha)
             ctx.moveTo(c.x + this.particlesArray[i].scrx,   c.y + this.particlesArray[i].scry);
             ctx.lineTo(c.x + this.particlesArray[i].scrx+1, c.y + this.particlesArray[i].scry);
         }
