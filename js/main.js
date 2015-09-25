@@ -65,8 +65,8 @@ var app = angular.module('app', [])
         simulate_page_load(1, show_intro_text)
         
         var drops = []
-        var duration = 1200
-        var drops_count = 20
+        var duration = 1000
+        var drops_count = 16
         var grid_size = $window.innterWidth
         var delay = duration/drops_count
         
@@ -74,7 +74,7 @@ var app = angular.module('app', [])
         
         function makeDrop() {
             
-            var border = 50
+            var border = 100
             var rnd_x = border + ($window.innerWidth - border*2) * Math.random()
             var rnd_y = border + ($window.innerHeight - border*2) * Math.random()
             
@@ -118,6 +118,13 @@ var app = angular.module('app', [])
     
     function onResize() {
         transition.resize($window.innerWidth, $window.innerHeight)
+        
+        var conts = doc.querySelectorAll("#cast .b-content, #makers .b-content")
+        for (var i=0; i<conts.length; i++) {
+            var div = conts[i]
+            div.style.width = Math.round($window.innerWidth*0.66) + "px"
+        }
+        
         preloader.set_size(200, 200)
     }
     
