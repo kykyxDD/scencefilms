@@ -91,7 +91,7 @@ Transition.prototype = {
     
         this.cont.x = -469
         this.cont.y = 152;
-        console.log(Power1.easeOut)
+
         TweenLite.to(this.cont, 0.44*this.time_scale, {x: -15, ease: Power1.easeOut, onComplete: function(){if (this.debug) console.log("onShow"); this.onShow()}, onCompleteScope: this})
         TweenLite.to(this.cont, 0.5*this.time_scale, {x: 0, ease: Power1.easeOut, delay: 0.44*this.time_scale})
     },
