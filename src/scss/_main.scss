@@ -314,6 +314,12 @@ body {
   .btn_top {
     display: block;
   }
+
+  .w-tab {
+    .tab {
+      max-width: none;
+    }
+  }
   
   #bg {
     display: none;
@@ -423,6 +429,20 @@ body {
 
   .text {
     margin-bottom: 4%;
+  }
+
+  .footer {
+    position: static;
+    text-align: center;
+
+    .w-nav,
+    .w-share {
+      margin-bottom: 10px;
+    }
+  }
+
+  html, body {
+    height: auto;
   }
 }
 
@@ -547,7 +567,7 @@ body {
     li {
       float: none;
       width: 100%;
-     }
+    }
   }
 }
 
