@@ -365,10 +365,11 @@ body {
         display: none !important;
       }
 
-      &.active, &:hover {
-                  background: #ffd800;
-                  color: #000;
-                }
+      &.active,
+      &:hover {
+        background: #ffd800;
+        color: #000;
+      }
     }
 
     span {
