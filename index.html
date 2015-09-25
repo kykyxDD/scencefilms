@@ -20,100 +20,99 @@
     <script src='js/main.js'></script>
   </head>
   <body ng-app="app" ng-controller="appController">
-	<div id='bg' class="home"></div>
+	  <div id='bg' class="home"></div>
 
 	<div id='content'>
         <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
             <div class="paricles"></div>
         </div>
-        <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}">
-            
-        </div>
-        <div id="media" class="page" ng-class="{selected: selectedPage == 'media'}">
-            
-        </div>
+        <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}"></div>
+        <div id="media" class="page" ng-class="{selected: selectedPage == 'media'}"></div>
 
 		<div id="cast" style="background-image: url('{{selectedCast.bg}}');" ng-class="{selected: selectedPage == 'cast'}" class="page w-content" ng-controller="castController as cc">
-            <div class="b-content" style="width: 1166px;">
-                <div class="b-content_inside">
-                    <div class="w-tab">
-                      <ul class="tab">
-                        <li ng-repeat="page in data.pages"><a href="#" ng-click="cc.changeCast(page)" ng-class="{active: page == selectedCast}"><span>{{page.title}}</span></a></li>
-                      </ul>
+        <div class="b-content" style="width: 1166px;">
+          <div class="b-content_inside">
+            <div class="w-tab">
+              <ul class="tab">
+                <li ng-repeat="page in data.pages"><a href="#" ng-click="cc.changeCast(page)" ng-class="{active: page == selectedCast}"><span>{{page.title}}</span></a></li>
+              </ul>
 
-                    </div>
-                    <div class="w-text">
-                        <div class="img"></div>
-                        <div class="b-text">
-                            <div class="t-title">
-                              <h2>{{selectedCast.name}}</h2>
-                              <h3>{{selectedCast.role}}</h3>
-                            </div>
-                            <div class="text">
-                              <p>{{selectedCast.desc}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <!--ng-if="selectedCast.video">
-            <video class="video_bg">
-                <source ng-repeat="file in selectedCast.video.files" src="{{file}}" type="video/ogg"></source>
-            </video>
-            </ng-if-->
+            <div class="w-text">
+              <div class="img"></div>
+              <div class="b-text">
+                <div class="t-title">
+                  <h2>{{selectedCast.name}}</h2>
+                  <h3>{{selectedCast.role}}</h3>
+                </div>
+                <div class="text">
+                  <p>{{selectedCast.desc}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-		<div id="makers" style="background-image: url('{{selectedMaker.bg}}');" ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
-            <div class="b-content" style="width: 1166px;">
-                <div class="b-content_inside">
-                    <div class="w-tab">
-                      <ul class="tab">
-                        <li ng-repeat="page in data.pages[3].pages"><a href="#" ng-click="changeMaker(page)" ng-class="{active: page == selectedMaker}"><span>{{page.title}}</span></a></li>
-                      </ul>
+        <!--ng-if="selectedCast.video">
+        <video class="video_bg">
+        <source ng-repeat="file in selectedCast.video.files" src="{{file}}" type="video/ogg"></source>
+        </video>
+        </ng-if-->
 
-                    </div>
-                    <div class="w-text">
-                        <div class="img"></div>
-                        <div class="b-text">
-                            <div class="t-title">
-                              <h2>{{selectedMaker.name}}</h2>
-                              <h3>{{selectedMaker.role}}</h3>
-                            </div>
-                            <div class="text">
-                              <p>{{selectedMaker.desc}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        
+      </div>
+      
+		  <div id="makers" style="background-image: url('{{selectedMaker.bg}}');" ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
+        <div class="b-content" style="width: 1166px;">
+          <div class="b-content_inside">
+            <div class="w-tab">
+              <ul class="tab">
+                <li ng-repeat="page in data.pages[3].pages"><a href="#" ng-click="changeMaker(page)" ng-class="{active: page == selectedMaker}"><span>{{page.title}}</span></a></li>
+              </ul>
+
             </div>
+            <div class="w-text">
+              <div class="img"></div>
+              <div class="b-text">
+                <div class="t-title">
+                  <h2>{{selectedMaker.name}}</h2>
+                  <h3>{{selectedMaker.role}}</h3>
+                </div>
+                <div class="text">
+                  <p>{{selectedMaker.desc}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <div id='side_page_right'>
-	</div>
-	<div id='side_page_left'>
-	</div>
+	  </div>
+	  <div id='side_page_left'>
+	  </div>
 
     <div id="title_page"></div>
 
     <div class="footer">
-        <div class="w-share">
-            <ul class="l-share">
-                <li><a class="i-facebook" href="#">facebook</a></li>
-                <li><a class="i-twitter" href="#">twitter</a></li>
-                <li><a class="i-instagram" href="#">instagram</a></li>
-                <li><a class="i-google_plus" href="#">google plus</a></li>
-            </ul>
-        </div>
-        <div class="w-nav">
-            <ul class="l-nav">
-                <li ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
-                    <span>{{page.name}}</span>
-                </li>
-            </ul>
-        </div>
+      <div class="w-share">
+        <ul class="l-share">
+          <li><a class="i-facebook" href="#">facebook</a></li>
+          <li><a class="i-twitter" href="#">twitter</a></li>
+          <li><a class="i-instagram" href="#">instagram</a></li>
+          <li><a class="i-google_plus" href="#">google plus</a></li>
+        </ul>
+      </div>
+      <div class="w-nav">
+        <ul class="l-nav">
+          <li ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
+            <span>{{page.name}}</span>
+          </li>
+        </ul>
+      </div>
     </div>
     
-	<div class="transition rot45deg">
+	  <div class="transition rot45deg">
       <div id="yellow_part" class="element">
         <div class="bg yellow"></div>
       </div>
@@ -123,23 +122,23 @@
     </div>
 
     <div id='main_menu'>
-        <div class="header_cont" ng-click="onMenuHeaderClick()">
-            <div class='lines_cont'>
-                <div class='line'></div>
-                <div class='line'></div>
-                <div class='line'></div>
-            </div>
-            <div class="haeder_label">menu</div>
+      <div class="header_cont" ng-click="onMenuHeaderClick()">
+        <div class='lines_cont'>
+          <div class='line'></div>
+          <div class='line'></div>
+          <div class='line'></div>
         </div>
-        <div class='menu_cont'></div>
-        <div class='close_btn' ng-click="onMenuCloseClick()">&#10006;</div>
+        <div class="haeder_label">menu</div>
+      </div>
+      <div class='menu_cont'></div>
+      <div class='close_btn' ng-click="onMenuCloseClick()">&#10006;</div>
     </div>
     
     <div id="intro_bg"></div>
     <div id="intro"></div>
 
     <div id="preloader">
-        <div class='label'>0%</div>
+      <div class='label'>0%</div>
     </div>
 
   </body>
