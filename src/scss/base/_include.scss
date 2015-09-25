@@ -32,4 +32,6 @@ $mediaC : "only screen and (max-width: 1024px)";
 $mediaCP : "only screen and (max-width: 1024px) and (orientation : portrait)";
 $mediaCL : "only screen and (max-width: 1024px) and (orientation : landscape)";
 $mediaD : "only screen and (max-width: 640px)";
+$mediaDP : "only screen and (max-width: 640px)  and (orientation : portrait)";
+$mediaDL : "only screen and (max-width: 640px)  and (orientation : landscape)";
 $mediaE : "only screen and (max-width: 480px)";
