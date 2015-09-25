@@ -50,6 +50,11 @@ var app = angular.module('app', [])
         $s.selectedMaker = $s.data.pages[3].pages[0]
 
         main_menu.init(data.pages, 0)
+        
+        if (!intro) {
+            transition.show()
+            main_menu.show_header(0.3)
+        }
     }))
     
     main_menu.onClick = function(page) {
@@ -140,7 +145,6 @@ var app = angular.module('app', [])
         
         transition.show()
         main_menu.show_header(0.3)       
-
     }
 
     function add_rhom(){
@@ -221,7 +225,7 @@ var app = angular.module('app', [])
 
     function onResize() {
         transition.resize($window.innerWidth, $window.innerHeight)
-        particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
+        particles && particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
         
         var conts = doc.querySelectorAll("#cast .b-content, #makers .b-content")
         for (var i=0; i<conts.length; i++) {

@@ -26,6 +26,7 @@
                 },
                 {
                     "bg": "image/bg/cast_carter.jpg",
+                    "video": { "files": ["image/video/carter.mp4", "image/video/carter.ogv", "image/video/carter.webm"]},
                     "title": "BOB CARTER",
                     "role": "Name",
                     "name": "BOB CARTER",
@@ -33,11 +34,12 @@
                 },
                 {
                     "bg": "image/bg/cast_maika.jpg",
+                    "video": { "files": ["image/video/maika.mp4", "image/video/maika.ogv", "image/video/maika.webm"]},
                     "title": "MIAKA MONROE",
                     "role": "Jody",
                     "name": "MIAKA MONROE",
                     "desc": "Maika Monroe is a professional kiteboarder turned actress who is taking Hollywood by storm. Garnering comparisons to some of the top names in the industry, she made her acting debut in the 2012 film AT ANY PRICE, co-starring Zac Effron and Dennis Quaid. In April 2012, Monroe signed up for the drama LABOR DAY, an adaptation of the hit novel, starring Josh Brolin and Kate Winslet. In June 2013, she joined the cast of the psychological thriller film THE GUEST, which gained almost unprecedented acclaim from audiences after playing at numerous film festivals, including the prestigious Sundance Film Festival. In August 2014, she joined the alien invasion thriller film THE 5TH WAVE, the first in a best-selling series of Young"
-                }            
+                }
             ]
         },
         {
@@ -47,6 +49,7 @@
             "pages": [
                 {
                     "bg": "image/bg/filmmakers_blake.jpg",
+                    "video": { "files": ["image/video/blake.mp4", "image/video/blake.ogv", "image/video/blake.webm"]},
                     "title": "BLAKE ROBBINS",
                     "role": "Director",
                     "name": "BLAKE ROBBINS",
@@ -54,6 +57,7 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_jeff.jpg",
+                    "video": { "files": ["image/video/film_jeff.mp4", "image/video/film_jeff.ogv", "image/video/film_jeff.webm"]},
                     "title": "JEFF JOHNSON",
                     "role": "Role",
                     "name": "JEFF JOHNSON",
@@ -68,6 +72,7 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_casey_john.jpg",
+                    "video": { "files": ["image/video/casey_jeff.mp4", "image/video/casey_jeff.ogv", "image/video/casey_jeff.webm"]},
                     "title": "CASEY TWENTER & JEFF ROBISON",
                     "role": "Writer / Producer",
                     "name": "CASEY TWENTER & JEFF ROBISON",
@@ -75,6 +80,7 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_debora.jpg",
+                    "video": { "files": ["image/video/debora.mp4", "image/video/debora.ogv", "image/video/debora.webm"]},
                     "title": "DEBORAH DION",
                     "role": "Casting Director",
                     "name": "DEBORAH DION",
@@ -82,6 +88,7 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_scott.jpg",
+                    "video": { "files": ["image/video/scott.mp4", "image/video/scott.ogv", "image/video/scott.webm"]},
                     "title": "SCOTT BOOKER",
                     "role": "Music Supervisor",
                     "name": "SCOTT BOOKER",
@@ -89,6 +96,7 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_embacment_films.jpg",
+                    "video": { "files": ["image/video/embankment.mp4", "image/video/embankment.ogv", "image/video/embankment.webm"]},
                     "title": "EMBANKMENT FILMS",
                     "role": "Foreign Sales Agency",
                     "name": "EMBANKMENT FILMS",
