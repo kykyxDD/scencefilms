@@ -178,7 +178,9 @@ body {
   }
 }
 
-@media #{$mediaD} {
+
+
+@media #{$mediaCP} {
   .w-tab {
     
     li {
@@ -309,8 +311,17 @@ body {
   }
 }
 
+@media #{$mediaCP, $mediaD} {
+  .footer {
+    background: #000;
+  }
+}
 
-@media #{$mediaC} {
+@media #{$mediaCL} {
+  
+}
+
+@media #{$mediaCP, $mediaDL} {
   #cont_menu,
   #main_menu {
     position: fixed !important;
@@ -488,65 +499,7 @@ body {
   }
 }
 
-@media #{$mediaCP} {
-  .b-content_inside {
-    display: block;
-
-    .w-text {
-      display: table;
-    }
-  }
-  
-  .w-img,
-  .b-text {
-    display: block;
-  }
-
-  .w-text {
-    overflow: hidden;
-    width: 100%;
-    padding: 0;
-
-    .t-title {
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 38px;
-      margin-bottom: 0;
-    }
-
-    p {
-      font-size: 14px;
-      line-height: 22px;
-    }
-  }
-
-  .b-text {
-    width: 100%;
-    @include box-sizing(border-box);
-  }
-
-  .w-img {
-    width: 100%;
-
-    &.w-img__landscape {
-      display: none;
-    }
-
-    img {
-      width: 100%;
-      display: block;
-      //min-width: 100%;
-    }
-  }
-
-  .btn_top {
-    text-align: right;
-  }
-}
-
-@media #{$mediaCL} {
+@media #{$mediaDL, $mediaCP} {
   .b-content_inside {
     display: block;
 
@@ -616,5 +569,69 @@ body {
     }
   }
 }
+
+@media #{$mediaDP} {
+  .b-content_inside {
+    display: block;
+
+    .w-text {
+      display: table;
+    }
+  }
+  
+  .w-img,
+  .b-text {
+    display: block;
+  }
+
+  .w-text {
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+
+    .t-title {
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 38px;
+      margin-bottom: 0;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+
+  .b-text {
+    width: 100%;
+    @include box-sizing(border-box);
+  }
+
+  .w-img {
+    width: 100%;
+
+    &.w-img__landscape {
+      display: none;
+    }
+
+     &.w-img__portrait {
+      display: block;
+    }
+
+
+    img {
+      width: 100%;
+      display: block;
+      
+    }
+  }
+
+  .btn_top {
+    text-align: right;
+  }
+}
+
 
 
