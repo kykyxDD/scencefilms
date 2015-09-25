@@ -14,7 +14,27 @@
         {
             "name": "CAST",
             "id": 3,
-            "page": "cast"
+            "page": "cast",
+            "pages": [
+                {
+                    "title": "MAGIE GRACE",
+                    "role": "Laurie",
+                    "name": "MAGIE GRACE",
+                    "desc": "Grace was born Margaret Grace Denig in Worthington, Ohio, one of threchildren of parents Valinn (née Everett) and Rick Denig, who ran a family jewelry business. Her family lived in a 200-year-old house, the first saltbox house in central Ohio.  She attended Worthington Christian Schools from kindergarte... of parents Valinn (née Everett) and Rick Denig, who ran a family jewelry business. Her family lived in a 200-year-old house, the first saltbox house in central Ohio. She attended Worthington Christian Schools from kindergarte... who ran a family jewelry business. Her family lived in a 200-year-old house, the first saltbox house in central Ohio."
+                },
+                {
+                    "title": "BOB CARTER",
+                    "role": "Name",
+                    "name": "BOB CARTER",
+                    "desc": "Brad Carter (born 1973) is an American film and television actor, guitarist, painter, sculptor, and photographer, known for playing Charlie Lange in True Detective and Leland Gruen in Sons of Anarchy. After suffering from brain disease and tremors that caused his hands to shake, he underwent brain surgery in 2013, which he recorded and posted on YouTube. The video went viral, and he became known as the \"guy playing guitar during brain surgery\".\nBrad Carter (born 1973) is an American film and television actor, guitarist, painter, sculptor, and photographer, known for playing..."
+                },
+                {
+                    "title": "MIAKA MONROE",
+                    "role": "Jody",
+                    "name": "MIAKA MONROE",
+                    "desc": "Maika Monroe is a professional kiteboarder turned actress who is taking Hollywood by storm. Garnering comparisons to some of the top names in the industry, she made her acting debut in the 2012 film AT ANY PRICE, co-starring Zac Effron and Dennis Quaid. In April 2012, Monroe signed up for the drama LABOR DAY, an adaptation of the hit novel, starring Josh Brolin and Kate Winslet. In June 2013, she joined the cast of the psychological thriller film THE GUEST, which gained almost unprecedented acclaim from audiences after playing at numerous film festivals, including the prestigious Sundance Film Festival. In August 2014, she joined the alien invasion thriller film THE 5TH WAVE, the first in a best-selling series of Young"
+                }            
+            ]
         },
         {
             "name": "FILMMAKERS",

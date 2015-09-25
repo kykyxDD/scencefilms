@@ -6,6 +6,8 @@ var app = angular.module('app', [])
     var preloader = new Preloader($doc[0].querySelector('#preloader'))
     var intro = new IntroText(document.querySelector("#intro"))
 
+    this.blah = "AAAA!"
+    
     onResize()
     angular.element($window).bind('resize', onResize)
 
@@ -97,37 +99,23 @@ var app = angular.module('app', [])
         transition.close();
     }
 }])
-.directive('mainmenu', function(){
+.controller("castController", ['$scope', function($s) {
     
-    return {
-        
-        scope: {
-            pages: '=ngModel'        
-        },
-        template: '<li ng-repeat="page in pages" class="" ng-class="{over: isOver == $index}" ng-mouseover="onOver($index)" ng-mouseout="onOut()">' +
-                        '<div class="itm{{$index}}"> {{page.name}} </div>' + 
-                        '<div class="cont_line">' + 
-                            '<div class="line_menu"></div>' +
-                        '</div>' +
-                    '</li>',
-        link: function(scope, element, attr) {
-            scope.isOver = -1;
-            scope.onOver = function(index) {
-                scope.isOver = index;
+    $s.$parent.$watch("data", onData)
+    
+    function onData(n, p) {
+        for (var i=0; n && i<n.pages.length; i++) {
+            if (n.pages[i].page == 'cast') {
+                console.log('set data', n.pages[i], $s)
+                $s.data = n.pages[i]
+                $s.selectedCast = $s.data.pages[0]
+                //$s.$apply()
+                break
             }
-            scope.onOut = function() {
-                scope.isOver = -1
-            }
-        }
-    } 
-})
-.directive('transition', function() {
-    return {
-        scope: {
-            ref: "=ref"
-        },
-        link: function(scope, element, attr) {
-            scope.ref = new Transition(element[0])            
         }
     }
-})
+    
+    this.changeCast = function(page) {
+        $s.selectedCast = page        
+    }
+}])

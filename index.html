@@ -34,7 +34,7 @@
         <div id="makers" class="page" ng-class="{selected: selectedPage == 'makers'}">
             <div class="underconstruction">Filmmakers</div>
         </div>
-		<div id="cast" ng-class="{selected: selectedPage == 'cast'}" class="page w-content">
+		<div id="cast" ng-class="{selected: selectedPage == 'cast'}" class="page w-content" ng-controller="castController as cc">
             <div class="b-content" style="width: 1166px;">
               <!-- <div class="p-title">
               <h1>cast</h1>
@@ -42,12 +42,7 @@
               <div class="b-content_inside">
                 <div class="w-tab">
                   <ul class="tab">
-                    <li><a href="#" class="active"><span>MAGIE GRACE</span></a></li>
-                    <li><a href="#"><span>BOB CARTER</span></a></li>
-                    <li><a href="#"><span>MIAKA MONROE</span></a></li>
-                    <li><a href="#"><span>MAGIE GRACE</span></a></li>
-                    <li><a href="#"><span>BOB CARTER</span></a></li>
-                    <li><a href="#"><span>MAGIE GRACE</span></a></li>
+                    <li ng-repeat="page in data.pages"><a href="#" ng-click="cc.changeCast(page)" ng-class="{active: page == selectedCast}"><span>{{page.title}}</span></a></li>
                   </ul>
                 </div>
                 <div class="w-text">
@@ -56,20 +51,11 @@
                   </div>
                   <div class="b-text">
                     <div class="t-title">
-                      <h2>MAGIE GRACE</h2>
-                      <h3>Laurie</h3>
+                      <h2>{{selectedCast.name}}</h2>
+                      <h3>{{selectedCast.role}}</h3>
                     </div>
                     <div class="text">
-                      <p>Grace was born Margaret Grace Denig in Worthington, Ohio, one of
-                        threchildren of parents Valinn (née Everett) and Rick Denig, who ran
-                        a family jewelry business. Her family lived in a 200-year-old house, the
-                        first saltbox house in central Ohio.  She attended Worthington Christian
-                        Schools from kindergarte...of parents Valinn (née Everett) and Rick Denig,
-                        who ran a family jewelry business. Her family lived in a 200-year-old house,
-                        the first saltbox house in central Ohio. She attended Worthington
-                        Christian Schools from kindergarte...who ran a family jewelry business. Her
-                        family lived in a 200-year-old house, the first saltbox house in central Ohio.
-                      </p>
+                      <p>{{selectedCast.desc}}</p>
                     </div>
                     
                   </div>
@@ -82,40 +68,12 @@
                       <h3>Name</h3>
                     </div>
                     <div class="text">
-                      <p>Brad Carter (born 1973) is an American film and television actor,
-                        guitarist, painter, sculptor, and photographer, known for playing
-                        Charlie Lange in True Detective and Leland Gruen in Sons of Anarchy. 
-                        After suffering from brain disease and tremors that caused his hands
-                        to shake, he underwent brain surgery in 2013, which he recorded and
-                        posted on YouTube. The video went viral, and he became known as the
-                        "guy playing guitar during brain surgery".</p>
-                      <p>Brad Carter (born 1973) is an American film and television actor,
-                        guitarist, painter, sculptor, and photographer, known for playing</p>
+                      <p></p>
                     </div>
                     
                   </div>
                 </div>
 
-                <div class="w-text hidden">
-                  <div class="b-text">
-                    <div class="t-title">
-                      <h2>MIAKA MONROE</h2>
-                      <h3>Jody</h3>
-                    </div>
-                    <div class="text">
-                      <p>Maika Monroe is a professional kiteboarder turned actress who is taking
-                        Hollywood by storm. Garnering comparisons to some of the top names in
-                        the industry, she made her acting debut in the 2012 film AT ANY PRICE,
-                        co-starring Zac Effron and Dennis Quaid. In April 2012, Monroe signed up
-                        for the drama LABOR DAY, an adaptation of the hit novel, starring Josh
-                        Brolin and Kate Winslet. In June 2013, she joined the cast of the 
-                        psychological thriller film THE GUEST, which gained almost unprecedented
-                        acclaim from audiences after playing at numerous film festivals, including
-                        the prestigious Sundance Film Festival. In August 2014, she joined the alien
-                        invasion thriller film THE 5TH WAVE, the first in a best-selling series of Young</p>
-                    </div>
-
-                  </div>
                 </div>
               </div>
             </div>
