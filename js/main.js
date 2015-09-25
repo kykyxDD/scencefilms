@@ -3,6 +3,8 @@ var app = angular.module('app', [])
 
     var transition = new Transition($doc[0].querySelector('.transition'))
     var main_menu = new Anim_menu($doc[0].querySelector('#main_menu'))
+    var preloader = new Preloader($doc[0].querySelector('#preloader'))
+    var intro = new IntroText(document.querySelector("#intro"))
 
     onResize()
     angular.element($window).bind('resize', onResize)
@@ -18,19 +20,20 @@ var app = angular.module('app', [])
         main_menu.show_header(0.3)
     }))
     
-    function onResize() {
-        transition.resize($window.innerWidth, $window.innerHeight)
-    }
-    
     main_menu.onClick = function(page) {
         $s.change_page(page);
     }
     
     transition.onOpened = function() {
-        console.log("$s.pageToChange", $s.pageToChange)
+
         $s.selectedPage = $s.pageToChange
         $s.$apply();
-        transition.close()
+        
+        preloader.show()
+        preloader.make_white()
+        simulate_page_load()
+        
+        //transition.close()
     }
     
     transition.onClosed = function() {
@@ -38,11 +41,36 @@ var app = angular.module('app', [])
         main_menu.show_header(0.3)
     }
     
+    function onResize() {
+        transition.resize($window.innerWidth, $window.innerHeight)
+        preloader.set_size(200, 200)
+    }
+    
+    function simulate_page_load() {
+        
+        preloader.fake_pc = 0
+        
+        var f = function() {
+            preloader.setPercent(preloader.fake_pc)
+            preloader.repaintCanvas()        
+        }
+        
+        f()
+        
+        TweenLite.to(preloader, 1, {fake_pc: 100, onUpdate: f, onComplete: onPageLoaded, onCompleteScope: this})
+    }
+    
+    function onPageLoaded() {
+        preloader.hide()
+        transition.close()
+    }
+
     $s.change_page = function(data){
         
         $s.pageToChange = data.page
         
-        main_menu.collapse();
+        main_menu.collapse()
+        main_menu.hide_header()
         transition.open()
     }
 
@@ -70,8 +98,6 @@ var app = angular.module('app', [])
     }
 }])
 .directive('mainmenu', function(){
-    
-    console.log("main_menu")
     
     return {
         
