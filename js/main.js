@@ -48,10 +48,7 @@ var app = angular.module('app', [])
 
         $s.selectedMaker = $s.data.pages[3].pages[0]
 
-        transition.show()
         main_menu.init(data.pages, 0)
-        main_menu.show_header(0.3)       
-        
     }))
     
     main_menu.onClick = function(page) {
@@ -139,6 +136,10 @@ var app = angular.module('app', [])
         particles.runRepaint()
         TweenLite.to(particles, 2, {kalpha: 3})
         add_rhom()
+        
+        transition.show()
+        main_menu.show_header(0.3)       
+
     }
 
     function add_rhom(){
@@ -219,7 +220,7 @@ var app = angular.module('app', [])
 
     function onResize() {
         transition.resize($window.innerWidth, $window.innerHeight)
-        particles.resize($window.innerWidth, $window.innerHeight)
+        particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
         
         var conts = doc.querySelectorAll("#cast .b-content, #makers .b-content")
         for (var i=0; i<conts.length; i++) {
