@@ -16,10 +16,13 @@ var app = angular.module('app', [])
     $http.get("data.json", {})
     .success(angular.bind(null, function(data, status) {
         $s.data = data
+        
+        $s.selectedMaker = $s.data.pages[3].pages[0]
 
         transition.show()
         main_menu.init(data.pages, 1)
-        main_menu.show_header(0.3)
+        main_menu.show_header(0.3)       
+        
     }))
     
     main_menu.onClick = function(page) {
@@ -97,6 +100,10 @@ var app = angular.module('app', [])
         main_menu.align_header();
         main_menu.show_header(0.3);
         transition.close();
+    }
+    
+    $s.changeMaker = function(page) {
+        $s.selectedMaker = page
     }
 }])
 .controller("castController", ['$scope', function($s) {

@@ -17,18 +17,21 @@
             "page": "cast",
             "pages": [
                 {
+                    "bg": "image/bg/cast_grace.jpg",
                     "title": "MAGIE GRACE",
                     "role": "Laurie",
                     "name": "MAGIE GRACE",
                     "desc": "Grace was born Margaret Grace Denig in Worthington, Ohio, one of threchildren of parents Valinn (née Everett) and Rick Denig, who ran a family jewelry business. Her family lived in a 200-year-old house, the first saltbox house in central Ohio.  She attended Worthington Christian Schools from kindergarte... of parents Valinn (née Everett) and Rick Denig, who ran a family jewelry business. Her family lived in a 200-year-old house, the first saltbox house in central Ohio. She attended Worthington Christian Schools from kindergarte... who ran a family jewelry business. Her family lived in a 200-year-old house, the first saltbox house in central Ohio."
                 },
                 {
+                    "bg": "image/bg/cast_carter.jpg",
                     "title": "BOB CARTER",
                     "role": "Name",
                     "name": "BOB CARTER",
                     "desc": "Brad Carter (born 1973) is an American film and television actor, guitarist, painter, sculptor, and photographer, known for playing Charlie Lange in True Detective and Leland Gruen in Sons of Anarchy. After suffering from brain disease and tremors that caused his hands to shake, he underwent brain surgery in 2013, which he recorded and posted on YouTube. The video went viral, and he became known as the \"guy playing guitar during brain surgery\".\nBrad Carter (born 1973) is an American film and television actor, guitarist, painter, sculptor, and photographer, known for playing..."
                 },
                 {
+                    "bg": "image/bg/cast_maika.jpg",
                     "title": "MIAKA MONROE",
                     "role": "Jody",
                     "name": "MIAKA MONROE",
@@ -39,7 +42,58 @@
         {
             "name": "FILMMAKERS",
             "id": 4,
-            "page": "makers"
+            "page": "makers",
+            "pages": [
+                {
+                    "bg": "image/bg/filmmakers_blake.jpg",
+                    "title": "BLAKE ROBBINS",
+                    "role": "Director",
+                    "name": "BLAKE ROBBINS",
+                    "desc": "Blake Robbins is an award winning writer, director and actor. His feature film debut The Sublime and Beautiful was one of 10 narrative features selected from thousands to world premiere in competition at the 20th annual Slamdance Film Festival. The Sublime and Beautiful has since played 12 major film festivals, winning 8 awards and receiving another 7 award nominations. The film is currently being distributed in VOD and theaters by Candy Factory Productions. As an actor Blake began his career in NYC having performed in over 50 theaterical productions including Broadway and Off-Broadway. Off-Broadway. Known to televison audiences for his performances as"
+                },
+                {
+                    "bg": "image/bg/filmmakers_jeff.jpg",
+                    "title": "JEFF JOHNSON",
+                    "role": "Role",
+                    "name": "JEFF JOHNSON",
+                    "desc": "A Kansas City native, Jeff Johnson is a successful business entrepreneur with his hands in the medical, internet, real estate and sales industries. In addition, he has experience in banking and lending throughout the Kansas City market. In 2012, Jeff met writers, Casey Twenter and Jeff Robison, and financed their debut film, The Jogger. The Jogger went on to win many awards for Best Narrative film in many film festivals nationwide. Afterwards, Jeff was producer on Rudderless, the directorial film debut by William H, Macy. Rudderless debuted at Sundance in 2014 with a theatrical release later that year.\nDue to their collaboration with The Jogger, Jeff, along with Casey Twenter..."
+                },
+                {
+                    "bg": "image/bg/filmmakers_kevin.jpg",
+                    "title": "KEVIN WALLEAR",
+                    "role": "Producer",
+                    "name": "KEVIN WALLEAR",
+                    "desc": "Mr. Waller is the President and sole owner of Gerson Capital, Inc. Through and related to his company, Mr. Waller has raised money for small business ventures, consulted, created and prepared financial projections for companies preparing for sale and/or seeking investment capital or strategic alliances, as well as consulted in the evaluation and strategic processes of the purchase and sale of companies and their assets. Having worked with many deal structures, understanding and evaluating the specific nuances of the relevant business components, Kevin provides the skill-set necessary to navigate the deal specifics of any venture from an operational, practical and financial standpoint."
+                },
+                {
+                    "bg": "image/bg/filmmakers_casey_john.jpg",
+                    "title": "CASEY TWENTER & JEFF ROBISON",
+                    "role": "Writer / Producer",
+                    "name": "CASEY TWENTER & JEFF ROBISON",
+                    "desc": "After a decade of writing as a team Casey Twenter and Jeff Robison connected with William H. Macy on the spec script, “Rudderless”, which was penned in 2008. Written with their hometown as a backdrop, Rudderless was filmed in and around Oklahoma City in the spring of 2013. Upon completion, Rudderless garnered the coveted “Closing Night Film” slot at the prestigious 2014 Sundance Film Festival.  After an unprecedented two standing ovations at the festival, Paramount Pictures and Samuel Goldwyn Films released the film in the Fall of 2014. The twosome wrote and directed their first full-length feature film, “The Jogger”, in 2012."
+                },
+                {
+                    "bg": "image/bg/filmmakers_debora.jpg",
+                    "title": "DEBORAH DION",
+                    "role": "Casting Director",
+                    "name": "DEBORAH DION",
+                    "desc": "Deborah Dion is one of Hollywood's finest casting directors. He prolific career began in the 1990s, where she cut her teeth on Academy Award winning films such as Good Will Hunting and Shakespeare in Love. This year, Deborah helped cast Weas Anderson's tour-de-force The Grand Budapest Hotel, already the recipient of several post-season awards. Perhaps the greatest indicator of Deborah's value is the fact that renowned Hollywood directors such as Tim Burton, Wes Anderson, and M. Night Shyamalan have repeatedly partnered with her, proving that her relentless work ethic and keen eye for talent on projects from micro-budget independent films to major studio blockbusters have made her a highly sought-after commodity in the film industry."
+                },
+                {
+                    "bg": "image/bg/filmmakers_scott.jpg",
+                    "title": "SCOTT BOOKER",
+                    "role": "Music Supervisor",
+                    "name": "SCOTT BOOKER",
+                    "desc": "Shortly after graduating with a degree from Central State University Scott Brooks met local band the Flaming Lips and began managing them in 1990, creating Hellfire Enterprises Ltd., an artist management company. After 20 years, Booker continues to work with the three-time Grammy Award-winning band. Also on the current management roster is Colourmusic on Memphis Industries and Stardeath and White Dwarfs on Warner Bros. Records. He has also worked with Academy Award Nominee Elliott Smith, and other acts like Wheat and Mercury Prize nominees British Sea Power.\nIn 2009 Booker helped found, The Academy of Contemporary Music at"
+                },
+                {
+                    "bg": "image/bg/filmmakers_embacment_films.jpg",
+                    "title": "EMBANKMENT FILMS",
+                    "role": "Foreign Sales Agency",
+                    "name": "EMBANKMENT FILMS",
+                    "desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine and gap financing for international producers, enabling filmmakers to manage their “owned” film assets.Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery.\nFounded in 2012 by Tim Haslam and Hugo Grumbar – the management maintain a validated track record for excellent performance. Tim has been financing high quality films for over 20 years, and Hugo Grumbar"
+                }
+            ]
         },
     
         {
