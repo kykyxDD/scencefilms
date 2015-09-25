@@ -311,6 +311,12 @@ body {
 
 
 @media #{$mediaC} {
+  .p-title {
+    padding-top: 30%;
+    padding-left: 30px;
+    margin-bottom: 30px;
+  }
+  
   .btn_top {
     display: block;
   }
@@ -370,6 +376,7 @@ body {
     min-height: 0;
     min-width: 0;
     padding: 0 30px;
+    margin-bottom: 30px;
 
     .tab {
       clear: both;
@@ -435,6 +442,36 @@ body {
     position: static;
     text-align: center;
 
+    li {
+      float: none;
+    }
+    
+    .w-share {
+      
+    }
+
+    
+    .l-nav {
+      li {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 10px;
+      }
+
+    }
+
+    .l-share {
+      margin: 0;
+
+      
+      li {
+        margin: 0 10px;
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
+    
+    
     .w-nav,
     .w-share {
       margin-bottom: 10px;
@@ -466,7 +503,7 @@ body {
     padding: 0;
 
     .t-title {
-      margin-bottom: 0;
+      margin-bottom: 20px;
     }
 
     h2 {
@@ -497,6 +534,10 @@ body {
       display: block;
       //min-width: 100%;
     }
+  }
+
+  .btn_top {
+    text-align: right;
   }
 }
 
