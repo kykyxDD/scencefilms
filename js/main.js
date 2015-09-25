@@ -5,7 +5,6 @@ var app = angular.module('app', [])
     var transition = new Transition(doc.querySelector('.transition'))
     var main_menu = new Anim_menu(doc.querySelector('#main_menu'))
     var preloader = new Preloader(doc.querySelector('#preloader'))
-    var particles = new Particles(doc.querySelector('.paricles'))
     var intro_bg = doc.querySelector('#intro_bg')
     var cont_rhom_right = doc.querySelector('#side_page_right');
     var cont_rhom_left = doc.querySelector('#side_page_left');
@@ -28,6 +27,8 @@ var app = angular.module('app', [])
     ];
     
     if (intro_bg) {
+        var particles = new Particles(doc.querySelector('.paricles'))
+
         var intro = new IntroText(document.querySelector("#intro"))
         intro.cont.x = 0
         intro.cont.y = 0
