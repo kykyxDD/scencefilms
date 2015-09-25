@@ -9,8 +9,14 @@
 	  <link rel="stylesheet" type="text/css" href="css/screen.css">
 	  <script src='js/script.js'></script>
 	  <script src='js/lib/gs/TweenLite.min.js'></script>
+	  <script src='js/lib/angular/angular.min.js'></script>
+	  <script src='js/lib/f.js'></script>
+	  <script src='js/lib/dom.js'></script>
     <script src='js/screen_object.js'></script>
+    <script src='js/preloader.js'></script>
+    <script src='js/intro_text.js'></script>
     <script src='js/transition.js'></script>
+    <script src='js/main.js'></script>
   </head>
   <body>
 	  <div id='bg' class="cast_grace"></div>
@@ -173,29 +179,15 @@
       <div class="w-nav">
         <ul class="l-nav">
           <li ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
-					<span>{{page.name}}</span>
-				</li>
+					  <span>{{page.name}}</span>
+				  </li>
         </ul>
       </div>
     </footer>
-
-	  <script type="text/javascript">
-		 window.requestAnimationFrame =
-		 window.      requestAnimationFrame ||
-		 window.     ORequestAnimationFrame ||
-		 window.    msRequestAnimationFrame ||
-		 window.   mozRequestAnimationFrame ||
-		 window.webkitRequestAnimationFrame ||
-		 function(fn) { return setTimeout(fn, 1000/60) }
-
-		 window.cancelAnimationFrame =
-		 window.      cancelAnimationFrame ||
-		 window.     OCancelAnimationFrame ||
-		 window.    msCancelAnimationFrame ||
-		 window.   mozCancelAnimationFrame ||
-		 window.webkitCancelAnimationFrame ||
-		 window.clearTimeout
-		 var anim_menu = new Anim_menu();
-	  </script>
+    <div id="preloader">
+      <div class='label'>0%</div>
+    </div>
+    
+    <div id="intro"></div>
   </body>
 </html>
