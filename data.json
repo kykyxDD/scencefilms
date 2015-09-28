@@ -1,4 +1,23 @@
 {
+    "homepage_data": {
+        "sq_arr_right": [
+            {"i": 0, "j": 3, "imgPath": "image/main/5.jpg", "type": "type"},
+            {"i": 2, "j": 3, "imgPath": "image/main/4.jpg", "type": "type"},
+            {"i": 0, "j": 2, "imgPath": "image/main/7.jpg", "type": "type"},
+            {"i": 1, "j": 1, "imgPath": "image/main/1.jpg", "type": "type"},
+            {"i": 1, "j": 5, "imgPath": "image/main/11.jpg", "type": "type"},
+            {"i": 1, "j": 2, "imgPath": "image/main/6.jpg", "type": "type"},
+            {"i": 1, "j": 4, "imgPath": "image/main/9.jpg", "type": "type"},
+            {"i": 2, "j": 2, "imgPath": "image/main/2.jpg", "type": "type"},
+            {"i": 1, "j": 0, "imgPath": "image/main/12.jpg", "type": "type"}
+        ],
+        "sq_arr_left": [
+            {"i": 0, "j": 0, "imgPath": "image/main/10.jpg", "type": "type"}, 
+            {"i": 1, "j": 0, "imgPath": "image/main/3.jpg", "type": "type"},
+            {"i": 1, "j": 1, "imgPath": "image/main/8.jpg", "type": "type"} 
+        ]
+    },
+
     "pages": [
     
         {

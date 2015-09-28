@@ -51,7 +51,7 @@ Anim_menu.prototype = {
     },
 
     create_event: function(elem, page){
-    	
+
 		var self = this;
 		elem.addEventListener('mouseover', function(e){
 			self.onOver(elem)
@@ -60,14 +60,12 @@ Anim_menu.prototype = {
 			self.onOut(elem)
 		})
 
-
 		elem.addEventListener('click', function(e){
 			self.onClick(page)
 		})
 	},
 	onOver:function(elem){
 
-		
 		var line = elem.line;
 		line.x = -150; 
 		line.scaleX = 0;
@@ -81,74 +79,6 @@ Anim_menu.prototype = {
 		line.scaleX = 1;
 		TweenLite.to(line, 0.4, {x:line.w, scaleX:0});
 	},
-
-    create_rhom: function(parent, sq_arr){
-        for(var k = 0; k < sq_arr.length; k++){
-            this.add_elem_rhom(parent , sq_arr[k], k);
-        }
-    },
-
-    add_elem_rhom: function(parent, page){
-
-        var sq_width = Math.round(document.body.clientWidth/6);
-        var scape_text = 1.45;
-
-        var itm_elem = document.createElement('div');
-        itm_elem.className = 'cont_rhom';
-        var rhom_before = document.createElement('div');
-        rhom_before.className = 'rhom_before';
-        itm_elem.appendChild(rhom_before);
-        var rhom_after =  document.createElement('div');
-        var className = 'rhom_after';
-        rhom_after.className = className; 
-        rhom_before.appendChild(rhom_after);
-        var text = document.createElement('div');
-        text.className = 'text_rhom';
-
-        rhom_after.appendChild(text);
-        parent.appendChild(itm_elem);
-        ScreenObject.decorate_element.apply(itm_elem);
-        ScreenObject.decorate_element.apply(rhom_before);
-        ScreenObject.decorate_element.apply(rhom_after);
-        ScreenObject.decorate_element.apply(text);
-        text.w = sq_width*scape_text;
-        text.h = sq_width*scape_text;
-      
-        text.style.backgroundImage = 'url("'+page.imgPath+'")'; 
-
-        text.style.bottom = Math.round(-sq_width*0.23) + 'px';
-        text.style.right = Math.round(-sq_width*0.23) + 'px';
-
-        itm_elem.w = sq_width;
-        itm_elem.h = sq_width;
-
-        itm_elem.x = sq_width*page.i;
-        itm_elem.y = sq_width*page.j;
-
-        page.elem = itm_elem;
-        page.rhom_before = rhom_before;
-        page.rhom_after = rhom_after;
-    },
-
-    vis_rhom: function(sq_arr){
-
-        var _delay = 1;
-        for (var i = 0; i < sq_arr.length; i++){
-
-            var rhom_before = sq_arr[i].rhom_before;
-            var rhom_after = sq_arr[i].rhom_after;
-
-            rhom_before.scaleX = 0;
-            rhom_before.scaleY = 0;
-
-            rhom_after.scaleX = 0;
-            rhom_after.scaleY = 0;
-
-            TweenLite.to(rhom_before, _delay, {scaleX: 1 , scaleY: 1 , delay: 0.3*i})
-            TweenLite.to(rhom_after, _delay, {scaleX: 1 , scaleY: 1 , delay: (0.3*i)+(_delay*0.5)})
-        };
-
-    },
 
     reset: function() {
 

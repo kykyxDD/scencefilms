@@ -5,27 +5,11 @@ var app = angular.module('app', [])
     var transition = new Transition(doc.querySelector('.transition'))
     var main_menu = new Anim_menu(doc.querySelector('#main_menu'))
     var preloader = new Preloader(doc.querySelector('#preloader'))
+    var squares = new Squares(doc);
     var intro_bg = doc.querySelector('#intro_bg')
-    var cont_rhom_right = doc.querySelector('#side_page_right');
-    var cont_rhom_left = doc.querySelector('#side_page_left');
+    
     var video
 
-    var sq_arr_right = [
-        {i: 0, j: 3, imgPath:'image/main/5.jpg', 'type':'type'},
-        {i: 2, j: 3, imgPath: 'image/main/4.jpg', 'type':'type'},
-        {i: 0, j: 2, imgPath: 'image/main/7.jpg', 'type':'type'},
-        {i: 1, j: 1, imgPath: 'image/main/1.jpg', 'type':'type'},
-        {i: 1, j: 5, imgPath: 'image/main/11.jpg', 'type':'type'}, 
-        {i: 1, j: 2, imgPath: 'image/main/6.jpg', 'type':'type'},
-        {i: 1, j: 4, imgPath: 'image/main/9.jpg', 'type':'type'},
-        {i: 2, j: 2, imgPath: 'image/main/2.jpg', 'type':'type'}, 
-        {i: 1, j: 0, imgPath: 'image/main/12.jpg', 'type':'type'}
-    ];
-    var sq_arr_left = [
-        {i: 0, j: 0, imgPath: 'image/main/10.jpg', 'type':'type'}, 
-        {i: 1, j: 0, imgPath: 'image/main/3.jpg', 'type':'type'},
-        {i: 1, j: 1, imgPath: 'image/main/8.jpg', 'type':'type'} 
-    ];
     
     if (intro_bg) {
         var particles = new Particles(doc.querySelector('.paricles'))
@@ -70,7 +54,7 @@ var app = angular.module('app', [])
                 }
             }
         })
-        
+        squares.init(data.homepage_data)
         main_menu.init(data.pages, 0)
         
         if (!intro) {
@@ -109,8 +93,8 @@ var app = angular.module('app', [])
         if ($s.selectedPage == 'home') {
             intro && intro.runRepaint()            
             particles && particles.runRepaint()
-            console.log(particles.runRepaint)
-            show_rhom()
+            // console.log(particles.runRepaint)
+            squares.show();
         }
     }
     
@@ -218,41 +202,11 @@ var app = angular.module('app', [])
         
         particles.runRepaint()
         TweenLite.to(particles, 2, {kalpha: 3})
-        add_rhom()
         
         video.play()
         transition.show()
         main_menu.show_header(0.3)
-    }
-
-    function add_rhom(){
-
-        var sq_width = Math.round(document.body.clientWidth/6);
-        var scape_text = 1.45;
-
-        ScreenObject.decorate_element.apply(cont_rhom_right)
-        ScreenObject.decorate_element.apply(cont_rhom_left)
-        cont_rhom_right.style.right = Math.round((sq_width*scape_text*3)*0.95) + 'px';
-        cont_rhom_left.style.left = Math.round((-sq_width)*0.4) + 'px';
-        cont_rhom_left.style.bottom = Math.round((-sq_width)*0.4) + 'px';
-
-        main_menu.create_rhom(cont_rhom_right, sq_arr_right);
-        main_menu.create_rhom(cont_rhom_left, sq_arr_left);
-
-        show_rhom()
-    }
-   
-    function hide_rhom(){  
-        cont_rhom_right.visible = false
-        cont_rhom_left .visible =  false    
-    }   
-    
-    function show_rhom(){  
-        cont_rhom_right.visible = true
-        cont_rhom_left .visible = true
-
-        main_menu.vis_rhom(sq_arr_right);
-        main_menu.vis_rhom(sq_arr_left);
+        squares.show();
     }
 
     function onResize() {
@@ -303,10 +257,7 @@ var app = angular.module('app', [])
     function onPageLoaded() {
         preloader.hide()
         transition.close()
-        if($s.pageToChange === 'home'){
-            vis_rhom();
-            // console.log($s.pageToChange )
-        }
+        
     }
 
     $s.change_page = function(data){
@@ -319,7 +270,7 @@ var app = angular.module('app', [])
         main_menu.collapse()
         main_menu.hide_header()
         transition.open()
-        hide_rhom();
+        squares.hide();
     }
 
     $s.$on('$locationChangeSuccess', function(event){
