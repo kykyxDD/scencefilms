@@ -3,16 +3,19 @@
     
         {
             "name": "Home",
+            "video": { "files": ["image/video/HomePageVideo.mp4", "image/video/HomePageVideo.ogv", "image/video/HomePageVideo.webm"]},
             "id": 1,
             "page": "home"
         },
         {
             "name": "NEWS",
+            "video": { "files": ["image/video/news.mp4", "image/video/news.ogv", "image/video/news.webm"]},
             "id": 2,
             "page": "news"
         },
         {
             "name": "CAST",
+            "video": { "files": ["image/video/grace_1.mp4", "image/video/grace_1.ogv", "image/video/grace_1.webm"]},
             "id": 3,
             "page": "cast",
             "pages": [
@@ -44,6 +47,7 @@
         },
         {
             "name": "FILMMAKERS",
+            "video": { "files": ["image/video/blake.mp4", "image/video/blake.ogv", "image/video/blake.webm"]},
             "id": 4,
             "page": "makers",
             "pages": [
@@ -107,6 +111,7 @@
     
         {
             "name": "MULTIMEDIA",
+            "video": { "files": ["image/video/multimedia.mp4", "image/video/multimedia.ogv", "image/video/multimedia.webm"]},
             "id": 5,
             "page": "media"
         }

@@ -8,7 +8,7 @@ var app = angular.module('app', [])
     var intro_bg = doc.querySelector('#intro_bg')
     var cont_rhom_right = doc.querySelector('#side_page_right');
     var cont_rhom_left = doc.querySelector('#side_page_left');
-    var video = jwplayer('video-player')
+    var video
 
     var sq_arr_right = [
         {i: 0, j: 3, imgPath:'image/main/5.jpg', 'type':'type'},
@@ -44,25 +44,33 @@ var app = angular.module('app', [])
     onResize()
     angular.element($window).bind('resize', onResize)
     
-    $s.$watch("selectedCast", function(cast){
-        if (cast && 'video' in cast) {
-            load_video(cast.video)
-        }
-    })
-
-    $s.$watch("selectedMakers", function(maker){
-        if (maker && 'video' in maker) {
-            load_video(maker.video)
-        }        
-    })
-
     $http.get("data.json", {})
     .success(angular.bind(null, function(data, status) {
         $s.data = data
 
+        create_video($s.data.pages[0].video.files)
+
         $s.selectedCast = $s.data.pages[2].pages[0]
         $s.selectedMaker = $s.data.pages[3].pages[0]
-
+    
+        $s.$watch('selectedCast', function(cast) {
+            if ($s.selectedPage == 'cast') {
+                if (cast && 'video' in cast) {
+                    create_video(cast.video.files)            
+                    video.play()
+                }
+            }
+        })
+        
+        $s.$watch('selectedMaker', function(maker) {
+            if ($s.selectedPage == 'makers') {
+                if (maker && 'video' in maker) {
+                    create_video(maker.video.files)
+                    video.play()
+                }
+            }
+        })
+        
         main_menu.init(data.pages, 0)
         
         if (!intro) {
@@ -82,7 +90,12 @@ var app = angular.module('app', [])
 
         preloader.show()
         preloader.make_white()
-        simulate_page_load(1, onPageLoaded)
+        simulate_page_load(2, onPageLoaded)
+        
+        var p = get_page($s.selectedPage)
+        if (p.video) {
+            create_video(p.video.files)
+        }
 
         //transition.close()
     }
@@ -90,17 +103,14 @@ var app = angular.module('app', [])
     transition.onClosed = function() {
         transition.show()
         main_menu.show_header(0.3)
+        
+        video.play()
 
         if ($s.selectedPage == 'home') {
             intro && intro.runRepaint()            
             particles && particles.runRepaint()
-        }
-        else if ($s.selectedPage == 'cast') {
-            load_video($s.selectedCast.video.files)
-            
-        }
-        else if ($s.selectedPage == 'makers') {
-            load_video($s.selectedMaker.video.files)
+            console.log(particles.runRepaint)
+            show_rhom()
         }
     }
     
@@ -128,16 +138,26 @@ var app = angular.module('app', [])
     }
     
     function create_video(files) {
-        var vid = doc.createElement("video")
-        vid.setAttribute("autoplay", "autoplay")
+        
+        if (video) {
+            video.pause()
+            if (video.parentNode) {
+                video.parentNode.removeChild(video)
+            }
+        }
+        
+        video = doc.createElement("video")
+        //video.setAttribute("autoplay", "autoplay")
+        video.setAttribute("width", 1920)
+        video.setAttribute("height", 1080)
         
         for (var i=0; i<files.length; i++) {
             var s = doc.createElement("source")
             s.src = files[i]
-            vid.appendChild(s)
+            video.appendChild(s)
         }
         
-        doc.querySelector("#bg").appendChild(vid)
+        doc.querySelector("#bg").appendChild(video)
     }
 
     function play_intro() {
@@ -179,9 +199,9 @@ var app = angular.module('app', [])
         intro.percent = 0
         intro.runRepaint()
         
-        TweenLite.to(intro, 3, {
+        TweenLite.to(intro, 5, {
             percent: 100,
-            ease: Power1.easeOut,
+            ease: Power0.easeInOut,
             onUpdate: function(){ intro.repaintCanvas() },
             onComplete: hide_intro,
             onCompleteScope: this
@@ -200,8 +220,9 @@ var app = angular.module('app', [])
         TweenLite.to(particles, 2, {kalpha: 3})
         add_rhom()
         
+        video.play()
         transition.show()
-        main_menu.show_header(0.3)       
+        main_menu.show_header(0.3)
     }
 
     function add_rhom(){
@@ -278,6 +299,11 @@ var app = angular.module('app', [])
     function hide_rhom(){  
         cont_rhom_right.visible = false
         cont_rhom_left .visible =  false    
+    }   
+    
+    function show_rhom(){  
+        cont_rhom_right.visible = true
+        cont_rhom_left .visible = true
     }
 
     function onResize() {
@@ -290,7 +316,15 @@ var app = angular.module('app', [])
             div.style.width = Math.round($window.innerWidth*0.66) + "px"
         }
         
+        resize_video()
+        
         preloader.set_size(200, 200)
+    }
+    
+    function resize_video() {
+        if (video) {
+            
+        }        
     }
     
     function simulate_page_load(duration, callback) {
@@ -306,6 +340,15 @@ var app = angular.module('app', [])
         f()
         
         TweenLite.to(preloader, duration, {fake_pc: 100, onUpdate: f, onComplete: callback, onCompleteScope: this})
+    }
+    
+    function get_page(name) {
+        for (var i=0; i<$s.data.pages.length; i++) {
+            var page = $s.data.pages[i]
+            if (page.page == $s.selectedPage) {
+                return page
+            }
+        }
     }
     
     function onPageLoaded() {
@@ -335,6 +378,8 @@ var app = angular.module('app', [])
         main_menu.hide_header()
         main_menu.expand()
         transition.expand()
+        
+        console.log("this?")
     }
 
     $s.onMenuCloseClick = function() {

@@ -32,7 +32,7 @@
         <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}"></div>
         <div id="media" class="page" ng-class="{selected: selectedPage == 'media'}"></div>
 
-		<div id="cast" style="background-image: url('{{selectedCast.bg}}');" ng-class="{selected: selectedPage == 'cast'}" class="page w-content">
+		<div id="cast" ng-class="{selected: selectedPage == 'cast'}" class="page w-content">
         <div class="b-content" style="width: 1166px;">
           <div class="b-content_inside">
             <div class="w-tab">
@@ -55,12 +55,6 @@
             </div>
           </div>
         </div>
-
-        <!--ng-if="selectedCast.video">
-        <video class="video_bg">
-        <source ng-repeat="file in selectedCast.video.files" src="{{file}}" type="video/ogg"></source>
-        </video>
-        </ng-if-->
         
       </div>
       
