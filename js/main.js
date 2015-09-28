@@ -282,7 +282,7 @@ var app = angular.module('app', [])
         main_menu.expand()
         transition.expand()
         
-        console.log("this?")
+        // console.log("this?")
     }
 
     $s.onMenuCloseClick = function() {
