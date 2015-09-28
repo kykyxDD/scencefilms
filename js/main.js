@@ -144,16 +144,13 @@ var app = angular.module('app', [])
         add_rhom()
         
         transition.show()
-        main_menu.show_header(0.3)       
+        main_menu.show_header(0.3)
     }
 
     function add_rhom(){
 
-        
-        // var sq_width = 310
         var sq_width = Math.round(document.body.clientWidth/6);
         var scape_text = 1.45;
-        var _delay = 1;
 
         ScreenObject.decorate_element.apply(cont_rhom_right)
         ScreenObject.decorate_element.apply(cont_rhom_left)
@@ -161,66 +158,22 @@ var app = angular.module('app', [])
         cont_rhom_left.style.left = Math.round((-sq_width)*0.4) + 'px';
         cont_rhom_left.style.bottom = Math.round((-sq_width)*0.4) + 'px';
 
-        for(var k = 0; k < sq_arr_right.length; k++){
-            add_elem(cont_rhom_right , sq_arr_right[k], k);
-        }
+        main_menu.create_rhom(cont_rhom_right, sq_arr_right);
+        main_menu.create_rhom(cont_rhom_left, sq_arr_left);
 
-        for(var k = 0; k < sq_arr_left.length; k++){
-            add_elem(cont_rhom_left , sq_arr_left[k], k);
-        }
-
-        function add_elem(parent, page, index){
-
-            var itm_arr = page;
-
-            var itm_elem = doc.createElement('div');
-            itm_elem.className = 'cont_rhom';
-            var rhom_before = doc.createElement('div');
-            rhom_before.className = 'rhom_before';
-            itm_elem.appendChild(rhom_before);
-            var rhom_after =  doc.createElement('div');
-            var className = 'rhom_after';
-            rhom_after.className = className; 
-            rhom_before.appendChild(rhom_after);
-            var text = doc.createElement('div');
-            text.className = 'text_rhom';
-
-            rhom_after.appendChild(text);
-            parent.appendChild(itm_elem);
-            ScreenObject.decorate_element.apply(itm_elem);
-            ScreenObject.decorate_element.apply(rhom_before);
-            ScreenObject.decorate_element.apply(rhom_after);
-            ScreenObject.decorate_element.apply(text);
-            text.w = sq_width*scape_text;
-            text.h = sq_width*scape_text;
-          
-            text.style.backgroundImage = 'url("'+page.imgPath+'")'; 
-
-            text.style.bottom = Math.round(-sq_width*0.23) + 'px';
-            text.style.right = Math.round(-sq_width*0.23) + 'px';
-
-            itm_elem.w = sq_width;
-            itm_elem.h = sq_width;
-
-            itm_elem.x = sq_width*itm_arr.i;
-            itm_elem.y = sq_width*itm_arr.j;
-
-            rhom_before.scaleX = 0;
-            rhom_before.scaleY = 0;
-
-            rhom_after.scaleX = 0;
-            rhom_after.scaleY = 0;
-
-
-            TweenLite.to(rhom_before, _delay, {scaleX: 1 , scaleY: 1 , delay: 0.3*index})
-            TweenLite.to(rhom_after, _delay, {scaleX: 1 , scaleY: 1 , delay: (0.3*index)+(_delay*0.5)})
-        }
-
+        vis_rhom();
     }
    
     function hide_rhom(){  
-        cont_rhom_right.visible = false
-        cont_rhom_left .visible =  false    
+        cont_rhom_right.visible = false;
+        cont_rhom_left.visible =  false;
+    }
+    function vis_rhom(){
+
+        cont_rhom_right.visible = true;
+        cont_rhom_left.visible =  true;
+        main_menu.vis_rhom(sq_arr_right);
+        main_menu.vis_rhom(sq_arr_left);
     }
 
     function onResize() {
@@ -254,10 +207,13 @@ var app = angular.module('app', [])
     function onPageLoaded() {
         preloader.hide()
         transition.close()
+        if($s.pageToChange === 'home'){
+            vis_rhom();
+            // console.log($s.pageToChange )
+        }
     }
 
     $s.change_page = function(data){
-        
         $s.pageToChange = data.page
         
         intro && intro.stopRepaint()
