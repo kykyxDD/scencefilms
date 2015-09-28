@@ -26,12 +26,12 @@ $icons_x2: sprite-map("icon_x2/*.png", $layout: 'smart');
 
 $retina-media: "only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio : 1.5)";
 
-$mediaA : "only screen and (max-width: 1920px)";
-$madiaB : "only screen and (max-width: 1200px)";
-$mediaC : "only screen and (max-width: 1024px)";
+$mediaA  : "only screen and (max-width: 1920px)";
+$madiaB  : "only screen and (max-width: 1200px)";
+$mediaC  : "only screen and (max-width: 1024px)";
 $mediaCP : "only screen and (max-width: 1024px) and (orientation : portrait)";
 $mediaCL : "only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape)";
-$mediaD : "only screen and (max-width: 640px)";
+$mediaD  : "only screen and (max-width: 640px)";
 $mediaDP : "only screen and (max-width: 640px)  and (orientation : portrait)";
 $mediaDL : "only screen and (max-width: 640px)  and (orientation : landscape)";
-$mediaE : "only screen and (max-width: 480px)";
+$mediaE  : "only screen and (max-width: 480px)";

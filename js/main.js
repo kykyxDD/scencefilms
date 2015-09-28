@@ -5,7 +5,7 @@ var app = angular.module('app', [])
     var transition = new Transition(doc.querySelector('.transition'))
     var main_menu = new Anim_menu(doc.querySelector('#main_menu'))
     var preloader = new Preloader(doc.querySelector('#preloader'))
-    var intro_bg = doc.querySelector('#intro_bg');
+    var intro_bg = doc.querySelector('#intro_bg')
     var cont_rhom_right = doc.querySelector('#side_page_right');
     var cont_rhom_left = doc.querySelector('#side_page_left');
 
@@ -27,6 +27,8 @@ var app = angular.module('app', [])
     ];
     
     if (intro_bg) {
+        var particles = new Particles(doc.querySelector('.paricles'))
+
         var intro = new IntroText(document.querySelector("#intro"))
         intro.cont.x = 0
         intro.cont.y = 0
@@ -35,23 +37,24 @@ var app = angular.module('app', [])
 
         play_intro()
     }
-    
+
     $s.selectedPage = 'home'
 
     onResize()
     angular.element($window).bind('resize', onResize)
-    
 
     $http.get("data.json", {})
     .success(angular.bind(null, function(data, status) {
         $s.data = data
-        
+
         $s.selectedMaker = $s.data.pages[3].pages[0]
 
-        transition.show()
-        main_menu.init(data.pages, 1)
-        main_menu.show_header(0.3)       
+        main_menu.init(data.pages, 0)
         
+        if (!intro) {
+            transition.show()
+            main_menu.show_header(0.3)
+        }
     }))
     
     main_menu.onClick = function(page) {
@@ -62,23 +65,24 @@ var app = angular.module('app', [])
 
         $s.selectedPage = $s.pageToChange
         $s.$apply();
-        
+
         preloader.show()
         preloader.make_white()
         simulate_page_load(1, onPageLoaded)
-        
+
         //transition.close()
     }
-    
+
     transition.onClosed = function() {
         transition.show()
         main_menu.show_header(0.3)
-        
+
         if ($s.selectedPage == 'home') {
             intro && intro.runRepaint()            
+            particles && particles.runRepaint()
         }
     }
-    
+
     function play_intro() {
         preloader.show()
         simulate_page_load(1, show_intro_text)
@@ -118,8 +122,9 @@ var app = angular.module('app', [])
         intro.percent = 0
         intro.runRepaint()
         
-        TweenLite.to(intro, 2, {
+        TweenLite.to(intro, 4, {
             percent: 100,
+            ease: Power1.easeOut,
             onUpdate: function(){ intro.repaintCanvas() },
             onComplete: hide_intro,
             onCompleteScope: this
@@ -133,8 +138,13 @@ var app = angular.module('app', [])
             var home_page = doc.querySelector('#home')
             home_page.appendChild(intro.cont)
         }})
-
+        
+        particles.runRepaint()
+        TweenLite.to(particles, 2, {kalpha: 3})
         add_rhom()
+        
+        transition.show()
+        main_menu.show_header(0.3)       
     }
 
     function add_rhom(){
@@ -215,6 +225,7 @@ var app = angular.module('app', [])
 
     function onResize() {
         transition.resize($window.innerWidth, $window.innerHeight)
+        particles && particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
         
         var conts = doc.querySelectorAll("#cast .b-content, #makers .b-content")
         for (var i=0; i<conts.length; i++) {
@@ -250,6 +261,7 @@ var app = angular.module('app', [])
         $s.pageToChange = data.page
         
         intro && intro.stopRepaint()
+        particles && particles.stopRepaint()
         
         main_menu.collapse()
         main_menu.hide_header()

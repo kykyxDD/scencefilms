@@ -311,17 +311,21 @@ body {
   }
 }
 
-@media #{$mediaCP, $mediaD} {
+@media #{$mediaCP, $mediaD, $mediaCL} {
   .footer {
     background: #000;
   }
 }
 
 @media #{$mediaCL} {
+
+  #cast_mobile {
+    background-image: none;
+  }
   .w-content {
     vertical-align: bottom;
     //margin-bottom: 40px;
-    padding-bottom: 12%;
+    //padding-bottom: 12%;
   }
   
   .w-tab {
@@ -370,7 +374,7 @@ body {
   }
 }
 
-@media #{$mediaCP, $mediaDL} {
+@media #{$mediaCP, $mediaDL, $mediaCL} {
   #cont_menu,
   #main_menu {
     position: fixed !important;
@@ -548,7 +552,7 @@ body {
   }
 }
 
-@media #{$mediaDL, $mediaCP} {
+@media #{$mediaDL, $mediaCP, $mediaCL} {
   .b-content_inside {
     display: block;
 
