@@ -219,7 +219,9 @@ var app = angular.module('app', [])
             div.style.width = Math.round($window.innerWidth*0.66) + "px"
         }
         
-        resize_video()
+        resize_video();
+
+        squares.resize();
         
         preloader.set_size(200, 200)
     }

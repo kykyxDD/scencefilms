@@ -11,21 +11,7 @@ function Squares (cont) {
     this.scape_text = 1.45;
     this.delay = 1;
 
-    this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95)
-
-    window.addEventListener('resize', function(){
-    	var left = self.rights;
-    	var clLeft = document.body.clientWidth
-    	var percent = left/clLeft;
-    	if(percent > 0.8){
-    		self.cont_rhom_right.style.left = '20%';
-    		self.cont_rhom_right.style.right = '';
-    	} else {
-    		self.cont_rhom_right.style.left = '';
-    		self.cont_rhom_right.style.right = self.rights + 'px';
-    	}
-    	
-    })
+    this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
 }
 
 Squares.prototype = {
@@ -82,6 +68,7 @@ Squares.prototype = {
         page.elem.text_rhom = text;
     },
 
+
     pos_rhom: function(page){
     	var scape_text = this.scape_text;
     	var sq_width = this.sq_width;
@@ -131,5 +118,17 @@ Squares.prototype = {
             TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: 0.3*i});
             TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , delay: (0.3*i)+(delay*0.5)});
         };
-    }
+    },
+    resize: function(){
+    	var left = this.rights;
+    	var clLeft = document.body.clientWidth
+    	var percent = left/clLeft;
+    	if(percent > 0.8){
+    		this.cont_rhom_right.style.left = '20%';
+    		this.cont_rhom_right.style.right = '';
+    	} else {
+    		this.cont_rhom_right.style.left = '';
+    		this.cont_rhom_right.style.right = this.rights + 'px';
+    	}
+    },
 }
