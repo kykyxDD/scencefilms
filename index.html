@@ -22,17 +22,179 @@
   </head>
   <body ng-app="app" ng-controller="appController">
 	  <div id='bg' class="home">
-        <div id="video-player"></div>
+      <div id="video-player"></div>
+    </div>
+
+	  <div id='content'>
+      <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
+        <div class="paricles"></div>
+      </div>
+      <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}"></div>
+      <div id="media" class="page" ng-class="{selected: selectedPage == 'media'}">
+        <div class="b-content">
+          <div class="b-content_inside">
+            <div class="w-tab">
+              <ul class="tab">
+                <li><a href="#" class="active"><span>video</span></a></li>
+                <li><a href="#"><span>photo</span></a></li>
+              </ul>
+
+            </div>
+            <div class="w-photo">
+              <div class="b-photo">
+                <div class="i-photo__group">
+                  <div class="i-photo i-photo__x">
+                    <div class="img">
+                      <img alt="img" src="image/img/photoa.jpg"/>
+                    </div>
+                    <div class="w-share">
+                      <div class="b-share">
+                        <ul class="l-share">
+                          <li><a href="#" class="i-plus"></a></li>
+                          <li><a href="#" class="i-like"></a></li>
+                          <li><a href="#" class="i-twett"></a></li>
+                          <li><a href="#" class="i-facebook"></a></li>
+                          <li><a href="#" class="i-instagram"></a></li>
+                          <li><a href="#" class="i-google_plus"></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="i-photo i-photo__xx">
+                    <div class="img">
+                      <img alt="img" src="image/img/photob.jpg"/>
+                    </div>
+                    <div class="w-share">
+                      
+                      <div class="b-share">
+                        <ul class="l-share">
+                          <li><a href="#" class="i-plus"></a></li>
+                          <li><a href="#" class="i-like"></a></li>
+                          <li><a href="#" class="i-twett"></a></li>
+                          <li><a href="#" class="i-facebook"></a></li>
+                          <li><a href="#" class="i-instagram"></a></li>
+                          <li><a href="#" class="i-google_plus"></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="i-photo__group">
+                  <div class="i-photo i-photo__xx">
+                    <div class="img">
+                      <img alt="img" src="image/img/photoc.jpg"/>
+                    </div>
+                    <div class="w-share">
+                      <div class="b-share">
+                        <ul class="l-share">
+                          <li><a href="#" class="i-plus"></a></li>
+                          <li><a href="#" class="i-like"></a></li>
+                          <li><a href="#" class="i-twett"></a></li>
+                          <li><a href="#" class="i-facebook"></a></li>
+                          <li><a href="#" class="i-instagram"></a></li>
+                          <li><a href="#" class="i-google_plus"></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="i-photo i-photo__x">
+                    <div class="img">
+                      <img alt="img" src="image/img/photod.jpg"/>
+                    </div>
+                    <div class="w-share">
+                      <div class="b-share">
+                        <ul class="l-share">
+                          <li><a href="#" class="i-plus"></a></li>
+                          <li><a href="#" class="i-like"></a></li>
+                          <li><a href="#" class="i-twett"></a></li>
+                          <li><a href="#" class="i-facebook"></a></li>
+                          <li><a href="#" class="i-instagram"></a></li>
+                          <li><a href="#" class="i-google_plus"></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="i-photo__group">
+                  <div class="i-photo i-photo__x">
+                    <div class="img">
+                      <img alt="img" src="image/img/photoe.jpg"/>
+                    </div>
+                    <div class="w-share">
+                      <div class="b-share">
+                        <ul class="l-share">
+                          <li><a href="#" class="i-plus"></a></li>
+                          <li><a href="#" class="i-like"></a></li>
+                          <li><a href="#" class="i-twett"></a></li>
+                          <li><a href="#" class="i-facebook"></a></li>
+                          <li><a href="#" class="i-instagram"></a></li>
+                          <li><a href="#" class="i-google_plus"></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="i-photo i-photo__xx">
+                    <div class="img">
+                      <img alt="img" src="image/img/photof.jpg"/>
+                    </div>
+                    <div class="w-share">
+                      <div class="b-share">
+                        <ul class="l-share">
+                          <li><a href="#" class="i-plus"></a></li>
+                          <li><a href="#" class="i-like"></a></li>
+                          <li><a href="#" class="i-twett"></a></li>
+                          <li><a href="#" class="i-facebook"></a></li>
+                          <li><a href="#" class="i-instagram"></a></li>
+                          <li><a href="#" class="i-google_plus"></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="i-photo__group">
+                  <div class="i-photo i-photo__xx">
+                    <div class="img">
+                      <img alt="img" src="image/img/photog.jpg"/>
+                    </div>
+                    <div class="w-share">
+                      <div class="b-share">
+                        <ul class="l-share">
+                          <li><a href="#" class="i-plus"></a></li>
+                          <li><a href="#" class="i-like"></a></li>
+                          <li><a href="#" class="i-twett"></a></li>
+                          <li><a href="#" class="i-facebook"></a></li>
+                          <li><a href="#" class="i-instagram"></a></li>
+                          <li><a href="#" class="i-google_plus"></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="i-photo i-photo__x">
+                    <div class="img">
+                      <img alt="img" src="image/img/photoh.jpg"/>
+                    </div>
+                    <div class="w-share">
+                      <div class="b-share">
+                        <ul class="l-share">
+                          <li><a href="#" class="i-plus"></a></li>
+                          <li><a href="#" class="i-like"></a></li>
+                          <li><a href="#" class="i-twett"></a></li>
+                          <li><a href="#" class="i-facebook"></a></li>
+                          <li><a href="#" class="i-instagram"></a></li>
+                          <li><a href="#" class="i-google_plus"></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-	<div id='content'>
-        <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
-            <div class="paricles"></div>
-        </div>
-        <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}"></div>
-        <div id="media" class="page" ng-class="{selected: selectedPage == 'media'}"></div>
-
-		<div id="cast" ng-class="{selected: selectedPage == 'cast'}" class="page w-content">
+		  <div id="cast" ng-class="{selected: selectedPage == 'cast'}" class="page w-content">
         <div class="b-content" style="width: 1166px;">
           <div class="b-content_inside">
             <div class="w-tab">
