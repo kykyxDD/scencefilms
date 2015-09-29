@@ -222,32 +222,17 @@ var app = angular.module('app', [])
         resize_video();
 
         squares.resize();
-        
+
         preloader.set_size(200, 200)
     }
 
     function resize_video() {
         if (video) {
-            var winWid = doc.documentElement.clientWidth;
-            var winHeig = doc.documentElement.clientHeight;
             var w = 1920;
             var h = 1080;
             var k = Math.max($window.innerWidth / w, $window.innerHeight / h);
 
-
             video.scaleX = video.scaleY = k;
-
-            var wid =  w*k;
-            var heig =  h*k;
-            var x = (wid - video.width)/2;
-            var y = (heig - video.height)/2;
-
-            console.log('wv:',video.width, 'ws:', wid, 'ww',winWid);
-            console.log('x:',x, 'x_w:',(winWid - wid)/2)
-
-            // video.x = x;//(winWid - wid)/2;
-            // video.y = y;
-
         }
     }
 
@@ -260,7 +245,7 @@ var app = angular.module('app', [])
             preloader.setPercent(preloader.fake_pc)
             preloader.repaintCanvas()
         }
-        
+
         f()
 
         TweenLite.to(preloader, duration, {fake_pc: 100, onUpdate: f, onComplete: callback, onCompleteScope: this})

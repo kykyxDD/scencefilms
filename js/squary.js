@@ -70,6 +70,22 @@ Squares.prototype = {
 
     resize: function(){
 
+        if(!this.sq_arr_right || !this.sq_arr_left) return
+
+        this.sq_width = Math.round(document.body.clientWidth/6);
+        this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
+
+        this.cont_rhom_right.style.right = this.rights + 'px';
+        this.cont_rhom_left.style.left = Math.round((-this.sq_width)*0.4) + 'px';
+        this.cont_rhom_left.style.bottom = Math.round((-this.sq_width)*0.4) + 'px';
+
+        for(var k = 0; k < this.sq_arr_right.length; k++){
+            this.pos_rhom(this.sq_arr_right[k]);
+        }
+        for(var k = 0; k < this.sq_arr_left.length; k++){
+            this.pos_rhom(this.sq_arr_left[k]);
+        }
+
     },
 
     pos_rhom: function(page){
@@ -121,34 +137,5 @@ Squares.prototype = {
             TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: 0.3*i});
             TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , delay: (0.3*i)+(delay*0.5)});
         };
-    },
-    resize: function(){
-    	// var left = this.rights;
-    	// var clLeft = document.body.clientWidth
-    	// var percent = left/clLeft;
-        if(!this.sq_arr_right || !this.sq_arr_left) return
-
-        this.sq_width = Math.round(document.body.clientWidth/6);
-        this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
-
-        this.cont_rhom_right.style.right = this.rights + 'px';
-        this.cont_rhom_left.style.left = Math.round((-this.sq_width)*0.4) + 'px';
-        this.cont_rhom_left.style.bottom = Math.round((-this.sq_width)*0.4) + 'px';
-
-        // console.log(this.sq_arr_right,this.sq_arr_left)
-
-        for(var k = 0; k < this.sq_arr_right.length; k++){
-            this.pos_rhom(this.sq_arr_right[k]);
-        }
-        for(var k = 0; k < this.sq_arr_left.length; k++){
-            this.pos_rhom(this.sq_arr_left[k]);
-        }
-    	// if(percent > 0.8){
-    	// 	this.cont_rhom_right.style.left = '20%';
-    	// 	this.cont_rhom_right.style.right = '';
-    	// } else {
-    	// 	this.cont_rhom_right.style.left = '';
-    	// 	this.cont_rhom_right.style.right = this.rights + 'px';
-    	// }
-    },
+    }
 }
