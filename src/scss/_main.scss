@@ -405,7 +405,56 @@ body {
   }
 }
 
-.b-photo {
+.i-video__group {
+  float: left;
+  margin: 0 10px 0 0;
+
+  .i-video {
+    &:first-child {
+      margin-bottom: 10px;
+    }
+  }
+  
+}
+
+.i-video {
+  
+  a {
+    display: block;
+    position: relative;
+
+    &:before {
+      @include pseudo-block($top: 50%, $left: 50%);
+      @include oneline-sprite($icons_x2, video, $retina: true);
+      width: 86px;
+      height: 86px;
+      margin-left: -43px;
+      margin-top: -68px;
+    }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  .text {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(#000, 0.6);
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 20px;
+    padding: 20px;
+    margin: 0;
+  }
+}
+
+.b-photo,
+.b-video {
   .btn_top {
     display: none;
     clear: both;
@@ -414,11 +463,31 @@ body {
 }
 
 @media #{$mediaC} {
+
+  .i-video__group {
+    margin: 0;
+    .i-video {
+      width: 50%;
+      float: left;
+      padding: 0 5px;
+      @include box-sizing(border-box);
+    }
+  }
+  
+  .b-video {
+    margin: 0;
+  }
+
+  .i-video {
+    .text {
+      @include ellipsis(ellipsis);
+    }
+  }
   
   
   #content {
     ////
-    background: red;
+    //background: red;
     ////
     #media.selected {
       display: block !important;
@@ -487,13 +556,15 @@ body {
     max-width: 800px;
   }
 
-  .b-photo {
+  .b-photo,
+  .b-video {
     clear: both;
     overflow: hidden;
 
     .btn_top {
       padding: 20px 0;
       display: block;
+      text-align: center;
     }
   }
 
@@ -510,22 +581,61 @@ body {
       padding: 5px;
       margin: 0 auto;
     }
+
+    
+    
+    .w-video {
+      margin: 0;
+      display: block;
+      padding: 0;
+    }
   }
 }
 
 //////
-.transition.rot45deg {
-  display: none;
-}
+/* .transition.rot45deg { */
+/*   display: none; */
+/* } */
 
-#main_menu {
-  display: none;
-}
+/* #main_menu { */
+/*   display: none; */
+/* } */
 //////
+
+@media #{$mediaD} {
+  .i-video {
+    
+    a {
+
+      &:before {
+        @include pseudo-block($top: 50%, $left: 50%);
+        @include oneline-sprite($icons_x2, videom, $retina: true);
+        width: 40px;
+        height: 40px;
+        margin-left: -20px;
+        margin-top: -20px;
+      }
+    }
+
+    .text {
+      line-height: 16px;
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+}
 
 @media #{$mediaE} {
   .i-photo__group {
     width: 100%;
+  }
+
+  .i-video__group {
+    .i-video {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 0 10px;
+    }
   }
 }
 
