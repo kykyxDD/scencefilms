@@ -1,6 +1,5 @@
 var app = angular.module('app', [])
-.controller('appController', ['$scope', '$http', '$location', '$document', '$window', function($s, $http, $location, $doc, $window){
-
+.service('view', ['$document', function($doc){
     var doc = $doc[0]
     var transition = new Transition(doc.querySelector('.transition'))
     var main_menu = new Anim_menu(doc.querySelector('#main_menu'))
@@ -8,8 +7,6 @@ var app = angular.module('app', [])
     var squares = new Squares(doc);
     var intro_bg = doc.querySelector('#intro_bg')
     
-    var video
-
     if (intro_bg) {
         var particles = new Particles(doc.querySelector('.paricles'))
 
@@ -18,17 +15,39 @@ var app = angular.module('app', [])
         intro.cont.y = 0
         intro.cont.scaleX = intro.cont.scaleY = 0.8
         ScreenObject.decorate_element.apply(intro_bg)
+    }
 
+    return {
+        transition: transition,
+        main_menu: main_menu,
+        preloader: preloader,
+        squares: squares,
+        intro_bg: intro_bg,
+        particles: particles,
+        intro: intro
+    }    
+    
+}])
+.controller('appController', ['view', '$scope', '$http', '$location', '$document', '$window', function(v, $s, $http, $location, $doc, $window){
+
+    var doc = $doc[0]
+    var video
+
+    $s.mobile_style = true;
+
+    if (v.intro_bg) {
         play_intro()
     }
 
     $s.selectedPage = 'home'
+    $s.nameToChange = 'home'
 
     onResize()
     angular.element($window).bind('resize', onResize)
-    
+
     $http.get("data.json", {})
     .success(angular.bind(null, function(data, status) {
+        
         $s.data = data
 
         create_video($s.data.pages[0].video.files)
@@ -53,26 +72,27 @@ var app = angular.module('app', [])
                 }
             }
         })
-        squares.init(data.homepage_data)
-        main_menu.init(data.pages, 0)
         
-        if (!intro) {
-            transition.show()
-            main_menu.show_header(0.3)
+        v.squares.init(data.homepage_data)
+        v.main_menu.init(data.pages, 0)
+        
+        if (!v.intro) {
+            v.transition.show()
+            v.main_menu.show_header(0.3)
         }
     }))
 
-    main_menu.onClick = function(page) {
+    v.main_menu.onClick = function(page) {
         $s.change_page(page);
     }
 
-    transition.onOpened = function() {
+    v.transition.onOpened = function() {
 
         $s.selectedPage = $s.pageToChange
         $s.$apply();
 
-        preloader.show()
-        preloader.make_white()
+        v.preloader.show()
+        v.preloader.make_white()
         simulate_page_load(2, onPageLoaded)
 
         var p = get_page($s.selectedPage)
@@ -83,17 +103,17 @@ var app = angular.module('app', [])
         //transition.close()
     }
 
-    transition.onClosed = function() {
-        transition.show()
-        main_menu.show_header(0.3)
+    v.transition.onClosed = function() {
+        v.transition.show()
+        v.main_menu.show_header(0.3)
 
         video.play()
 
         if ($s.selectedPage == 'home') {
-            intro && intro.runRepaint()
-            particles && particles.runRepaint()
+            v.intro && v.intro.runRepaint()
+            v.particles && v.particles.runRepaint()
             // console.log(particles.runRepaint)
-            squares.show();
+            v.squares.show();
         }
     }
 
@@ -146,7 +166,7 @@ var app = angular.module('app', [])
     }
 
     function play_intro() {
-        preloader.show()
+        v.preloader.show()
         simulate_page_load(1, show_intro_text)
 
         var drops = []
@@ -177,53 +197,70 @@ var app = angular.module('app', [])
     }
     
     function show_intro_text() {
-        preloader.hide()
+        v.preloader.hide()
 
-        intro.show()
-        intro.percent = 0
-        intro.runRepaint()
+        v.intro.show()
+        v.intro.percent = 0
+        v.intro.runRepaint()
         
-        TweenLite.to(intro, 5, {
+        TweenLite.to(v.intro, 5, {
             percent: 100,
             ease: Power0.easeInOut,
-            onUpdate: function(){ intro.repaintCanvas() },
+            onUpdate: function(){ v.intro.repaintCanvas() },
             onComplete: hide_intro,
             onCompleteScope: this
         })
     }
 
     function hide_intro() {
-        TweenLite.to(intro_bg, 1, {alpha: 0, onComplete: function() {intro_bg.visible = false}})
+        TweenLite.to(v.intro_bg, 1, {alpha: 0, onComplete: function() {v.intro_bg.visible = false}})
 
-        TweenLite.to(intro.cont, 1, {x: -300, onComplete: function(){
+        TweenLite.to(v.intro.cont, 1, {x: -300, onComplete: function(){
             var home_page = doc.querySelector('#home')
-            home_page.appendChild(intro.cont)
+            home_page.appendChild(v.intro.cont)
         }})
 
-        particles.runRepaint()
-        TweenLite.to(particles, 2, {kalpha: 3})
+        v.particles.runRepaint()
+        TweenLite.to(v.particles, 2, {kalpha: 3})
 
         video.play()
-        transition.show()
-        main_menu.show_header(0.3)
-        squares.show();
+        v.transition.show()
+        v.main_menu.show_header(0.3)
+        v.squares.show();
     }
 
-    function onResize() {
-        transition.resize($window.innerWidth, $window.innerHeight)
-        particles && particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
+    function onResize(e) {
+        var win_wid = $window.innerWidth;
+        var win_heig = $window.innerHeight;
+
+        var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+
+        if((win_wid <= 1024 && orientation == 'portrait') || 
+           (win_wid <= 640 && orientation == 'landscape')){
+            $s.mobile_style = true;
+        } else {
+            $s.mobile_style = false;
+        }
+
+        v.transition.resize($window.innerWidth, $window.innerHeight)
+        v.particles && v.particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
         
         var conts = doc.querySelectorAll("#cast .b-content, #makers .b-content")
+        
         for (var i=0; i<conts.length; i++) {
             var div = conts[i]
-            div.style.width = Math.round($window.innerWidth*0.66) + "px"
+            div.style.width = $s.mobile_style == false ? Math.round($window.innerWidth*0.66) + "px" : '';
         }
 
         resize_video();
 
-        squares.resize();
+        v.squares.resize();
 
-        preloader.set_size(200, 200)
+        v.preloader.set_size(200, 200)
+
+        if (e) {
+            $s.$apply()
+        }
     }
 
     function resize_video() {
@@ -239,16 +276,16 @@ var app = angular.module('app', [])
     function simulate_page_load(duration, callback) {
 
         var duration = duration || 1
-        preloader.fake_pc = 0
-        
+        v.preloader.fake_pc = 0
+
         var f = function() {
-            preloader.setPercent(preloader.fake_pc)
-            preloader.repaintCanvas()
+            v.preloader.setPercent(v.preloader.fake_pc)
+            v.preloader.repaintCanvas()
         }
 
         f()
 
-        TweenLite.to(preloader, duration, {fake_pc: 100, onUpdate: f, onComplete: callback, onCompleteScope: this})
+        TweenLite.to(v.preloader, duration, {fake_pc: 100, onUpdate: f, onComplete: callback, onCompleteScope: this})
     }
 
     function get_page(name) {
@@ -261,46 +298,45 @@ var app = angular.module('app', [])
     }
 
     function onPageLoaded() {
-        preloader.hide()
-        transition.close()
+        v.preloader.hide()
+        v.transition.close()
     }
 
     $s.change_page = function(data){
-        $s.pageToChange = data.page
+        console.log(data)
+        $s.pageToChange = data.page;
+        $s.nameToChange = data.name;
 
-        intro && intro.stopRepaint()
-        particles && particles.stopRepaint()
+        v.intro && v.intro.stopRepaint()
+        v.particles && v.particles.stopRepaint()
         video.ready && video.remove()
 
-        main_menu.collapse()
-        main_menu.hide_header()
-        transition.open()
-        squares.hide();
+        v.main_menu.collapse()
+        v.main_menu.hide_header()
+        v.transition.open()
+        v.squares.hide();
     }
 
-    $s.$on('$locationChangeSuccess', function(event){
-        //to do: handle hash change
-    })
 
     $s.onMenuHeaderClick = function() {
-        main_menu.hide_header()
-        main_menu.expand()
-        transition.expand()
+        v.main_menu.hide_header()
+        v.main_menu.expand()
+        v.transition.expand()
 
         // console.log("this?")
     }
 
     $s.onMenuCloseClick = function() {
-        main_menu.align_header();
-        main_menu.collapse();
-        main_menu.show_header(0.3);
-        transition.collapse();
+        v.main_menu.align_header();
+        v.main_menu.collapse();
+        v.main_menu.show_header(0.3);
+        v.transition.collapse();
     }
 
     $s.readyHtml = function(){
-        main_menu.align_header();
-        main_menu.show_header(0.3);
-        transition.close();
+        v.main_menu.align_header();
+        v.main_menu.show_header(0.3);
+        v.transition.close();
     }
 
     $s.changeMaker = function(page) {
@@ -310,5 +346,77 @@ var app = angular.module('app', [])
     $s.changeCast = function(page) {
         $s.selectedCast = page
     }
+ 
+    $s.skip_intro = function() {
+        TweenLite.killTweensOf(v.intro)
+        hide_intro()
+        delete $s.skip_intro
+    }
 }])
 
+.controller("mediaController", ["$scope", "$document", "$window", function($s, $doc, $window) {
+    var media_data
+    var doc = $doc[0]
+    var scroll_cont = doc.querySelector(".mediaScrollCont")
+    var items_cont = scroll_cont.querySelector(".mediaCont")
+    var scroll
+    
+    onResize()
+    angular.element($window).bind('resize', onResize)
+   
+    $s.$watch('data', function(data) {
+        
+        if (data) {
+            media_data = data.pages[4]
+            media_data.pages.forEach(groupBy)
+
+            $s.selectedMedia = data.pages[4].pages[0]
+
+            scroll = new IScroll(scroll_cont, {scrollX: true})
+            
+            onResize()
+
+        }
+    })
+   
+    
+    function onResize() {
+        console.log("reisze")
+        if (media_data) {
+
+            var cont_w = $window.innerWidth - 450;
+            var content_w = $s.selectedMedia.itemGroups.length*450
+            scroll_cont.style.width = cont_w + "px"
+            items_cont.style.width = content_w + "px"
+            scroll.refresh()
+        }
+    }
+    
+    function groupBy(arr) {
+
+        var itemsInGroup = 2
+
+        if (!arr) return []
+
+        var grouped_arr = []
+
+        for (var i=0; i<arr.items.length; i++) {
+
+            var itm = arr.items[i]
+
+            if (i % itemsInGroup == 0) {
+                var group = []
+                grouped_arr.push(group)
+            }
+
+            group.push(itm)
+        }
+
+        arr.itemGroups = grouped_arr
+    }
+    
+    $s.changeMedia = function(page) {
+        $s.selectedMedia = page
+    }
+
+}])

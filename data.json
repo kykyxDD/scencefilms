@@ -40,6 +40,8 @@
             "pages": [
                 {
                     "bg": "image/bg/cast_grace.jpg",
+                    "img_port": "image/img/imc.jpg",
+                    "img_land": "image/img/imcL.jpg",
                     "video": { "files": ["image/video/grace_1.mp4", "image/video/grace_1.ogv", "image/video/grace_1.webm"]},
                     "title": "MAGIE GRACE",
                     "role": "Laurie",
@@ -47,20 +49,55 @@
                     "desc": "Grace was born Margaret Grace Denig in Worthington, Ohio, one of threchildren of parents Valinn (née Everett) and Rick Denig, who ran a family jewelry business. Her family lived in a 200-year-old house, the first saltbox house in central Ohio.  She attended Worthington Christian Schools from kindergarte... of parents Valinn (née Everett) and Rick Denig, who ran a family jewelry business. Her family lived in a 200-year-old house, the first saltbox house in central Ohio. She attended Worthington Christian Schools from kindergarte... who ran a family jewelry business. Her family lived in a 200-year-old house, the first saltbox house in central Ohio."
                 },
                 {
-                    "bg": "image/bg/cast_carter.jpg",
+                    "bg": "image/bg/cast_carter.jpg",                    
+                    "img_port": "image/img/imd.jpg",
+                    "img_land": "image/img/imdL.jpg",
                     "video": { "files": ["image/video/carter.mp4", "image/video/carter.ogv", "image/video/carter.webm"]},
-                    "title": "BOB CARTER",
-                    "role": "Name",
-                    "name": "BOB CARTER",
-                    "desc": "Brad Carter (born 1973) is an American film and television actor, guitarist, painter, sculptor, and photographer, known for playing Charlie Lange in True Detective and Leland Gruen in Sons of Anarchy. After suffering from brain disease and tremors that caused his hands to shake, he underwent brain surgery in 2013, which he recorded and posted on YouTube. The video went viral, and he became known as the \"guy playing guitar during brain surgery\".\nBrad Carter (born 1973) is an American film and television actor, guitarist, painter, sculptor, and photographer, known for playing..."
+                    "title": "brad carter",
+                    "role": "Billy",
+                    "name": "brad carter",
+                    
+                    "desc": "Multi-talented actor, musician and comedy writer Brad Carter recently earned critical acclaim as incarcerated criminal “Charlie Lange” opposite Oscar® winner Matthew McConaughey and Oscar® nominee Woody Harrelson in the first season of the HBO Emmy® nominated series “True Detective.” 2014 was an exciting year as Carter additionally joined the final season of Kurt Sutter’s critically acclaimed FX series “Sons of Anarchy” in  the recurring role of “Leland Gruen” opposite Charlie Hunnam and starred in SyFy’s critically acclaimed mini-series “Ascension.”  He also starred opposite Faith Hill and Chris Zylka in the film DIXIELAND, which premiered at the Tribeca Film Festival. This Fall will prove to be equally as exciting, as Carter is soon to release  his debut, self- produced studio album and will also share the silver screen with Johnny Depp in Warner Bros suspense thriller BLACK MASS."
                 },
                 {
                     "bg": "image/bg/cast_maika.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/maika.mp4", "image/video/maika.ogv", "image/video/maika.webm"]},
                     "title": "MIAKA MONROE",
                     "role": "Jody",
                     "name": "MIAKA MONROE",
                     "desc": "Maika Monroe is a professional kiteboarder turned actress who is taking Hollywood by storm. Garnering comparisons to some of the top names in the industry, she made her acting debut in the 2012 film AT ANY PRICE, co-starring Zac Effron and Dennis Quaid. In April 2012, Monroe signed up for the drama LABOR DAY, an adaptation of the hit novel, starring Josh Brolin and Kate Winslet. In June 2013, she joined the cast of the psychological thriller film THE GUEST, which gained almost unprecedented acclaim from audiences after playing at numerous film festivals, including the prestigious Sundance Film Festival. In August 2014, she joined the alien invasion thriller film THE 5TH WAVE, the first in a best-selling series of Young"
+                },
+                {
+                    "bg": "image/bg/cast_maika.jpg",
+                    "img_port": "image/img/imb.jpg",
+                    "img_land": "image/img/imbL.jpg",
+                    "video": { "files": ["image/video/patton.mp4", "image/video/patton.ogv", "image/video/patton.webm"]},
+                    "title": "WILL PATTON",
+                    "role": "Senior",
+                    "name": "WILL PATTON",
+                    "desc": "Will Patton successfully divides his time between mainstream and independent features, television films, and a stage career on and off-Broadway. Born and raised in North Carolina,Patton learned his craft at the North Carolina School of the Arts and at New York's Actor's Studio where he studied under Lee Strasberg. During the early '80s, Patton appeared in such New York-based independent films as Michael Oblowitz's KING  BLANK and VARIETY (both 1983). Patton was cast in his first big-budget film, Martin Scorsese's AFTER HOURS (1985), where he played a brutish boyfriend with a thing for leather and chains. His best portrayal of a villain can be found in the Gene Hackman-starring thriller NO WAY OUT (1987) which he followed with the Kevin Costner project THE POSTMAN and the Michael Bay blockbuster ARMAGEDDON. At the beginning of  the 21st century Patton continued to remain busy with major roles in REMEMBER THE TITANS, GONE IN 60 SECONDS, THE MOTHMAN PROPHECIES, and THE PUNISHER. Most recently, Will finished a lead role in the TNT sci-fi television series FALLING SKIES, executive produced by Steven Spielberg."
+                },
+                {
+                    "bg": "image/bg/cast_maika.jpg",
+                    "img_port": "image/img/imi.jpg",
+                    "img_land": "image/img/imiL.jpg",
+                    "video": { "files": ["image/video/logan.mp4", "image/video/logan.ogv", "image/video/logan.webm"]},
+                    "title": "LOGAN MILLER",
+                    "role": "Colin",
+                    "name": "LOGAN MILLER",
+                    "desc": "Logan Miller has already done more than most actors twice his age. His career started with small roles in GHOSTS OF GIRLFRIENDS PAST opposite Matthew McConaughey and Sofia Coppola's THE BLING RING. Those performances paved the way to Miller’s break out performance Matt Sobel's buzzworthy 2015 Sundance film, TAKE ME TO THE RIVER, in which Miller plays a gay teenager forced to retreat back into the closet when goes to visit his ultra-conservative extended family. That same year, Miller played a supporting role in the  ensemble hit THE STANFORD PRISON EXPERIMENT.                    Logan’s work can be seen in the trailer for the Paramount blockbuster, BOY SCOUTS GUIDE TO THE  ZOMBIE APOCALYPSE, due October 31st of 2015."
+                },
+                {
+                    "bg": "image/bg/cast_maika.jpg",
+                    "img_port": "image/img/imf.jpg",
+                    "img_land": "image/img/imfL.jpg",
+                    "video": { "files": ["image/video/bonnie.mp4", "image/video/bonnie.ogv", "image/video/bonnie.webm"]},
+                    "title": "BONNIE BEDELIA",
+                    "role": "Annabelle",
+                    "name": "BONNIE BEDELIA",
+                    "desc": "Bonnie Bedelia began her storied acting career on the CBS daytime soap opera, LOVE OF LIFE, before her talent vaulted her to the top of film and an television.Bedelia was nominated for a Golden Globe Award for her performance in the film HEART LIKE A WHEEL, and for an Independent Spirit Award for THE PRINCE OF PENNSYLVANIA. She is best known for her roles in the  DIE HARD films, PRESUMED INNOCENT and NEEDFUL THINGS. Bedelia also had many other leading and supporting roles, and has worked regularly on television.For her television work, Bedelia received two Emmy Awards nominations. From 2001 to 2004, Bedelia played  the lead role in the Lifetime television drama series, THE DIVISION, and later starred as family matriarch  Camille Braverman in the NBC drama series, PARENTHOOD."
                 }
             ]
         },
@@ -72,6 +109,8 @@
             "pages": [
                 {
                     "bg": "image/bg/filmmakers_blake.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/blake.mp4", "image/video/blake.ogv", "image/video/blake.webm"]},
                     "title": "BLAKE ROBBINS",
                     "role": "Director",
@@ -80,6 +119,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_jeff.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/film_jeff.mp4", "image/video/film_jeff.ogv", "image/video/film_jeff.webm"]},
                     "title": "JEFF JOHNSON",
                     "role": "Role",
@@ -88,6 +129,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_kevin.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "title": "KEVIN WALLEAR",
                     "role": "Producer",
                     "name": "KEVIN WALLEAR",
@@ -95,6 +138,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_casey_john.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/casey_jeff.mp4", "image/video/casey_jeff.ogv", "image/video/casey_jeff.webm"]},
                     "title": "CASEY TWENTER & JEFF ROBISON",
                     "role": "Writer / Producer",
@@ -103,6 +148,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_debora.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/debora.mp4", "image/video/debora.ogv", "image/video/debora.webm"]},
                     "title": "DEBORAH DION",
                     "role": "Casting Director",
@@ -111,6 +158,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_scott.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/scott.mp4", "image/video/scott.ogv", "image/video/scott.webm"]},
                     "title": "SCOTT BOOKER",
                     "role": "Music Supervisor",
@@ -119,6 +168,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_embacment_films.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/embankment.mp4", "image/video/embankment.ogv", "image/video/embankment.webm"]},
                     "title": "EMBANKMENT FILMS",
                     "role": "Foreign Sales Agency",
@@ -132,7 +183,91 @@
             "name": "MULTIMEDIA",
             "video": { "files": ["image/video/multimedia.mp4", "image/video/multimedia.ogv", "image/video/multimedia.webm"]},
             "id": 5,
-            "page": "media"
+            "page": "media",
+            "pages": [
+                {
+                    "name": "photo",
+                    "items": [
+                        {
+                            "src": "image/img/photoa.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photob.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photoc.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photod.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photoe.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photof.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photog.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photoh.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "video",
+                    "items": [
+                    ]
+                }
+            ]
         }
         
     ]
