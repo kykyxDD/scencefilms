@@ -26,9 +26,10 @@ var app = angular.module('app', [])
 
     onResize()
     angular.element($window).bind('resize', onResize)
-    
+
     $http.get("data.json", {})
     .success(angular.bind(null, function(data, status) {
+        
         $s.data = data
 
         create_video($s.data.pages[0].video.files)
@@ -53,6 +54,7 @@ var app = angular.module('app', [])
                 }
             }
         })
+        
         squares.init(data.homepage_data)
         main_menu.init(data.pages, 0)
         
@@ -208,7 +210,7 @@ var app = angular.module('app', [])
         main_menu.show_header(0.3)
         squares.show();
     }
-
+    
     function onResize() {
         transition.resize($window.innerWidth, $window.innerHeight)
         particles && particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
@@ -310,5 +312,77 @@ var app = angular.module('app', [])
     $s.changeCast = function(page) {
         $s.selectedCast = page
     }
+ 
+    $s.skip_intro = function() {
+        TweenLite.killTweensOf(intro)
+        hide_intro()
+        delete $s.skip_intro
+    }
 }])
 
+.controller("mediaController", ["$scope", "$document", "$window", function($s, $doc, $window) {
+    var media_data
+    var doc = $doc[0]
+    var scroll_cont = doc.querySelector(".mediaScrollCont")
+    var items_cont = scroll_cont.querySelector(".mediaCont")
+    var scroll
+    
+    onResize()
+    angular.element($window).bind('resize', onResize)
+   
+    $s.$watch('data', function(data) {
+        
+        if (data) {
+            media_data = data.pages[4]
+            media_data.pages.forEach(groupBy)
+
+            $s.selectedMedia = data.pages[4].pages[0]
+
+            scroll = new IScroll(scroll_cont, {scrollX: true, })
+            
+            onResize()
+
+        }
+    })
+   
+    
+    function onResize() {
+        console.log("reisze")
+        if (media_data) {
+
+            var cont_w = $window.innerWidth - 450;
+            var content_w = $s.selectedMedia.itemGroups.length*450
+            scroll_cont.style.width = cont_w + "px"
+            items_cont.style.width = content_w + "px"
+            scroll.refresh()
+        }
+    }
+    
+    function groupBy(arr) {
+
+        var itemsInGroup = 2
+
+        if (!arr) return []
+
+        var grouped_arr = []
+
+        for (var i=0; i<arr.items.length; i++) {
+
+            var itm = arr.items[i]
+
+            if (i % itemsInGroup == 0) {
+                var group = []
+                grouped_arr.push(group)
+            }
+
+            group.push(itm)
+        }
+
+        arr.itemGroups = grouped_arr
+    }
+    
+    $s.changeMedia = function(page) {
+        $s.selectedMedia = page
+    }
+
+}])

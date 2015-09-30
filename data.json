@@ -132,7 +132,91 @@
             "name": "MULTIMEDIA",
             "video": { "files": ["image/video/multimedia.mp4", "image/video/multimedia.ogv", "image/video/multimedia.webm"]},
             "id": 5,
-            "page": "media"
+            "page": "media",
+            "pages": [
+                {
+                    "name": "photo",
+                    "items": [
+                        {
+                            "src": "image/img/photoa.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photob.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photoc.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photod.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photoe.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photof.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photog.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/photoh.jpg",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "video",
+                    "items": [
+                    ]
+                }
+            ]
         }
         
     ]
