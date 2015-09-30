@@ -25,6 +25,7 @@ var app = angular.module('app', [])
     }
 
     $s.selectedPage = 'home'
+    $s.nameToChange = 'home';
 
     onResize()
     angular.element($window).bind('resize', onResize)
@@ -213,6 +214,7 @@ var app = angular.module('app', [])
 
     function onResize(e) {
         // $s.mobile_style = true;
+        console.log($s)
         var win_wid = $window.innerWidth;
         var win_heig = $window.innerHeight;
 
@@ -227,7 +229,7 @@ var app = angular.module('app', [])
         }
 
 
-        console.log($s.mobile_style, $window.innerWidth, $window.innerHeight)
+        // console.log($s.mobile_style, $window.innerWidth, $window.innerHeight)
         transition.resize($window.innerWidth, $window.innerHeight)
         particles && particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
         
@@ -289,7 +291,9 @@ var app = angular.module('app', [])
     }
 
     $s.change_page = function(data){
-        $s.pageToChange = data.page
+        console.log(data)
+        $s.pageToChange = data.page;
+        $s.nameToChange = data.name;
 
         intro && intro.stopRepaint()
         particles && particles.stopRepaint()
