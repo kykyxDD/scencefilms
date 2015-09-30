@@ -22,10 +22,17 @@
     <script src='js/transition.js'></script>
     <script src='js/main.js'></script>
   </head>
-  <body ng-app="app" ng-controller="appController">
-	  <div id='bg' class="home">
-        <div id="video-player"></div>
+
+  <body ng-app="app" ng-controller="appController" ng-class="{cast_mobile: mobile_style}">
+	  <div id='bg' class="home" ng-class="{cast_mobile: !mobile_style}" >
+      <div id="video-player"></div>
       </div>
+
+      <a name="top" ng-show='selectedPage == "cast" || selectedPage == "makers"'></a>
+	  <div class="p-title" ng-if='mobile_style' ng-show='selectedPage == "cast" || selectedPage == "makers"'>
+	    <h1>{{nameToChange}}</h1>
+	  </div>
+
 	  <div id='content'>
       <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
         <div class="paricles"></div>
@@ -69,7 +76,8 @@
         </div>
       </div>
 
-		  <div id="cast" ng-class="{selected: selectedPage == 'cast'}" class="page w-content">
+     <div id="cast" ng-if='!mobile_style' ng-class="{selected: selectedPage == 'cast'}" class="page w-content">
+
         <div class="b-content" style="width: 1166px;">
           <div class="b-content_inside">
             <div class="w-tab">
@@ -92,10 +100,55 @@
             </div>
           </div>
         </div>
-        
+      </div>
+
+      <div id="cast" ng-if='mobile_style' ng-class="{selected: selectedPage == 'cast'}" class="page w-content"> 
+      	<div class="w-content">
+        <div class="b-content">
+          <div class="b-content_inside">
+            <div class="w-tab">
+              <ul class="tab">
+                <li ng-repeat="page in data.pages[2].pages">
+                	<a href='' ng-href="#{{page.role}}"  ng-click="changeCast(page)" ng-class="{active: page == selectedCast}" >
+                		<span>{{page.title}}</span>
+                	</a>
+                </li>
+              </ul>
+            </div>
+            <div class="w-text" ng-repeat="selectedCast in data.pages[2].pages">
+              <a id="{{selectedCast.role}}"></a>
+              <div class="w-img w-img__portrait">
+                <img alt="img" src="{{selectedCast.img_port}}"/>
+              </div>
+              <div class="w-img w-img__landscape" ng-if='$index%2 == 1'>
+               <div class="b-img b-img__landscape" style="background-image: url('{{selectedCast.img_land}}');"></div>
+              </div>
+              <div class="b-text">
+                <div class="t-title">
+                  <h2>{{selectedCast.name}}</h2>
+                  <h3>{{selectedCast.role}}</h3>
+                </div>
+                <div class="text">
+                  <p>{{selectedCast.desc}}</p>
+                </div>
+                <div class="btn_top">
+                  <a href="#top"><span class="btn"></a></span>
+                </div>
+              </div>
+              <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
+                <div class="b-img b-img__landscape" style="background-image: url('{{selectedCast.img_land}}');"></div>
+              </div>
+            
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
       </div>
       
-		  <div id="makers" ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
+	  <div id="makers" ng-if='!mobile_style' ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
         <div class="b-content" style="width: 1166px;">
           <div class="b-content_inside">
             <div class="w-tab">
@@ -119,11 +172,56 @@
           </div>
         </div>
       </div>
+
+      <div id="makers" ng-if='mobile_style' ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
+        <div class="b-content">
+          <div class="b-content_inside">
+            <div class="w-tab">
+
+              <ul class="tab">                
+                <li ng-repeat="page in data.pages[3].pages">
+                	<a href="#" ng-href="#{{page.role}}" ng-click="changeMaker(page)" ng-class="{active: page == selectedMaker}">
+                		<span>{{page.title}}</span>
+                	</a>
+                </li>
+              </ul>
+
+            </div>
+            <div class="w-text" ng-repeat="selectedMaker in data.pages[3].pages">
+              <a id="{{selectedMaker.role}}"></a>
+
+              <div class="w-img w-img__portrait">
+                <img alt="img" src="{{selectedMaker.img_port}}"/>
+              </div>
+              <div class="w-img w-img__landscape" ng-if='$index%2 == 1'>
+               <div class="b-img b-img__landscape" style="background-image: url('{{selectedMaker.img_land}}');"></div>
+              </div>
+              <div class="b-text">
+                <div class="t-title">
+                  <h2>{{selectedMaker.name}}</h2>
+                  <h3>{{selectedMaker.role}}</h3>
+                </div>
+                <div class="text">
+                  <p>{{selectedMaker.desc}}</p>
+                </div>
+                <div class="btn_top">
+                  <a href="#top"><span class="btn"></a></span>
+                </div>
+              </div>
+              <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
+                <div class="b-img b-img__landscape" style="background-image: url('{{selectedMaker.img_land}}');"></div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id='side_page_right'>
-	  </div>
-	  <div id='side_page_left'>
-	  </div>
+    <div id='side_page_right' ng-class='{mobile:mobile_style}'>
+	</div>
+	<div id='side_page_left' ng-hide="mobile_style">
+	</div>
 
     <div id="title_page"></div>
 
