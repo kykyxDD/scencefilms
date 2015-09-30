@@ -467,6 +467,18 @@ body {
   .i-news__content {
     padding: 0 0 200px 0;
   }
+
+  .w-time {
+    font-size: 20px;
+    line-height: 28px;
+    margin: 0 0 20px 0;
+    display: none;
+
+    .time {
+      display: block;
+      color: #ffd800;
+    }
+  }
   
   .news {
     background: #000;
@@ -490,9 +502,17 @@ body {
       margin-left: -15px;
     }
 
-    p {
+    h3 {
       text-transform: uppercase;
       color: #fff;
+      font-weight: normal;
+      margin: 0 0 8px 0;
+      font-size: 24px;
+      line-height: 28px;
+    }
+
+    p {
+      display: none;
     }
   }
 
@@ -572,11 +592,22 @@ body {
       @include ellipsis(ellipsis);
     }
   }
-  
+
+  .i-news {
+    padding: 5px 5px;
+    margin: 0;
+    width: 50%;
+    @include box-sizing(border-box);
+
+    .news {
+      margin: 5px;
+      height: auto;
+    }
+  }
   
   #content {
     ////
-    //background: red;
+//    background: red;
     ////
     #media.selected {
       display: block !important;
@@ -585,8 +616,10 @@ body {
   }
 
   .w-photo,
-  .w-video {
+  .w-video,
+  .w-news {
     border-left: none;
+    
   }
   
   #media {
@@ -665,7 +698,8 @@ body {
   }
 
   .b-content_inside {
-    .w-photo {
+    .w-photo,
+    .w-news {
       display: block;
       padding: 5px;
       margin: 0 auto;
@@ -693,9 +727,7 @@ body {
 
 @media #{$mediaD} {
   .i-video {
-    
     a {
-
       &:before {
         @include pseudo-block($top: 50%, $left: 50%);
         @include oneline-sprite($icons_x2, videom, $retina: true);
@@ -710,6 +742,51 @@ body {
       line-height: 16px;
       font-size: 14px;
       padding: 10px;
+    }
+  }
+
+  .i-news {
+    width: 100%;
+    
+    .news {
+      position: static;
+      margin: 0;
+      padding: 16px;
+
+      &:before {
+        display: none;
+      }
+
+      p {
+        display: block;
+        color: #fff;
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      h3 {
+        color: #ffd800;
+        
+      }
+
+      .w-time {
+        display: block;
+      }
+    }
+
+    .i-news__content {
+      padding: 0;
+      
+    }
+
+    &:nth-child(even) {
+      .i-news__content {
+        padding: 0;
+      }
+    }
+
+    .btn {
+      display: none;
     }
   }
 }
