@@ -6,6 +6,7 @@
 
 body {
   background-color: #000;
+  overflow-x: hidden;
 }
 
 #bg {
@@ -399,7 +400,7 @@ body {
 
 #side_page_right,
 #side_page_left{
-	background-color: #aaa;
+	// background-color: #aaa;
 	position: fixed;
 	-moz-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
@@ -407,11 +408,22 @@ body {
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
+#side_page_right.mobile{
+  height: 3000px;
+  // overflow-x:hidden;
+  // overflow-y:visible;
+  position:relative;
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
 
 #side_page_right{
 	top: 50px;
+  
 }
-
 .cont_rhom{
 	position: absolute;		
 	display: inline-block;
