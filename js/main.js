@@ -96,7 +96,7 @@ var app = angular.module('app', [])
             intro && intro.runRepaint()
             particles && particles.runRepaint()
             // console.log(particles.runRepaint)
-            squares.show();
+            squares.show();        
         }
     }
 
@@ -209,25 +209,22 @@ var app = angular.module('app', [])
         video.play()
         transition.show()
         main_menu.show_header(0.3)
+
         squares.show();
     }
 
     function onResize(e) {
-        // $s.mobile_style = true;
-        console.log($s)
         var win_wid = $window.innerWidth;
         var win_heig = $window.innerHeight;
 
-
         var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
-        if((win_wid < 1024 && orientation == 'portrait' ) || 
-           (win_wid < 640 && orientation == 'landscape' )){
+        if((win_wid <= 1024 && orientation == 'portrait') || 
+           (win_wid <= 640 && orientation == 'landscape')){
             $s.mobile_style = true;
         } else {
             $s.mobile_style = false;
         }
-
 
         // console.log($s.mobile_style, $window.innerWidth, $window.innerHeight)
         transition.resize($window.innerWidth, $window.innerHeight)
@@ -242,7 +239,7 @@ var app = angular.module('app', [])
 
         resize_video();
 
-        squares.resize();
+        squares.resize($s.mobile_style);
 
         preloader.set_size(200, 200)
 

@@ -135,7 +135,7 @@
       </div>
 
       <div id="makers" ng-if='mobile_style' ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
-        <div class="b-content" style="width: 1166px;">
+        <div class="b-content">
           <div class="b-content_inside">
             <div class="w-tab">
 
@@ -192,10 +192,10 @@
         </div>
       </div>
     </div>
-    <div id='side_page_right'>
-	  </div>
-	  <div id='side_page_left'>
-	  </div>
+    <div id='side_page_right' ng-class='{mobile:mobile_style}'>
+	</div>
+	<div id='side_page_left' ng-hide="mobile_style">
+	</div>
 
     <div id="title_page"></div>
 

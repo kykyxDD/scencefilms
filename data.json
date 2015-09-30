@@ -109,8 +109,8 @@
             "pages": [
                 {
                     "bg": "image/bg/filmmakers_blake.jpg",
-                    "img_port": "image/img/imi.jpg",
-                    "img_land": "image/img/imiL.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/blake.mp4", "image/video/blake.ogv", "image/video/blake.webm"]},
                     "title": "BLAKE ROBBINS",
                     "role": "Director",
@@ -119,8 +119,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_jeff.jpg",
-                    "img_port": "image/img/imi.jpg",
-                    "img_land": "image/img/imiL.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/film_jeff.mp4", "image/video/film_jeff.ogv", "image/video/film_jeff.webm"]},
                     "title": "JEFF JOHNSON",
                     "role": "Role",
@@ -129,8 +129,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_kevin.jpg",
-                    "img_port": "image/img/imi.jpg",
-                    "img_land": "image/img/imiL.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "title": "KEVIN WALLEAR",
                     "role": "Producer",
                     "name": "KEVIN WALLEAR",
@@ -138,8 +138,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_casey_john.jpg",
-                    "img_port": "image/img/imi.jpg",
-                    "img_land": "image/img/imiL.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/casey_jeff.mp4", "image/video/casey_jeff.ogv", "image/video/casey_jeff.webm"]},
                     "title": "CASEY TWENTER & JEFF ROBISON",
                     "role": "Writer / Producer",
@@ -148,8 +148,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_debora.jpg",
-                    "img_port": "image/img/imi.jpg",
-                    "img_land": "image/img/imiL.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/debora.mp4", "image/video/debora.ogv", "image/video/debora.webm"]},
                     "title": "DEBORAH DION",
                     "role": "Casting Director",
@@ -158,8 +158,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_scott.jpg",
-                    "img_port": "image/img/imi.jpg",
-                    "img_land": "image/img/imiL.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/scott.mp4", "image/video/scott.ogv", "image/video/scott.webm"]},
                     "title": "SCOTT BOOKER",
                     "role": "Music Supervisor",
@@ -168,8 +168,8 @@
                 },
                 {
                     "bg": "image/bg/filmmakers_embacment_films.jpg",
-                    "img_port": "image/img/imi.jpg",
-                    "img_land": "image/img/imiL.jpg",
+                    "img_port": "image/img/ima.jpg",
+                    "img_land": "image/img/imaL.jpg",
                     "video": { "files": ["image/video/embankment.mp4", "image/video/embankment.ogv", "image/video/embankment.webm"]},
                     "title": "EMBANKMENT FILMS",
                     "role": "Foreign Sales Agency",
