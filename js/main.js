@@ -28,7 +28,7 @@ var app = angular.module('app', [])
     }    
     
 }])
-.controller('appController', ['view', '$scope', '$http', '$location', '$document', '$window', function(v, $s, $http, $location, $doc, $window){
+.controller('appController', ['view', '$scope', '$http', '$document', '$window', function(v, $s, $http, $doc, $window){
 
     var doc = $doc[0]
     var video
