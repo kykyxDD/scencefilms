@@ -1,5 +1,5 @@
 var app = angular.module('app', [])
-.controller('appController', ['$scope', '$http', '$location', '$document', '$window', function($s, $http, $location, $doc, $window){
+.controller('appController', ['$scope', '$http', '$document', '$window', function($s, $http, $doc, $window){
 
     var doc = $doc[0]
     var transition = new Transition(doc.querySelector('.transition'))
@@ -9,6 +9,8 @@ var app = angular.module('app', [])
     var intro_bg = doc.querySelector('#intro_bg')
     
     var video
+
+    $s.mobile_style = true;
 
     if (intro_bg) {
         var particles = new Particles(doc.querySelector('.paricles'))
@@ -209,14 +211,31 @@ var app = angular.module('app', [])
         squares.show();
     }
 
-    function onResize() {
+    function onResize(e) {
+        // $s.mobile_style = true;
+        var win_wid = $window.innerWidth;
+        var win_heig = $window.innerHeight;
+
+
+        var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+
+        if((win_wid < 1024 && orientation == 'portrait' ) || 
+           (win_wid < 640 && orientation == 'landscape' )){
+            $s.mobile_style = true;
+        } else {
+            $s.mobile_style = false;
+        }
+
+
+        console.log($s.mobile_style, $window.innerWidth, $window.innerHeight)
         transition.resize($window.innerWidth, $window.innerHeight)
         particles && particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
         
         var conts = doc.querySelectorAll("#cast .b-content, #makers .b-content")
+        
         for (var i=0; i<conts.length; i++) {
             var div = conts[i]
-            div.style.width = Math.round($window.innerWidth*0.66) + "px"
+            div.style.width = $s.mobile_style == false ? Math.round($window.innerWidth*0.66) + "px" : '';
         }
 
         resize_video();
@@ -224,6 +243,10 @@ var app = angular.module('app', [])
         squares.resize();
 
         preloader.set_size(200, 200)
+
+        if (e) {
+            $s.$apply()
+        }
     }
 
     function resize_video() {
@@ -278,9 +301,6 @@ var app = angular.module('app', [])
         squares.hide();
     }
 
-    $s.$on('$locationChangeSuccess', function(event){
-        //to do: handle hash change
-    })
 
     $s.onMenuHeaderClick = function() {
         main_menu.hide_header()
