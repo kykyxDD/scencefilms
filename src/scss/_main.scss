@@ -458,12 +458,16 @@ body {
 }
 
 .i-news {
-  padding: 0 0 200px 0;
+  padding: 0;
   margin: 0 10px 0 0;
   width: 448px;
   position: relative;
   float: left;
 
+  .i-news__content {
+    padding: 0 0 200px 0;
+  }
+  
   .news {
     background: #000;
     position: absolute;
@@ -493,8 +497,12 @@ body {
   }
 
   &:nth-child(even) {
-    padding: 200px 0 0 0;
+    
 
+    .i-news__content {
+      padding: 200px 0 0 0;
+    }
+    
     .news {
       top: 0;
       bottom: auto;
