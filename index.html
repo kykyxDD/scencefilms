@@ -23,7 +23,7 @@
     <script src='js/main.js'></script>
   </head>
 
-  <body ng-app="app" ng-controller="appController" ng-class="{cast_mobile: mobile_style}">
+  <body ng-app="app" ng-controller="appController" ng-class="{mobile: mobile_style, home: selectedPage == 'home'}">
 	  <div id='bg' class="home" ng-class="{cast_mobile: !mobile_style}" >
       <div id="video-player"></div>
       </div>
@@ -243,7 +243,7 @@
       </div>
     </div>
     
-	  <div class="transition rot45deg">
+	  <div class="transition rot45deg" ng-class='{mobile: mobile_style}'>
       <div id="yellow_part" class="element">
         <div class="bg yellow"></div>
       </div>
@@ -252,21 +252,21 @@
       </div>
     </div>
 
-    <div id='main_menu'>
+    <div id='main_menu' ng-class='{mobile: mobile_style}'>
       <div class="header_cont" ng-click="onMenuHeaderClick()">
         <div class='lines_cont'>
           <div class='line'></div>
           <div class='line'></div>
           <div class='line'></div>
         </div>
-        <div class="haeder_label">menu</div>
+        <div class="haeder_label" ng-hide='mobile_style'>menu</div>
       </div>
       <div class='menu_cont'></div>
-      <div class='close_btn' ng-click="onMenuCloseClick()">&#10006;</div>
+      <div class='close_btn' ng-click="onMenuCloseClick()" >&#10006;</div>
     </div>
     
     <div id="intro_bg"></div>
-    <div id="intro" ng-click="skip_intro()"></div>
+    <div id="intro" ng-click="skip_intro()" ng-class='{mobile_intro:mobile_style}'></div>
 
     <div id="preloader">
       <div class='label'>0%</div>

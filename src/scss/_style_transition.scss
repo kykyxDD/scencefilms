@@ -33,6 +33,7 @@ body {
   background-size: auto 100%;
   
 }
+
 #news {
   //background-image: url('../image/news_1.jpg');
   background-repeat:no-repeat;
@@ -62,7 +63,7 @@ body {
   background-image: url('../image/bg/cast_maika.jpg');
 }
 
-.cast_mobile {
+.mobile {
   background-image: url('../image/bg/cast_mobile.jpg');
 }
 
@@ -168,6 +169,10 @@ body {
   top: -485px;
   left: 85px;
 }
+.transition.mobile {
+  top: -540px;
+  left: 40px;
+} 
 
 .transition .element {
   position: absolute;
@@ -261,6 +266,9 @@ body {
   left: 25px;
   top: 40px;
 }
+#main_menu.mobile .header_cont .lines_cont{
+  top: 30px;
+}
 
 .header_cont .lines_cont .line {
   position: relative;
@@ -288,6 +296,9 @@ body {
 	cursor: pointer;
 }
 
+#main_menu.mobile .cont_list_menu{
+  text-align: center;
+}
 .cont_list_menu .line{
 	height:5px;
 	width: 150px;
@@ -301,6 +312,9 @@ body {
   top: 15px;
   font-size: 24px;
   cursor: pointer;
+}
+#main_menu.mobile .close_btn{
+  left: 25px;
 }
 
 .footer_menu{
@@ -330,11 +344,11 @@ body {
 }
 
 #preloader {
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
-    margin-top: -50px;
-    margin-left: -50px;
+    margin-top: -100px;
+    margin-left: -100px;
 }
 
 #preloader .label{
@@ -408,10 +422,17 @@ body {
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
+
+
+#side_page_right{
+	top: 50px;
+  
+}
 #side_page_right.mobile{
-  height: 3000px;
-  // overflow-x:hidden;
-  // overflow-y:visible;
+  top: -55px;
+  bottom:auto;
+  background: url('../image/main/bg_page.jpg');
+  background-size:cover;
   position:relative;
   -moz-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
@@ -419,10 +440,28 @@ body {
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
 }
-
-#side_page_right{
-	top: 50px;
-  
+#side_page_right.mobile:before{
+  content: '';
+  position:absolute;
+  top:-7%;
+  left: 0;
+  width: 39%;
+  height: 25%;
+  background:url('../image/main/imgoL.png') no-repeat;
+  background-size: 100% auto;
+  background-position: left top;
+}
+#side_page_right.mobile:after{
+  content: '';
+  position:absolute;
+  top:-7%;
+  right: 0;
+  width: 39%;
+  height: 25%;
+  background:url('../image/main/imgoR.png') no-repeat;
+  background-position: right top;
+  background-size: 100% auto;
+  z-index: -1;
 }
 .cont_rhom{
 	position: absolute;		
@@ -474,4 +513,15 @@ body {
 
 .mediaScrollCont {
     overflow: hidden;
+}
+.mobile.home .footer{
+  position:absolute;
+}
+.mobile.home #content{
+  min-height: 430px;
+  background: url('../image/bg/main.jpg') center;
+  background-size: cover;
+}
+#intro.mobile_intro{
+  top: 0;
 }

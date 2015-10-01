@@ -83,12 +83,10 @@ Squares.prototype = {
     },
 
     resize: function(mobile){
-        console.log('resize',mobile)
 
         if(!this.sq_arr_right || !this.sq_arr_left) return
         
         if(mobile){
-            console.log('true', mobile)
             this.resize_mobile();
             return
         }
@@ -136,17 +134,13 @@ Squares.prototype = {
     },
 
     resize_mobile: function(){
-        console.log('resize_mobile')
 
         this.cont_rhom_right.style.right = '';
         // this.cont_rhom_left.visible = false;
         var win_wid = document.documentElement.clientWidth;//window.innerWidth;
         var wid_elem = Math.floor(win_wid/1.43);
         var l = this.sq_arr_right.length;
-        this.cont_rhom_right.h = (l-1.5)*wid_elem;
-        this.cont_rhom_right.y = -win_wid/2;
-        
-        // this.cont_rhom_right.style.bottom = Math.floor(-win_wid/2) + 'px';
+        this.cont_rhom_right.h = (l-1)*wid_elem;
         
         for (var k = 0; k < l; k++){
             var page = this.sq_arr_right[k];
