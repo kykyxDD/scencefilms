@@ -254,7 +254,7 @@ var app = angular.module('app', [])
 
         resize_video();
 
-        v.squares.resize();
+        v.squares.resize($s.mobile_style);
 
         v.preloader.set_size(200, 200)
 
