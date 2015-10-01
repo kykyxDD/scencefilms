@@ -77,7 +77,7 @@ var app = angular.module('app', [])
         v.main_menu.init(data.pages, 0)
         
         if (!v.intro) {
-            v.transition.show()
+            v.transition.show($s.mobile_style)
             v.main_menu.show_header(0.3)
         }
     }))
@@ -104,7 +104,7 @@ var app = angular.module('app', [])
     }
 
     v.transition.onClosed = function() {
-        v.transition.show()
+        v.transition.show($s.mobile_style)
         v.main_menu.show_header(0.3)
 
         video.play()
@@ -112,7 +112,6 @@ var app = angular.module('app', [])
         if ($s.selectedPage == 'home') {
             v.intro && v.intro.runRepaint()
             v.particles && v.particles.runRepaint()
-            // console.log(particles.runRepaint)
             v.squares.show();
         }
     }
@@ -130,7 +129,6 @@ var app = angular.module('app', [])
             ,   stretching: "fill"
             ,   events: {
                 onTime: function(ev) {
-                    console.log('on time', ev)
                     if (ev.position > 5.5) {
                         console.log("here")
                         video.pause(true)
@@ -202,6 +200,13 @@ var app = angular.module('app', [])
         v.intro.show()
         v.intro.percent = 0
         v.intro.runRepaint()
+
+        
+        if($s.mobile_style){
+            var scale = ($window.innerWidth/v.intro.cont.w).toFixed(3)
+            v.intro.cont.scaleX = v.intro.cont.scaleY = scale;
+            v.intro.cont.y = ($window.innerHeight/2)
+        }
         
         TweenLite.to(v.intro, 5, {
             percent: 100,
@@ -218,16 +223,25 @@ var app = angular.module('app', [])
         
         TweenLite.to(v.intro_bg, 1, {alpha: 0, onComplete: function() {v.intro_bg.visible = false}})
 
-        TweenLite.to(v.intro.cont, 1, {x: -300, onComplete: function(){
+        if($s.mobile_style) {
+            var itm_y = $window.innerHeight*0.3;
+            // v.intro.cont.y = $window.innerWidth*0.2;
+            TweenLite.to(v.intro.cont, 1, {y: itm_y, onComplete: function(){
+                var home_page = doc.querySelector('#home')
+                home_page.appendChild(v.intro.cont)
+            }})
+        } else {
+            TweenLite.to(v.intro.cont, 1, {x: -300, onComplete: function(){
             var home_page = doc.querySelector('#home')
             home_page.appendChild(v.intro.cont)
         }})
+        }
 
         v.particles.runRepaint()
         TweenLite.to(v.particles, 2, {kalpha: 3})
 
         video.play()
-        v.transition.show()
+        v.transition.show($s.mobile_style)
         v.main_menu.show_header(0.3)
         v.squares.show();
     }
@@ -262,6 +276,7 @@ var app = angular.module('app', [])
         v.preloader.set_size(200, 200)
 
         if (e) {
+            resize_intro();
             $s.$apply()
         }
     }
@@ -273,6 +288,19 @@ var app = angular.module('app', [])
             var k = Math.max($window.innerWidth / w, $window.innerHeight / h);
 
             video.scaleX = video.scaleY = k;
+        }
+    }
+
+    function resize_intro(){
+        if($s.mobile_style){
+            var scale = ($window.innerWidth/v.intro.cont.w).toFixed(3)
+            v.intro.cont.scaleX = v.intro.cont.scaleY = scale;
+            v.intro.cont.x = 0;
+            v.intro.cont.y = $window.innerHeight*0.3;
+        } else {
+            v.intro.cont.scaleX = v.intro.cont.scaleY = 0.8;
+            v.intro.cont.x = -300;
+            v.intro.cont.y = 0;
         }
     }
 
@@ -306,7 +334,6 @@ var app = angular.module('app', [])
     }
 
     $s.change_page = function(data){
-        console.log(data)
         $s.pageToChange = data.page;
         $s.nameToChange = data.name;
 
@@ -324,7 +351,7 @@ var app = angular.module('app', [])
     $s.onMenuHeaderClick = function() {
         v.main_menu.hide_header()
         v.main_menu.expand()
-        v.transition.expand()
+        v.transition.expand($s.mobile_style)
 
         // console.log("this?")
     }
@@ -333,7 +360,7 @@ var app = angular.module('app', [])
         v.main_menu.align_header();
         v.main_menu.collapse();
         v.main_menu.show_header(0.3);
-        v.transition.collapse();
+        v.transition.collapse($s.mobile_style);
     }
 
     $s.readyHtml = function(){

@@ -511,7 +511,7 @@ body {
   margin-left: -960px;
 }
 
-.scrollCont {
+.mediaScrollCont {
     overflow: hidden;
 }
 .mobile.home .footer{

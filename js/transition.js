@@ -26,11 +26,14 @@ Transition.prototype = {
         this.exp_rad = 2000
     
         this.yellow_part = this.cont.querySelector('#yellow_part')
+        this.yellow_part.squary = this.cont.querySelector('.bg.yellow');
+        console.log(this.yellow_part.squary)
         this.black_part = this.cont.querySelector('#black_part')
         
         ScreenObject.decorate_element.apply(this.cont)
         ScreenObject.decorate_element.apply(this.yellow_part)
         ScreenObject.decorate_element.apply(this.black_part)
+        ScreenObject.decorate_element.apply(this.yellow_part.squary)
         
         this.reset()
     },
@@ -83,9 +86,10 @@ Transition.prototype = {
         
     },
 
-    show: function() {
+    show: function(mobile) {
     
         if (this.debug) console.log("show")
+
     
         this.current_state = 'collapsed'
     
@@ -96,23 +100,43 @@ Transition.prototype = {
         TweenLite.to(this.cont, 0.5*this.time_scale, {x: 0, ease: Power1.easeOut, delay: 0.44*this.time_scale})
     },
     
-    collapse: function() {
+    collapse: function(mobile) {
+        console.log('collapse')
 
         if (this.debug) console.log("collapse")
-    
-        this.current_state = 'collapsed'
-        TweenLite.to(this.cont, 0.35*this.time_scale, {y: 167, ease: Power1.easeOut, onComplete: function(){ if (this.debug) console.log("onCollapsed"); this.onCollapsed()}, onCompleteScope: this})
-        TweenLite.to(this.cont, 1*this.time_scale, {y: 152, ease: Power1.easeOut, delay: 0.35*this.time_scale})
+
+        this.current_state = 'collapsed';
+        this.cont.scaleX = 1;
+        this.cont.scaleY = 1;
+
+        if(!mobile){
+            TweenLite.to(this.cont, 0.35*this.time_scale, {y: 167, ease: Power1.easeOut, onComplete: function(){ if (this.debug) console.log("onCollapsed"); this.onCollapsed()}, onCompleteScope: this})
+            TweenLite.to(this.cont, 1*this.time_scale, {y: 152, ease: Power1.easeOut, delay: 0.35*this.time_scale})
+        } else {
+            TweenLite.to(this.cont, 0.35*this.time_scale, {y: 167, rotation: 45, ease: Power1.easeOut, onComplete: function(){ if (this.debug) console.log("onCollapsed"); this.onCollapsed()}, onCompleteScope: this})
+            TweenLite.to(this.cont, 1*this.time_scale, {y: 152, ease: Power1.easeOut, delay: 0.35*this.time_scale})
+        }
     },
     
-    expand: function() {
-    
+    expand: function(mobile) {
+        console.log('expand', mobile)
         if (this.debug) console.log("expand")
-        
+
         this.current_state = 'expanded';
 
-        TweenLite.to(this.cont, 0.35*this.time_scale, {y: 350, ease: Power1.easeOut, onComplete: function() {if (this.debug) console.log("onExpanded"); this.onExpanded()}, onCompleteScope: this})
-        TweenLite.to(this.cont, 1*this.time_scale, {y: 380, ease: Power1.easeOut, delay: 0.35*this.time_scale})
+
+        if(!mobile){
+            TweenLite.to(this.cont, 0.35*this.time_scale, {y: 350, ease: Power1.easeOut, onComplete: function() {if (this.debug) console.log("onExpanded"); this.onExpanded()}, onCompleteScope: this})
+            TweenLite.to(this.cont, 1*this.time_scale, {y: 380, ease: Power1.easeOut, delay: 0.35*this.time_scale})
+        } else {
+            var elem = this.yellow_part.squary
+            var vis_w = elem.y + elem.w;
+            var scale = window.innerWidth/vis_w; 
+            this.cont.scaleX = scale;
+            this.cont.scaleY = scale;
+            TweenLite.to(this.cont, 0.35*this.time_scale, {y: 800, rotation: 0 , ease: Power1.easeOut, onComplete: function() {if (this.debug) console.log("onExpanded"); this.onExpanded()}, onCompleteScope: this})
+            TweenLite.to(this.cont, 1*this.time_scale, {y: 800, ease: Power1.easeOut, delay: 0.35*this.time_scale})
+        }
 
     },
     
