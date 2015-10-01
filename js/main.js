@@ -377,13 +377,11 @@ var app = angular.module('app', [])
             scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
             
             onResize()
-
         }
     })
    
     
     function onResize() {
-        console.log("reisze")
         if (media_data) {
 
             var cont_w = $window.innerWidth - 450;
