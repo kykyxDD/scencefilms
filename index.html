@@ -118,7 +118,7 @@
             <div class="w-text" ng-repeat="selectedCast in data.pages[2].pages">
               <a id="{{selectedCast.role}}"></a>
               <div class="w-img w-img__portrait">
-                <img alt="img" src="{{selectedCast.img_port}}"/>
+                <img alt="img" ng-src="{{selectedCast.img_port}}"/>
               </div>
               <div class="w-img w-img__landscape" ng-if='$index%2 == 1'>
                <div class="b-img b-img__landscape" style="background-image: url('{{selectedCast.img_land}}');"></div>
@@ -191,7 +191,7 @@
               <a id="{{selectedMaker.role}}"></a>
 
               <div class="w-img w-img__portrait">
-                <img alt="img" src="{{selectedMaker.img_port}}"/>
+                <img alt="img" ng-src="{{selectedMaker.img_port}}"/>
               </div>
               <div class="w-img w-img__landscape" ng-if='$index%2 == 1'>
                <div class="b-img b-img__landscape" style="background-image: url('{{selectedMaker.img_land}}');"></div>
