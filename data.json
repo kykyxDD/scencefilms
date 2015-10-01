@@ -30,7 +30,74 @@
             "name": "NEWS",
             "video": { "files": ["image/video/news.mp4", "image/video/news.ogv", "image/video/news.webm"]},
             "id": 2,
-            "page": "news"
+            "types": [{"type": "photo", "label": "photo"}, {"type": "video", "label": "video"}, {"type": "all", "label": "all"}],
+            "page": "news",
+            "pages": [
+                {
+                    "id": 1,
+                    "type": "photo",
+                    "short_desc": "‘The Scent Of Rain Anad Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
+                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
+                    "date": "1.10.2015",
+                    "img": "image/img/newa.jpg"
+                },
+                {
+                    "id": 2,
+                    "type": "photo",
+                    "short_desc": "‘The Scent Of Rain Anad Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
+                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
+                    "date": "28.09.2015",
+                    "img": "image/img/newb.jpg"
+                },
+                {
+                    "id": 3,
+                    "type": "photo",
+                    "short_desc": "‘The Scent Of Rain Anad Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
+                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
+                    "date": "26.09.2015",
+                    "img": "image/img/newc.jpg"
+                },
+                {
+                    "id": 4,
+                    "type": "photo",
+                    "short_desc": "‘The Scent Of Rain Anad Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
+                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
+                    "date": "20.09.2015",
+                    "img": "image/img/newd.jpg"
+                },
+                {
+                    "id": 5,
+                    "type": "video",
+                    "short_desc": "‘The Scent Of Rain Anad Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
+                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
+                    "date": "1.10.2015",
+                    "img": "image/img/videoa.jpg"
+                },
+                {
+                    "id": 6,
+                    "type": "video",
+                    "short_desc": "‘The Scent Of Rain Anad Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
+                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
+                    "date": "28.09.2015",
+                    "img": "image/img/videob.jpg"
+                },
+                {
+                    "id": 7,
+                    "type": "video",
+                    "short_desc": "‘The Scent Of Rain Anad Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
+                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
+                    "date": "26.09.2015",
+                    "img": "image/img/videoc.jpg"
+                },
+                {
+                    "id": 8,
+                    "type": "video",
+                    "short_desc": "‘The Scent Of Rain Anad Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
+                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
+                    "date": "20.09.2015",
+                    "img": "image/img/videod.jpg"
+                }
+            ]
         },
         {
             "name": "CAST",
