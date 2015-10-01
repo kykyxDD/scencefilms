@@ -37,7 +37,40 @@
       <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
         <div class="paricles"></div>
       </div>
-      <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}"></div>
+      <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}" ng-controller="newsController as nc">
+      
+        <div class="b-content">
+          <div class="b-content_inside">
+            <div class="w-tab">
+              <ul class="tab">
+                <li ng-repeat="itm in news_data.types" ng-click="nc.selectType(itm.type)"><a href="#" ng-class="{active: selectedNewsType == itm.type}"><span>{{itm.label}}</span></a></li>
+              </ul>
+            </div>
+            <div class="w-news">
+              <div class="b-news">
+                  <div class="scrollCont">
+                    <div class="newsCont">
+                        <div class="i-news" ng-repeat="item in news track by $index">
+                            <div class="i-news__content">
+                              <div class="img">
+                                <img alt="img" ng-src="{{item.img}}"/>
+                              </div>
+                              <div class="news">
+                                <h3>{{item.short_desc}}</h3>
+                                <div class="w-time"><span class="time">{{item.date}}</span></div>
+                                <p>{{item.full_desc}}</p>
+                                <a class="btn" href="#">read all</a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
       <div id="media" class="page" ng-class="{selected: selectedPage == 'media'}" ng-controller="mediaController">
         <div class="b-content">
           <div class="b-content_inside">
@@ -50,7 +83,7 @@
             </div>
             <div class="w-photo">
                 <div class="b-photo">
-                    <div class="mediaScrollCont">
+                    <div class="scrollCont">
                         <div class="mediaCont">
                             <div class="i-photo__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
                                 <div ng-repeat="item in grpup track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">

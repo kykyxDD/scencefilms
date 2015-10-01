@@ -213,6 +213,9 @@ var app = angular.module('app', [])
     }
 
     function hide_intro() {
+        
+        delete $s.skip_intro
+        
         TweenLite.to(v.intro_bg, 1, {alpha: 0, onComplete: function() {v.intro_bg.visible = false}})
 
         TweenLite.to(v.intro.cont, 1, {x: -300, onComplete: function(){
@@ -350,14 +353,13 @@ var app = angular.module('app', [])
     $s.skip_intro = function() {
         TweenLite.killTweensOf(v.intro)
         hide_intro()
-        delete $s.skip_intro
     }
 }])
 
 .controller("mediaController", ["$scope", "$document", "$window", function($s, $doc, $window) {
     var media_data
     var doc = $doc[0]
-    var scroll_cont = doc.querySelector(".mediaScrollCont")
+    var scroll_cont = doc.querySelector(".b-photo .scrollCont")
     var items_cont = scroll_cont.querySelector(".mediaCont")
     var scroll
     
@@ -372,7 +374,7 @@ var app = angular.module('app', [])
 
             $s.selectedMedia = data.pages[4].pages[0]
 
-            scroll = new IScroll(scroll_cont, {scrollX: true})
+            scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
             
             onResize()
 
@@ -419,4 +421,64 @@ var app = angular.module('app', [])
         $s.selectedMedia = page
     }
 
+}])
+.controller('newsController', ['$scope', "$document", "$window", function($s, $doc, $window){
+    
+    var news_data
+    var doc = $doc[0]
+    var scroll_cont = doc.querySelector(".b-news .scrollCont")
+    var items_cont = scroll_cont.querySelector(".newsCont")
+    var scroll
+    this.selectType = selectType
+    
+    onResize()
+    angular.element($window).bind('resize', onResize)
+    
+   
+    $s.$watch('data', function(data) {
+        
+        if (data) {
+            $s.news_data = data.pages[1]
+            $s.news_data.pages.forEach(parseDate)
+
+            scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
+            
+            //onResize()
+            selectType($s.news_data.types[0].type)
+        }
+    })
+    
+    function onResize() {
+
+        if ($s.news_data) {
+
+            var cont_w = $window.innerWidth - 450;
+            var content_w = $s.news.length*460
+            scroll_cont.style.width = cont_w + "px"
+            items_cont.style.width = content_w + "px"
+            scroll.refresh()
+        }
+    }
+    
+    function selectType(type) {
+        console.log("here")
+        $s.selectedNewsType = type
+        $s.news = filterByType(type, $s.news_data.pages)
+        
+        onResize()
+    }
+    
+    function filterByType(type, arr) {
+        var arr = []
+        return $s.news_data.pages.filter(function(itm) {
+            if (type == 'all' || itm.type == type) {
+                return itm
+            }
+        })
+    }
+    
+    function parseDate(item) {
+        var date_parts = item.date.split(".")
+        item.timestamp = new Date(date_parts[2], date_parts[1], date_parts[0], 0, 0, 0)
+    }
 }])
