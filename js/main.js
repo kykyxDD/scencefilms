@@ -437,7 +437,7 @@ var app = angular.module('app', [])
         
         if (media_data && !mobile) {
 
-            var cont_w = $window.innerWidth - 450;
+            var cont_w = $window.innerWidth - 450 + 192;
             var content_w = $s.selectedMedia.itemGroups.length*450
             scroll_cont.style.width = cont_w + "px"
             items_cont.style.width = content_w + "px"
@@ -522,7 +522,7 @@ var app = angular.module('app', [])
 
         if ($s.news_data && !mobile) {
             
-            var cont_w = $window.innerWidth - 450;
+            var cont_w = $window.innerWidth - 450 + 192;
             var content_w = $s.news.length*460
             scroll_cont.style.width = cont_w + "px"
             items_cont.style.width = content_w + "px"

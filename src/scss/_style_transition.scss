@@ -530,6 +530,12 @@ body {
     position: absolute;
 }
 #anim_bg {
-    overflow: hidden;
+    //overflow: hidden;
     z-index: -1;
+    //width: 1920px;
+    //height: 1080px;
+    left: 0px;
+    top: 0px;
+    //transform-origin: 0 0 0;
+    position: fixed;
 }
