@@ -141,7 +141,8 @@
                 <div class="b-photo">
                     <div class="scrollCont">
                         <div class="mediaCont">
-                            <div class="i-photo__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
+                            <div  ng-switch="selectedMedia.type">
+                            <div ng-switch-when="photo" class="i-photo__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
                                 <div ng-repeat="item in grpup track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
                                     <div class="img">
                                         <img alt="img" ng-src="{{item.src}}"/>
@@ -156,6 +157,16 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            
+                            <div ng-switch-when="video" class="i-video__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
+                                <div class="i-video" ng-repeat="item in grpup track by $index">
+                                    <a href="#">
+                                        <img alt="img" ng-src="{{item.src}}"/>
+                                        <span class="text">{{item.desc}}</span>
+                                    </a>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>

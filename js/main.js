@@ -404,7 +404,6 @@ var app = angular.module('app', [])
             scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
             
             onResize()
-
         }
     })
    

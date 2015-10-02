@@ -256,6 +256,7 @@
             "pages": [
                 {
                     "name": "photo",
+                    "type": "photo",
                     "items": [
                         {
                             "src": "image/img/photoa.jpg",
@@ -333,7 +334,88 @@
                 },
                 {
                     "name": "video",
+                    "type": "video",
                     "items": [
+                        {
+                            "src": "image/img/videoa.jpg",
+                            "desc": "Video Name Tag offers a cool and colorful way",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/videob.jpg",
+                            "desc": "Video Name Tag offers a cool and colorful way",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/videoc.jpg",
+                            "desc": "Video Name Tag offers a cool and colorful way",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/videod.jpg",
+                            "desc": "Video Name Tag offers a cool and colorful way",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/videoa.jpg",
+                            "desc": "Video Name Tag offers a cool and colorful way",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/videob.jpg",
+                            "desc": "Video Name Tag offers a cool and colorful way",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/videoc.jpg",
+                            "desc": "Video Name Tag offers a cool and colorful way",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        },
+                        {
+                            "src": "image/img/videod.jpg",
+                            "desc": "Video Name Tag offers a cool and colorful way",
+                            "links": [
+                                {"type": "i-twett", "href": "#"},
+                                {"type": "i-facebook", "href": "#"},
+                                {"type": "i-instagram", "href": "#"},
+                                {"type": "i-google_plus", "href": "#"}
+                            ]
+                        }
                     ]
                 }
             ]
