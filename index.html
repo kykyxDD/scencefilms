@@ -24,12 +24,12 @@
     <script src='js/main.js'></script>
 </head>
 
-<body ng-app="app" ng-controller="appController" ng-class="{mobile: mobile_style, home: selectedPage == 'home', cast: selectedPage == 'cast', makers: selectedPage == 'makers'}">
+<body ng-app="app" ng-controller="appController" ng-class="{mobile: mobile_style, home: selectedPage == 'home', cast: selectedPage == 'cast', news: selectedPage == 'news', makers: selectedPage == 'makers', media: selectedPage == 'media'}">
     <div id='bg' class="home" >
         <div id="video-player"></div>
     </div>
     
-    <div id='anim_bg'></div>
+    <div id='anim_bg' ng-hide='mobile_style'></div>
 
       <a name="top" ng-show='mobile_style'></a>
 	  <div class="p-title" ng-if='mobile_style' ng-show='selectedPage == "cast" || selectedPage == "makers"'>
