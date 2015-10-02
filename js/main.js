@@ -40,7 +40,7 @@ var app = angular.module('app', [])
     var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
     if((win_wid <= 1024 && orientation == 'landscape') || 
-       (win_wid <= 640 && orientation == 'portrait')){
+       (win_wid <= 768 && orientation == 'portrait')){
         $s.mobile_style = true;
     } else {
         $s.mobile_style = false;
@@ -98,7 +98,9 @@ var app = angular.module('app', [])
     }))
 
     v.main_menu.onClick = function(page) {
-        $s.change_page(page);
+        if(page.page !== $s.selectedPage) {
+            $s.change_page(page);
+        }
     }
 
     v.transition.onOpened = function() {
@@ -271,7 +273,7 @@ var app = angular.module('app', [])
         var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
         if((win_wid <= 1024 && orientation == 'landscape') || 
-           (win_wid <= 640 && orientation == 'portrait')){
+           (win_wid <= 768 && orientation == 'portrait')){
             $s.mobile_style = true;
         } else {
             $s.mobile_style = false;
