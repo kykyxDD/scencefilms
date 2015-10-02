@@ -163,7 +163,7 @@ IntroText.prototype = {
         this.updateDistortionField()        
         
         var ctx = this.canvas.getContext('2d')
-        ctx.save()
+        //ctx.save()
         ctx.clearRect(0, 0, this.WIDTH, this.HEIGHT)
         ctx.strokeStyle = "#000000"
         ctx.miterLimit = 1
@@ -208,7 +208,7 @@ IntroText.prototype = {
         }
 
         ctx.stroke()
-        ctx.restore()
+        //ctx.restore()
     },
     
     arrLines: [

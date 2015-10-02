@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #000;
+  background-color: #6e6d6f;
   overflow-x: hidden;
 }
 
@@ -17,13 +17,10 @@ body {
 	top:0;
 	left: 0;
 	/*background-color: #9BE1FF;*/
-
-	background-repeat:no-repeat;
-	background-position:center center;
-	background-attachment:fixed;
-	
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
 	background-size: cover;
-
 }
 
 
@@ -527,4 +524,12 @@ body {
 }
 #intro.mobile_intro{
   top: 0;
+}
+
+#anim_bg, #anim_bg * {
+    position: absolute;
+}
+#anim_bg {
+    overflow: hidden;
+    z-index: -1;
 }
