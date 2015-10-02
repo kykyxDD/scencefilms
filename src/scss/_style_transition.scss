@@ -63,7 +63,7 @@ body {
   background-image: url('../image/bg/cast_maika.jpg');
 }
 
-.mobile {
+.mobile.cast, .mobile.makers {
   background-image: url('../image/bg/cast_mobile.jpg');
 }
 
@@ -86,8 +86,7 @@ body {
 //filmmakers_blake.jpg
 //filmmakers_casey_john.jpg
 //filmmakers_debora.jpg
-//filmmakers_embacment_films.jpg
-//filmmakers_jeff.jpg
+//filmmakers_embacment_films.jpgf
 //filmmakers_kevin.jpg
 //filmmakers_scott.jpg
 
@@ -169,7 +168,7 @@ body {
   top: -485px;
   left: 85px;
 }
-.transition.mobile {
+.transition.mobile_transition {
   top: -540px;
   left: 40px;
 } 
@@ -266,7 +265,7 @@ body {
   left: 25px;
   top: 40px;
 }
-#main_menu.mobile .header_cont .lines_cont{
+#main_menu.mobile_menu .header_cont .lines_cont{
   top: 30px;
 }
 
@@ -296,7 +295,7 @@ body {
 	cursor: pointer;
 }
 
-#main_menu.mobile .cont_list_menu{
+#main_menu.mobile_menu .cont_list_menu{
   text-align: center;
 }
 .cont_list_menu .line{
@@ -313,7 +312,7 @@ body {
   font-size: 24px;
   cursor: pointer;
 }
-#main_menu.mobile .close_btn{
+#main_menu.mobile_menu .close_btn{
   left: 25px;
 }
 
@@ -428,7 +427,7 @@ body {
 	top: 50px;
   
 }
-#side_page_right.mobile{
+#side_page_right.mobile_squary{
   top: -55px;
   bottom:auto;
   background: url('../image/main/bg_page.jpg');
@@ -440,7 +439,7 @@ body {
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
 }
-#side_page_right.mobile:before{
+#side_page_right.mobile_squary:before{
   content: '';
   position:absolute;
   top:-7%;
@@ -451,7 +450,7 @@ body {
   background-size: 100% auto;
   background-position: left top;
 }
-#side_page_right.mobile:after{
+#side_page_right.mobile_squary:after{
   content: '';
   position:absolute;
   top:-7%;

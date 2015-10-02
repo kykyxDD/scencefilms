@@ -91,7 +91,9 @@ Transition.prototype = {
         if (this.debug) console.log("show")
 
     
-        this.current_state = 'collapsed'
+        this.current_state = 'collapsed';
+        this.cont.scaleX = 1;
+        this.cont.scaleY = 1;
     
         this.cont.x = -469
         this.cont.y = 152;
