@@ -271,7 +271,7 @@ var app = angular.module('app', [])
         var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
         if((win_wid <= 1024 && orientation == 'landscape') || 
-           (win_wid < 640 && orientation == 'portrait')){
+           (win_wid <= 640 && orientation == 'portrait')){
             $s.mobile_style = true;
         } else {
             $s.mobile_style = false;
