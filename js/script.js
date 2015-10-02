@@ -10,7 +10,8 @@ function Anim_menu (cont) {
     
     this.menu_cont = this.cont.querySelector('.menu_cont')
 	this.close_btn = this.cont.querySelector('.close_btn')
-   
+    
+    ScreenObject.decorate_element.apply(this.menu_cont)
     ScreenObject.decorate_element.apply(this.close_btn)
     ScreenObject.decorate_element.apply(this.header_label)
     ScreenObject.decorate_element.apply(this.header_cont)
@@ -24,8 +25,11 @@ function Anim_menu (cont) {
 }
 Anim_menu.prototype = {
     
-    init: function(pages, index) {
-        
+    init: function(pages, index, mobile) {
+
+        var h = 35*pages.length + this.menu_cont.y;
+        var top = Math.floor((document.documentElement.clientHeight - h)/pages.length);
+
         for (var i = index; i < pages.length; i++) {
             var page = pages[i]
             var itm = document.createElement("div")
@@ -40,7 +44,8 @@ Anim_menu.prototype = {
 
 			itm.line.scaleX = 0;
             
-            itm.y = 12 * (i-index);
+            itm.y = !mobile ? 12 * (i-index) : top * (i-index);
+
 
             this.create_event(itm, page);
            
@@ -140,8 +145,13 @@ Anim_menu.prototype = {
         TweenLite.to(this.header_cont, 0.3, {y: 0, delay: show_delay+0.42})
     },
 
-    hide_header: function() {
-        TweenLite.to(this.header_cont, 0.5, {x: 150, alpha: 0})
+    hide_header: function(mobile) {
+        var win_width = window.innerWidth;
+        if(!mobile){
+            TweenLite.to(this.header_cont, 0.5, {x: 150, alpha: 0})
+        } else {
+            TweenLite.to(this.header_cont, 0.5, {x: win_width, alpha: 0})
+        }
     },
 
     collapse: function() {
@@ -176,5 +186,35 @@ Anim_menu.prototype = {
 
         TweenLite.to(this.close_btn, 0.2, {y: 0, delay: expand_delay + 0.3})
         TweenLite.to(this.close_btn, 0.9, {y: 7, delay: expand_delay + 0.3 + 0.2})
+    },
+    resize: function(mobile){
+        var win_width = document.documentElement.clientWidth;
+
+        if(mobile){
+            var left = (win_width - 150)/2;
+            this.menu_cont.style.left = left + 'px';
+
+            // this.menu_cont.w = win_width - this.menu_cont.x;
+        } else {
+           this.menu_cont.style.left = '27px' 
+        }
+
+        if(this.items.length){
+            this.pos_menu_resize(mobile)
+        }
+
+    },
+
+    pos_menu_resize: function(mobile){
+        var item = this.items;
+
+        var h = 35*this.items.length + this.menu_cont.y;
+        var top = Math.floor((document.documentElement.clientHeight - h)/this.items.length);
+
+        for (var i = 0; i < this.items.length; i++) {
+            var itm = this.items[i];            
+            itm.y = !mobile ? 12 * (i) : top * (i);
+        };
+
     }
-}
+} 

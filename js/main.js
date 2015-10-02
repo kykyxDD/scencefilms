@@ -74,7 +74,7 @@ var app = angular.module('app', [])
         })
         
         v.squares.init(data.homepage_data)
-        v.main_menu.init(data.pages, 0)
+        v.main_menu.init(data.pages, 0, $s.mobile_style)
         
         if (!v.intro) {
             v.transition.show($s.mobile_style)
@@ -130,7 +130,6 @@ var app = angular.module('app', [])
             ,   events: {
                 onTime: function(ev) {
                     if (ev.position > 5.5) {
-                        console.log("here")
                         video.pause(true)
                     }
                 }
@@ -261,7 +260,7 @@ var app = angular.module('app', [])
             $s.mobile_style = false;
         }
 
-        v.transition.resize($window.innerWidth, $window.innerHeight)
+        v.transition.resize($window.innerWidth, $window.innerHeight, $s.mobile_style)
         v.particles && v.particles.resize(Math.round($window.innerWidth*0.95), Math.round($window.innerHeight*0.95))
         
         var conts = doc.querySelectorAll("#cast .b-content, #makers .b-content")
@@ -272,6 +271,7 @@ var app = angular.module('app', [])
         }
 
         resize_video();
+        v.main_menu.resize($s.mobile_style);
 
         v.squares.resize($s.mobile_style);
 
@@ -347,14 +347,14 @@ var app = angular.module('app', [])
         video.ready && video.remove()
 
         v.main_menu.collapse()
-        v.main_menu.hide_header()
+        v.main_menu.hide_header($s.mobile_style)
         v.transition.open()
         v.squares.hide();
     }
 
 
     $s.onMenuHeaderClick = function() {
-        v.main_menu.hide_header()
+        v.main_menu.hide_header($s.mobile_style)
         v.main_menu.expand()
         v.transition.expand($s.mobile_style)
 
@@ -518,7 +518,6 @@ var app = angular.module('app', [])
     }
     
     function selectType(type) {
-        console.log("here")
         $s.selectedNewsType = type
         $s.news = filterByType(type, $s.news_data.pages)
         

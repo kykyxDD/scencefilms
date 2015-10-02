@@ -27,7 +27,6 @@ Transition.prototype = {
     
         this.yellow_part = this.cont.querySelector('#yellow_part')
         this.yellow_part.squary = this.cont.querySelector('.bg.yellow');
-        console.log(this.yellow_part.squary)
         this.black_part = this.cont.querySelector('#black_part')
         
         ScreenObject.decorate_element.apply(this.cont)
@@ -38,7 +37,7 @@ Transition.prototype = {
         this.reset()
     },
     
-    resize: function(w, h) {
+    resize: function(w, h, mobile) {
     
         if (this.debug) console.log("resize", w, h)
     
@@ -50,6 +49,38 @@ Transition.prototype = {
             this.calc_exp_scale()
             this.yellow_part.scaleX = this.yellow_part.scaleY = this.yellow_exp_scale
             this.black_part.scaleX = this.black_part.scaleY = this.black_exp_scale
+        }
+
+        if(mobile){
+           
+            var elem = this.yellow_part.squary
+            var vis_w = elem.y + elem.w;
+
+            var scale = window.innerWidth > window.innerHeight ? window.innerWidth/vis_w : window.innerHeight/vis_w; 
+            if(this.current_state == 'expanded'){
+                this.cont.y = 800;
+                this.cont.rotation = 0;
+                this.cont.scaleX =  scale;
+                this.cont.scaleY =  scale;
+            } else if (this.current_state == 'collapsed'){
+                this.cont.y = 152;
+                this.cont.rotation = 45;
+                this.cont.scaleX = 1;
+                this.cont.scaleY = 1;
+            }
+        } else {
+            this.cont.scaleX = 1;
+            this.cont.scaleY = 1;
+            this.cont.rotation = 45;
+            if(this.current_state == 'expanded'){
+                this.cont.y = 380;
+                
+            } else if (this.current_state == 'collapsed'){
+                this.cont.y = 152;
+                
+            }
+            
+           
         }
     },
     
@@ -103,7 +134,6 @@ Transition.prototype = {
     },
     
     collapse: function(mobile) {
-        console.log('collapse')
 
         if (this.debug) console.log("collapse")
 
@@ -121,7 +151,6 @@ Transition.prototype = {
     },
     
     expand: function(mobile) {
-        console.log('expand', mobile)
         if (this.debug) console.log("expand")
 
         this.current_state = 'expanded';
@@ -133,11 +162,13 @@ Transition.prototype = {
         } else {
             var elem = this.yellow_part.squary
             var vis_w = elem.y + elem.w;
-            var scale = window.innerWidth/vis_w; 
+
+            var scale = window.innerWidth > window.innerHeight ? window.innerWidth/vis_w : window.innerHeight/vis_w; 
+
             this.cont.scaleX = scale;
             this.cont.scaleY = scale;
-            TweenLite.to(this.cont, 0.35*this.time_scale, {y: 800, rotation: 0 , ease: Power1.easeOut, onComplete: function() {if (this.debug) console.log("onExpanded"); this.onExpanded()}, onCompleteScope: this})
-            TweenLite.to(this.cont, 1*this.time_scale, {y: 800, ease: Power1.easeOut, delay: 0.35*this.time_scale})
+            TweenLite.to(this.cont, 0.8*this.time_scale, {y: 800, rotation: 0 , ease: Power1.easeOut, onComplete: function() {if (this.debug) console.log("onExpanded"); this.onExpanded()}, onCompleteScope: this})
+            TweenLite.to(this.cont, 1*this.time_scale, {y: 800, ease: Power1.easeOut, delay: 0.8*this.time_scale})
         }
 
     },
