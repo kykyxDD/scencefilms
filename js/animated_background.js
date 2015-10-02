@@ -4,12 +4,12 @@ function AnimatedBackground(cont)
     ScreenObject.decorate_element.apply(this.cont)
 
     this.canvas = document.createElement('canvas')
+    ScreenObject.decorate_element.apply(this.canvas)
     this.cont.appendChild(this.canvas)
 
     this.percent = 0
     this.lenghts
     this.arrLines
-    this.currentIndex = 0
     this.centerPointX
     this.centerPointY
     this.distRadus = 150
@@ -20,10 +20,25 @@ function AnimatedBackground(cont)
 AnimatedBackground.prototype = {
     
     init: function() {
-                
+        this.set_size(1920, 1080)
     },
     
-    prepare: function() {
+    show: function() {
+        dom.display(this.cont, true)
+    },
+    
+    hide: function() {
+        dom.display(this.cont, false)
+    },
+    
+    set_size: function(w, h) {
+        this.WIDTH = w
+        this.HEIGHT = h
+        this.canvas.width = this.WIDTH
+        this.canvas.height = this.HEIGHT
+    },
+    
+    prepare: function(lines) {
         var pos,dir;
         
         this.lenghts = [];
@@ -32,7 +47,7 @@ AnimatedBackground.prototype = {
          
         var minY = 1000000;
         var maxY = -1000000;
-        this.arrLines = backgrounds[currentIndex % backgrounds.length];
+        this.arrLines = lines
         
         for (var j=0; j<this.arrLines.length;j++){
             
@@ -78,42 +93,59 @@ AnimatedBackground.prototype = {
         
         return ret;
     },
-
-    repaint: function() {
-        logoSprite.graphics.clear();
-        logoSprite.graphics.lineStyle(2,0,1);
+    
+    clearCanvas: function() {
         
-        var pnt;
+        var ctx = this.canvas.getContext('2d')
+        //ctx.save()
+        ctx.clearRect(0, 0, this.WIDTH, this.HEIGHT)
+    },
+    
+    repaintCanvas: function() {
+        
+        var ctx = this.canvas.getContext('2d')
+        //ctx.save()
+        ctx.clearRect(0, 0, this.WIDTH, this.HEIGHT)
+        ctx.strokeStyle = "#000000"
+        ctx.miterLimit = 1
+        ctx.lineWidth = 2
+        ctx.lineCap = "round"
+        ctx.beginPath()
 
+        var pnt;
+        
          for(var j=0;j<this.arrLines.length;j++){
-             var k1 = 1/100*percent;
-             var lenRequired = lenghts[j]*easeInOutCubic(k1,0,1,1);
+
+             var k1 = 1/100*this.percent;
+             var lenRequired = this.lenghts[j]*this.easeInOutCubic(k1,0,1,1);
 
              var fin = false;
-             var len =0;
-             pnt = getDistortion(arrLines[j][0],arrLines[j][1]);
-             logoSprite.graphics.moveTo(pnt.x,pnt.y);
+             var len = 0;
+             pnt = this.getDistortion(this.arrLines[j][0], this.arrLines[j][1]);
+             ctx.moveTo(pnt.x,pnt.y);
              
-             for(var i=2;i<arrLines[j].length && !fin;i+=2){
-                 var dx = arrLines[j][i]-arrLines[j][i-2];
-                 var dy = arrLines[j][i+1]-arrLines[j][i-1];
+             for (var i=2; i<this.arrLines[j].length && !fin; i+=2){
+                 var dx = this.arrLines[j][i] - this.arrLines[j][i-2];
+                 var dy = this.arrLines[j][i+1] - this.arrLines[j][i-1];
                  var l1 = Math.sqrt(dx*dx+dy*dy);
 
-                 if (lenRequired<=len+l1) {
-                    var k = (lenRequired-len)/l1;
+                 if (lenRequired <= len + l1) {
+                    var k = (lenRequired - len) / l1
 
-                    pnt = getDistortion(arrLines[j][i-2]+dx*k,arrLines[j][i-1]+dy*k);
-                    logoSprite.graphics.lineTo(pnt.x,pnt.y);
+                    pnt = this.getDistortion(this.arrLines[j][i-2] + dx*k, this.arrLines[j][i-1] + dy*k)
+                    ctx.lineTo(pnt.x,pnt.y);
                     fin = true
                  }
                  else {
-                    pnt = getDistortion(arrLines[j][i],arrLines[j][i+1]);
-                    logoSprite.graphics.lineTo(pnt.x,pnt.y);
+                    pnt = this.getDistortion(this.arrLines[j][i], this.arrLines[j][i+1])
+                    ctx.lineTo(pnt.x,pnt.y);
                  }
                  
                  len += l1
              }
          }
+         
+         ctx.stroke()
     },
     
     easeInCubic: function(t, b, c, d) {

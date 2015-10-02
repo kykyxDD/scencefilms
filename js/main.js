@@ -4,6 +4,7 @@ var app = angular.module('app', [])
     var transition = new Transition(doc.querySelector('.transition'))
     var main_menu = new Anim_menu(doc.querySelector('#main_menu'))
     var preloader = new Preloader(doc.querySelector('#preloader'))
+    var background = new Background(doc.querySelector('#anim_bg'))
     var squares = new Squares(doc);
     var intro_bg = doc.querySelector('#intro_bg')
     
@@ -24,14 +25,14 @@ var app = angular.module('app', [])
         squares: squares,
         intro_bg: intro_bg,
         particles: particles,
-        intro: intro
+        intro: intro,
+        background: background
     }    
     
 }])
 .controller('appController', ['view', '$scope', '$http', '$document', '$window', function(v, $s, $http, $doc, $window){
 
     var doc = $doc[0]
-    var video
 
     $s.mobile_style = true;
 
@@ -50,25 +51,26 @@ var app = angular.module('app', [])
         
         $s.data = data
 
-        create_video($s.data.pages[0].video.files)
+        v.background.init($s.data)
+        v.background.prepare($s.data.pages[0].bg_ref)
 
         $s.selectedCast = $s.data.pages[2].pages[0]
         $s.selectedMaker = $s.data.pages[3].pages[0]
 
         $s.$watch('selectedCast', function(cast) {
             if ($s.selectedPage == 'cast') {
-                if (cast && 'video' in cast) {
-                    create_video(cast.video.files)
-                    video.play()
+                if (cast) {
+                    v.background.prepare(cast.bg_ref)
+                    v.background.onLoad = angular.bind(v.background, v.background.play2)
                 }
             }
         })
 
         $s.$watch('selectedMaker', function(maker) {
             if ($s.selectedPage == 'makers') {
-                if (maker && 'video' in maker) {
-                    create_video(maker.video.files)
-                    video.play()
+                if (maker) {
+                    v.background.prepare(maker.bg_ref)
+                    v.background.onLoad = angular.bind(v.background, v.background.play2)
                 }
             }
         })
@@ -96,9 +98,7 @@ var app = angular.module('app', [])
         simulate_page_load(2, onPageLoaded)
 
         var p = get_page($s.selectedPage)
-        if (p.video) {
-            create_video(p.video.files)
-        }
+        v.background.prepare(p.bg_ref, true)
 
         //transition.close()
     }
@@ -107,7 +107,7 @@ var app = angular.module('app', [])
         v.transition.show($s.mobile_style)
         v.main_menu.show_header(0.3)
 
-        video.play()
+        v.background.play()
 
         if ($s.selectedPage == 'home') {
             v.intro && v.intro.runRepaint()
@@ -130,14 +130,13 @@ var app = angular.module('app', [])
             ,   events: {
                 onTime: function(ev) {
                     if (ev.position > 5.5) {
-                        console.log("here")
                         video.pause(true)
                     }
                 }
             }
             })
     }
-
+    
     function create_video(files) {
 
         if (video) {
@@ -160,7 +159,6 @@ var app = angular.module('app', [])
         ScreenObject.decorate_element.apply(video)
         doc.querySelector("#video-player").appendChild(video)
         ScreenObject.decorate_element.apply(video.parentNode)
-
     }
 
     function play_intro() {
@@ -240,7 +238,7 @@ var app = angular.module('app', [])
         v.particles.runRepaint()
         TweenLite.to(v.particles, 2, {kalpha: 3})
 
-        video.play()
+        v.background.play()
         v.transition.show($s.mobile_style)
         v.main_menu.show_header(0.3)
         v.squares.show();
@@ -269,10 +267,8 @@ var app = angular.module('app', [])
             div.style.width = $s.mobile_style == false ? Math.round($window.innerWidth*0.66) + "px" : '';
         }
 
-        resize_video();
-
+        v.background.resize($window.innerWidth, $window.innerHeight)
         v.squares.resize($s.mobile_style);
-
         v.preloader.set_size(200, 200)
 
         if (e) {
@@ -339,7 +335,6 @@ var app = angular.module('app', [])
 
         v.intro && v.intro.stopRepaint()
         v.particles && v.particles.stopRepaint()
-        video.ready && video.remove()
 
         v.main_menu.collapse()
         v.main_menu.hide_header()
@@ -352,8 +347,6 @@ var app = angular.module('app', [])
         v.main_menu.hide_header()
         v.main_menu.expand()
         v.transition.expand($s.mobile_style)
-
-        // console.log("this?")
     }
 
     $s.onMenuCloseClick = function() {
@@ -379,6 +372,7 @@ var app = angular.module('app', [])
  
     $s.skip_intro = function() {
         TweenLite.killTweensOf(v.intro)
+        TweenLite.to(v.intro, 1, { percent: 100, ease: Power0.easeInOut, onUpdate: function(){ v.intro.repaintCanvas() }, })
         hide_intro()
     }
 }])
@@ -486,7 +480,6 @@ var app = angular.module('app', [])
     }
     
     function selectType(type) {
-        console.log("here")
         $s.selectedNewsType = type
         $s.news = filterByType(type, $s.news_data.pages)
         

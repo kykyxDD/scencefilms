@@ -27,7 +27,6 @@ Transition.prototype = {
     
         this.yellow_part = this.cont.querySelector('#yellow_part')
         this.yellow_part.squary = this.cont.querySelector('.bg.yellow');
-        console.log(this.yellow_part.squary)
         this.black_part = this.cont.querySelector('#black_part')
         
         ScreenObject.decorate_element.apply(this.cont)

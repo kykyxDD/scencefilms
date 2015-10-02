@@ -19,14 +19,19 @@
     <script src='js/preloader.js'></script>
     <script src='js/particles.js'></script>
     <script src='js/intro_text.js'></script>
+    <script src='js/background.js'></script>
+    <script src='js/animated_background.js'></script>
     <script src='js/transition.js'></script>
     <script src='js/main.js'></script>
   </head>
 
   <body ng-app="app" ng-controller="appController" ng-class="{mobile: mobile_style, home: selectedPage == 'home'}">
+  
 	  <div id='bg' class="home" ng-class="{cast_mobile: !mobile_style}" >
-      <div id="video-player"></div>
+        <div id="video-player"></div>
       </div>
+      
+      <div id='anim_bg'></div>
 
       <a name="top" ng-show='selectedPage == "cast" || selectedPage == "makers"'></a>
 	  <div class="p-title" ng-if='mobile_style' ng-show='selectedPage == "cast" || selectedPage == "makers"'>
@@ -131,7 +136,6 @@
 
             </div>
             <div class="w-text">
-              <div class="img"></div>
               <div class="b-text">
                 <div class="t-title">
                   <h2>{{selectedCast.name}}</h2>
