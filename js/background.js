@@ -118,7 +118,7 @@ Background.prototype = {
                 this.anim.show()
                 this.anim.percent = 0
                 this.anim.canvas.alpha = 1
-                TweenLite.to(this.anim, 10, {percent: 100, onUpdate: angular.bind(this.anim, this.anim.repaintCanvas), ease: Power3.easeOut, delay: 0.5})
+                TweenLite.to(this.anim, 10, {percent: 75, onUpdate: angular.bind(this.anim, this.anim.repaintCanvas), ease: Power3.easeOut, delay: 0.5})
             }
         }
         else {
