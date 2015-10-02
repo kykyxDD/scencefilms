@@ -27,9 +27,6 @@ Anim_menu.prototype = {
     
     init: function(pages, index, mobile) {
 
-        var h = 35*pages.length + this.menu_cont.y;
-        var top = Math.floor((document.documentElement.clientHeight - h)/pages.length);
-
         for (var i = index; i < pages.length; i++) {
             var page = pages[i]
             var itm = document.createElement("div")
@@ -44,7 +41,7 @@ Anim_menu.prototype = {
 
 			itm.line.scaleX = 0;
             
-            itm.y = !mobile ? 12 * (i-index) : top * (i-index);
+            itm.y = 12 * (i-index);
 
 
             this.create_event(itm, page);
@@ -189,32 +186,20 @@ Anim_menu.prototype = {
     },
     resize: function(mobile){
         var win_width = document.documentElement.clientWidth;
+        var win_height = document.documentElement.clientHeight;
 
         if(mobile){
+            var h = 35*5 + this.menu_cont.y-12;
+            var top = (win_height - h)/2;
             var left = (win_width - 150)/2;
             this.menu_cont.style.left = left + 'px';
+            this.menu_cont.style.top = top + 'px';
 
             // this.menu_cont.w = win_width - this.menu_cont.x;
         } else {
-           this.menu_cont.style.left = '27px' 
+            this.menu_cont.style.left = '27px' 
+            this.menu_cont.style.top = '65px'
         }
-
-        if(this.items.length){
-            this.pos_menu_resize(mobile)
-        }
-
-    },
-
-    pos_menu_resize: function(mobile){
-        var item = this.items;
-
-        var h = 35*this.items.length + this.menu_cont.y;
-        var top = Math.floor((document.documentElement.clientHeight - h)/this.items.length);
-
-        for (var i = 0; i < this.items.length; i++) {
-            var itm = this.items[i];            
-            itm.y = !mobile ? 12 * (i) : top * (i);
-        };
 
     }
 } 
