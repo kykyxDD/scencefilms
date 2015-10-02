@@ -1,5 +1,6 @@
-function AnimatedBackground(cont)
+function AnimatedBackground(cont, skip_event_frames)
 {
+    this.skip_event_frames = skip_event_frames
     this.cont = cont
     ScreenObject.decorate_element.apply(this.cont)
 
@@ -102,6 +103,11 @@ AnimatedBackground.prototype = {
     },
     
     repaintCanvas: function() {
+        
+        if (this.skip_event_frames) {
+            this.skip_frame = !this.skip_frame
+            if (this.skip_frame) return
+        }
         
         var ctx = this.canvas.getContext('2d')
         //ctx.save()

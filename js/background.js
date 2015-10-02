@@ -1,9 +1,9 @@
-function Background(cont) {
+function Background(cont, skip_event_frames) {
     
     this.cont = cont
     ScreenObject.decorate_element.apply(this.cont)
     
-    this.anim = new AnimatedBackground(cont)
+    this.anim = new AnimatedBackground(cont, skip_event_frames)
     this.init()
     
     this.images = []

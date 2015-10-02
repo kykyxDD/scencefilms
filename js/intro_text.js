@@ -1,5 +1,6 @@
-function IntroText(cont)
+function IntroText(cont, skip_event_frames)
 {
+    this.skip_event_frames = skip_event_frames
     this.cont = cont
     ScreenObject.decorate_element.apply(this.cont)
     this.canvas = document.createElement('canvas')
@@ -159,6 +160,11 @@ IntroText.prototype = {
     },
     
     repaintCanvas: function() {
+        
+        if (this.skip_event_frames) {
+            this.skip_frame = !this.skip_frame
+            if (this.skip_frame) return
+        }
         
         this.updateDistortionField()        
         
