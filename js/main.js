@@ -2,9 +2,9 @@ var app = angular.module('app', [])
 .service('view', ['$document', function($doc){
     var doc = $doc[0]
     var transition = new Transition(doc.querySelector('.transition'))
-    var main_menu = new Anim_menu(doc.querySelector('#main_menu'))
-    var preloader = new Preloader(doc.querySelector('#preloader'))
-    var background = new Background(doc.querySelector('#anim_bg'))
+    var main_menu = new Anim_menu(doc.querySelector('#main_menu'), true)
+    var preloader = new Preloader(doc.querySelector('#preloader'), true)
+    var background = new Background(doc.querySelector('#anim_bg'), true)
     var squares = new Squares(doc);
     var intro_bg = doc.querySelector('#intro_bg')
     
