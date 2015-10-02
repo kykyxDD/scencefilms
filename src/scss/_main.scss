@@ -621,7 +621,7 @@ body {
     border-left: none;
     
   }
-  
+  #news,  
   #media {
     .w-tab {
       padding: 0 5px;
@@ -679,7 +679,8 @@ body {
   }
 
   .b-photo,
-  .b-video {
+  .b-video,
+  .b-news {
     clear: both;
     overflow: hidden;
 

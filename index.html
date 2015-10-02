@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1">
@@ -14,7 +14,6 @@
     <script src='js/lib/angular/angular.min.js'></script>
     <script src='js/lib/f.js'></script>
     <script src='js/lib/dom.js'></script>
-    <script src='js/lib/jw/jwplayer.js'></script>
     <script src='js/screen_object.js'></script>
     <script src='js/preloader.js'></script>
     <script src='js/particles.js'></script>
@@ -23,17 +22,16 @@
     <script src='js/animated_background.js'></script>
     <script src='js/transition.js'></script>
     <script src='js/main.js'></script>
-  </head>
+</head>
 
-  <body ng-app="app" ng-controller="appController" ng-class="{mobile: mobile_style, home: selectedPage == 'home'}">
-  
-	  <div id='bg' class="home" ng-class="{cast_mobile: !mobile_style}" >
+<body ng-app="app" ng-controller="appController" ng-class="{mobile: mobile_style, home: selectedPage == 'home', cast: selectedPage == 'cast', makers: selectedPage == 'makers'}">
+    <div id='bg' class="home" >
         <div id="video-player"></div>
-      </div>
-      
-      <div id='anim_bg'></div>
+    </div>
+    
+    <div id='anim_bg'></div>
 
-      <a name="top" ng-show='selectedPage == "cast" || selectedPage == "makers"'></a>
+      <a name="top" ng-show='mobile_style'></a>
 	  <div class="p-title" ng-if='mobile_style' ng-show='selectedPage == "cast" || selectedPage == "makers"'>
 	    <h1>{{nameToChange}}</h1>
 	  </div>
@@ -42,7 +40,7 @@
       <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
         <div class="paricles"></div>
       </div>
-      <div id="news" class="page" ng-class="{selected: selectedPage == 'news'}" ng-controller="newsController as nc">
+      <div id="news" ng-if='!mobile_style' class="page" ng-class="{selected: selectedPage == 'news'}" ng-controller="newsController as nc">
       
         <div class="b-content">
           <div class="b-content_inside">
@@ -76,7 +74,54 @@
         </div>
       
       </div>
-      <div id="media" class="page" ng-class="{selected: selectedPage == 'media'}" ng-controller="mediaController">
+
+      <div id="news" ng-if='mobile_style' class="page" ng-class="{selected: selectedPage == 'news'}" ng-controller="newsController as nc">
+      
+        <div class="b-content">
+          <div class="b-content_inside">
+            <div class="w-tab">
+              <ul class="tab">
+                <li ng-repeat="itm in news_data.types" ng-click="nc.selectType(itm.type)"><a href="#" ng-class="{active: selectedNewsType == itm.type}"><span>{{itm.label}}</span></a></li>
+              </ul>
+            </div>
+            <div class="w-news">
+              <div class="b-news">
+
+              <div class="scrollCont">
+                <div class="mediaCont">
+
+                    <div class="i-news" ng-repeat="item in news track by $index">
+                      <div class="i-news__content">
+                        <div class="img">
+                          <img alt="img" ng-src="{{item.img}}"/>
+                        </div>
+                        <div class="news">
+                          <h3>{{item.short_desc}}</h3>
+
+                          <div class="w-time"><span class="time">{{item.date}}</span></div>
+                          
+                          <p>{{item.full_desc}}</p>
+                          <a class="btn" href="#">read all</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="btn_top">
+                      <a href="#top">
+                        <span class="btn"></span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      
+      <div id="media" ng-if='!mobile_style' class="page" ng-class="{selected: selectedPage == 'media'}" ng-controller="mediaController">
         <div class="b-content">
           <div class="b-content_inside">
             <div class="w-tab">
@@ -120,7 +165,66 @@
                         </div>
                     </div>
                 </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+
+      <div id="media" ng-if='mobile_style' class="page" ng-class="{selected: selectedPage == 'media'}" ng-controller="mediaController">
+        <div class="b-content">
+          <div class="b-content_inside">
+            <div class="w-tab">
+              <ul class="tab">
+                <li ng-repeat="section in data.pages[4].pages track by $index">
+                    <a href="#" ng-click="changeMedia(section)" ng-class="{active: selectedMedia.name == section.name}"><span>{{section.name}}</span></a>
+                </li>
+               </ul>
             </div>
+            <div class="w-photo">
+                <div class="b-photo">
+
+                  <div class="scrollCont">
+                    <div class="mediaCont">
+
+                      <div ng-switch="selectedMedia.type">
+                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
+                            <div ng-repeat="item in grpup track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
+                                <div class="img">
+                                    <img alt="img" ng-src="{{item.src}}"/>
+                                </div>
+                                <div class="w-share">
+                                    <div class="b-share">
+                                        <ul class="l-share">
+                                            <li><a href="#" class="i-plus"></a></li>
+                                            <li><a href="#" class="i-like"></a></li>
+                                            <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                        <div ng-switch-when="video" class="i-video__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
+                            <div class="i-video" ng-repeat="item in grpup track by $index">
+                                <a href="#">
+                                    <img alt="img" ng-src="{{item.src}}"/>
+                                    <span class="text">{{item.desc}}</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="btn_top">
+                          <a href="#top">
+                            <span class="btn"></span>
+                          </a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                </div>
+            </div>            
           </div>
         </div>
       </div>
@@ -196,7 +300,7 @@
       </div>
       </div>
       
-	  <div id="makers" ng-if='!mobile_style' ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
+	    <div id="makers" ng-if='!mobile_style' ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
         <div class="b-content" style="width: 1166px;">
           <div class="b-content_inside">
             <div class="w-tab">
@@ -266,9 +370,9 @@
         </div>
       </div>
     </div>
-    <div id='side_page_right' ng-class='{mobile:mobile_style}'>
+  <div id='side_page_right' ng-show='selectedPage == "home"' ng-class='{mobile_squary:mobile_style}'>
 	</div>
-	<div id='side_page_left' ng-hide="mobile_style">
+	<div id='side_page_left' ng-show='selectedPage == "home"' ng-hide="mobile_style">
 	</div>
 
     <div id="title_page"></div>
@@ -291,7 +395,7 @@
       </div>
     </div>
     
-	  <div class="transition rot45deg" ng-class='{mobile: mobile_style}'>
+	  <div class="transition rot45deg" ng-class='{mobile_transition: mobile_style}'>
       <div id="yellow_part" class="element">
         <div class="bg yellow"></div>
       </div>
@@ -300,7 +404,7 @@
       </div>
     </div>
 
-    <div id='main_menu' ng-class='{mobile: mobile_style}'>
+    <div id='main_menu' ng-class='{mobile_menu: mobile_style}'>
       <div class="header_cont" ng-click="onMenuHeaderClick()">
         <div class='lines_cont'>
           <div class='line'></div>

@@ -32,6 +32,7 @@ Anim_menu.prototype = {
             itm.className = "cont_list_menu"
             itm.innerHTML = "<div class='label'>" + page.name + "</div><div class='line'></div>"
             itm.line = itm.querySelector('.line')
+            // itm.setAttribute("autoscroll",'true')
             ScreenObject.decorate_element.apply(itm)
             ScreenObject.decorate_element.apply(itm.line)
             itm.line.x = -250; 
