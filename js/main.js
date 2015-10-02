@@ -53,6 +53,7 @@ var app = angular.module('app', [])
 
         v.background.init($s.data)
         v.background.prepare($s.data.pages[0].bg_ref)
+        v.background.onLoad = angular.bind(this, on_bg_loaded, show_intro_text)
 
         $s.selectedCast = $s.data.pages[2].pages[0]
         $s.selectedMaker = $s.data.pages[3].pages[0]
@@ -61,7 +62,7 @@ var app = angular.module('app', [])
             if ($s.selectedPage == 'cast') {
                 if (cast) {
                     v.background.prepare(cast.bg_ref)
-                    v.background.onLoad = angular.bind(v.background, v.background.play2)
+                    v.background.play2()
                 }
             }
         })
@@ -70,7 +71,7 @@ var app = angular.module('app', [])
             if ($s.selectedPage == 'makers') {
                 if (maker) {
                     v.background.prepare(maker.bg_ref)
-                    v.background.onLoad = angular.bind(v.background, v.background.play2)
+                    v.background.play2()
                 }
             }
         })
@@ -95,10 +96,11 @@ var app = angular.module('app', [])
 
         v.preloader.show()
         v.preloader.make_white()
-        simulate_page_load(2, onPageLoaded)
+        simulate_page_load(30, null, true)
 
         var p = get_page($s.selectedPage)
         v.background.prepare(p.bg_ref, true)
+        v.background.onLoad = angular.bind(this, on_bg_loaded, onPageLoaded)
 
         //transition.close()
     }
@@ -114,6 +116,10 @@ var app = angular.module('app', [])
             v.particles && v.particles.runRepaint()
             v.squares.show();
         }
+    }
+    
+    function on_bg_loaded(callback) {
+        simulate_page_load(0.3, callback, false)
     }
 
     function load_video(files) {
@@ -163,7 +169,7 @@ var app = angular.module('app', [])
 
     function play_intro() {
         v.preloader.show()
-        simulate_page_load(1, show_intro_text)
+        simulate_page_load(30, null, true)
 
         var drops = []
         var duration = 1000
@@ -302,10 +308,10 @@ var app = angular.module('app', [])
         }
     }
 
-    function simulate_page_load(duration, callback) {
+    function simulate_page_load(duration, callback, reset_preloader) {
 
         var duration = duration || 1
-        v.preloader.fake_pc = 0
+        v.preloader.fake_pc = reset_preloader ? 0 : v.preloader.fake_pc
 
         var f = function() {
             v.preloader.setPercent(v.preloader.fake_pc)
@@ -314,7 +320,7 @@ var app = angular.module('app', [])
 
         f()
 
-        TweenLite.to(v.preloader, duration, {fake_pc: 100, onUpdate: f, onComplete: callback, onCompleteScope: this})
+        TweenLite.to(v.preloader, duration, {fake_pc: 100, onUpdate: f, onComplete: callback, onCompleteScope: this, ease: Cubic.easeOut})
     }
 
     function get_page(name) {
@@ -382,7 +388,7 @@ var app = angular.module('app', [])
     }
 }])
 
-.controller("mediaController", ["$scope", "$document", "$window", function($s, $doc, $window) {
+.controller("mediaController", ["$scope", "$document", "$window", "$timeout", function($s, $doc, $window, $t) {
     var media_data
     var doc = $doc[0];
     var mobile = $s.mobile_style;
@@ -412,13 +418,21 @@ var app = angular.module('app', [])
 
             $s.selectedMedia = data.pages[4].pages[0]
             scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
-            
-            onResize()
+
+            $t(onResize)
         }
     })
-   
     
+    $s.$watch('selectedPage', function(page) {
+        if (page == 'media') {
+            $t(onResize)
+        }
+    })
+
     function onResize() {
+        
+        console.log("media on resize")
+        
         mobile = $s.mobile_style;
         
         if (media_data && !mobile) {
@@ -459,7 +473,7 @@ var app = angular.module('app', [])
     }
 
 }])
-.controller('newsController', ['$scope', "$document", "$window", function($s, $doc, $window){
+.controller('newsController', ['$scope', "$document", "$window", "$timeout", function($s, $doc, $window, $t){
     
     var news_data
     var doc = $doc[0]
@@ -493,8 +507,13 @@ var app = angular.module('app', [])
 
             scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
        
-            //onResize()
             selectType($s.news_data.types[0].type)
+        }
+    })
+    
+    $s.$watch('selectedPage', function(page) {
+        if (page == 'news') {
+            $t(angular.bind(this, onResize))
         }
     })
     
@@ -502,11 +521,12 @@ var app = angular.module('app', [])
         mobile = $s.mobile_style;
 
         if ($s.news_data && !mobile) {
-
+            
             var cont_w = $window.innerWidth - 450;
             var content_w = $s.news.length*460
             scroll_cont.style.width = cont_w + "px"
             items_cont.style.width = content_w + "px"
+            console.log(cont_w, content_w)
             scroll.refresh()
         }
     }

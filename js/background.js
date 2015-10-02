@@ -54,7 +54,12 @@ Background.prototype = {
     },
     
     play: function() {
-        delete this.onLoad
+        if (this.loading) {
+            this.delayedPlay = angular.bind(this, this.play)
+            return
+        }
+        
+        delete this.delayedPlay  
         
         this.show()
         this.anim.show()
@@ -73,23 +78,28 @@ Background.prototype = {
     },
     
     play2: function() {
-        
-        delete this.onLoad
-        
-        this.show()
-        
+
         while (this.images.length > 2) {
             this.remove_image(this.images.shift())
         }
+
+        var old_img = this.images[0]
+        var new_img = this.images[1]
         
+        old_img.visible = true
+        TweenLite.to(old_img, 0.5, {alpha: 0})
+    
+        if (this.loading) {
+            this.delayedPlay = angular.bind(this, this.play2)
+            return
+        }
+        
+        delete this.delayedPlay        
+        
+        this.show()
+                
         var duration = 2
         
-        var old_img = this.images[0]
-        old_img.visible = true
-        old_img.alpha = 1
-        TweenLite.to(old_img, 0.5, {alpha: 0})
-        
-        var new_img = this.images[1]
         new_img.visible = true
         new_img.alpha = 0
         TweenLite.to(new_img, duration, {alpha: 1, delay: 1})
@@ -105,10 +115,13 @@ Background.prototype = {
     
     load_image: function(src) {
         
+        this.loading = true
+        
         var img = document.createElement("img")
+        ScreenObject.decorate_element.apply(img)
         img.src = src
         img.onload = angular.bind(this, this.on_image_loaded, img)
-        ScreenObject.decorate_element.apply(img)
+        img.visible = false
         
         if (this.cont.children.length > 1) {
             this.cont.insertBefore(img, this.anim.canvas)
@@ -121,10 +134,10 @@ Background.prototype = {
     },
     
     on_image_loaded: function(img) {
-        console.log("loaded")
-        img.visible = false
-        
+        this.loading = false
+        this.delayedPlay && this.delayedPlay()
         this.onLoad && this.onLoad()
+        this.onLoad = null
     },
     
     remove_image: function(img) {
