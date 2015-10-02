@@ -1,6 +1,7 @@
 function Background(cont) {
     
     this.cont = cont
+    ScreenObject.decorate_element.apply(this.cont)
     
     this.anim = new AnimatedBackground(cont)
     this.init()
@@ -32,9 +33,30 @@ Background.prototype = {
     },
     
     resize: function(w, h){
-        this.cont.style.width = w + "px"
-        this.cont.style.height = h + "px"
-        this.anim.set_size(w, h)
+        
+        var base_w = 1920
+        var base_h = 1080
+        this.WIDTH = w
+        this.HEIGHT = h
+        
+        this.anim.set_size(base_w, base_h)
+
+        //this.cont.style.width = w + "px"
+        //this.cont.style.height = h + "px"
+        
+        var k = Math.max(w/base_w, h/base_h)
+
+        var dx = base_w - w*k
+        var dy = base_h - h*k
+        console.log(w, h, k)
+        
+        function set_scale(mc) {
+            mc.scaleX = mc.scaleY = k
+        }
+        
+        set_scale(this.cont)
+        //set_scale(this.anim.canvas)
+        //this.images.forEach(set_scale)
     },
 
     show: function() {
@@ -88,28 +110,37 @@ Background.prototype = {
         
         old_img.visible = true
         TweenLite.to(old_img, 0.5, {alpha: 0})
-    
+        
         if (this.loading) {
             this.delayedPlay = angular.bind(this, this.play2)
-            return
+            
+            if (this.bg_data.lines) {
+                this.anim.show()
+                this.anim.percent = 0
+                this.anim.canvas.alpha = 1
+                TweenLite.to(this.anim, 10, {percent: 75, onUpdate: angular.bind(this.anim, this.anim.repaintCanvas), ease: Power3.easeOut, delay: 0.5})
+            }
         }
-        
-        delete this.delayedPlay        
-        
-        this.show()
-                
-        var duration = 2
-        
-        new_img.visible = true
-        new_img.alpha = 0
-        TweenLite.to(new_img, duration, {alpha: 1, delay: 1})
-        
-        if (this.bg_data.lines) {
-            this.anim.show()
-            this.anim.percent = 0
-            this.anim.canvas.alpha = 1
-            TweenLite.to(this.anim, duration, {percent: 100, onUpdate: angular.bind(this.anim, this.anim.repaintCanvas), delay: 0.5})
-            TweenLite.to(this.anim.canvas, 1, {alpha: 0, delay: 2.5})
+        else {
+            if (this.bg_data.lines) {
+                TweenLite.to(this.anim, 2, {percent: 100, onUpdate: angular.bind(this.anim, this.anim.repaintCanvas)})
+                TweenLite.to(this.anim.canvas, 1, {alpha: 0, delay: 1.5})
+                var delay = 1
+            }
+            else {
+                var delay = 0
+            }
+
+            var duration = 1.5
+            
+            delete this.delayedPlay        
+            
+            this.show()
+            
+            new_img.visible = true
+            new_img.alpha = 0
+            TweenLite.to(new_img, duration, {alpha: 1, delay: delay})
+
         }
     },
     
@@ -134,6 +165,9 @@ Background.prototype = {
     },
     
     on_image_loaded: function(img) {
+        
+        this.resize(this.WIDTH, this.HEIGHT)
+        
         this.loading = false
         this.delayedPlay && this.delayedPlay()
         this.onLoad && this.onLoad()

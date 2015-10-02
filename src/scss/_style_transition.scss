@@ -59,18 +59,18 @@ body {
 #bg.cast_maika {
   background-image: url('../image/bg/cast_maika.jpg');
 }
-
-.mobile.cast {
-  background-image: url('../image/bg/cast_mobile.jpg');
+.mobile{
+  background-size: cover;
 }
-.mobile.makers{
+
+.mobile.cast,.mobile.makers{
   background-image: url('../image/bg/cast_mobile.jpg');
 }
 .mobile.news {
-  background-image: url('../image/bg/cast_mobile.jpg');
+  background-image: url('../image/bg/news_mobile.jpg');
 }
 .mobile.media{
-  background-image: url('../image/bg/cast_mobile.jpg');
+  background-image: url('../image/bg/media_mobile.jpg');
 }
 
 #media {
@@ -539,6 +539,12 @@ body {
     position: absolute;
 }
 #anim_bg {
-    overflow: hidden;
+    //overflow: hidden;
     z-index: -1;
+    //width: 1920px;
+    //height: 1080px;
+    left: 0px;
+    top: 0px;
+    //transform-origin: 0 0 0;
+    position: fixed;
 }
