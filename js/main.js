@@ -32,9 +32,21 @@ var app = angular.module('app', [])
 }])
 .controller('appController', ['view', '$scope', '$http', '$document', '$window', function(v, $s, $http, $doc, $window){
 
-    var doc = $doc[0]
+    var doc = $doc[0];
 
-    $s.mobile_style = true;
+    var win_wid = $window.innerWidth;
+    var win_heig = $window.innerHeight;
+
+    var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+
+    if((win_wid <= 1024 && orientation == 'landscape') || 
+       (win_wid <= 640 && orientation == 'portrait')){
+        $s.mobile_style = true;
+    } else {
+        $s.mobile_style = false;
+    }
+
+    // $s.mobile_style = true;
 
     if (v.intro_bg) {
         play_intro()
@@ -258,8 +270,8 @@ var app = angular.module('app', [])
 
         var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
-        if((win_wid <= 1024 && orientation == 'portrait') || 
-           (win_wid <= 640 && orientation == 'landscape')){
+        if((win_wid <= 1024 && orientation == 'landscape') || 
+           (win_wid < 640 && orientation == 'portrait')){
             $s.mobile_style = true;
         } else {
             $s.mobile_style = false;
