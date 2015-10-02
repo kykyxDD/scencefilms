@@ -388,7 +388,7 @@
       </div>
       <div class="w-nav">
         <ul class="l-nav">
-          <li ng-repeat='page in data.pages' class='footer_menu' ng-click="change_page(page)">
+          <li ng-repeat='page in data.pages' class='footer_menu' ng-show="selectedPage != page.page" ng-click="change_page(page)">
             <span>{{page.name}}</span>
           </li>
         </ul>
