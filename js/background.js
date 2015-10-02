@@ -124,7 +124,7 @@ Background.prototype = {
         else {
             if (this.bg_data.lines) {
                 TweenLite.to(this.anim, 2, {percent: 100, onUpdate: angular.bind(this.anim, this.anim.repaintCanvas)})
-                TweenLite.to(this.anim.canvas, 1, {alpha: 0, delay: 1.5})
+                TweenLite.to(this.anim.canvas, 1, {alpha: 0, delay: 2.5})
                 var delay = 1
             }
             else {

@@ -261,7 +261,7 @@
             <div class="w-tab">
               <ul class="tab">
                 <li ng-repeat="page in data.pages[2].pages">
-                	<a href='' ng-href="#{{page.role}}"  ng-click="changeCast(page)" ng-class="{active: page == selectedCast}" >
+                	<a href='' ng-href="#{{page.role}}" ng-class="{active: page == selectedCast}" >
                 		<span>{{page.title}}</span>
                 	</a>
                 </li>
@@ -332,7 +332,7 @@
 
               <ul class="tab">                
                 <li ng-repeat="page in data.pages[3].pages">
-                	<a href="#" ng-href="#{{page.role}}" ng-click="changeMaker(page)" ng-class="{active: page == selectedMaker}">
+                	<a href="#" ng-href="#{{page.role}}" ng-class="{active: page == selectedMaker}">
                 		<span>{{page.title}}</span>
                 	</a>
                 </li>
