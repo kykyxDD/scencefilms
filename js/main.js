@@ -195,6 +195,8 @@ var app = angular.module('app', [])
     }
     
     function show_intro_text() {
+        $window.scrollTo(0,0)
+
         v.preloader.hide()
 
         v.intro.show()
@@ -329,6 +331,9 @@ var app = angular.module('app', [])
     }
 
     function onPageLoaded() {
+        // $window.pageYOffset = 0;
+        $window.scrollTo(0, 0);
+
         v.preloader.hide()
         v.transition.close()
     }
@@ -385,22 +390,33 @@ var app = angular.module('app', [])
 
 .controller("mediaController", ["$scope", "$document", "$window", function($s, $doc, $window) {
     var media_data
-    var doc = $doc[0]
-    var scroll_cont = doc.querySelector(".b-photo .scrollCont")
-    var items_cont = scroll_cont.querySelector(".mediaCont")
+    var doc = $doc[0];
+    var mobile = $s.mobile_style;
+    var scroll_cont
+    var items_cont
+
+    if(!mobile){
+        scroll_cont = doc.querySelector(".b-photo .scrollCont")
+        items_cont = scroll_cont.querySelector(".mediaCont")
+    }
     var scroll
     
     onResize()
     angular.element($window).bind('resize', onResize)
    
     $s.$watch('data', function(data) {
+        var mobile = $s.mobile_style;
         
         if (data) {
+            if(!scroll_cont || !items_cont){
+                scroll_cont = doc.querySelector(".b-photo .scrollCont")
+                items_cont = scroll_cont.querySelector(".mediaCont")
+            }
+
             media_data = data.pages[4]
             media_data.pages.forEach(groupBy)
 
             $s.selectedMedia = data.pages[4].pages[0]
-
             scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
             
             onResize()
@@ -409,7 +425,9 @@ var app = angular.module('app', [])
    
     
     function onResize() {
-        if (media_data) {
+        mobile = $s.mobile_style;
+        
+        if (media_data && !mobile) {
 
             var cont_w = $window.innerWidth - 450;
             var content_w = $s.selectedMedia.itemGroups.length*450
@@ -451,8 +469,14 @@ var app = angular.module('app', [])
     
     var news_data
     var doc = $doc[0]
-    var scroll_cont = doc.querySelector(".b-news .scrollCont")
-    var items_cont = scroll_cont.querySelector(".newsCont")
+    var mobile = $s.mobile_style;
+    var scroll_cont
+    var items_cont
+    if(!mobile){
+        scroll_cont = doc.querySelector(".b-news .scrollCont")
+        items_cont = scroll_cont.querySelector(".newsCont")
+    }
+    
     var scroll
     this.selectType = selectType
     
@@ -461,21 +485,29 @@ var app = angular.module('app', [])
     
    
     $s.$watch('data', function(data) {
-        
+        mobile = $s.mobile_style;
+
         if (data) {
+
+            if(!scroll_cont || !items_cont){
+                scroll_cont = doc.querySelector(".b-photo .scrollCont")
+                items_cont = scroll_cont.querySelector(".mediaCont")
+            }
+
             $s.news_data = data.pages[1]
             $s.news_data.pages.forEach(parseDate)
 
             scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
-            
+       
             //onResize()
             selectType($s.news_data.types[0].type)
         }
     })
     
     function onResize() {
+        mobile = $s.mobile_style;
 
-        if ($s.news_data) {
+        if ($s.news_data && !mobile) {
 
             var cont_w = $window.innerWidth - 450;
             var content_w = $s.news.length*460
