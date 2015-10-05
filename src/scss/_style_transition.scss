@@ -301,8 +301,21 @@ body {
 }
 
 .cont_list_menu{
+  position:relative;
 	overflow:hidden;
 	cursor: pointer;
+  margin-top: 12px;
+}
+.cont_list_menu:first-child{
+  margin-top: 0px; 
+}
+
+body.home .menu_cont .cont_list_menu.itm_home,
+body.news .menu_cont .cont_list_menu.itm_news,
+body.cast .menu_cont .cont_list_menu.itm_cast,
+body.media .menu_cont .cont_list_menu.itm_media,
+body.makers .menu_cont .cont_list_menu.itm_makers{
+  display: none;
 }
 
 #main_menu.mobile_menu .cont_list_menu{

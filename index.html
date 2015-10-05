@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <meta content="telephone=no" name="format-detection" />
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
@@ -24,7 +24,7 @@
     <script src='js/main.js'></script>
 </head>
 
-<body ng-app="app" ng-controller="appController" ng-class="{mobile: mobile_style, home: selectedPage == 'home', cast: selectedPage == 'cast', news: selectedPage == 'news', makers: selectedPage == 'makers', media: selectedPage == 'media'}">
+<body ng-app="app" ng-controller="appController" ng-class="{mobile: mobile_style, home: selectedPage == 'home', cast: selectedPage == 'cast', news: selectedPage == 'news', makers: selectedPage == 'makers', media: selectedPage == 'media', landscape: orientation == 'landscape', portrait: orientation == 'portrait',desktop: orientation == 'desktop'}">
     <div id='bg' class="home" >
         <div id="video-player"></div>
     </div>

@@ -37,12 +37,14 @@ var app = angular.module('app', [])
     var win_wid = $window.innerWidth;
     var win_heig = $window.innerHeight;
 
-    var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+    var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
-    if((win_wid <= 1024 && orientation == 'landscape') || 
-       (win_wid <= 768 && orientation == 'portrait')){
+    if((win_wid <= 1024 && orien == 'landscape') || 
+       (win_wid <= 768 && orien == 'portrait')){
+        $s.orientation = orien;
         $s.mobile_style = true;
     } else {
+        $s.orientation = 'desktop';
         $s.mobile_style = false;
     }
 
@@ -270,12 +272,15 @@ var app = angular.module('app', [])
         var win_wid = $window.innerWidth;
         var win_heig = $window.innerHeight;
 
-        var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+        var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
-        if((win_wid <= 1024 && orientation == 'landscape') || 
-           (win_wid <= 768 && orientation == 'portrait')){
+        if((win_wid <= 1024 && orien == 'landscape') || 
+           (win_wid <= 768 && orien == 'portrait')){
+
+            $s.orientation = orien;
             $s.mobile_style = true;
         } else {
+            $s.orientation = 'desktop';
             $s.mobile_style = false;
         }
 

@@ -24,25 +24,22 @@ function Anim_menu (cont) {
    
 }
 Anim_menu.prototype = {
-    
+
     init: function(pages, index, mobile) {
 
         for (var i = index; i < pages.length; i++) {
-            var page = pages[i]
-            var itm = document.createElement("div")
-            itm.className = "cont_list_menu"
-            itm.innerHTML = "<div class='label'>" + page.name + "</div><div class='line'></div>"
-            itm.line = itm.querySelector('.line')
-            // itm.setAttribute("autoscroll",'true')
-            ScreenObject.decorate_element.apply(itm)
-            ScreenObject.decorate_element.apply(itm.line)
+
+            var page = pages[i];
+            var itm = document.createElement("div");
+            itm.className = "cont_list_menu itm_" + page.page;
+            itm.innerHTML = "<div class='label'>" + page.name + "</div><div class='line'></div>";
+            itm.line = itm.querySelector('.line');
+            ScreenObject.decorate_element.apply(itm);
+            ScreenObject.decorate_element.apply(itm.line);
             itm.line.x = -250; 
             itm.line.w = 150; 
 
 			itm.line.scaleX = 0;
-            
-            itm.y = 12 * (i-index);
-
 
             this.create_event(itm, page);
            
@@ -187,9 +184,13 @@ Anim_menu.prototype = {
     resize: function(mobile){
         var win_width = document.documentElement.clientWidth;
         var win_height = document.documentElement.clientHeight;
+        ScreenObject.decorate_element.apply(this.menu_cont)
+
+        console.log(this.menu_cont.h)
 
         if(mobile){
-            var h = 35*5 + this.menu_cont.y-12;
+            var h = this.menu_cont.h ? this.menu_cont.h : 188;
+            // console.log(h, 35*5, 35*4);
             var top = (win_height - h)/2;
             var left = (win_width - 150)/2;
             this.menu_cont.style.left = left + 'px';
