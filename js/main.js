@@ -36,6 +36,7 @@ var app = angular.module('app', [])
     }
     
 }])
+
 .service('appState', ['$http', function($http){
     return {
         selectedPage: '',
@@ -102,19 +103,21 @@ var app = angular.module('app', [])
         }
     }
 }])
-.controller('appController', ['appState', 'view', '$scope', '$http', '$document', '$window', function(state, v, $s, $http, $doc, $window){
+.controller('appController', ['appState', 'view', '$scope', '$http', '$document', '$location', '$window', 'anchorSmoothScroll', function(state, v, $s, $http, $doc, $loc, $window, anchorSmoothScroll){
 
     var doc = $doc[0];
 
     var win_wid = $window.innerWidth;
     var win_heig = $window.innerHeight;
 
-    var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+    var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
-    if((win_wid <= 1024 && orientation == 'landscape') || 
-       (win_wid <= 768 && orientation == 'portrait')){
+    if((win_wid <= 1024 && orien == 'landscape') || 
+       (win_wid <= 768 && orien == 'portrait')){
+        $s.orientation = orien;
         $s.mobile_style = true;
     } else {
+        $s.orientation = 'desktop';
         $s.mobile_style = false;
     }
     
@@ -197,19 +200,27 @@ var app = angular.module('app', [])
     }
     
     function on_bg_loaded(callback) {
+
         v.simulate_page_load(0.3, callback, false)
+    }
+
+    $s.goScroll = function (eID){          
+        anchorSmoothScroll.scrollTo(eID);          
     }
 
     function onResize(e) {
         var win_wid = $window.innerWidth;
         var win_heig = $window.innerHeight;
 
-        var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+        var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
-        if((win_wid <= 1024 && orientation == 'landscape') || 
-           (win_wid <= 768 && orientation == 'portrait')){
+        if((win_wid <= 1024 && orien == 'landscape') || 
+           (win_wid <= 768 && orien == 'portrait')){
+
+            $s.orientation = orien;
             $s.mobile_style = true;
         } else {
+            $s.orientation = 'desktop';
             $s.mobile_style = false;
         }
 
@@ -217,15 +228,6 @@ var app = angular.module('app', [])
         v.main_menu.resize($s.mobile_style);
         v.background.resize($window.innerWidth, $window.innerHeight)
         v.preloader.set_size(200, 200)
-    }
-
-    function get_page(name) {
-        for (var i=0; i<$s.data.pages.length; i++) {
-            var page = $s.data.pages[i]
-            if (page.page == name) {
-                return page
-            }
-        }
     }
 
     function onPageLoaded() {
@@ -311,7 +313,7 @@ var app = angular.module('app', [])
         scroll.destroy()
         angular.element($w).off('resize', onResize)
     }
-    
+
     function onResize() {
         
         console.log("media on resize")
@@ -331,7 +333,7 @@ var app = angular.module('app', [])
         $t(onResize)
     }
 }])
-.controller('homeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state){
+.controller('homeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
 
     console.log('home controller')
     var doc = $doc[0]
@@ -472,6 +474,55 @@ var app = angular.module('app', [])
         state.pageToChange = 'home'
         $s.$apply()
     }
-
- 
 }])
+.service('anchorSmoothScroll', function(){
+    
+    this.scrollTo = function(eID) {
+
+        var startY = currentYPosition();
+        var stopY = elmYPosition(eID);
+        var distance = stopY > startY ? stopY - startY : startY - stopY;
+        if (distance < 100) {
+            scrollTo(0, stopY); return;
+        }
+        var speed = Math.round(distance / 100);
+        if (speed >= 20) speed = 20;
+        var step = Math.round(distance / 25);
+        var leapY = stopY > startY ? startY + step : startY - step;
+        var timer = 0;
+        if (stopY > startY) {
+            for ( var i=startY; i<stopY; i+=step ) {
+                setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
+                leapY += step; if (leapY > stopY) leapY = stopY; timer++;
+            } return;
+        }
+        for ( var i=startY; i>stopY; i-=step ) {
+            setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
+            leapY -= step; if (leapY < stopY) leapY = stopY; timer++;
+        }
+        
+        function currentYPosition() {
+            // Firefox, Chrome, Opera, Safari
+            if (self.pageYOffset) return self.pageYOffset;
+            // Internet Explorer 6 - standards mode
+            if (document.documentElement && document.documentElement.scrollTop)
+                return document.documentElement.scrollTop;
+            // Internet Explorer 6, 7 and 8
+            if (document.body.scrollTop) return document.body.scrollTop;
+            return 0;
+        }
+        
+        function elmYPosition(eID) {
+            var elm = document.getElementById(eID);
+            console.log(eID, elm)
+            var y = elm.offsetTop;
+            var node = elm;
+            while (node.offsetParent && node.offsetParent != document.body) {
+                node = node.offsetParent;
+                y += node.offsetTop;
+            } return y;
+        }
+
+    };
+    
+});

@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, maximum-scale=1, minimum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <meta content="telephone=no" name="format-detection" />
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
@@ -101,28 +101,21 @@
                     </div>
                     <div class="w-news">
                         <div class="b-news">
-                            <div class="scrollCont">
-                                <div class="mediaCont">
-
-                                    <div class="i-news" ng-repeat="item in selectedType.items track by $index">
-                                        <div class="i-news__content">
-                                            <div class="img">
-                                                <img alt="img" ng-src="{{item.img}}"/>
-                                            </div>
-                                            <div class="news">
-                                                <h3>{{item.short_desc}}</h3>
-                                                <div class="w-time"><span class="time">{{item.date}}</span></div>
-                                                <p>{{item.full_desc}}</p>
-                                                <a class="btn" href="#">read all</a>
-                                            </div>
-                                        </div>
+                            <div class="i-news" ng-repeat="item in selectedType.items track by $index">
+                                <div class="i-news__content">
+                                    <div class="img">
+                                        <img alt="img" ng-src="{{item.img}}"/>
                                     </div>
-                                    <div class="btn_top">
-                                        <a href="#top">
-                                            <span class="btn"></span>
-                                        </a>
+                                    <div class="news">
+                                        <h3>{{item.short_desc}}</h3>
+                                        <div class="w-time"><span class="time">{{item.date}}</span></div>
+                                        <p>{{item.full_desc}}</p>
+                                        <a class="btn" href="#">read all</a>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="btn_top" ng-click='goScroll("top")'>
+                                <span class="btn"></span>
                             </div>
                         </div>
                     </div>
@@ -174,7 +167,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>            
+                    </div>
                 </div>
             </div>
         </div>
@@ -191,40 +184,34 @@
                     </div>
                     <div class="w-photo">
                         <div class="b-photo">
-                            <div class="scrollCont">
-                                <div class="mediaCont">
-                                    <div ng-switch="selectedType.type">
-                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index">
-                                            <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
-                                                <div class="img">
-                                                    <img alt="img" ng-src="{{item.src}}"/>
-                                                </div>
-                                                <div class="w-share">
-                                                    <div class="b-share">
-                                                        <ul class="l-share">
-                                                            <li><a href="#" class="i-plus"></a></li>
-                                                            <li><a href="#" class="i-like"></a></li>
-                                                            <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div ng-switch="selectedType.type">
+                                <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index">
+                                    <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
+                                        <div class="img">
+                                            <img alt="img" ng-src="{{item.src}}"/>
                                         </div>
-
-                                        <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by $index">
-                                            <div class="i-video" ng-repeat="item in group track by $index">
-                                                <a href="#">
-                                                    <img alt="img" ng-src="{{item.src}}"/>
-                                                    <span class="text">{{item.desc}}</span>
-                                                </a>
+                                        <div class="w-share">
+                                            <div class="b-share">
+                                                <ul class="l-share">
+                                                    <li><a href="#" class="i-plus"></a></li>
+                                                    <li><a href="#" class="i-like"></a></li>
+                                                    <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
+                                                </ul>
                                             </div>
-                                        </div>
-                                        <div class="btn_top">
-                                            <a href="#top">
-                                                <span class="btn"></span>
-                                            </a>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by $index">
+                                    <div class="i-video" ng-repeat="item in group track by $index">
+                                        <a href="#">
+                                            <img alt="img" ng-src="{{item.src}}"/>
+                                            <span class="text">{{item.desc}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="btn_top" ng-click='goScroll("top")'>
+                                    <span class="btn"></span>
                                 </div>
                             </div>
                         </div>
@@ -285,8 +272,8 @@
                                 <div class="text">
                                     <p>{{selectedItem.desc}}</p>
                                 </div>
-                                <div class="btn_top">
-                                    <a href="#top"><span class="btn"></a></span>
+                                <div class="btn_top" ng-click='goScroll("top")'>
+                                    <span class="btn"></span>
                                 </div>
                             </div>
                             <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
@@ -297,7 +284,7 @@
                 </div>
             </div>
         </div>
-      
+
         <div id="makers" ng-switch-when="makers" ng-if='!mobile_style' class="page w-content" ng-controller="contentController">
             <div class="b-content">
                 <div class="b-content_inside">
@@ -352,8 +339,8 @@
                             <div class="text">
                                 <p>{{selectedMaker.desc}}</p>
                             </div>
-                            <div class="btn_top">
-                                <a href="#top"><span class="btn"></a></span>
+                            <div class="btn_top" ng-click='goScroll("top")'>
+                                <span class="btn"></span>
                             </div>
                         </div>
                         <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
@@ -364,9 +351,16 @@
             </div>
         </div>
     </div>
-   
-    <div id='side_page_right' ng-show='state.selectedPage == "home"' ng-class='{mobile_squary:mobile_style}'></div>
-	<div id='side_page_left' ng-show='state.selectedPage == "home"' ng-hide="mobile_style"></div>
+
+    <div id='side_page_right' ng-show='state.selectedPage == "home"' ng-class='{mobile_squary:mobile_style}'>
+        <div class='cont_rhom_right'></div>
+        <div class="btn_top" ng-if='mobile_style' ng-click='goScroll("top")'>
+            <span class="btn"></span>
+        </div>
+    </div>
+    <div id='side_page_left' ng-show='state.selectedPage == "home"' ng-hide="mobile_style">
+    </div>
+
     <div id="title_page"></div>
 
     <div class="footer" ng-show="state.interfaceVisible">
@@ -386,7 +380,7 @@
             </ul>
         </div>
     </div>
-    
+
     <div class="transition rot45deg" ng-class='{mobile_transition: mobile_style}' ng-show="state.interfaceVisible">
         <div id="yellow_part" class="element">
             <div class="bg yellow"></div>

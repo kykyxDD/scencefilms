@@ -2,6 +2,7 @@ function Squares (cont) {
 	var self = this;
 	this.cont = cont
 	this.cont_rhom_right = this.cont.querySelector('#side_page_right');
+    this.cont_rhom = this.cont_rhom_right.querySelector('.cont_rhom_right');
     this.cont_rhom_left = this.cont.querySelector('#side_page_left');
     this.sq_arr_left;
     this.sq_arr_right;
@@ -21,8 +22,8 @@ Squares.prototype = {
         var win_wid = window.innerWidth;
         var win_heig = window.innerHeight;
         var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
-        if((win_wid < 1024 && orientation == 'portrait' ) || 
-           (win_wid < 640 && orientation == 'landscape' )){
+        if((win_wid <= 1024 && orientation == 'landscape' ) || 
+           (win_wid <= 768 && orientation == 'portrait' )){
             mobile = true;
         }
 
@@ -37,7 +38,7 @@ Squares.prototype = {
 		this.sq_arr_left = page.sq_arr_left;
 
 		for(var k = 0; k < this.sq_arr_right.length; k++){
-            this.create_elem(this.cont_rhom_right, this.sq_arr_right[k]);
+            this.create_elem(this.cont_rhom, this.sq_arr_right[k]);
             if(!mobile) this.pos_rhom(this.sq_arr_right[k]);
         }
         for(var k = 0; k < this.sq_arr_left.length; k++){
@@ -66,8 +67,12 @@ Squares.prototype = {
         rhom_after.className = className; 
         rhom_before.appendChild(rhom_after);
         var text = document.createElement('div');
-        text.style.backgroundImage = 'url("'+page.imgPath+'")'; 
         text.className = 'text_rhom';
+        var img = document.createElement('img');
+        img.src = page.imgPath;
+        text.appendChild(img);
+        img.style.width = '100%';
+        img.style.height = '100%';
 
         rhom_after.appendChild(text);
         parent.appendChild(itm_elem);
@@ -92,13 +97,14 @@ Squares.prototype = {
         }
 
         this.cont_rhom_right.h = '';
+        this.cont_rhom_right.w = '';
         this.cont_rhom_right.y = '';
         this.cont_rhom_right.rotation = '';
 
         this.sq_width = Math.round(document.body.clientWidth/6);
         this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
 
-        this.cont_rhom_right.h = 0;
+        // this.cont_rhom_right.h = 0;
         this.cont_rhom_right.style.right = this.rights + 'px';
         this.cont_rhom_left.style.left = Math.round((-this.sq_width)*0.4) + 'px';
         this.cont_rhom_left.style.bottom = Math.round((-this.sq_width)*0.4) + 'px';
@@ -136,12 +142,12 @@ Squares.prototype = {
     resize_mobile: function(){
 
         this.cont_rhom_right.style.right = '';
-        // this.cont_rhom_left.visible = false;
-        var win_wid = document.documentElement.clientWidth;//window.innerWidth;
+        var win_wid = document.documentElement.clientWidth;
         var wid_elem = Math.floor(win_wid/1.43);
         var l = this.sq_arr_right.length;
-        this.cont_rhom_right.h = (l-1)*wid_elem;
-        
+        var top_1 = Math.floor(wid_elem*(1 - (Math.PI/4))) + Math.floor(wid_elem*(Math.PI/4));
+        var top_2 = Math.floor(win_wid*0.15);
+
         for (var k = 0; k < l; k++){
             var page = this.sq_arr_right[k];
             var itm_elem = page.elem;
@@ -150,8 +156,15 @@ Squares.prototype = {
             itm_elem.w = wid_elem;
             itm_elem.h = wid_elem;
 
-            itm_elem.y = k !== 0 ? Math.floor(wid_elem*(1 - (Math.PI/4))) + Math.floor(wid_elem*(Math.PI/4))*k: 0;
             itm_elem.x = k !== 0 ? (win_wid*0.47)*(k%2) : win_wid*0.15;
+
+            if(k == 0){
+                itm_elem.y = 0;
+            } else if(k == 1){
+                itm_elem.y = top_1;
+            } else if(k > 1){
+                itm_elem.y = this.sq_arr_right[k-1].elem.y - top_2;
+            }
             text.w = win_wid;
             text.h = win_wid;
 
