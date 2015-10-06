@@ -70,7 +70,7 @@ Squares.prototype = {
         var text = document.createElement('div');
         text.className = 'text_rhom';
         var img = document.createElement('img');
-        img.src = page.imgPath;
+        // img.src = page.imgPath;
         text.appendChild(img);
         img.style.width = '100%';
         img.style.height = '100%';
@@ -89,6 +89,8 @@ Squares.prototype = {
         page.elem.text_rhom = text;
         page.elem.img = img;
 
+
+
         // rhom_before.scaleX = 0;
         // rhom_before.scaleY = 0;
 
@@ -97,9 +99,10 @@ Squares.prototype = {
         // rhom_after.alpha = 0;
 
         // TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1});
-        // img.onload = function(){
-        //     TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , alpha:1, delay: delay});
-        // }
+        img.onload = function(){
+            console.log(img)
+            // TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , alpha:1, delay: delay});
+        }
     },
 
     resize: function(mobile){
@@ -204,13 +207,15 @@ Squares.prototype = {
 
     anim_show: function(sq_arr){
     	var delay = this.delay;
+        var self = this;
 
         for (var i = 0; i < sq_arr.length; i++){
 
             var rhom_before = sq_arr[i].elem.rhom_before;
             var rhom_after = sq_arr[i].elem.rhom_after;
             var imgs = sq_arr[i].elem.img;
-            console.log(imgs)
+            imgs.src = sq_arr[i].imgPath;
+            console.log(sq_arr[i])
 
             rhom_before.scaleX = 0;
             rhom_before.scaleY = 0;
@@ -219,10 +224,9 @@ Squares.prototype = {
             rhom_after.scaleY = 0;
 
             TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: 0.3*i});
-            imgs.onload = function(){
-                console.log(imgs)
-                TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , delay: (0.3*i)+(delay*0.5)});    
-            }
+            imgs.onload = (function(rhom, delay){
+                TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: (0.3)+(delay*0.5)});
+            })(rhom_after, delay)
         };
     }
 }
