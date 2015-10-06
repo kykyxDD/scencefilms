@@ -28,10 +28,11 @@
     <div id='bg' class="home" >
         <div id="video-player"></div>
     </div>
-    
+
+    <a id="top"></a>
     <div id='anim_bg' ng-hide='mobile_style'></div>
 
-      <a name="top" ng-show='mobile_style'></a>
+    
 	  <div class="p-title" ng-if='mobile_style' ng-show='selectedPage == "cast" || selectedPage == "makers"'>
 	    <h1>{{nameToChange}}</h1>
 	  </div>
@@ -105,10 +106,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="btn_top">
-                      <a href="#top">
+                    <div class="btn_top" ng-click='goScroll("top")'>
                         <span class="btn"></span>
-                      </a>
                     </div>
                   </div>
                 </div>
@@ -212,10 +211,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="btn_top">
-                          <a href="#top">
-                            <span class="btn"></span>
-                          </a>
+                        <div class="btn_top" ng-click='goScroll("top")'>
+                          <span class="btn"></span>
                         </div>
                       </div>
 
@@ -261,7 +258,7 @@
             <div class="w-tab">
               <ul class="tab">
                 <li ng-repeat="page in data.pages[2].pages">
-                	<a href='' ng-href="#{{page.role}}" ng-class="{active: page == selectedCast}" >
+                	<a ng-click='goScroll(page.role)'  ng-class="{active: page == selectedCast}" >
                 		<span>{{page.title}}</span>
                 	</a>
                 </li>
@@ -283,8 +280,8 @@
                 <div class="text">
                   <p>{{selectedCast.desc}}</p>
                 </div>
-                <div class="btn_top">
-                  <a href="#top"><span class="btn"></a></span>
+                <div class="btn_top" ng-click='goScroll("top")'>
+                  <span class="btn"></span>
                 </div>
               </div>
               <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
@@ -330,9 +327,9 @@
           <div class="b-content_inside">
             <div class="w-tab">
 
-              <ul class="tab">                
+              <ul class="tab">
                 <li ng-repeat="page in data.pages[3].pages">
-                	<a href="#" ng-href="#{{page.role}}" ng-class="{active: page == selectedMaker}">
+                	<a ng-click='goScroll(page.role)' ng-class="{active: page == selectedMaker}">
                 		<span>{{page.title}}</span>
                 	</a>
                 </li>
@@ -356,8 +353,8 @@
                 <div class="text">
                   <p>{{selectedMaker.desc}}</p>
                 </div>
-                <div class="btn_top">
-                  <a href="#top"><span class="btn"></a></span>
+                <div class="btn_top" ng-click='goScroll("top")'>
+                  <span class="btn"></span>
                 </div>
               </div>
               <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
@@ -371,6 +368,10 @@
       </div>
     </div>
   <div id='side_page_right' ng-show='selectedPage == "home"' ng-class='{mobile_squary:mobile_style}'>
+    <div class='cont_rhom_right'></div>
+    <div class="btn_top" ng-if='mobile_style' ng-click='goScroll("top")'>
+      <span class="btn"></span>
+    </div>
 	</div>
 	<div id='side_page_left' ng-show='selectedPage == "home"' ng-hide="mobile_style">
 	</div>

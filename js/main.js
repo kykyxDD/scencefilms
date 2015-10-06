@@ -30,7 +30,7 @@ var app = angular.module('app', [])
     }    
     
 }])
-.controller('appController', ['view', '$scope', '$http', '$document', '$window', function(v, $s, $http, $doc, $window){
+.controller('appController', ['view', '$scope', '$http', '$document', '$location', '$window', 'anchorSmoothScroll', function(v, $s, $http, $doc, $loc, $window, anchorSmoothScroll){
 
     var doc = $doc[0];
 
@@ -212,6 +212,20 @@ var app = angular.module('app', [])
                 setTimeout(makeDrop, delay)
             }
         }
+    }
+    $s.goScroll = function (eID){          
+            // $loc.hash('top');     
+        anchorSmoothScroll.scrollTo(eID);          
+       
+        // console.log('top');
+        // var top = 400;
+        // var duration = 2000; //milliseconds
+        // $window.scrollTo(0,0)
+        // $("body").animate({scrollTop: -100}, 100); 
+        // $anchorScroll()
+        // $doc.scrollTop(top, duration).then(function() {
+        //   console && console.log('You just scrolled to the top!');
+        // });
     }
     
     function show_intro_text() {
@@ -527,7 +541,7 @@ var app = angular.module('app', [])
             $s.news_data.pages.forEach(parseDate)
 
             scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
-       
+
             selectType($s.news_data.types[0].type)
         }
     })
@@ -537,12 +551,11 @@ var app = angular.module('app', [])
             $t(angular.bind(this, onResize))
         }
     })
-    
+
     function onResize() {
         mobile = $s.mobile_style;
 
         if ($s.news_data && !mobile) {
-            
             var cont_w = $window.innerWidth - 450 + 192;
             var content_w = $s.news.length*460
             scroll_cont.style.width = cont_w + "px"
@@ -573,3 +586,54 @@ var app = angular.module('app', [])
         item.timestamp = new Date(date_parts[2], date_parts[1], date_parts[0], 0, 0, 0)
     }
 }])
+.service('anchorSmoothScroll', function(){
+    
+    this.scrollTo = function(eID) {
+
+        var startY = currentYPosition();
+        var stopY = elmYPosition(eID);
+        var distance = stopY > startY ? stopY - startY : startY - stopY;
+        if (distance < 100) {
+            scrollTo(0, stopY); return;
+        }
+        var speed = Math.round(distance / 100);
+        if (speed >= 20) speed = 20;
+        var step = Math.round(distance / 25);
+        var leapY = stopY > startY ? startY + step : startY - step;
+        var timer = 0;
+        if (stopY > startY) {
+            for ( var i=startY; i<stopY; i+=step ) {
+                setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
+                leapY += step; if (leapY > stopY) leapY = stopY; timer++;
+            } return;
+        }
+        for ( var i=startY; i>stopY; i-=step ) {
+            setTimeout("window.scrollTo(0, "+leapY+")", timer * speed);
+            leapY -= step; if (leapY < stopY) leapY = stopY; timer++;
+        }
+        
+        function currentYPosition() {
+            // Firefox, Chrome, Opera, Safari
+            if (self.pageYOffset) return self.pageYOffset;
+            // Internet Explorer 6 - standards mode
+            if (document.documentElement && document.documentElement.scrollTop)
+                return document.documentElement.scrollTop;
+            // Internet Explorer 6, 7 and 8
+            if (document.body.scrollTop) return document.body.scrollTop;
+            return 0;
+        }
+        
+        function elmYPosition(eID) {
+            var elm = document.getElementById(eID);
+            console.log(eID, elm)
+            var y = elm.offsetTop;
+            var node = elm;
+            while (node.offsetParent && node.offsetParent != document.body) {
+                node = node.offsetParent;
+                y += node.offsetTop;
+            } return y;
+        }
+
+    };
+    
+});
