@@ -10,10 +10,12 @@
 		},
 		
 		decorate_element: function(do_not_set_defaults) {
-			this.view = this
-			//set_defaults_for_object.call(this)
-			set_defaults_for_element.call(this)
-			setup.call(this)
+            if (!this.__decorated_as_screen_object) {
+                this.view = this
+                set_defaults_for_element.call(this)
+                setup.call(this)
+                this.__decorated_as_screen_object = true
+            }
             return this
 		}
 	}
@@ -36,8 +38,8 @@
 
 	function set_defaults_for_element() {
 		var s = window.getComputedStyle(this.view)
-		this._x = get_integer_from_value(s.getPropertyValue("left")) || 0
-		this._y = get_integer_from_value(s.getPropertyValue("top")) || 0
+		this._x = this.x || 0
+		this._y = this.y || 0
 		this._w = get_integer_from_value(s.getPropertyValue("width")) || 0
 		this._h = get_integer_from_value(s.getPropertyValue("height")) || 0
         this._scaleX = 'scaleX' in this ? this.scaleX : 1

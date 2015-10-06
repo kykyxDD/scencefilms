@@ -1,25 +1,23 @@
-function Particles(cont, skip_event_frames) {
+function Particles(skip_even_frames) {
 
-    this.cont = cont
     this.particlesCount = 100
     this.particlesArray = []
     this.wind = [5,0,0];
-    this.skip_event_frames = skip_event_frames
+    this.skip_even_frames = skip_even_frames
     
-    this.canvas = document.createElement('canvas')
-    this.cont.appendChild(this.canvas)
-
     this.oldScreenSizeH = 0;
     this.oldScreenSizeW = 0;
     this.kalpha = 0;
-
-    this.init(window.innerWidth, window.innerHeight)
 }
 
 Particles.prototype = {
     
     init: function(w, h) {
         this.prepareParticles(w, h)
+    },
+    
+    set_canvas: function(canv) {
+        this.canvas = canv
     },
     
     resize: function (w, h) {
@@ -91,12 +89,13 @@ Particles.prototype = {
     
     repaintCanvas: function() {
 
-        if (this.skip_event_frames) {
+        if (!this.canvas) return
+    
+        if (this.skip_even_frames) {
             this.skip_frame = !this.skip_frame
             if (this.skip_frame) return
         }
     
-        //console.log("repaint")
         this.updateParticlesPosition()
         
         var c = new Point(0, 0)

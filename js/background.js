@@ -48,7 +48,6 @@ Background.prototype = {
 
         var dx = base_w - w*k
         var dy = base_h - h*k
-        console.log(w, h, k)
         
         function set_scale(mc) {
             mc.scaleX = mc.scaleY = k

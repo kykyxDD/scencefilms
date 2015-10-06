@@ -1,36 +1,30 @@
-function IntroText(cont, skip_event_frames)
+function IntroText(skip_even_frames)
 {
-    this.skip_event_frames = skip_event_frames
-    this.cont = cont
-    ScreenObject.decorate_element.apply(this.cont)
-    this.canvas = document.createElement('canvas')
-    this.cont.appendChild(this.canvas)
+    this.skip_even_frames = skip_even_frames
     
     this.distortionField = []
     this.distortionElementsCount = 10;
     this.centerPointX = 0
     this.centerPointY = 0
     this.distRadus = 150
-    
     this.init()
 }
 
 IntroText.prototype = {
     
     init: function() {
-        this.set_size(900, 350)
         this.prepare()
-        this.hide()
     },
     
-    show: function() {
-        dom.display(this.cont, true)
+    set_canvas(canvas) {
+        this.canvas = canvas
+        ScreenObject.decorate_element.apply(this.canvas)
+        
+        if (this.WIDTH) {
+            this.set_size(this.WIDTH, this.HEIGHT)
+        }
     },
-    
-    hide: function() {
-        dom.display(this.cont, false)
-    },
-    
+   
     set_size: function(w, h) {
         this.WIDTH = w
         this.HEIGHT = h
@@ -161,7 +155,9 @@ IntroText.prototype = {
     
     repaintCanvas: function() {
         
-        if (this.skip_event_frames) {
+        if (!this.canvas) return
+        
+        if (this.skip_even_frames) {
             this.skip_frame = !this.skip_frame
             if (this.skip_frame) return
         }
