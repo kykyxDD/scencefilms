@@ -32,7 +32,7 @@
     
     <div id='anim_bg' ng-hide='mobile_style'></div>
 
-    <a name="top" ng-show='mobile_style'></a>
+    <a id="top" name="top" ng-show='mobile_style'></a>
 
     <div class="p-title" ng-if='mobile_style' ng-show='state.selectedPage == "cast" || state.selectedPage == "makers"'>
         <h1>{{nameToChange}}</h1>
@@ -87,12 +87,12 @@
             </div>
         </div>
 
-        <div id="news" ng-switch-when="news" ng-if='mobile_style' class="page" ng-controller="mediaController">
+        <div id="news" ng-switch-when="news" ng-if='mobile_style' class="page" ng-controller="mobileMediaController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
                         <ul class="tab">
-                            <li ng-repeat="itm in state.selectedPageData.types" ng-click="typeMenuClick(itm.type)">
+                            <li ng-repeat="itm in state.selectedPageData.types" ng-click="typeMenuClick(itm)">
                                 <a href="#" ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
                                 </a>
@@ -172,13 +172,13 @@
             </div>
         </div>
 
-        <div id="media" ng-switch-when="media" ng-if='mobile_style' class="page" ng-controller="mediaController">
+        <div id="media" ng-switch-when="media" ng-if='mobile_style' class="page" ng-controller="mobileMediaController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
                       <ul class="tab">
                         <li ng-repeat="itm in state.selectedPageData.types track by $index">
-                            <a href="#" ng-click="typeMenuClick(section)" ng-class="{active: selectedType.type == itm.type}"><span>{{itm.label}}</span></a>
+                            <a href="#" ng-click="typeMenuClick(itm)" ng-class="{active: selectedType.type == itm.type}"><span>{{itm.label}}</span></a>
                         </li>
                        </ul>
                     </div>
@@ -250,7 +250,7 @@
                         <div class="w-tab">
                             <ul class="tab">
                                 <li ng-repeat="page in state.selectedPageData.pages">
-                                    <a href='' ng-href="#{{page.role}}" ng-class="{active: page == selectedItem}" >
+                                    <a href='' ng-click='goScroll(page.role)' ng-class="{active: page == selectedItem}" >
                                         <span>{{page.title}}</span>
                                     </a>
                                 </li>
@@ -317,7 +317,7 @@
                     <div class="w-tab">
                         <ul class="tab">                
                             <li ng-repeat="page in state.selectedPageData.pages">
-                                <a href="#" ng-href="#{{page.role}}" ng-class="{active: page == selectedMaker}">
+                                <a ng-click='goScroll(page.role)' ng-class="{active: page == selectedItem}">
                                     <span>{{page.title}}</span>
                                 </a>
                             </li>

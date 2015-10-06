@@ -165,8 +165,9 @@ var app = angular.module('app', [])
     }
 
     v.main_menu.onClick = function(page) {
-        if(page.page !== $s.selectedPage) {
+        if(page.page !== state.selectedPage) {
             $s.change_page(page);
+            $s.$apply()
         }
     }
 
@@ -326,6 +327,29 @@ var app = angular.module('app', [])
             items_cont.style.width = content_w + "px"
             scroll.refresh()
         }
+    }
+    
+    $s.typeMenuClick = function(type) {
+        $s.selectedType = type
+        $t(onResize)
+    }
+}])
+.controller("mobileMediaController", ["$scope", "$document", "$window", "$timeout", "appState", function($s, $doc, $w, $t, state) {
+
+    var doc = $doc[0];
+    var media_data = state.selectedPageData
+    $s.selectedType = media_data.types[0]
+    
+    angular.element($w).on('resize', onResize)
+    $t(onResize)
+    
+    $s.$on('destroy', clean_up)
+    
+    function clean_up() {
+        angular.element($w).off('resize', onResize)
+    }
+
+    function onResize() {
     }
     
     $s.typeMenuClick = function(type) {
