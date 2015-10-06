@@ -67,13 +67,12 @@ Squares.prototype = {
         rhom_after.className = className; 
         rhom_before.appendChild(rhom_after);
         var text = document.createElement('div');
-        text.style.backgroundImage = 'url("'+page.imgPath+'")'; 
         text.className = 'text_rhom';
-        // var img = document.createElement('img');
-        // img.src = page.imgPath;
-        // text.appendChild(img);
-        // img.style.width = '100%';
-        // img.style.height = '100%';
+        var img = document.createElement('img');
+        img.src = page.imgPath;
+        text.appendChild(img);
+        img.style.width = '100%';
+        img.style.height = '100%';
 
         rhom_after.appendChild(text);
         parent.appendChild(itm_elem);

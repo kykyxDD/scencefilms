@@ -308,7 +308,6 @@ var app = angular.module('app', [])
             div.style.width = $s.mobile_style == false ? Math.round($window.innerWidth*0.66) + "px" : '';
         }
 
-
         v.main_menu.resize($s.mobile_style);
         v.background.resize($window.innerWidth, $window.innerHeight)
         v.squares.resize($s.mobile_style);
