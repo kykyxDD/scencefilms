@@ -88,21 +88,6 @@ Squares.prototype = {
         page.elem.rhom_after = rhom_after;
         page.elem.text_rhom = text;
         page.elem.img = img;
-
-
-
-        // rhom_before.scaleX = 0;
-        // rhom_before.scaleY = 0;
-
-        // rhom_after.scaleX = 0;
-        // rhom_after.scaleY = 0;
-        // rhom_after.alpha = 0;
-
-        // TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1});
-        img.onload = function(){
-            console.log(img)
-            // TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , alpha:1, delay: delay});
-        }
     },
 
     resize: function(mobile){
@@ -122,7 +107,6 @@ Squares.prototype = {
         this.sq_width = Math.round(document.body.clientWidth/6);
         this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
 
-        // this.cont_rhom_right.h = 0;
         this.cont_rhom_right.style.right = this.rights + 'px';
         this.cont_rhom_left.style.left = Math.round((-this.sq_width)*0.4) + 'px';
         this.cont_rhom_left.style.bottom = Math.round((-this.sq_width)*0.4) + 'px';
