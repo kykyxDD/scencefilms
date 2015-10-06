@@ -1,9 +1,7 @@
 function Squares (cont) {
 	var self = this;
 	this.cont = cont
-	this.cont_rhom_right = this.cont.querySelector('#side_page_right');
-    this.cont_rhom = this.cont_rhom_right.querySelector('.cont_rhom_right');
-    this.cont_rhom_left = this.cont.querySelector('#side_page_left');
+	
     this.sq_arr_left;
     this.sq_arr_right;
     this.json;
@@ -17,6 +15,10 @@ function Squares (cont) {
 
 Squares.prototype = {
 	init: function(page){
+
+        this.cont_rhom_right = this.cont.querySelector('#side_page_right');
+        this.cont_rhom = this.cont_rhom_right.querySelector('.cont_rhom_right');
+        this.cont_rhom_left = this.cont.querySelector('#side_page_left');
 
         var mobile = false;
         var win_wid = window.innerWidth;
@@ -56,6 +58,7 @@ Squares.prototype = {
 	create_elem: function(parent, page){
 		var scape_text = this.scape_text;
 		var sq_width = this.sq_width;
+        var delay = this.delay
 
         var itm_elem = document.createElement('div');
         itm_elem.className = 'cont_rhom';
@@ -69,10 +72,11 @@ Squares.prototype = {
         var text = document.createElement('div');
         text.className = 'text_rhom';
         var img = document.createElement('img');
-        img.src = page.imgPath;
+        // img.src = page.imgPath;
         text.appendChild(img);
         img.style.width = '100%';
         img.style.height = '100%';
+
 
         rhom_after.appendChild(text);
         parent.appendChild(itm_elem);
@@ -85,9 +89,11 @@ Squares.prototype = {
         page.elem.rhom_before = rhom_before;
         page.elem.rhom_after = rhom_after;
         page.elem.text_rhom = text;
+        page.elem.img = img;
     },
 
     resize: function(mobile){
+        console.log('square',mobile)
 
         if(!this.sq_arr_right || !this.sq_arr_left) return
         
@@ -104,7 +110,6 @@ Squares.prototype = {
         this.sq_width = Math.round(document.body.clientWidth/6);
         this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
 
-        // this.cont_rhom_right.h = 0;
         this.cont_rhom_right.style.right = this.rights + 'px';
         this.cont_rhom_left.style.left = Math.round((-this.sq_width)*0.4) + 'px';
         this.cont_rhom_left.style.bottom = Math.round((-this.sq_width)*0.4) + 'px';
@@ -189,11 +194,14 @@ Squares.prototype = {
 
     anim_show: function(sq_arr){
     	var delay = this.delay;
+        var self = this;
 
         for (var i = 0; i < sq_arr.length; i++){
 
             var rhom_before = sq_arr[i].elem.rhom_before;
             var rhom_after = sq_arr[i].elem.rhom_after;
+            var imgs = sq_arr[i].elem.img;
+            imgs.src = sq_arr[i].imgPath;
 
             rhom_before.scaleX = 0;
             rhom_before.scaleY = 0;
@@ -202,7 +210,9 @@ Squares.prototype = {
             rhom_after.scaleY = 0;
 
             TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: 0.3*i});
-            TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , delay: (0.3*i)+(delay*0.5)});
+            imgs.onload = (function(rhom, delay){
+                TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: (0.3)+(delay*0.5)});
+            })(rhom_after, delay)
         };
     }
 }
