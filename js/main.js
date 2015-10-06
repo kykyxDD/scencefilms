@@ -90,7 +90,7 @@ var app = angular.module('app', [])
             }
         })
         
-        v.squares.init(data.homepage_data)
+        // v.squares.init(data.homepage_data)
         v.main_menu.init(data.pages, 0, $s.mobile_style)
         
         if (!v.intro) {
@@ -278,8 +278,9 @@ var app = angular.module('app', [])
 
         v.background.play()
         v.transition.show($s.mobile_style)
-        v.main_menu.show_header(0.3)
-        v.squares.show();
+        v.main_menu.show_header(0.3);
+        v.squares.init($s.data.homepage_data)
+        // v.squares.show();
     }
 
     function onResize(e) {

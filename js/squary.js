@@ -46,7 +46,7 @@ Squares.prototype = {
             if(!mobile) this.pos_rhom(this.sq_arr_left[k]);
         }
 
-        this.hide();
+        // this.hide();
 
         if(mobile){
             this.resize_mobile();
@@ -56,6 +56,7 @@ Squares.prototype = {
 	create_elem: function(parent, page){
 		var scape_text = this.scape_text;
 		var sq_width = this.sq_width;
+        var delay = this.delay
 
         var itm_elem = document.createElement('div');
         itm_elem.className = 'cont_rhom';
@@ -85,6 +86,18 @@ Squares.prototype = {
         page.elem.rhom_before = rhom_before;
         page.elem.rhom_after = rhom_after;
         page.elem.text_rhom = text;
+
+        rhom_before.scaleX = 0;
+        rhom_before.scaleY = 0;
+
+        rhom_after.scaleX = 0;
+        rhom_after.scaleY = 0;
+        rhom_after.alpha = 0;
+
+        TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1});
+        img.onload = function(){
+            TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , alpha:1, delay: delay});
+        }
     },
 
     resize: function(mobile){
@@ -194,6 +207,8 @@ Squares.prototype = {
 
             var rhom_before = sq_arr[i].elem.rhom_before;
             var rhom_after = sq_arr[i].elem.rhom_after;
+            var imgs = rhom_after.querySelector('img');
+            console.log(imgs)
 
             rhom_before.scaleX = 0;
             rhom_before.scaleY = 0;
@@ -202,7 +217,12 @@ Squares.prototype = {
             rhom_after.scaleY = 0;
 
             TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: 0.3*i});
-            TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , delay: (0.3*i)+(delay*0.5)});
+            // imgs.load = function(){
+                // console.log(imgs)
+                TweenLite.to(rhom_after, delay, {scaleX: 1 , scaleY: 1 , delay: (0.3*i)+(delay*0.5)});    
+            // }
+
+            
         };
     }
 }
