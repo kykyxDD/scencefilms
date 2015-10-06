@@ -186,8 +186,6 @@ Anim_menu.prototype = {
         var win_height = document.documentElement.clientHeight;
         ScreenObject.decorate_element.apply(this.menu_cont)
 
-        console.log(this.menu_cont.h)
-
         if(mobile){
             var h = this.menu_cont.h ? this.menu_cont.h : 188;
             // console.log(h, 35*5, 35*4);

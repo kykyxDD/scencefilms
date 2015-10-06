@@ -28,6 +28,7 @@
     ng-app="app"
     ng-controller="appController"
     ng-class="{mobile: mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
+{{mobile_style}} {{orientation}}
     <div id='bg' class="home" ></div>
     
     <div id='anim_bg' ng-hide='mobile_style'></div>
@@ -69,7 +70,7 @@
                                     <div class="i-news" ng-repeat="item in selectedType.items track by $index">
                                         <div class="i-news__content">
                                             <div class="img">
-                                                <img alt="img" ng-src="{{item.img}}"/>
+                                                <img alt="img" ng-src="{{item.img}}" />
                                             </div>
                                             <div class="news">
                                                 <h3>{{item.short_desc}}</h3>

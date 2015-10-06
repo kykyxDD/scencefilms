@@ -103,7 +103,7 @@ var app = angular.module('app', [])
         }
     }
 }])
-.controller('appController', ['appState', 'view', '$scope', '$http', '$document', '$location', '$window', 'anchorSmoothScroll', function(state, v, $s, $http, $doc, $loc, $window, anchorSmoothScroll){
+.controller('appController', ['appState', 'view', '$scope', '$http', '$document', '$location', '$window', 'anchorSmoothScroll', '$timeout', function(state, v, $s, $http, $doc, $loc, $window, anchorSmoothScroll, $t){
 
     var doc = $doc[0];
 
@@ -131,7 +131,7 @@ var app = angular.module('app', [])
     v.simulate_page_load(30, null, true)
 
     function on_site_data() {
-        console.log("on site data")
+
         v.background.init(state.data)
         v.squares.init(state.data.homepage_data)
         v.main_menu.init(state.data.pages, 0, $s.mobile_style)
@@ -139,7 +139,6 @@ var app = angular.module('app', [])
     }
     
     function on_page_change(new_page, old_page) {
-        console.log('on_change_page', new_page, old_page)
         
         if (new_page) {
         
@@ -150,7 +149,7 @@ var app = angular.module('app', [])
                 
                 if (old_page == 'intro') {
                     v.background.prepare(state.get_page(new_page).bg_ref)
-                    v.background.play()
+                    v.background.play2()
                     v.transition.show($s.mobile_style)
                     v.main_menu.show_header(0.3)
                     state.set_selected_page(new_page)
@@ -224,11 +223,15 @@ var app = angular.module('app', [])
             $s.orientation = 'desktop';
             $s.mobile_style = false;
         }
+        
+        console.log("on resize")
 
         v.transition.resize($window.innerWidth, $window.innerHeight, $s.mobile_style)
         v.main_menu.resize($s.mobile_style);
         v.background.resize($window.innerWidth, $window.innerHeight)
         v.preloader.set_size(200, 200)
+        
+        $t(function(){$s.$apply()})
     }
 
     function onPageLoaded() {
@@ -271,8 +274,6 @@ var app = angular.module('app', [])
     
     $s.selectedItem = state.selectedPageData.pages[0]
     $s.$on('destroy', clean_up)
-    
-    console.log("content controller", state.selectedPage)
     
     function onResize() {
         var div = doc.querySelector(".b-content")
@@ -317,8 +318,6 @@ var app = angular.module('app', [])
 
     function onResize() {
         
-        console.log("media on resize")
-
         if (!$s.mobile_style) {
 
             var cont_w = $w.innerWidth - 450 + 192;
@@ -359,7 +358,6 @@ var app = angular.module('app', [])
 }])
 .controller('homeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
 
-    console.log('home controller')
     var doc = $doc[0]
 
     v.intro.set_canvas(doc.querySelector('#home .screen'))
@@ -379,7 +377,6 @@ var app = angular.module('app', [])
     $s.$on('$destroy', clean_up)
 
     function on_resize() {
-        console.log('home resize')
         v.squares.resize($s.mobile_style);
         v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
     }
@@ -388,12 +385,10 @@ var app = angular.module('app', [])
         angular.element($w).off('resize', on_resize)
         v.particles.stopRepaint()
         v.intro.stopRepaint()
-        console.log('home cleanup')
     }
 }])
 .controller('introController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state){
 
-    console.log('intro controller')
     var doc = $doc[0]
     var intro_bg = doc.querySelector('#intro_bg')
     var screen = doc.querySelector('#intro .screen')
@@ -405,8 +400,6 @@ var app = angular.module('app', [])
     play_intro()
 
     function on_resize() {
-        console.log('intro resize')
-        
         if (!v.intro.canvas) return
         
         if($s.mobile_style){
@@ -423,8 +416,6 @@ var app = angular.module('app', [])
 
     function clean_up() {
         angular.element($w).off('resize', on_resize)
-        
-        console.log('intro cleanup')
     }
 
     $s.skip_intro = function() {
@@ -491,7 +482,6 @@ var app = angular.module('app', [])
     }
 
     function hide_intro() {
-        console.log('hide intro')
         delete $s.skip_intro
         v.intro.stopRepaint()
         state.interfaceVisible = true
@@ -538,7 +528,7 @@ var app = angular.module('app', [])
         
         function elmYPosition(eID) {
             var elm = document.getElementById(eID);
-            console.log(eID, elm)
+
             var y = elm.offsetTop;
             var node = elm;
             while (node.offsetParent && node.offsetParent != document.body) {
@@ -549,4 +539,17 @@ var app = angular.module('app', [])
 
     };
     
-});
+})
+.directive('onComplete', function(){
+    return {
+        scope: {
+            callback: "@on-complete-callback"
+        },
+        
+        link: function($s, el, attr) {
+            
+            
+        }
+        
+    }
+})
