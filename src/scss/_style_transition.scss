@@ -336,20 +336,7 @@ body {
 }
 
 #content .page {
-  display: none;
-}
 
-.page .underconstruction {
-    font-size: 100px;
-    width: 100%;
-    color: #ffffff;
-    text-align: center;
-    margin-top: 20%;
-    font-size: 100px;
-    width: 100%;
-    color: #ffffff;
-    text-align: center;
-    margin-top: 20%;
 }
 
 #preloader {
@@ -382,7 +369,7 @@ body {
     color: #000000;
 }
 
-#intro {
+.screen {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -531,7 +518,7 @@ body {
   background: url('../image/bg/main.jpg') center;
   background-size: cover;
 }
-#intro.mobile_intro{
+.screen.mobile_intro{
   top: 0;
 }
 

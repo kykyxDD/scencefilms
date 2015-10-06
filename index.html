@@ -24,406 +24,395 @@
     <script src='js/main.js'></script>
 </head>
 
-<body ng-app="app" ng-controller="appController" ng-class="{mobile: mobile_style, home: selectedPage == 'home', cast: selectedPage == 'cast', news: selectedPage == 'news', makers: selectedPage == 'makers', media: selectedPage == 'media'}">
-    <div id='bg' class="home" >
-        <div id="video-player"></div>
-    </div>
+<body
+    ng-app="app"
+    ng-controller="appController"
+    ng-class="{mobile: mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
+    <div id='bg' class="home" ></div>
     
     <div id='anim_bg' ng-hide='mobile_style'></div>
 
-      <a name="top" ng-show='mobile_style'></a>
-	  <div class="p-title" ng-if='mobile_style' ng-show='selectedPage == "cast" || selectedPage == "makers"'>
-	    <h1>{{nameToChange}}</h1>
-	  </div>
+    <a name="top" ng-show='mobile_style'></a>
 
-	  <div id='content'>
-      <div id="home" class="page" ng-class="{selected: selectedPage == 'home'}">
-        <div class="paricles"></div>
-      </div>
-      <div id="news" ng-if='!mobile_style' class="page" ng-class="{selected: selectedPage == 'news'}" ng-controller="newsController as nc">
-      
-        <div class="b-content">
-          <div class="b-content_inside">
-            <div class="w-tab">
-              <ul class="tab">
-                <li ng-repeat="itm in news_data.types" ng-click="nc.selectType(itm.type)"><a href="#" ng-class="{active: selectedNewsType == itm.type}"><span>{{itm.label}}</span></a></li>
-              </ul>
-            </div>
-            <div class="w-news">
-              <div class="b-news">
-                  <div class="scrollCont">
-                    <div class="newsCont">
-                        <div class="i-news" ng-repeat="item in news track by $index">
-                            <div class="i-news__content">
-                              <div class="img">
-                                <img alt="img" ng-src="{{item.img}}"/>
-                              </div>
-                              <div class="news">
-                                <h3>{{item.short_desc}}</h3>
-                                <div class="w-time"><span class="time">{{item.date}}</span></div>
-                                <p>{{item.full_desc}}</p>
-                                <a class="btn" href="#">read all</a>
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="p-title" ng-if='mobile_style' ng-show='state.selectedPage == "cast" || state.selectedPage == "makers"'>
+        <h1>{{nameToChange}}</h1>
+    </div>
+
+    <div id='content' ng-switch="state.selectedPage">
+
+        <div id="intro" ng-switch-when="intro" class="page" ng-controller="introController">
+            <div id="intro_bg"></div>
+            <canvas class="screen" ng-click="skip_intro()" ng-class='{mobile_intro:mobile_style}'></canvas>
+        </div>
+        
+        <div id="home" ng-switch-when="home" class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">
+            <canvas class="particles"></canvas>
+            <canvas class="screen"></canvas>
         </div>
       
-      </div>
-
-      <div id="news" ng-if='mobile_style' class="page" ng-class="{selected: selectedPage == 'news'}" ng-controller="newsController as nc">
-      
-        <div class="b-content">
-          <div class="b-content_inside">
-            <div class="w-tab">
-              <ul class="tab">
-                <li ng-repeat="itm in news_data.types" ng-click="nc.selectType(itm.type)"><a href="#" ng-class="{active: selectedNewsType == itm.type}"><span>{{itm.label}}</span></a></li>
-              </ul>
-            </div>
-            <div class="w-news">
-              <div class="b-news">
-
-              <div class="scrollCont">
-                <div class="mediaCont">
-
-                    <div class="i-news" ng-repeat="item in news track by $index">
-                      <div class="i-news__content">
-                        <div class="img">
-                          <img alt="img" ng-src="{{item.img}}"/>
-                        </div>
-                        <div class="news">
-                          <h3>{{item.short_desc}}</h3>
-
-                          <div class="w-time"><span class="time">{{item.date}}</span></div>
-                          
-                          <p>{{item.full_desc}}</p>
-                          <a class="btn" href="#">read all</a>
-                        </div>
-                      </div>
+        <div id="news" ng-switch-when="news" ng-if='!mobile_style' class="page" ng-controller="mediaController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                        <ul class="tab">
+                            <li ng-repeat="itm in state.selectedPageData.types" ng-click="typeMenuClick(itm)">
+                                <a href="#" ng-class="{active: selectedType.type == itm.type}">
+                                    <span>{{itm.label}}</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="btn_top">
-                      <a href="#top">
-                        <span class="btn"></span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      
-      </div>
-      
-      <div id="media" ng-if='!mobile_style' class="page" ng-class="{selected: selectedPage == 'media'}" ng-controller="mediaController">
-        <div class="b-content">
-          <div class="b-content_inside">
-            <div class="w-tab">
-              <ul class="tab">
-                <li ng-repeat="section in data.pages[4].pages track by $index">
-                    <a href="#" ng-click="changeMedia(section)" ng-class="{active: selectedMedia.name == section.name}"><span>{{section.name}}</span></a>
-                </li>
-               </ul>
-            </div>
-            <div class="w-photo">
-                <div class="b-photo">
-                    <div class="scrollCont">
-                        <div class="mediaCont">
-                            <div  ng-switch="selectedMedia.type">
-                            <div ng-switch-when="photo" class="i-photo__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
-                                <div ng-repeat="item in grpup track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
-                                    <div class="img">
-                                        <img alt="img" ng-src="{{item.src}}"/>
-                                    </div>
-                                    <div class="w-share">
-                                        <div class="b-share">
-                                            <ul class="l-share">
-                                                <li><a href="#" class="i-plus"></a></li>
-                                                <li><a href="#" class="i-like"></a></li>
-                                                <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
-                                            </ul>
+                    <div class="w-news">
+                        <div class="b-news">
+                            <div class="scrollCont">
+                                <div class="newsCont">
+                                    <div class="i-news" ng-repeat="item in selectedType.items track by $index">
+                                        <div class="i-news__content">
+                                            <div class="img">
+                                                <img alt="img" ng-src="{{item.img}}"/>
+                                            </div>
+                                            <div class="news">
+                                                <h3>{{item.short_desc}}</h3>
+                                                <div class="w-time"><span class="time">{{item.date}}</span></div>
+                                                <p>{{item.full_desc}}</p>
+                                                <a class="btn" href="#">read all</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div ng-switch-when="video" class="i-video__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
-                                <div class="i-video" ng-repeat="item in grpup track by $index">
-                                    <a href="#">
-                                        <img alt="img" ng-src="{{item.src}}"/>
-                                        <span class="text">{{item.desc}}</span>
-                                    </a>
-                                </div>
-                            </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>            
-          </div>
-        </div>
-      </div>
-
-      <div id="media" ng-if='mobile_style' class="page" ng-class="{selected: selectedPage == 'media'}" ng-controller="mediaController">
-        <div class="b-content">
-          <div class="b-content_inside">
-            <div class="w-tab">
-              <ul class="tab">
-                <li ng-repeat="section in data.pages[4].pages track by $index">
-                    <a href="#" ng-click="changeMedia(section)" ng-class="{active: selectedMedia.name == section.name}"><span>{{section.name}}</span></a>
-                </li>
-               </ul>
             </div>
-            <div class="w-photo">
-                <div class="b-photo">
+        </div>
 
-                  <div class="scrollCont">
-                    <div class="mediaCont">
+        <div id="news" ng-switch-when="news" ng-if='mobile_style' class="page" ng-controller="mediaController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                        <ul class="tab">
+                            <li ng-repeat="itm in state.selectedPageData.types" ng-click="typeMenuClick(itm.type)">
+                                <a href="#" ng-class="{active: selectedType.type == itm.type}">
+                                    <span>{{itm.label}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-news">
+                        <div class="b-news">
+                            <div class="scrollCont">
+                                <div class="mediaCont">
 
-                      <div ng-switch="selectedMedia.type">
-                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
-                            <div ng-repeat="item in grpup track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
-                                <div class="img">
-                                    <img alt="img" ng-src="{{item.src}}"/>
-                                </div>
-                                <div class="w-share">
-                                    <div class="b-share">
-                                        <ul class="l-share">
-                                            <li><a href="#" class="i-plus"></a></li>
-                                            <li><a href="#" class="i-like"></a></li>
-                                            <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
-                                        </ul>
+                                    <div class="i-news" ng-repeat="item in selectedType.items track by $index">
+                                        <div class="i-news__content">
+                                            <div class="img">
+                                                <img alt="img" ng-src="{{item.img}}"/>
+                                            </div>
+                                            <div class="news">
+                                                <h3>{{item.short_desc}}</h3>
+                                                <div class="w-time"><span class="time">{{item.date}}</span></div>
+                                                <p>{{item.full_desc}}</p>
+                                                <a class="btn" href="#">read all</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn_top">
+                                        <a href="#top">
+                                            <span class="btn"></span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                      
-                        <div ng-switch-when="video" class="i-video__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
-                            <div class="i-video" ng-repeat="item in grpup track by $index">
-                                <a href="#">
-                                    <img alt="img" ng-src="{{item.src}}"/>
-                                    <span class="text">{{item.desc}}</span>
-                                </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="media" ng-switch-when="media" ng-if='!mobile_style' class="page" ng-controller="mediaController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                        <ul class="tab">
+                            <li ng-repeat="item in state.selectedPageData.types track by $index">
+                                <a href="#" ng-click="typeMenuClick(item)" ng-class="{active: selectedType.type == item.type}"><span>{{item.label}}</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-photo">
+                        <div class="b-photo">
+                            <div class="scrollCont">
+                                <div class="mediaCont">
+                                    <div ng-switch="selectedType.type">
+                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index">
+                                            <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
+                                                <div class="img">
+                                                    <img alt="img" ng-src="{{item.src}}"/>
+                                                </div>
+                                                <div class="w-share">
+                                                    <div class="b-share">
+                                                        <ul class="l-share">
+                                                            <li><a href="#" class="i-plus"></a></li>
+                                                            <li><a href="#" class="i-like"></a></li>
+                                                            <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by $index">
+                                            <div class="i-video" ng-repeat="item in group track by $index">
+                                                <a href="#">
+                                                    <img alt="img" ng-src="{{item.src}}"/>
+                                                    <span class="text">{{item.desc}}</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="btn_top">
-                          <a href="#top">
-                            <span class="btn"></span>
-                          </a>
-                        </div>
-                      </div>
+                    </div>            
+                </div>
+            </div>
+        </div>
 
+        <div id="media" ng-switch-when="media" ng-if='mobile_style' class="page" ng-controller="mediaController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                      <ul class="tab">
+                        <li ng-repeat="itm in state.selectedPageData.types track by $index">
+                            <a href="#" ng-click="typeMenuClick(section)" ng-class="{active: selectedType.type == itm.type}"><span>{{itm.label}}</span></a>
+                        </li>
+                       </ul>
                     </div>
-                  </div>
+                    <div class="w-photo">
+                        <div class="b-photo">
+                            <div class="scrollCont">
+                                <div class="mediaCont">
+                                    <div ng-switch="selectedType.type">
+                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index">
+                                            <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
+                                                <div class="img">
+                                                    <img alt="img" ng-src="{{item.src}}"/>
+                                                </div>
+                                                <div class="w-share">
+                                                    <div class="b-share">
+                                                        <ul class="l-share">
+                                                            <li><a href="#" class="i-plus"></a></li>
+                                                            <li><a href="#" class="i-like"></a></li>
+                                                            <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-
+                                        <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by $index">
+                                            <div class="i-video" ng-repeat="item in group track by $index">
+                                                <a href="#">
+                                                    <img alt="img" ng-src="{{item.src}}"/>
+                                                    <span class="text">{{item.desc}}</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="btn_top">
+                                            <a href="#top">
+                                                <span class="btn"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
                 </div>
-            </div>            
-          </div>
+            </div>
         </div>
-      </div>
 
-     <div id="cast" ng-if='!mobile_style' ng-class="{selected: selectedPage == 'cast'}" class="page w-content">
-
-        <div class="b-content" style="width: 1166px;">
-          <div class="b-content_inside">
-            <div class="w-tab">
-              <ul class="tab">
-                <li ng-repeat="page in data.pages[2].pages"><a href="#" ng-click="changeCast(page)" ng-class="{active: page == selectedCast}"><span>{{page.title}}</span></a></li>
-              </ul>
-
-            </div>
-            <div class="w-text">
-              <div class="b-text">
-                <div class="t-title">
-                  <h2>{{selectedCast.name}}</h2>
-                  <h3>{{selectedCast.role}}</h3>
+        <div id="cast" ng-switch-when="cast" ng-if='!mobile_style' class="page w-content" ng-controller="contentController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                        <ul class="tab">
+                            <li ng-repeat="page in state.selectedPageData.pages"><a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="w-text">
+                        <div class="b-text">
+                            <div class="t-title">
+                                <h2>{{selectedItem.name}}</h2>
+                                <h3>{{selectedItem.role}}</h3>
+                            </div>
+                            <div class="text">
+                                <p>{{selectedItem.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text">
-                  <p>{{selectedCast.desc}}</p>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
 
-      <div id="cast" ng-if='mobile_style' ng-class="{selected: selectedPage == 'cast'}" class="page w-content"> 
-      	<div class="w-content">
-        <div class="b-content">
-          <div class="b-content_inside">
-            <div class="w-tab">
-              <ul class="tab">
-                <li ng-repeat="page in data.pages[2].pages">
-                	<a href='' ng-href="#{{page.role}}" ng-class="{active: page == selectedCast}" >
-                		<span>{{page.title}}</span>
-                	</a>
-                </li>
-              </ul>
+        <div id="cast" ng-switch-when="cast" ng-if='mobile_style' class="page w-content" ng-controller="contentController"> 
+            <div class="w-content">
+                <div class="b-content">
+                    <div class="b-content_inside">
+                        <div class="w-tab">
+                            <ul class="tab">
+                                <li ng-repeat="page in state.selectedPageData.pages">
+                                    <a href='' ng-href="#{{page.role}}" ng-class="{active: page == selectedItem}" >
+                                        <span>{{page.title}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="w-text" ng-repeat="selectedItem in state.selectedPageData.pages">
+                            <a id="{{selectedItem.role}}"></a>
+                            <div class="w-img w-img__portrait">
+                                <img alt="img" ng-src="{{selectedItem.img_port}}"/>
+                            </div>
+                            <div class="w-img w-img__landscape" ng-if='$index%2 == 1'>
+                                <div class="b-img b-img__landscape" style="background-image: url('{{selectedItem.img_land}}');"></div>
+                            </div>
+                            <div class="b-text">
+                                <div class="t-title">
+                                    <h2>{{selectedItem.name}}</h2>
+                                    <h3>{{selectedItem.role}}</h3>
+                                </div>
+                                <div class="text">
+                                    <p>{{selectedItem.desc}}</p>
+                                </div>
+                                <div class="btn_top">
+                                    <a href="#top"><span class="btn"></a></span>
+                                </div>
+                            </div>
+                            <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
+                                <div class="b-img b-img__landscape" style="background-image: url('{{selectedItem.img_land}}');"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="w-text" ng-repeat="selectedCast in data.pages[2].pages">
-              <a id="{{selectedCast.role}}"></a>
-              <div class="w-img w-img__portrait">
-                <img alt="img" ng-src="{{selectedCast.img_port}}"/>
-              </div>
-              <div class="w-img w-img__landscape" ng-if='$index%2 == 1'>
-               <div class="b-img b-img__landscape" style="background-image: url('{{selectedCast.img_land}}');"></div>
-              </div>
-              <div class="b-text">
-                <div class="t-title">
-                  <h2>{{selectedCast.name}}</h2>
-                  <h3>{{selectedCast.role}}</h3>
-                </div>
-                <div class="text">
-                  <p>{{selectedCast.desc}}</p>
-                </div>
-                <div class="btn_top">
-                  <a href="#top"><span class="btn"></a></span>
-                </div>
-              </div>
-              <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
-                <div class="b-img b-img__landscape" style="background-image: url('{{selectedCast.img_land}}');"></div>
-              </div>
-            
-
-            </div>
-
-
-          </div>
         </div>
-      </div>
-      </div>
       
-	    <div id="makers" ng-if='!mobile_style' ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
-        <div class="b-content" style="width: 1166px;">
-          <div class="b-content_inside">
-            <div class="w-tab">
-              <ul class="tab">
-                <li ng-repeat="page in data.pages[3].pages"><a href="#" ng-click="changeMaker(page)" ng-class="{active: page == selectedMaker}"><span>{{page.title}}</span></a></li>
-              </ul>
-
-            </div>
-            <div class="w-text">
-              <div class="img"></div>
-              <div class="b-text">
-                <div class="t-title">
-                  <h2>{{selectedMaker.name}}</h2>
-                  <h3>{{selectedMaker.role}}</h3>
+        <div id="makers" ng-switch-when="makers" ng-if='!mobile_style' class="page w-content" ng-controller="contentController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                        <ul class="tab">
+                            <li ng-repeat="page in state.selectedPageData.pages">
+                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-text">
+                        <div class="img"></div>
+                        <div class="b-text">
+                            <div class="t-title">
+                                <h2>{{selectedItem.name}}</h2>
+                                <h3>{{selectedItem.role}}</h3>
+                            </div>
+                            <div class="text">
+                                <p>{{selectedItem.desc}}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text">
-                  <p>{{selectedMaker.desc}}</p>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
 
-      <div id="makers" ng-if='mobile_style' ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
-        <div class="b-content">
-          <div class="b-content_inside">
-            <div class="w-tab">
-
-              <ul class="tab">                
-                <li ng-repeat="page in data.pages[3].pages">
-                	<a href="#" ng-href="#{{page.role}}" ng-class="{active: page == selectedMaker}">
-                		<span>{{page.title}}</span>
-                	</a>
-                </li>
-              </ul>
-
+        <div id="makers" ng-switch-when="makers" ng-if='mobile_style' class="page w-content" ng-controller="contentController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                        <ul class="tab">                
+                            <li ng-repeat="page in state.selectedPageData.pages">
+                                <a href="#" ng-href="#{{page.role}}" ng-class="{active: page == selectedMaker}">
+                                    <span>{{page.title}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-text" ng-repeat="selectedMaker in state.selectedPageData.pages">
+                        <a id="{{selectedMaker.role}}"></a>
+                        <div class="w-img w-img__portrait">
+                            <img alt="img" ng-src="{{selectedMaker.img_port}}"/>
+                        </div>
+                        <div class="w-img w-img__landscape" ng-if='$index%2 == 1'>
+                            <div class="b-img b-img__landscape" style="background-image: url('{{selectedMaker.img_land}}');"></div>
+                        </div>
+                        <div class="b-text">
+                            <div class="t-title">
+                                <h2>{{selectedMaker.name}}</h2>
+                                <h3>{{selectedMaker.role}}</h3>
+                            </div>
+                            <div class="text">
+                                <p>{{selectedMaker.desc}}</p>
+                            </div>
+                            <div class="btn_top">
+                                <a href="#top"><span class="btn"></a></span>
+                            </div>
+                        </div>
+                        <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
+                            <div class="b-img b-img__landscape" style="background-image: url('{{selectedMaker.img_land}}');"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="w-text" ng-repeat="selectedMaker in data.pages[3].pages">
-              <a id="{{selectedMaker.role}}"></a>
-
-              <div class="w-img w-img__portrait">
-                <img alt="img" ng-src="{{selectedMaker.img_port}}"/>
-              </div>
-              <div class="w-img w-img__landscape" ng-if='$index%2 == 1'>
-               <div class="b-img b-img__landscape" style="background-image: url('{{selectedMaker.img_land}}');"></div>
-              </div>
-              <div class="b-text">
-                <div class="t-title">
-                  <h2>{{selectedMaker.name}}</h2>
-                  <h3>{{selectedMaker.role}}</h3>
-                </div>
-                <div class="text">
-                  <p>{{selectedMaker.desc}}</p>
-                </div>
-                <div class="btn_top">
-                  <a href="#top"><span class="btn"></a></span>
-                </div>
-              </div>
-              <div class="w-img w-img__landscape" ng-if='$index%2 == 0'>
-                <div class="b-img b-img__landscape" style="background-image: url('{{selectedMaker.img_land}}');"></div>
-              </div>
-
-
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  <div id='side_page_right' ng-show='selectedPage == "home"' ng-class='{mobile_squary:mobile_style}'>
-	</div>
-	<div id='side_page_left' ng-show='selectedPage == "home"' ng-hide="mobile_style">
-	</div>
-
+   
+    <div id='side_page_right' ng-show='state.selectedPage == "home"' ng-class='{mobile_squary:mobile_style}'></div>
+	<div id='side_page_left' ng-show='state.selectedPage == "home"' ng-hide="mobile_style"></div>
     <div id="title_page"></div>
 
-    <div class="footer">
-      <div class="w-share">
-        <ul class="l-share">
-          <li><a class="i-facebook" href="#">facebook</a></li>
-          <li><a class="i-twitter" href="#">twitter</a></li>
-          <li><a class="i-instagram" href="#">instagram</a></li>
-          <li><a class="i-google_plus" href="#">google plus</a></li>
-        </ul>
-      </div>
-      <div class="w-nav">
-        <ul class="l-nav">
-          <li ng-repeat='page in data.pages' class='footer_menu' ng-show="selectedPage != page.page" ng-click="change_page(page)">
-            <span>{{page.name}}</span>
-          </li>
-        </ul>
-      </div>
+    <div class="footer" ng-show="state.interfaceVisible">
+        <div class="w-share">
+            <ul class="l-share">
+                <li><a class="i-facebook" href="#">facebook</a></li>
+                <li><a class="i-twitter" href="#">twitter</a></li>
+                <li><a class="i-instagram" href="#">instagram</a></li>
+                <li><a class="i-google_plus" href="#">google plus</a></li>
+            </ul>
+        </div>
+        <div class="w-nav">
+            <ul class="l-nav">
+                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" ng-click="change_page(page)">
+                    <span>{{page.name}}</span>
+                </li>
+            </ul>
+        </div>
     </div>
     
-	  <div class="transition rot45deg" ng-class='{mobile_transition: mobile_style}'>
-      <div id="yellow_part" class="element">
-        <div class="bg yellow"></div>
-      </div>
-      <div id="black_part" class="element">
-        <div class="bg black"></div>
-      </div>
+    <div class="transition rot45deg" ng-class='{mobile_transition: mobile_style}' ng-show="state.interfaceVisible">
+        <div id="yellow_part" class="element">
+            <div class="bg yellow"></div>
+        </div>
+        <div id="black_part" class="element">
+            <div class="bg black"></div>
+        </div>
     </div>
 
-    <div id='main_menu' ng-class='{mobile_menu: mobile_style}'>
-      <div class="header_cont" ng-click="onMenuHeaderClick()">
-        <div class='lines_cont'>
-          <div class='line'></div>
-          <div class='line'></div>
-          <div class='line'></div>
+    <div id='main_menu' ng-class='{mobile_menu: mobile_style}' ng-show="state.interfaceVisible">
+        <div class="header_cont" ng-click="onMenuHeaderClick()">
+            <div class='lines_cont'>
+                <div class='line'></div>
+                <div class='line'></div>
+                <div class='line'></div>
+            </div>
+            <div class="haeder_label" ng-hide='mobile_style'>menu</div>
         </div>
-        <div class="haeder_label" ng-hide='mobile_style'>menu</div>
-      </div>
-      <div class='menu_cont'></div>
-      <div class='close_btn' ng-click="onMenuCloseClick()" >&#10006;</div>
+        <div class='menu_cont'></div>
+        <div class='close_btn' ng-click="onMenuCloseClick()" >&#10006;</div>
     </div>
-    
-    <div id="intro_bg"></div>
-    <div id="intro" ng-click="skip_intro()" ng-class='{mobile_intro:mobile_style}'></div>
 
     <div id="preloader">
-      <div class='label'>0%</div>
+        <div class='label'>0%</div>
     </div>
 
-  </body>
+</body>
 </html>
 
