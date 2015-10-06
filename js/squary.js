@@ -69,6 +69,11 @@ Squares.prototype = {
         var text = document.createElement('div');
         text.style.backgroundImage = 'url("'+page.imgPath+'")'; 
         text.className = 'text_rhom';
+        // var img = document.createElement('img');
+        // img.src = page.imgPath;
+        // text.appendChild(img);
+        // img.style.width = '100%';
+        // img.style.height = '100%';
 
         rhom_after.appendChild(text);
         parent.appendChild(itm_elem);
@@ -100,7 +105,7 @@ Squares.prototype = {
         this.sq_width = Math.round(document.body.clientWidth/6);
         this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
 
-        this.cont_rhom_right.h = 0;
+        // this.cont_rhom_right.h = 0;
         this.cont_rhom_right.style.right = this.rights + 'px';
         this.cont_rhom_left.style.left = Math.round((-this.sq_width)*0.4) + 'px';
         this.cont_rhom_left.style.bottom = Math.round((-this.sq_width)*0.4) + 'px';
@@ -154,7 +159,9 @@ Squares.prototype = {
 
             itm_elem.x = k !== 0 ? (win_wid*0.47)*(k%2) : win_wid*0.15;
 
-            if(k == 1){
+            if(k == 0){
+                itm_elem.y = 0;
+            } else if(k == 1){
                 itm_elem.y = top_1;
             } else if(k > 1){
                 itm_elem.y = this.sq_arr_right[k-1].elem.y - top_2;
