@@ -350,7 +350,8 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 
 #content .page {
-
+    display: table-cell;
+    vertical-align: middle;
 }
 
 #preloader {
