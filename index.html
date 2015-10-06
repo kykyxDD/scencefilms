@@ -32,7 +32,6 @@
     <a id="top"></a>
     <div id='anim_bg' ng-hide='mobile_style'></div>
 
-    
 	  <div class="p-title" ng-if='mobile_style' ng-show='selectedPage == "cast" || selectedPage == "makers"'>
 	    <h1>{{nameToChange}}</h1>
 	  </div>
@@ -42,7 +41,7 @@
         <div class="paricles"></div>
       </div>
       <div id="news" ng-if='!mobile_style' class="page" ng-class="{selected: selectedPage == 'news'}" ng-controller="newsController as nc">
-      
+
         <div class="b-content">
           <div class="b-content_inside">
             <div class="w-tab">
@@ -87,37 +86,28 @@
             </div>
             <div class="w-news">
               <div class="b-news">
-
-              <div class="scrollCont">
-                <div class="mediaCont">
-
-                    <div class="i-news" ng-repeat="item in news track by $index">
-                      <div class="i-news__content">
-                        <div class="img">
-                          <img alt="img" ng-src="{{item.img}}"/>
-                        </div>
-                        <div class="news">
-                          <h3>{{item.short_desc}}</h3>
-
-                          <div class="w-time"><span class="time">{{item.date}}</span></div>
-                          
-                          <p>{{item.full_desc}}</p>
-                          <a class="btn" href="#">read all</a>
-                        </div>
-                      </div>
+                <div class="i-news" ng-repeat="item in news track by $index">
+                  <div class="i-news__content">
+                    <div class="img">
+                      <img alt="img" ng-src="{{item.img}}"/>
                     </div>
-                    <div class="btn_top" ng-click='goScroll("top")'>
-                        <span class="btn"></span>
+                    <div class="news">
+                      <h3>{{item.short_desc}}</h3>
+
+                      <div class="w-time"><span class="time">{{item.date}}</span></div>
+
+                      <p>{{item.full_desc}}</p>
+                      <a class="btn" href="#">read all</a>
                     </div>
                   </div>
                 </div>
-
-
+                <div class="btn_top" ng-click='goScroll("top")'>
+                    <span class="btn"></span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      
       </div>
       
       <div id="media" ng-if='!mobile_style' class="page" ng-class="{selected: selectedPage == 'media'}" ng-controller="mediaController">
@@ -181,47 +171,38 @@
             </div>
             <div class="w-photo">
                 <div class="b-photo">
-
-                  <div class="scrollCont">
-                    <div class="mediaCont">
-
-                      <div ng-switch="selectedMedia.type">
-                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
-                            <div ng-repeat="item in grpup track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
-                                <div class="img">
-                                    <img alt="img" ng-src="{{item.src}}"/>
-                                </div>
-                                <div class="w-share">
-                                    <div class="b-share">
-                                        <ul class="l-share">
-                                            <li><a href="#" class="i-plus"></a></li>
-                                            <li><a href="#" class="i-like"></a></li>
-                                            <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
-                                        </ul>
-                                    </div>
+                  <div ng-switch="selectedMedia.type">
+                    <div ng-switch-when="photo" class="i-photo__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
+                        <div ng-repeat="item in grpup track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
+                            <div class="img">
+                                <img alt="img" ng-src="{{item.src}}"/>
+                            </div>
+                            <div class="w-share">
+                                <div class="b-share">
+                                    <ul class="l-share">
+                                        <li><a href="#" class="i-plus"></a></li>
+                                        <li><a href="#" class="i-like"></a></li>
+                                        <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                      
-                        <div ng-switch-when="video" class="i-video__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
-                            <div class="i-video" ng-repeat="item in grpup track by $index">
-                                <a href="#">
-                                    <img alt="img" ng-src="{{item.src}}"/>
-                                    <span class="text">{{item.desc}}</span>
-                                </a>
-                            </div>
+                    </div>
+                  
+                    <div ng-switch-when="video" class="i-video__group" ng-repeat="grpup in selectedMedia.itemGroups track by $index">
+                        <div class="i-video" ng-repeat="item in grpup track by $index">
+                            <a href="#">
+                                <img alt="img" ng-src="{{item.src}}"/>
+                                <span class="text">{{item.desc}}</span>
+                            </a>
                         </div>
-                        <div class="btn_top" ng-click='goScroll("top")'>
-                          <span class="btn"></span>
-                        </div>
-                      </div>
-
+                    </div>
+                    <div class="btn_top" ng-click='goScroll("top")'>
+                      <span class="btn"></span>
                     </div>
                   </div>
-
-
                 </div>
-            </div>            
+            </div>
           </div>
         </div>
       </div>
@@ -296,7 +277,7 @@
         </div>
       </div>
       </div>
-      
+
 	    <div id="makers" ng-if='!mobile_style' ng-class="{selected: selectedPage == 'makers'}" class="page w-content">
         <div class="b-content" style="width: 1166px;">
           <div class="b-content_inside">
@@ -361,7 +342,6 @@
                 <div class="b-img b-img__landscape" style="background-image: url('{{selectedMaker.img_land}}');"></div>
               </div>
 
-
             </div>
           </div>
         </div>
@@ -395,7 +375,7 @@
         </ul>
       </div>
     </div>
-    
+
 	  <div class="transition rot45deg" ng-class='{mobile_transition: mobile_style}'>
       <div id="yellow_part" class="element">
         <div class="bg yellow"></div>
@@ -417,7 +397,7 @@
       <div class='menu_cont'></div>
       <div class='close_btn' ng-click="onMenuCloseClick()" >&#10006;</div>
     </div>
-    
+
     <div id="intro_bg"></div>
     <div id="intro" ng-click="skip_intro()" ng-class='{mobile_intro:mobile_style}'></div>
 

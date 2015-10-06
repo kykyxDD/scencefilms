@@ -443,7 +443,7 @@ var app = angular.module('app', [])
         var mobile = $s.mobile_style;
         
         if (data) {
-            if(!scroll_cont || !items_cont){
+            if((!scroll_cont || !items_cont) && !mobile){
                 scroll_cont = doc.querySelector(".b-photo .scrollCont")
                 items_cont = scroll_cont.querySelector(".mediaCont")
             }
@@ -452,7 +452,7 @@ var app = angular.module('app', [])
             media_data.pages.forEach(groupBy)
 
             $s.selectedMedia = data.pages[4].pages[0]
-            scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
+            if(!mobile) scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
 
             $t(onResize)
         }
@@ -471,6 +471,11 @@ var app = angular.module('app', [])
         mobile = $s.mobile_style;
         
         if (media_data && !mobile) {
+            if(!scroll_cont || !items_cont || !scroll){
+                scroll_cont = doc.querySelector(".b-photo .scrollCont")
+                items_cont = scroll_cont.querySelector(".mediaCont")
+                scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
+            }
 
             var cont_w = $window.innerWidth - 450 + 192;
             var content_w = $s.selectedMedia.itemGroups.length*450
@@ -532,15 +537,14 @@ var app = angular.module('app', [])
 
         if (data) {
 
-            if(!scroll_cont || !items_cont){
-                scroll_cont = doc.querySelector(".b-photo .scrollCont")
-                items_cont = scroll_cont.querySelector(".mediaCont")
+            if((!scroll_cont || !items_cont) && !mobile){
+                scroll_cont = doc.querySelector(".b-news .scrollCont")
+                items_cont = scroll_cont.querySelector(".newsCont")
             }
 
             $s.news_data = data.pages[1]
             $s.news_data.pages.forEach(parseDate)
-
-            scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
+            if(!mobile) scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
 
             selectType($s.news_data.types[0].type)
         }
@@ -556,6 +560,13 @@ var app = angular.module('app', [])
         mobile = $s.mobile_style;
 
         if ($s.news_data && !mobile) {
+            if(!scroll_cont || !items_cont){
+                scroll_cont = doc.querySelector(".b-news .scrollCont")
+                items_cont = scroll_cont.querySelector(".newsCont")
+
+                scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
+            }
+
             var cont_w = $window.innerWidth - 450 + 192;
             var content_w = $s.news.length*460
             scroll_cont.style.width = cont_w + "px"
