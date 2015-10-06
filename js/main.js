@@ -114,11 +114,11 @@ var app = angular.module('app', [])
 
     if((win_wid <= 1024 && orien == 'landscape') || 
        (win_wid <= 768 && orien == 'portrait')){
-        $s.orientation = orien;
-        $s.mobile_style = true;
+        state.orientation = orien;
+        state.mobile_style = true;
     } else {
-        $s.orientation = 'desktop';
-        $s.mobile_style = false;
+        state.orientation = 'desktop';
+        state.mobile_style = false;
     }
     
     $s.state = state
@@ -133,8 +133,8 @@ var app = angular.module('app', [])
     function on_site_data() {
         console.log("on site data")
         v.background.init(state.data)
-        v.squares.init(state.data.homepage_data)
-        v.main_menu.init(state.data.pages, 0, $s.mobile_style)
+        
+        v.main_menu.init(state.data.pages, 0, state.mobile_style)
         state.pageToChange = 'intro'
     }
     
@@ -151,13 +151,13 @@ var app = angular.module('app', [])
                 if (old_page == 'intro') {
                     v.background.prepare(state.get_page(new_page).bg_ref)
                     v.background.play()
-                    v.transition.show($s.mobile_style)
+                    v.transition.show(state.mobile_style)
                     v.main_menu.show_header(0.3)
                     state.set_selected_page(new_page)
                 }
                 else {
                     v.main_menu.collapse()
-                    v.main_menu.hide_header($s.mobile_style)
+                    v.main_menu.hide_header(state.mobile_style)
                     v.transition.open()
                 }
             }
@@ -188,7 +188,7 @@ var app = angular.module('app', [])
     }
 
     v.transition.onClosed = function() {
-        v.transition.show($s.mobile_style)
+        v.transition.show(state.mobile_style)
         v.main_menu.show_header(0.3)
 
         v.background.play()
@@ -196,7 +196,7 @@ var app = angular.module('app', [])
         if ($s.selectedPage == 'home') {
             v.intro && v.intro.runRepaint()
             v.particles && v.particles.runRepaint()
-            v.squares.show();
+            // v.squares.show();
         }
     }
     
@@ -215,20 +215,26 @@ var app = angular.module('app', [])
 
         var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
+
+
         if((win_wid <= 1024 && orien == 'landscape') || 
            (win_wid <= 768 && orien == 'portrait')){
 
-            $s.orientation = orien;
-            $s.mobile_style = true;
+            state.orientation = orien;
+            state.mobile_style = true;
         } else {
-            $s.orientation = 'desktop';
-            $s.mobile_style = false;
+            state.orientation = 'desktop';
+            state.mobile_style = false;
         }
 
-        v.transition.resize($window.innerWidth, $window.innerHeight, $s.mobile_style)
-        v.main_menu.resize($s.mobile_style);
+        //console.log(orien, state.orientation, state.mobile_style)
+
+        v.transition.resize($window.innerWidth, $window.innerHeight, state.mobile_style)
+        v.main_menu.resize(state.mobile_style);
         v.background.resize($window.innerWidth, $window.innerHeight)
         v.preloader.set_size(200, 200)
+        //console.log(state.mobile_style)
+        if(e){$s.$apply()}
     }
 
     function onPageLoaded() {
@@ -244,16 +250,16 @@ var app = angular.module('app', [])
     }
 
     $s.onMenuHeaderClick = function() {
-        v.main_menu.hide_header($s.mobile_style)
+        v.main_menu.hide_header(state.mobile_style)
         v.main_menu.expand()
-        v.transition.expand($s.mobile_style)
+        v.transition.expand(state.mobile_style)
     }
 
     $s.onMenuCloseClick = function() {
         v.main_menu.align_header();
         v.main_menu.collapse();
         v.main_menu.show_header(0.3);
-        v.transition.collapse($s.mobile_style);
+        v.transition.collapse(state.mobile_style);
     }
 
     $s.readyHtml = function(){
@@ -266,6 +272,7 @@ var app = angular.module('app', [])
     
     var doc = $doc[0]
 
+
     onResize()
     angular.element($w).on('resize', onResize)
     
@@ -276,7 +283,7 @@ var app = angular.module('app', [])
     
     function onResize() {
         var div = doc.querySelector(".b-content")
-        div.style.width = $s.mobile_style ? '' : Math.round($w.innerWidth*0.66) + "px";
+        //div.style.width = state.mobile_style ? '' : Math.round($w.innerWidth*0.66) + "px";
     }
 
     function clean_up() {
@@ -294,7 +301,7 @@ var app = angular.module('app', [])
 
     var doc = $doc[0];
 
-    if(!$s.mobile_style){
+    if(!state.mobile_style){
         scroll_cont = doc.querySelector(".scrollCont")
         items_cont = scroll_cont.querySelector(":first-child")
     }
@@ -319,7 +326,7 @@ var app = angular.module('app', [])
         
         console.log("media on resize")
 
-        if (!$s.mobile_style) {
+        if (!state.mobile_style) {
 
             var cont_w = $w.innerWidth - 450 + 192;
             var content_w = $s.selectedType.items.length*$s.selectedType.item_width
@@ -368,7 +375,8 @@ var app = angular.module('app', [])
 
     v.particles.set_canvas(doc.querySelector('#home .particles'))
     v.particles.init($w.innerWidth, $w.innerHeight)
-    v.particles.runRepaint()
+    v.particles.runRepaint();
+    v.squares.init(state.data.homepage_data)
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
     v.squares.show()
@@ -380,7 +388,7 @@ var app = angular.module('app', [])
 
     function on_resize() {
         console.log('home resize')
-        v.squares.resize($s.mobile_style);
+        v.squares.resize(state.mobile_style);
         v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
     }
 
@@ -409,7 +417,7 @@ var app = angular.module('app', [])
         
         if (!v.intro.canvas) return
         
-        if($s.mobile_style){
+        if(state.mobile_style){
             var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
             v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
             v.intro.canvas.x = 0;
@@ -475,7 +483,7 @@ var app = angular.module('app', [])
         
         on_resize()
         
-        if($s.mobile_style){
+        if(state.mobile_style){
             var scale = ($w.innerWidth/screen.w).toFixed(3)
             screen.scaleX = screen.scaleY = scale;
             screen.y = ($w.innerHeight/2)
@@ -538,7 +546,6 @@ var app = angular.module('app', [])
         
         function elmYPosition(eID) {
             var elm = document.getElementById(eID);
-            console.log(eID, elm)
             var y = elm.offsetTop;
             var node = elm;
             while (node.offsetParent && node.offsetParent != document.body) {

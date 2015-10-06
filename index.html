@@ -27,14 +27,14 @@
 <body
     ng-app="app"
     ng-controller="appController"
-    ng-class="{mobile: mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
+    ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
     <div id='bg' class="home" ></div>
     
-    <div id='anim_bg' ng-hide='mobile_style'></div>
+    <div id='anim_bg' ng-hide='state.mobile_style'></div>
 
-    <a id="top" name="top" ng-show='mobile_style'></a>
+    <a id="top" name="top" ng-show='state.mobile_style'></a>
 
-    <div class="p-title" ng-if='mobile_style' ng-show='state.selectedPage == "cast" || state.selectedPage == "makers"'>
+    <div class="p-title" ng-if='state.mobile_style' ng-show='state.selectedPage == "cast" || state.selectedPage == "makers"'>
         <h1>{{nameToChange}}</h1>
     </div>
 
@@ -42,15 +42,23 @@
 
         <div id="intro" ng-switch-when="intro" class="page" ng-controller="introController">
             <div id="intro_bg"></div>
-            <canvas class="screen" ng-click="skip_intro()" ng-class='{mobile_intro:mobile_style}'></canvas>
+            <canvas class="screen" ng-click="skip_intro()" ng-class='{mobile_intro:state.mobile_style}'></canvas>
         </div>
         
         <div id="home" ng-switch-when="home" class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">
             <canvas class="particles"></canvas>
             <canvas class="screen"></canvas>
+            <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
+              <div class='cont_rhom_right'></div>
+              <div class="btn_top" ng-if='state.mobile_style' ng-click='goScroll("top")'>
+                  <span class="btn"></span>
+              </div>
+            </div>
+            <div id='side_page_left' ng-hide="state.mobile_style">
+            </div>
         </div>
       
-        <div id="news" ng-switch-when="news" ng-if='!mobile_style' class="page" ng-controller="mediaController">
+        <div id="news" ng-switch-when="news" ng-if='!state.mobile_style' class="page" ng-controller="mediaController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -87,7 +95,7 @@
             </div>
         </div>
 
-        <div id="news" ng-switch-when="news" ng-if='mobile_style' class="page" ng-controller="mobileMediaController">
+        <div id="news" ng-switch-when="news" ng-if='state.mobile_style' class="page" ng-controller="mobileMediaController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -123,7 +131,7 @@
             </div>
         </div>
 
-        <div id="media" ng-switch-when="media" ng-if='!mobile_style' class="page" ng-controller="mediaController">
+        <div id="media" ng-switch-when="media" ng-if='!state.mobile_style' class="page" ng-controller="mediaController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -172,7 +180,7 @@
             </div>
         </div>
 
-        <div id="media" ng-switch-when="media" ng-if='mobile_style' class="page" ng-controller="mobileMediaController">
+        <div id="media" ng-switch-when="media" ng-if='state.mobile_style' class="page" ng-controller="mobileMediaController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -220,7 +228,7 @@
             </div>
         </div>
 
-        <div id="cast" ng-switch-when="cast" ng-if='!mobile_style' class="page w-content" ng-controller="contentController">
+        <div id="cast" ng-switch-when="cast" ng-if='!state.mobile_style' class="page w-content" ng-controller="contentController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -243,7 +251,7 @@
             </div>
         </div>
 
-        <div id="cast" ng-switch-when="cast" ng-if='mobile_style' class="page w-content" ng-controller="contentController"> 
+        <div id="cast" ng-switch-when="cast" ng-if='state.mobile_style' class="page w-content" ng-controller="contentController"> 
             <div class="w-content">
                 <div class="b-content">
                     <div class="b-content_inside">
@@ -285,7 +293,7 @@
             </div>
         </div>
 
-        <div id="makers" ng-switch-when="makers" ng-if='!mobile_style' class="page w-content" ng-controller="contentController">
+        <div id="makers" ng-switch-when="makers" ng-if='!state.mobile_style' class="page w-content" ng-controller="contentController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -311,7 +319,7 @@
             </div>
         </div>
 
-        <div id="makers" ng-switch-when="makers" ng-if='mobile_style' class="page w-content" ng-controller="contentController">
+        <div id="makers" ng-switch-when="makers" ng-if='state.mobile_style' class="page w-content" ng-controller="contentController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -352,15 +360,6 @@
         </div>
     </div>
 
-    <div id='side_page_right' ng-show='state.selectedPage == "home"' ng-class='{mobile_squary:mobile_style}'>
-        <div class='cont_rhom_right'></div>
-        <div class="btn_top" ng-if='mobile_style' ng-click='goScroll("top")'>
-            <span class="btn"></span>
-        </div>
-    </div>
-    <div id='side_page_left' ng-show='state.selectedPage == "home"' ng-hide="mobile_style">
-    </div>
-
     <div id="title_page"></div>
 
     <div class="footer" ng-show="state.interfaceVisible">
@@ -381,7 +380,7 @@
         </div>
     </div>
 
-    <div class="transition rot45deg" ng-class='{mobile_transition: mobile_style}' ng-show="state.interfaceVisible">
+    <div class="transition rot45deg" ng-class='{mobile_transition: state.mobile_style}' ng-show="state.interfaceVisible">
         <div id="yellow_part" class="element">
             <div class="bg yellow"></div>
         </div>
@@ -390,14 +389,14 @@
         </div>
     </div>
 
-    <div id='main_menu' ng-class='{mobile_menu: mobile_style}' ng-show="state.interfaceVisible">
+    <div id='main_menu' ng-class='{mobile_menu: state.mobile_style}' ng-show="state.interfaceVisible">
         <div class="header_cont" ng-click="onMenuHeaderClick()">
             <div class='lines_cont'>
                 <div class='line'></div>
                 <div class='line'></div>
                 <div class='line'></div>
             </div>
-            <div class="haeder_label" ng-hide='mobile_style'>menu</div>
+            <div class="haeder_label" ng-hide='state.mobile_style'>menu</div>
         </div>
         <div class='menu_cont'></div>
         <div class='close_btn' ng-click="onMenuCloseClick()" >&#10006;</div>

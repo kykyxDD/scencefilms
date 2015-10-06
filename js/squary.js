@@ -1,9 +1,7 @@
 function Squares (cont) {
 	var self = this;
 	this.cont = cont
-	this.cont_rhom_right = this.cont.querySelector('#side_page_right');
-    this.cont_rhom = this.cont_rhom_right.querySelector('.cont_rhom_right');
-    this.cont_rhom_left = this.cont.querySelector('#side_page_left');
+	
     this.sq_arr_left;
     this.sq_arr_right;
     this.json;
@@ -17,6 +15,10 @@ function Squares (cont) {
 
 Squares.prototype = {
 	init: function(page){
+
+        this.cont_rhom_right = this.cont.querySelector('#side_page_right');
+        this.cont_rhom = this.cont_rhom_right.querySelector('.cont_rhom_right');
+        this.cont_rhom_left = this.cont.querySelector('#side_page_left');
 
         var mobile = false;
         var win_wid = window.innerWidth;
@@ -91,6 +93,7 @@ Squares.prototype = {
     },
 
     resize: function(mobile){
+        console.log('square',mobile)
 
         if(!this.sq_arr_right || !this.sq_arr_left) return
         
@@ -199,7 +202,6 @@ Squares.prototype = {
             var rhom_after = sq_arr[i].elem.rhom_after;
             var imgs = sq_arr[i].elem.img;
             imgs.src = sq_arr[i].imgPath;
-            console.log(sq_arr[i])
 
             rhom_before.scaleX = 0;
             rhom_before.scaleY = 0;
