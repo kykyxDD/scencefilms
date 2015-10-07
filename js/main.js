@@ -173,31 +173,27 @@ var app = angular.module('app', [])
 
     v.transition.onOpened = function() {
 
-        state.set_selected_page(state.pageToChange)
+        state.selectedPage = ""
         $s.$apply();
 
         v.preloader.show()
         v.preloader.make_white()
         v.simulate_page_load(30, null, true)
 
-        var p = state.get_page(state.selectedPage)
+        var p = state.get_page(state.pageToChange)
         v.background.prepare(p.bg_ref, true)
         v.background.onLoad = angular.bind(this, on_bg_loaded, onPageLoaded)
-
-        //transition.close()
     }
 
     v.transition.onClosed = function() {
+        
+        state.set_selected_page(state.pageToChange)
+        $s.$apply();
+        
         v.transition.show(state.mobile_style)
         v.main_menu.show_header(0.3)
 
         v.background.play()
-
-        if ($s.selectedPage == 'home') {
-            v.intro && v.intro.runRepaint()
-            v.particles && v.particles.runRepaint()
-            // v.squares.show();
-        }
     }
     
     function on_bg_loaded(callback) {
@@ -215,8 +211,6 @@ var app = angular.module('app', [])
 
         var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
-
-
         if((win_wid <= 1024 && orien == 'landscape') || 
            (win_wid <= 768 && orien == 'portrait')){
 
@@ -227,10 +221,6 @@ var app = angular.module('app', [])
             state.mobile_style = false;
         }
         
-        console.log("on resize")
-
-        //console.log(orien, state.orientation, state.mobile_style)
-
         v.transition.resize($window.innerWidth, $window.innerHeight, state.mobile_style)
         v.main_menu.resize(state.mobile_style);
         v.background.resize($window.innerWidth, $window.innerHeight)
@@ -279,11 +269,11 @@ var app = angular.module('app', [])
     angular.element($w).on('resize', onResize)
     
     $s.selectedItem = state.selectedPageData.pages[0]
-    $s.$on('destroy', clean_up)
+    $s.$on('$destroy', clean_up)
     
     function onResize() {
         var div = doc.querySelector(".b-content")
-        //div.style.width = state.mobile_style ? '' : Math.round($w.innerWidth*0.66) + "px";
+        div.style.width = state.mobile_style ? '' : Math.round($w.innerWidth*0.66) + "px";
     }
 
     function clean_up() {
@@ -296,6 +286,32 @@ var app = angular.module('app', [])
         v.background.play2()
     }
     
+    $s.animateMenuItems = function() {
+        
+        var items = doc.querySelectorAll(".tab li")
+        for (var i=0; i<items.length; i++) {
+            var itm = items[i]
+            ScreenObject.decorate_element.apply(itm)
+            TweenLite.from(itm, 0.5, {x: "-=15", alpha: 0, delay: i*0.1})
+        }
+    }
+    
+}])
+.controller("mobileContentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
+    
+    var doc = $doc[0]
+
+    onResize()
+    angular.element($w).on('resize', onResize)
+    
+    $s.$on('$destroy', clean_up)
+    
+    function onResize() {
+    }
+
+    function clean_up() {
+        angular.element($w).off('resize', onResize)
+    }
 }])
 .controller("mediaController", ["$scope", "$document", "$window", "$timeout", "appState", function($s, $doc, $w, $t, state) {
 
@@ -315,7 +331,7 @@ var app = angular.module('app', [])
     angular.element($w).on('resize', onResize)
     $t(onResize)
     
-    $s.$on('destroy', clean_up)
+    $s.$on('$destroy', clean_up)
     
     function clean_up() {
         scroll.destroy()
@@ -334,6 +350,16 @@ var app = angular.module('app', [])
         }
     }
     
+    $s.animateMenuItems = function() {
+        
+        var items = doc.querySelectorAll(".tab li")
+        for (var i=0; i<items.length; i++) {
+            var itm = items[i]
+            ScreenObject.decorate_element.apply(itm)
+            TweenLite.from(itm, 0.5, {x: "-=15", alpha: 0, delay: i*0.1})
+        }
+    }
+    
     $s.typeMenuClick = function(type) {
         $s.selectedType = type
         $t(onResize)
@@ -348,7 +374,7 @@ var app = angular.module('app', [])
     angular.element($w).on('resize', onResize)
     $t(onResize)
     
-    $s.$on('destroy', clean_up)
+    $s.$on('$destroy', clean_up)
     
     function clean_up() {
         angular.element($w).off('resize', onResize)
@@ -549,14 +575,157 @@ var app = angular.module('app', [])
 })
 .directive('onComplete', function(){
     return {
-        scope: {
-            callback: "@on-complete-callback"
-        },
-        
         link: function($s, el, attr) {
             
-            
+            if ($s.$last) {
+                $s.$evalAsync(attr.onCompleteCallback);
+            }
         }
         
+    }
+})
+.directive('animateText', function(){
+    
+	function convert_str(str) {
+		var column = 0
+		
+		var text = str.replace(/[\w\W]/g, function(symbol) {
+			if(++column > 80 && symbol === ' ') symbol = '\n';
+			if(symbol === '\n') column = 0
+			return symbol
+		});
+        
+		return text
+	}
+    
+    return {
+        scope: {
+            text: "=",
+            duration: "=",
+            delay: "="
+        },
+
+        link: function($s, el, attr) {
+
+            var delay = $s.delay || 0
+            var duration = $s.duration || 1
+            var text = convert_str($s.text)
+            var element = el[0]
+            
+            var obj = {
+                
+                update: function() {
+                    this.showLetters(this.index)
+                },
+
+                back_update: function() {
+                    this.showLettersBack(this.index)
+                },
+
+                showLetters: function(n) {
+                    var i
+                    this.field.textContent = ""
+                    
+                    /*
+                    if (n < this.timing_for_minuces) {
+                        
+                        var subLen = Math.ceil(this.text.length*n / this.timing_for_minuces)
+                        
+                        for (i=0;i<subLen;i++) {
+                            this.field.textContent += text.charCodeAt(i) != 13 ? "-" : "\n"
+                        }
+                        
+                        return;
+                    }
+                    */
+                    
+                    if (n >= 1) {
+                        this.field.textContent = this.text
+                        return
+                    }
+                    
+                    var prc = (n-this.timing_for_minuces)/(1-this.timing_for_minuces)
+                    
+                    subLen = Math.ceil(this.text.length*prc)
+                    
+                    this.field.textContent = this.text.substr(0, subLen)
+                    
+                    for(i=0; i<=0; i++) {
+                        this.field.textContent += String.fromCharCode(Math.ceil(Math.random()*40)+60)
+                    }
+                    
+                    /*
+                    for(i=subLen; i<this.text.length;i++) {
+                        this.field.textContent += this.text.charCodeAt(i) != 13 ? "-" : "\n"
+                    }
+                    */
+                },
+
+                showLettersBack: function(n) {
+                    var i
+                    var subLen
+                    this.field.textContent = ""
+
+                    if (n < this.timing_for_minuces) {
+
+                        subLen = Math.ceil(this.text.length*n / this.timing_for_minuces)
+
+                        for (i=0; i<this.text.length; i++) {
+                            var s = i<subLen ? "-" : " "
+                            s = this.text.charCodeAt(i) != 13 ? s : "\n"
+                            this.field.textContent += s
+                        }
+
+                        return;
+                    }
+
+                    var prc = (n-this.timing_for_minuces)/(1-this.timing_for_minuces)
+
+                    subLen = Math.ceil(this.text.length*prc)
+
+                    this.field.textContent = this.text.substr(0, subLen)
+
+                    for(i=0; i<=0; i++) {
+                        this.field.textContent += String.fromCharCode(Math.ceil(Math.random()*40)+60)
+                    }
+                }
+            }
+
+            obj.index = 0
+            obj.text = text
+            obj.timing_for_minuces = 0.8
+            obj.field = element
+            ScreenObject.decorate_element.apply(element)
+
+            $s.$watch('text', function(new_text, old_text) {
+                
+                var oh = element.h
+                element.style.height = ""
+                element.textContent = new_text
+                var nh = element.clientHeight
+                element.textContent = ""
+                TweenLite.killTweensOf(element)
+                element.h = oh
+                TweenLite.to(element, 1, {h: nh})
+
+                obj.text = new_text
+                obj.index = 0
+                run()
+                
+            })
+
+            $s.$on('$destroy', clean_up)
+
+            function clean_up() {
+                TweenLite.killTweensOf(element)
+                TweenLite.killTweensOf(obj)
+                console.log("kill animator")
+            }
+
+            function run() {
+                TweenLite.killTweensOf(obj)
+                TweenLite.to(obj, duration, {index: 1, onUpdate: angular.bind(obj, obj.update)})
+            }
+        }
     }
 })

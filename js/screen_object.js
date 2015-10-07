@@ -40,8 +40,8 @@
 		var s = window.getComputedStyle(this.view)
 		this._x = this.x || 0
 		this._y = this.y || 0
-		this._w = get_integer_from_value(s.getPropertyValue("width")) || 0
-		this._h = get_integer_from_value(s.getPropertyValue("height")) || 0
+		this._w = get_integer_from_value(s.getPropertyValue("width")) || this.view.clientWidth || 0
+		this._h = get_integer_from_value(s.getPropertyValue("height")) || this.view.clientHeight || 0
         this._scaleX = 'scaleX' in this ? this.scaleX : 1
         this._scaleY = 'scaleY' in this ? this.scaleY : 1
         this._visible = "visible" in this ? this.visible : true

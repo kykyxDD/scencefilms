@@ -46,7 +46,7 @@
             <canvas class="screen" ng-click="skip_intro()" ng-class='{mobile_intro:state.mobile_style}'></canvas>
         </div>
         
-        <div id="home" ng-switch-when="home" class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">
+        <div id="home" ng-switch-when="home" class="page" ng-controller="homeController">
             <canvas class="particles"></canvas>
             <canvas class="screen"></canvas>
             <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
@@ -64,7 +64,7 @@
                 <div class="b-content_inside">
                     <div class="w-tab">
                         <ul class="tab">
-                            <li ng-repeat="itm in state.selectedPageData.types" ng-click="typeMenuClick(itm)">
+                            <li ng-repeat="itm in state.selectedPageData.types" ng-click="typeMenuClick(itm)" on-complete on-complete-callback="animateMenuItems()">
                                 <a href="#" ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
                                 </a>
@@ -137,7 +137,7 @@
                 <div class="b-content_inside">
                     <div class="w-tab">
                         <ul class="tab">
-                            <li ng-repeat="item in state.selectedPageData.types track by $index">
+                            <li ng-repeat="item in state.selectedPageData.types track by $index" on-complete on-complete-callback="animateMenuItems()">
                                 <a href="#" ng-click="typeMenuClick(item)" ng-class="{active: selectedType.type == item.type}"><span>{{item.label}}</span></a>
                             </li>
                         </ul>
@@ -234,17 +234,19 @@
                 <div class="b-content_inside">
                     <div class="w-tab">
                         <ul class="tab">
-                            <li ng-repeat="page in state.selectedPageData.pages"><a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a></li>
+                            <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
+                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
+                            </li>
                         </ul>
                     </div>
                     <div class="w-text">
                         <div class="b-text">
                             <div class="t-title">
-                                <h2>{{selectedItem.name}}</h2>
-                                <h3>{{selectedItem.role}}</h3>
+                                <h2 animate-text text="selectedItem.name" duration="1"></h2>
+                                <h3 animate-text text="selectedItem.role" duration="1" delay="0.3"></h3>
                             </div>
                             <div class="text">
-                                <p>{{selectedItem.desc}}</p>
+                                <p animate-text text="selectedItem.desc" duration="2" delay="0.6"></p>
                             </div>
                         </div>
                     </div>
@@ -252,7 +254,7 @@
             </div>
         </div>
 
-        <div id="cast" ng-switch-when="cast" ng-if='state.mobile_style' class="page w-content" ng-controller="contentController"> 
+        <div id="cast" ng-switch-when="cast" ng-if='state.mobile_style' class="page w-content" ng-controller="mobileContentController"> 
             <div class="w-content">
                 <div class="b-content">
                     <div class="b-content_inside">
@@ -299,7 +301,7 @@
                 <div class="b-content_inside">
                     <div class="w-tab">
                         <ul class="tab">
-                            <li ng-repeat="page in state.selectedPageData.pages">
+                            <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
                                 <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
                             </li>
                         </ul>
@@ -308,11 +310,11 @@
                         <div class="img"></div>
                         <div class="b-text">
                             <div class="t-title">
-                                <h2>{{selectedItem.name}}</h2>
-                                <h3>{{selectedItem.role}}</h3>
+                                <h2 animate-text text="selectedItem.name" duration="2"></h2>
+                                <h3 animate-text text="selectedItem.role" duration="2" delay="0.3"></h3>
                             </div>
                             <div class="text">
-                                <p>{{selectedItem.desc}}</p>
+                                <p animate-text text="selectedItem.desc" duration="2" delay="0.6"></p>
                             </div>
                         </div>
                     </div>
@@ -320,7 +322,7 @@
             </div>
         </div>
 
-        <div id="makers" ng-switch-when="makers" ng-if='state.mobile_style' class="page w-content" ng-controller="contentController">
+        <div id="makers" ng-switch-when="makers" ng-if='state.mobile_style' class="page w-content" ng-controller="mobileContentController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -401,6 +403,22 @@
         </div>
         <div class='menu_cont'></div>
         <div class='close_btn' ng-click="onMenuCloseClick()" >&#10006;</div>
+    </div>
+    
+    <div id='news_popup'>
+        <div class='bg'></div>
+        
+        <img class='picture'/>
+        
+        <div class='content'>
+            <h3 class='title'>Blah blah</h3>
+            <h5 class='date'>today</h5>
+            
+            <div class='scroll_holder'>
+                <div class='cont'></div>
+            </div>
+        </div>
+        <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
     </div>
 
     <div id="preloader">
