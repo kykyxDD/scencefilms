@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div id="home" ng-switch-when="home" ng-if='state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="mobileHomeController">
+        <div id="home" ng-switch-when="home" ng-if='state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home', mobile_home:state.mobile_style}" ng-controller="mobileHomeController">
             <div class="bg_mobile" ng-if="state.mobile_style"></div>
             <canvas class="particles"></canvas>
             <canvas class="screen" ng-class='{mobile_intro: state.mobile_style}'></canvas>

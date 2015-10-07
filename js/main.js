@@ -131,7 +131,6 @@ var app = angular.module('app', [])
     v.simulate_page_load(30, null, true)
 
     function on_site_data() {
-        console.log("on site data")
         v.background.init(state.data)
         
         v.main_menu.init(state.data.pages, 0, state.mobile_style)
@@ -139,7 +138,6 @@ var app = angular.module('app', [])
     }
     
     function on_page_change(new_page, old_page) {
-        console.log('on_change_page', new_page, old_page)
         
         if (new_page) {
         
@@ -210,12 +208,11 @@ var app = angular.module('app', [])
     }
 
     function onResize(e) {
+
         var win_wid = $window.innerWidth;
         var win_heig = $window.innerHeight;
 
         var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
-
-
 
         if((win_wid <= 1024 && orien == 'landscape') || 
            (win_wid <= 768 && orien == 'portrait')){
@@ -279,8 +276,6 @@ var app = angular.module('app', [])
     $s.selectedItem = state.selectedPageData.pages[0]
     $s.$on('destroy', clean_up)
     
-    console.log("content controller", state.selectedPage)
-    
     function onResize() {
         var div = doc.querySelector(".b-content")
         //div.style.width = state.mobile_style ? '' : Math.round($w.innerWidth*0.66) + "px";
@@ -323,8 +318,6 @@ var app = angular.module('app', [])
     }
 
     function onResize() {
-        
-        console.log("media on resize")
 
         if (!state.mobile_style) {
 
@@ -366,17 +359,12 @@ var app = angular.module('app', [])
 }])
 .controller('homeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
 
-    console.log('home controller')
     var doc = $doc[0];
 
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
     v.intro.runRepaint()
 
-    
-
-    
-        TweenLite.to(v.intro.canvas, 1, {x: -300})
-
+    TweenLite.to(v.intro.canvas, 1, {x: -300})
 
     v.particles.set_canvas(doc.querySelector('#home .particles'))
     v.particles.init($w.innerWidth, $w.innerHeight)
@@ -392,45 +380,40 @@ var app = angular.module('app', [])
     $s.$on('$destroy', clean_up)
 
     function on_resize(e) {
-
-        console.log('home resize', e)
         v.squares.resize(state.mobile_style);
         v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
-        v.intro.canvas.left = $w.innerWidth/2;
-        
-            v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;            
-            v.intro.canvas.top = $w.innerHeight/2;
-            if(e) v.intro.canvas.x = -300; 
-            v.intro.canvas.y = 0;
-       
+
+        v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;            
+        v.intro.canvas.top = $w.innerHeight/2;
+        if(e) v.intro.canvas.x = -300; 
+        v.intro.canvas.y = 0;
     }
 
     function clean_up() {
         angular.element($w).off('resize', on_resize)
         v.particles.stopRepaint()
         v.intro.stopRepaint()
-        console.log('home cleanup')
     }
 }])
 .controller('mobileHomeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
 
-    console.log('mobile home controller')
     var doc = $doc[0];
 
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
     v.intro.runRepaint()
+    var home = doc.querySelector('#home');
+    var bg_mobile = home.querySelector(':first-child');
+    console.log(home, bg_mobile);
+    
+    // ScreenObject.decorate_element.apply(bg_mobile);
+    // bg_mobile.h = $w.innerHeight*0.9;
 
-
-        var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
-        var y_0 = $w.innerHeight/2;
-        v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
-        v.intro.canvas.top = y_0;
-
-
-
-        var y_1 = -0.2*$w.innerHeight;    
-        TweenLite.to(v.intro.canvas, 3, {y: y_1})
-
+    var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
+    var y_0 = $w.innerHeight/2;
+    var y_1 = -0.2*$w.innerHeight;
+    v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
+    v.intro.canvas.top = y_0;
+    TweenLite.to(v.intro.canvas, 3, {y: y_1});
 
     v.particles.set_canvas(doc.querySelector('#home .particles'))
     v.particles.init($w.innerWidth, $w.innerHeight)
@@ -445,19 +428,20 @@ var app = angular.module('app', [])
 
     $s.$on('$destroy', clean_up)
 
+    
     function on_resize(e) {
-
-        console.log('home resize', e)
         v.squares.resize(state.mobile_style);
         v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
         v.intro.canvas.left = $w.innerWidth/2;
+        // bg_mobile.h = $w.innerHeight*0.9;
 
-            var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
-            v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
-            v.intro.canvas.x = 0;
-            var y_0 = $w.innerHeight/2;
-            v.intro.canvas.top = y_0;
-            if(e) v.intro.canvas.y = y_1;
+        var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
+        v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
+        v.intro.canvas.x = 0;
+        var y_0 = $w.innerHeight/2;
+        v.intro.canvas.top = y_0;
+        if(e) v.intro.canvas.y = y_1;
+       
  
     }
 
@@ -465,12 +449,10 @@ var app = angular.module('app', [])
         angular.element($w).off('resize', on_resize)
         v.particles.stopRepaint()
         v.intro.stopRepaint()
-        console.log('home cleanup')
     }
 }])
 .controller('introController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state){
 
-    console.log('intro controller')
     var doc = $doc[0]
     var intro_bg = doc.querySelector('#intro_bg')
     var screen = doc.querySelector('#intro .screen')
@@ -482,7 +464,6 @@ var app = angular.module('app', [])
     play_intro()
 
     function on_resize() {
-        console.log('intro resize')
         
         if (!v.intro.canvas) return
         
@@ -499,8 +480,6 @@ var app = angular.module('app', [])
 
     function clean_up() {
         angular.element($w).off('resize', on_resize)
-        
-        console.log('intro cleanup')
     }
 
     $s.skip_intro = function() {
@@ -567,7 +546,6 @@ var app = angular.module('app', [])
     }
 
     function hide_intro() {
-        console.log('hide intro')
         delete $s.skip_intro
         v.intro.stopRepaint()
         state.interfaceVisible = true
