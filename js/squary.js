@@ -93,7 +93,6 @@ Squares.prototype = {
     },
 
     resize: function(mobile){
-        console.log('square',mobile)
 
         if(!this.sq_arr_right || !this.sq_arr_left) return
         

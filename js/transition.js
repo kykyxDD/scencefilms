@@ -53,7 +53,7 @@ Transition.prototype = {
         if(mobile){
 
             var elem = this.yellow_part.squary
-            var vis_w = elem.y + elem.w;
+            var vis_w = elem.left + elem.w;
 
             var scale = window.innerWidth > window.innerHeight ? window.innerWidth/vis_w : window.innerHeight/vis_w; 
             if(this.current_state == 'expanded'){
@@ -156,7 +156,7 @@ Transition.prototype = {
             TweenLite.to(this.cont, 1*this.time_scale, {y: 380, ease: Power1.easeOut, delay: 0.35*this.time_scale})
         } else {
             var elem = this.yellow_part.squary
-            var vis_w = elem.y + elem.w;
+            var vis_w = elem.left + elem.w;
 
             var scale = window.innerWidth > window.innerHeight ? window.innerWidth/vis_w : window.innerHeight/vis_w; 
 
