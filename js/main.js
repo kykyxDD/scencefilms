@@ -367,11 +367,16 @@ var app = angular.module('app', [])
 .controller('homeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
 
     console.log('home controller')
-    var doc = $doc[0]
+    var doc = $doc[0];
 
-    v.intro.set_canvas(doc.querySelector('#home .screen'))
+    v.intro.set_canvas(doc.querySelector('#home .screen')) 
     v.intro.runRepaint()
-    TweenLite.to(v.intro.canvas, 1, {x: -300})
+
+    
+
+    
+        TweenLite.to(v.intro.canvas, 1, {x: -300})
+
 
     v.particles.set_canvas(doc.querySelector('#home .particles'))
     v.particles.init($w.innerWidth, $w.innerHeight)
@@ -386,10 +391,74 @@ var app = angular.module('app', [])
 
     $s.$on('$destroy', clean_up)
 
-    function on_resize() {
-        console.log('home resize')
+    function on_resize(e) {
+
+        console.log('home resize', e)
         v.squares.resize(state.mobile_style);
         v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
+        v.intro.canvas.left = $w.innerWidth/2;
+        
+            v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;            
+            v.intro.canvas.top = $w.innerHeight/2;
+            if(e) v.intro.canvas.x = -300; 
+            v.intro.canvas.y = 0;
+       
+    }
+
+    function clean_up() {
+        angular.element($w).off('resize', on_resize)
+        v.particles.stopRepaint()
+        v.intro.stopRepaint()
+        console.log('home cleanup')
+    }
+}])
+.controller('mobileHomeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
+
+    console.log('mobile home controller')
+    var doc = $doc[0];
+
+    v.intro.set_canvas(doc.querySelector('#home .screen')) 
+    v.intro.runRepaint()
+
+
+        var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
+        var y_0 = $w.innerHeight/2;
+        v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
+        v.intro.canvas.top = y_0;
+
+
+
+        var y_1 = -0.2*$w.innerHeight;    
+        TweenLite.to(v.intro.canvas, 3, {y: y_1})
+
+
+    v.particles.set_canvas(doc.querySelector('#home .particles'))
+    v.particles.init($w.innerWidth, $w.innerHeight)
+    v.particles.runRepaint();
+    v.squares.init(state.data.homepage_data)
+
+    TweenLite.to(v.particles, 2, {kalpha: 3})
+    v.squares.show()
+    
+    on_resize()
+    angular.element($w).on('resize', on_resize)
+
+    $s.$on('$destroy', clean_up)
+
+    function on_resize(e) {
+
+        console.log('home resize', e)
+        v.squares.resize(state.mobile_style);
+        v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
+        v.intro.canvas.left = $w.innerWidth/2;
+
+            var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
+            v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
+            v.intro.canvas.x = 0;
+            var y_0 = $w.innerHeight/2;
+            v.intro.canvas.top = y_0;
+            if(e) v.intro.canvas.y = y_1;
+ 
     }
 
     function clean_up() {
@@ -418,13 +487,12 @@ var app = angular.module('app', [])
         if (!v.intro.canvas) return
         
         if(state.mobile_style){
-            var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
+            var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
+            var itm_y = $w.innerHeight/2;
             v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
-            v.intro.canvas.x = 0;
-            v.intro.canvas.y = $w.innerHeight*0.3;
+            v.intro.canvas.y = itm_y;
         } else {
             v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;
-            v.intro.canvas.x = 0;
             v.intro.canvas.y = 0;
         }
     }

@@ -45,9 +45,23 @@
             <canvas class="screen" ng-click="skip_intro()" ng-class='{mobile_intro:state.mobile_style}'></canvas>
         </div>
         
-        <div id="home" ng-switch-when="home" class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">
+        <div id="home" ng-switch-when="home" ng-if='!state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">            
             <canvas class="particles"></canvas>
-            <canvas class="screen"></canvas>
+            <canvas class="screen" ng-class='{mobile_intro: state.mobile_style}'></canvas>
+            <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
+              <div class='cont_rhom_right'></div>
+              <div class="btn_top" ng-if='state.mobile_style' ng-click='goScroll("top")'>
+                  <span class="btn"></span>
+              </div>
+            </div>
+            <div id='side_page_left' ng-hide="state.mobile_style">
+            </div>
+        </div>
+
+        <div id="home" ng-switch-when="home" ng-if='state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="mobileHomeController">
+            <div class="bg_mobile" ng-if="state.mobile_style"></div>
+            <canvas class="particles"></canvas>
+            <canvas class="screen" ng-class='{mobile_intro: state.mobile_style}'></canvas>
             <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
               <div class='cont_rhom_right'></div>
               <div class="btn_top" ng-if='state.mobile_style' ng-click='goScroll("top")'>

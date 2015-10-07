@@ -164,21 +164,21 @@
         this.set_alpha = set_alpha
 		
 		this.get_top = function(){
-			return this._y
+			return this._top
 		}
 		
 		this.set_top = function(value){
-			this._y = value
-			this.view.style.top = this._y + 'px'
+			this._top = value
+			this.view.style.top = this._top + 'px'
 		}
 		
 		this.get_left = function(){
-			return this._x
+			return this._left
 		}
 		
 		this.set_left = function(value){
-			this._x = value
-			this.view.style.left = this._x + 'px'
+			this._left = value
+			this.view.style.left = this._left + 'px'
 		}
 		
 		this.get_h = function(){
@@ -219,6 +219,8 @@
         
 		Object.defineProperty(this, 'x'  , { get: this.get_x  , set: this.set_x, configurable: true   })
 		Object.defineProperty(this, 'y'  , { get: this.get_y  , set: this.set_y, configurable: true   })
+		Object.defineProperty(this, 'left'  , { get: this.get_left  , set: this.set_left, configurable: true   })
+		Object.defineProperty(this, 'top'  , { get: this.get_top  , set: this.set_top, configurable: true   })
 		Object.defineProperty(this, 'h'  , { get: this.get_h  , set: this.set_h, configurable: true   })
 		Object.defineProperty(this, 'w'  , { get: this.get_w  , set: this.set_w, configurable: true   })
 		Object.defineProperty(this, 'rotation'  , { get: this.get_rotation  , set: this.set_rotation, configurable: true   })
