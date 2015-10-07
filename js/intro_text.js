@@ -16,7 +16,7 @@ IntroText.prototype = {
         this.prepare()
     },
     
-    set_canvas(canvas) {
+    set_canvas: function(canvas) {
         this.canvas = canvas
         ScreenObject.decorate_element.apply(this.canvas)
         

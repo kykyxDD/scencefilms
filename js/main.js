@@ -131,7 +131,6 @@ var app = angular.module('app', [])
     v.simulate_page_load(30, null, true)
 
     function on_site_data() {
-
         v.background.init(state.data)
         
         v.main_menu.init(state.data.pages, 0, state.mobile_style)
@@ -144,6 +143,7 @@ var app = angular.module('app', [])
         
             if (new_page == 'intro') {
                 state.set_selected_page('intro')
+
             }
             else {
                 
@@ -392,6 +392,7 @@ var app = angular.module('app', [])
 }])
 .controller('homeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
 
+
     var doc = $doc[0];
 
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
@@ -412,13 +413,14 @@ var app = angular.module('app', [])
 
     $s.$on('$destroy', clean_up)
 
+
     function on_resize(e) {
 
         v.squares.resize(state.mobile_style);
 
         v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
 
-        v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;
+        v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;            
         v.intro.canvas.top = $w.innerHeight/2;
         if(e) v.intro.canvas.x = -300; 
         v.intro.canvas.y = 0;
@@ -435,10 +437,10 @@ var app = angular.module('app', [])
     var doc = $doc[0];
 
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
-    v.intro.runRepaint()
+    // v.intro.runRepaint()
+    v.intro.repaintCanvas();
     var home = doc.querySelector('#home');
-    var bg_mobile = home.querySelector(':first-child');
-    console.log(home, bg_mobile);
+    console.log(home.childNodes);
     
     // ScreenObject.decorate_element.apply(bg_mobile);
     // bg_mobile.h = $w.innerHeight*0.9;
@@ -450,9 +452,9 @@ var app = angular.module('app', [])
     v.intro.canvas.top = y_0;
     TweenLite.to(v.intro.canvas, 3, {y: y_1});
 
-    v.particles.set_canvas(doc.querySelector('#home .particles'))
-    v.particles.init($w.innerWidth, $w.innerHeight)
-    v.particles.runRepaint();
+    // v.particles.set_canvas(doc.querySelector('#home .particles'))
+    // v.particles.init($w.innerWidth, $w.innerHeight)
+    // v.particles.runRepaint();
     v.squares.init(state.data.homepage_data)
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
@@ -466,7 +468,7 @@ var app = angular.module('app', [])
     
     function on_resize(e) {
         v.squares.resize(state.mobile_style);
-        v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
+        // v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
         v.intro.canvas.left = $w.innerWidth/2;
         // bg_mobile.h = $w.innerHeight*0.9;
 
@@ -482,8 +484,8 @@ var app = angular.module('app', [])
 
     function clean_up() {
         angular.element($w).off('resize', on_resize)
-        v.particles.stopRepaint()
-        v.intro.stopRepaint()
+        // v.particles.stopRepaint()
+        // v.intro.stopRepaint()
     }
 }])
 .controller('introController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state){
@@ -499,7 +501,6 @@ var app = angular.module('app', [])
     play_intro()
 
     function on_resize() {
-
         if (!v.intro.canvas) return
         
         if(state.mobile_style){

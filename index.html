@@ -29,6 +29,7 @@
     ng-controller="appController"
     ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
 
+
     <div id='bg' class="home" ></div>
     
     <div id='anim_bg' ng-hide='state.mobile_style'></div>
@@ -45,8 +46,10 @@
             <div id="intro_bg"></div>
             <canvas class="screen" ng-click="skip_intro()" ng-class='{mobile_intro:state.mobile_style}'></canvas>
         </div>
+        
 
-        <div id="home" ng-switch-when="home" ng-if='!state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">
+        <div id="home" ng-switch-when="home" ng-if='!state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">            
+
             <canvas class="particles"></canvas>
             <canvas class="screen" ng-class='{mobile_intro: state.mobile_style}'></canvas>
             <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
@@ -418,22 +421,7 @@
         <div class='menu_cont'></div>
         <div class='close_btn' ng-click="onMenuCloseClick()" >&#10006;</div>
     </div>
-    
-    <div id='news_popup'>
-        <div class='bg'></div>
-        
-        <img class='picture'/>
-        
-        <div class='content'>
-            <h3 class='title'>Blah blah</h3>
-            <h5 class='date'>today</h5>
-            
-            <div class='scroll_holder'>
-                <div class='cont'></div>
-            </div>
-        </div>
-        <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
-    </div>
+
 
     <div id="preloader">
         <div class='label'>0%</div>
