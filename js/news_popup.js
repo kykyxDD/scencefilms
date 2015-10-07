@@ -12,6 +12,8 @@ NewsPopup.prototype = {
 
     show: function(target) {
         dom.display(this.cont, true)
+        
+        
     },
     
     hide: function() {

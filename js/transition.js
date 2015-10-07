@@ -38,21 +38,20 @@ Transition.prototype = {
     },
     
     resize: function(w, h, mobile) {
-    
+
         if (this.debug) console.log("resize", w, h)
-    
+
         this.WIDTH = w
         this.HEIGHT = h
-    
+
         if (this.current_state == 'opened') {
-            
             this.calc_exp_scale()
             this.yellow_part.scaleX = this.yellow_part.scaleY = this.yellow_exp_scale
             this.black_part.scaleX = this.black_part.scaleY = this.black_exp_scale
         }
 
         if(mobile){
-           
+
             var elem = this.yellow_part.squary
             var vis_w = elem.y + elem.w;
 
@@ -74,16 +73,12 @@ Transition.prototype = {
             this.cont.rotation = 45;
             if(this.current_state == 'expanded'){
                 this.cont.y = 380;
-                
             } else if (this.current_state == 'collapsed'){
                 this.cont.y = 152;
-                
             }
-            
-           
         }
     },
-    
+
     calc_exp_scale: function() {
         var tan_a = this.HEIGHT / this.WIDTH
         var projection_a = Math.cos(Math.atan(tan_a)) * this.WIDTH

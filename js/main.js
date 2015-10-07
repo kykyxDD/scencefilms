@@ -8,7 +8,8 @@ var app = angular.module('app', [])
     var squares = new Squares(doc);
     var particles = new Particles()
     var intro = new IntroText()
-
+    var news_popup = new NewsPopup(doc.querySelector('#news_popup'))
+    
     return {
         transition: transition,
         main_menu: main_menu,
@@ -17,6 +18,7 @@ var app = angular.module('app', [])
         particles: particles,
         intro: intro,
         background: background,
+        news_popup: news_popup,
         
         simulate_page_load: function (duration, callback, reset_preloader) {
 
