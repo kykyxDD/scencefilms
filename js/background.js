@@ -105,7 +105,7 @@ Background.prototype = {
         }
 
         var old_img = this.images[0]
-        var new_img = this.images[1]
+        var new_img = this.images[this.images.length-1]
         
         old_img.visible = true
         TweenLite.to(old_img, 0.5, {alpha: 0})
