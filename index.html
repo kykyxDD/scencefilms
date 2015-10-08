@@ -118,7 +118,7 @@
                 <div class="b-content_inside">
                     <div class="w-tab">
                         <ul class="tab">
-                            <li ng-repeat="itm in state.selectedPageData.types" ng-click="typeMenuClick(itm)">
+                            <li ng-repeat="itm in state.selectedPageData.types" ng-mousedown="typeMenuClick(itm)">
                                 <a href="#" ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
                                 </a>
@@ -204,7 +204,7 @@
                     <div class="w-tab">
                       <ul class="tab">
                         <li ng-repeat="itm in state.selectedPageData.types track by $index">
-                            <a href="#" ng-click="typeMenuClick(itm)" ng-class="{active: selectedType.type == itm.type}"><span>{{itm.label}}</span></a>
+                            <a href="#" ng-mousedown="typeMenuClick(itm)" ng-class="{active: selectedType.type == itm.type}"><span>{{itm.label}}</span></a>
                         </li>
                        </ul>
                     </div>
@@ -278,7 +278,7 @@
                         <div class="w-tab">
                             <ul class="tab">
                                 <li ng-repeat="page in state.selectedPageData.pages">
-                                    <a href='' ng-click='goScroll(page.role)' ng-class="{active: page == selectedItem}" >
+                                    <a href='' ng-mousedown='goScroll(page.role)' ng-class="{active: page == selectedItem}" >
                                         <span>{{page.title}}</span>
                                     </a>
                                 </li>
@@ -345,7 +345,7 @@
                     <div class="w-tab">
                         <ul class="tab">                
                             <li ng-repeat="page in state.selectedPageData.pages">
-                                <a ng-click='goScroll(page.role)' ng-class="{active: page == selectedItem}">
+                                <a ng-mousedown='goScroll(page.role)' ng-class="{active: page == selectedItem}">
                                     <span>{{page.title}}</span>
                                 </a>
                             </li>
