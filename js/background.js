@@ -74,6 +74,12 @@ Background.prototype = {
         this.images.forEach(function(img){TweenLite.killTweensOf(img)})
     },
     
+    stop: function() {
+        
+        this.images.forEach(function(img){ delete img.onload })
+        this.killTweens()
+    },
+    
     play: function() {
         if (this.loading) {
             this.delayedPlay = angular.bind(this, this.play)

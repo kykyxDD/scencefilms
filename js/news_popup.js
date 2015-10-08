@@ -4,19 +4,35 @@ function NewsPopup(cont) {
     this.init()
     
     this.bg = this.cont.querySelector(".popup_bg")
-    this.img = this.cont.querySelector(".popup_img")
     this.content = this.cont.querySelector(".popup_content")
+    this.scroll_cont = this.content.querySelector(".scroll_cont")
+    this.text_cont = this.content.querySelector(".text_cont")
+    this.title = this.content.querySelector(".title")
+    this.date = this.content.querySelector(".date")
     this.btn = this.cont.querySelector(".close_btn")
+    this.img_cont = this.cont.querySelector(".popup_img_cont")
+    this.preloader = this.cont.querySelector(".popup_preloader")
+    this.img = this.cont.querySelector(".popup_img")
+    this.icons = this.cont.querySelectorAll(".ico")
     
     ScreenObject.decorate_element.apply(this.bg)
-    ScreenObject.decorate_element.apply(this.img)
     ScreenObject.decorate_element.apply(this.content)
     ScreenObject.decorate_element.apply(this.btn)
+    ScreenObject.decorate_element.apply(this.scroll_cont)
+    ScreenObject.decorate_element.apply(this.img_cont)
+    ScreenObject.decorate_element.apply(this.preloader)
+    ScreenObject.decorate_element.apply(this.img)
     
     this.btn.top = this.btn.left = 0
     
     this.w = 1200
     this.h = 600
+    
+    this.scroll = new IScroll(this.scroll_cont, {useTransition: false, scrollbars: true})
+    
+    this.title_anim = new TextAnimator(this.title, 1, 0)
+    this.date_anim = new TextAnimator(this.date, 1, 0)
+    this.text_anim = new TextAnimator(this.text_cont, 2, 0)
 }
 
 NewsPopup.prototype = {
@@ -26,6 +42,7 @@ NewsPopup.prototype = {
     },
 
     show: function(target, data) {
+        
         dom.display(this.cont, true)
         var r = target.getBoundingClientRect()
 
@@ -45,14 +62,47 @@ NewsPopup.prototype = {
         this.content.alpha = 1
         TweenLite.from(this.content, 0.5, {alpha: 0, x: this.content.sx-10, delay: 0.8})
         
-        this.img.alpha = 1
-        TweenLite.from(this.img, 0.5, {alpha: 0, x: this.img.sx-10, delay: 0.8})
+        this.img_cont.alpha = 1
+        TweenLite.from(this.img_cont, 0.5, {alpha: 0, x: this.img_cont.sx-10, delay: 0.8})
         
-        console.log("show", r)
+        this.text_cont.textContent = data.full_desc
+        this.title.textContent = data.short_desc
+        this.date.textContent = data.date
+        this.scroll.refresh()
+        
+        this.img.src = data.img
+        this.img.onload = angular.bind(this, this.on_image_load)
+        
+        this.update_inner_size()
+        
+        this.title_anim.text = data.short_desc
+        this.date_anim.text = data.date
+        this.text_anim.text = data.full_desc
+
+        this.title_anim.run(0.6)
+        this.date_anim.run(0.6)
+        this.text_anim.run(0.6)
+
+        for (var i=0; i<this.icons.length; i++) {
+            var ico = this.icons[i]
+            ScreenObject.decorate_element.apply(ico)
+            TweenLite.from(ico, 1, {x: "-=10", alpha: 0, delay: 0.6+0.2*i})
+        }
     },
 
     hide: function() {
         dom.display(this.cont, false)
+    },
+    
+    on_image_load: function() {
+        console.log("loaded", this.img.width, this.img.height)
+        var k = Math.max(this.img_cont.w/this.img.width, this.img_cont.h/this.img.height)
+        this.img.scaleX = this.img.scaleY = k
+        this.img.x = (this.img_cont.w - this.img.width)/2
+        this.img.y = (this.img_cont.h - this.img.height)/2
+        
+        this.img.alpha = 1
+        TweenLite.from(this.img, 1, {alpha: 0, scaleX: k*1.1, scaleY: k*1.1})
     },
 
     resize: function(w, h) {
@@ -60,16 +110,34 @@ NewsPopup.prototype = {
         this.btn.sx = this.btn.x = (w + this.w)/2 - 25
         this.btn.sy = this.btn.y = (h - this.h)/2
         
-        this.img.sx = this.img.x = (w - this.w)/2
-        this.img.sy = this.img.y = (h - this.h)/2
+        this.img_cont.sx = this.img_cont.x = (w - this.w)/2
+        this.img_cont.sy = this.img_cont.y = (h - this.h)/2
+        this.img_cont.w = this.w*0.42
+        this.img_cont.h = this.h
         
-        this.content.sx = this.content.x = (w - this.w)/2 - Math.round(w*0.7)
-        this.content.sy = this.content.y = (h - this.h)/2
+        var content_margin_top = 25
+        
+        this.content.sx = this.content.x = Math.round((w - this.w)/2 + this.w*0.45)
+        this.content.sy = this.content.y = Math.round((h - this.h)/2 + content_margin_top)
+        this.content.w = Math.round(this.w*0.53)
+        this.content.h = Math.round(this.h - content_margin_top)
         
         this.bg.sx = this.bg.x = (w - this.w)/2
         this.bg.sy = this.bg.y = (h - this.h)/2
         this.bg.w = this.w
         this.bg.h = this.h
+        
+        this.update_inner_size()
+        this.scroll.refresh()
+    },
+    
+    update_inner_size: function() {
+        
+        var title_h = this.title.clientHeight
+        var date_h = this.date.clientHeight
+        
+        this.scroll_cont.w = this.content.w
+        this.scroll_cont.h = this.content.h - title_h - date_h - 120
     }
 
 }

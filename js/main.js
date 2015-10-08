@@ -38,7 +38,6 @@ var app = angular.module('app', ['mobile'])
     }
     
 }])
-
 .service('appState', ['$http', function($http){
     return {
         selectedPage: '',
@@ -150,9 +149,10 @@ var app = angular.module('app', ['mobile'])
             else {
                 
                 if (old_page == 'intro') {
-                    v.background.prepare(state.get_page(new_page).bg_ref)
-
-                    v.background.play2()
+                    if (!state.mobile_style) {
+                        v.background.prepare(state.get_page(new_page).bg_ref)
+                        v.background.play2()
+                    }
                     v.transition.show(state.mobile_style)
                     v.main_menu.show_header(0.3)
                     state.set_selected_page(new_page)
@@ -161,6 +161,7 @@ var app = angular.module('app', ['mobile'])
                     v.main_menu.collapse(state.mobile_style)
                     v.main_menu.hide_header(state.mobile_style)
                     v.transition.open()
+                    v.background.stop()
                 }
             }
         }
@@ -259,8 +260,6 @@ var app = angular.module('app', ['mobile'])
 
     function onPageLoaded() {
         
-        console.log("desktop page loaded")
-
         $window.scrollTo(0, 0);
 
         v.preloader.hide()
@@ -328,14 +327,11 @@ var app = angular.module('app', ['mobile'])
 
     function onResize() {
 
-        if (!state.mobile_style) {
-
-            var cont_w = $w.innerWidth - 450 + 192;
-            var content_w = $s.selectedType.items.length*$s.selectedType.item_width
-            scroll_cont.style.width = cont_w + "px"
-            items_cont.style.width = content_w + "px"
-            scroll.refresh()
-        }
+        var cont_w = $w.innerWidth - 450 + 192;
+        var content_w = $s.selectedType.items.length*$s.selectedType.item_width
+        scroll_cont.style.width = cont_w + "px"
+        items_cont.style.width = content_w + "px"
+        scroll.refresh()
     }
     
     $s.animateMenuItems = function() {
@@ -348,15 +344,25 @@ var app = angular.module('app', ['mobile'])
         }
     }
     
+    $s.animateContentItems = function(selector) {
+        
+        var items = doc.querySelectorAll(selector)
+        for (var i=0; i<items.length; i++) {
+            var itm = items[i]
+            ScreenObject.decorate_element.apply(itm)
+            TweenLite.from(itm, 0.3, {x: "-=15", alpha: 0, delay: i*0.1})
+        }
+    }
+    
     $s.typeMenuClick = function(type) {
         $s.selectedType = type
+        scroll.scrollTo(0)
         $t(onResize)
     }
     
     $s.showNewsPopup = function(news_item) {
         var target = items_cont.querySelector('#news'+news_item.id)
         
-        console.log(target, news_item)
         if (target && news_item) {
             v.news_popup.show(target, news_item)
         }
@@ -364,7 +370,6 @@ var app = angular.module('app', ['mobile'])
     
 }])
 .controller('homeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
-
 
     var doc = $doc[0];
 
@@ -385,7 +390,15 @@ var app = angular.module('app', ['mobile'])
     angular.element($w).on('resize', on_resize)
 
     $s.$on('$destroy', clean_up)
-
+    $s.$watch('state.pageToChange', monitor_page_change)
+    
+    function monitor_page_change(new_page, old_page) {
+        if (new_page != 'home') {
+            console.log("home page stop animation", new_page, old_page)
+            v.particles.stopRepaint()
+            v.intro.stopRepaint()
+        }
+    }
 
     function on_resize(e) {
 
@@ -420,8 +433,8 @@ var app = angular.module('app', ['mobile'])
     function on_resize() {
         if (!v.intro.canvas) return
 
-        //v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;
-        //v.intro.canvas.y = 0;
+        v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;
+        v.intro.canvas.y = 0;
     }
 
     function clean_up() {
@@ -581,12 +594,8 @@ var app = angular.module('app', ['mobile'])
             var text = convert_str($s.text)
             var element = el[0]
             
-            var obj = new TextAnimator
-
-            obj.index = 0
+            var obj = new TextAnimator(element, duration, delay)
             obj.text = text
-            obj.timing_for_minuces = 0.8
-            obj.field = element
             ScreenObject.decorate_element.apply(element)
 
             $s.$watch('text', function(new_text, old_text) {
@@ -600,24 +609,40 @@ var app = angular.module('app', ['mobile'])
                 element.h = oh
                 TweenLite.to(element, 1, {h: nh})
 
+                //obj.delay = 0
                 obj.text = new_text
                 obj.index = 0
-                run()
+                obj.run()
                 
             })
 
             $s.$on('$destroy', clean_up)
 
             function clean_up() {
-                TweenLite.killTweensOf(element)
-                TweenLite.killTweensOf(obj)
-                console.log("kill animator")
-            }
-
-            function run() {
-                TweenLite.killTweensOf(obj)
-                TweenLite.to(obj, duration, {index: 1, onUpdate: angular.bind(obj, obj.update)})
+                obj.stop()
             }
         }
     }
+})
+.directive('animateNewsItem', function() {
+  
+    return {
+        scope: {
+            delay: '='
+        },
+        link: function($s, el, attr) {
+            
+            var div = el[0]
+            var delay = $s.delay || 0
+            
+            ScreenObject.decorate_element.apply(div)
+            TweenLite.from(div, 0.3, {alpha: 0, x: "-=10", delay: delay})
+
+            $s.$on('$destroy', function() {
+                TweenLite.killTweensOf(div)
+            })
+            
+        }
+    }
+  
 })

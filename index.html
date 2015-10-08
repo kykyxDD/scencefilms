@@ -75,7 +75,7 @@
                         <div class="b-news">
                             <div class="scrollCont">
                                 <div class="newsCont">
-                                    <div class="i-news" ng-repeat="item in selectedType.items">
+                                    <div class="i-news" ng-repeat="item in selectedType.items" on-complete on-complete-callback="animateContentItems('.newsCont .i-news')">
                                         <div class="i-news__content" id="news{{item.id}}">
                                             <div class="img">
                                                 <img alt="img" ng-src="{{item.img}}" />
@@ -111,7 +111,7 @@
                             <div class="scrollCont">
                                 <div class="mediaCont">
                                     <div ng-switch="selectedType.type">
-                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index">
+                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index" on-complete on-complete-callback="animateContentItems('.mediaCont .i-photo')">
                                             <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
                                                 <div class="img">
                                                     <img alt="img" ng-src="{{item.src}}"/>
@@ -128,7 +128,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by $index">
+                                        <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by $index" on-complete on-complete-callback="animateContentItems('.mediaCont .i-video')">
                                             <div class="i-video" ng-repeat="item in group track by $index">
                                                 <a href="#">
                                                     <img alt="img" ng-src="{{item.src}}"/>
@@ -159,10 +159,10 @@
                         <div class="b-text">
                             <div class="t-title">
                                 <h2 animate-text text="selectedItem.name" duration="1"></h2>
-                                <h3 animate-text text="selectedItem.role" duration="1" delay="0.3"></h3>
+                                <h3 animate-text text="selectedItem.role" duration="1" delay="0"></h3>
                             </div>
                             <div class="text">
-                                <p animate-text text="selectedItem.desc" duration="2" delay="0.6"></p>
+                                <p animate-text text="selectedItem.desc" duration="2" delay="0"></p>
                             </div>
                         </div>
                     </div>
@@ -185,10 +185,10 @@
                         <div class="b-text">
                             <div class="t-title">
                                 <h2 animate-text text="selectedItem.name" duration="2"></h2>
-                                <h3 animate-text text="selectedItem.role" duration="2" delay="0.3"></h3>
+                                <h3 animate-text text="selectedItem.role" duration="2" delay="0"></h3>
                             </div>
                             <div class="text">
-                                <p animate-text text="selectedItem.desc" duration="2" delay="0.6"></p>
+                                <p animate-text text="selectedItem.desc" duration="2" delay="0"></p>
                             </div>
                         </div>
                     </div>
@@ -425,15 +425,24 @@
         <div class='menu_cont'></div>
         <div class='close_btn' ng-mousedown="onMenuCloseClick()" >&#10006;</div>
     </div>
-    
+
     <div id="news_popup">
         <div class="popup_bg"></div>
-        <img class="popup_img"/>
+        <div class="popup_img_cont">
+            <img class="popup_preloader" src='image/preloader.gif'/>
+            <img class="popup_img"/>
+        </div>
         <div class="popup_content">
             <h3 class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
             <h5 class="date">today</h5>
             <div class="scroll_cont">
                 <div class="text_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices erat nec quam mollis tincidunt. Nullam tempor sagittis nunc, quis finibus dui sollicitudin sed. Maecenas at dolor erat. Vivamus elementum faucibus mauris sed ultrices. Aliquam sit amet rutrum eros, sed auctor nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>
+            </div>
+            <div class='icons'>
+                <div class='ico fb'></div>
+                <div class='ico twitter'></div>
+                <div class='ico ln'></div>
+                <div class='ico gp'></div>
             </div>
         </div>
         <div class='close_btn' ng-click="closePopups()" >&#10006;</div>

@@ -1,9 +1,27 @@
-function TextAnimator() {
+function TextAnimator(target, duration, delay) {
     
-    
+    this.field = target
+    this.duration = duration || 1
+    this.delay = delay || 0
+    this.timing_for_minuces = 0.8
 }
 
 TextAnimator.prototype = {
+    
+    stop: function() {
+        TweenLite.killTweensOf(this)
+    },
+
+    run: function(additional_delay) {
+        
+        var that = this
+        additional_delay = additional_delay || 0
+        
+        TweenLite.killTweensOf(this)
+        that.index = 0
+        that.update()
+        TweenLite.to(that, that.duration, {index: 1, onUpdate: function() { that.update()}, delay: that.delay + additional_delay})
+    },
     
     update: function() {
         this.showLetters(this.index)

@@ -1,5 +1,4 @@
-var app = angular.module('mobile', [])
-
+angular.module('mobile', [])
 app.controller("mobileController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
     
     v.main_menu.onClick = function(page) {
@@ -25,8 +24,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     }
     
     function switch_page() {
-        
-        console.log("mobile switch page")
         
         $window.scrollTo(0, 0);
         v.preloader.hide()
@@ -81,7 +78,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     // v.intro.runRepaint()
     v.intro.repaintCanvas();
     var bg_mobile = doc.querySelector('#home .bg_mobile');
-    console.log(bg_mobile);
     
     ScreenObject.decorate_element.apply(bg_mobile);
     bg_mobile.h = $w.innerHeight*0.9;
