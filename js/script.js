@@ -47,7 +47,7 @@ Anim_menu.prototype = {
             this.items.push(itm)
         }
 
-        this.reset()
+        this.reset(mobile)
     },
 
     create_event: function(elem, page){
@@ -154,15 +154,15 @@ Anim_menu.prototype = {
         var expand_delay = expand_delay || 0
         var delay = 0;
 
-        var itm_x = !mobile ? -250 : -1*(this.menu_cont.left + 176);
-        console.log(this.menu_cont.left, itm_x, this.menu_cont.left + 176)
-
         for (var i=0, l=this.items.length; i<l; i++) {
             var itm = this.items[i];
-            itm.visible = true;
+            // itm.visible = false;
             itm.alpha = 1;
             delay = expand_delay + (l-i-1)*0.1;
-            TweenLite.to(itm, 0.3, {x: itm_x, alpha: 0, delay: delay, ease: Power0.easeOut})
+            TweenLite.to(itm, 0.3, {x: -250, alpha: 0, delay: delay, ease: Power0.easeOut});
+            setTimeout(function(itm){
+                itm.visible = false;
+            }, 300, itm)
         }
 
         TweenLite.to(this.close_btn, 0.2, {y: -90, delay: 0})
@@ -190,17 +190,14 @@ Anim_menu.prototype = {
     resize: function(mobile){
         var win_width = document.documentElement.clientWidth;
         var win_height = document.documentElement.clientHeight;
-        ScreenObject.decorate_element.apply(this.menu_cont)
+        ScreenObject.decorate_element.apply(this.menu_cont);
 
         if(mobile){
             var h = this.menu_cont.h ? this.menu_cont.h : 188;
-            // console.log(h, 35*5, 35*4);
             var top = (win_height - h)/2;
             var left = (win_width - 150)/2;
             this.menu_cont.style.left = left + 'px';
             this.menu_cont.style.top = top + 'px';
-
-            // this.menu_cont.w = win_width - this.menu_cont.x;
         } else {
             this.menu_cont.style.left = '27px' 
             this.menu_cont.style.top = '65px'
