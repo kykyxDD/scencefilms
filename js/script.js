@@ -148,27 +148,33 @@ Anim_menu.prototype = {
         }
     },
 
-    collapse: function() {
+    collapse: function(mobile) {
+        console.log('collapse',mobile)
 
         var expand_delay = expand_delay || 0
         var delay = 0;
 
+        var itm_x = !mobile ? -250 : -1*(this.menu_cont.left + 176);
+        console.log(this.menu_cont.left, itm_x, this.menu_cont.left + 176)
+
         for (var i=0, l=this.items.length; i<l; i++) {
-            var itm = this.items[i]
-            itm.visible = true
-            itm.alpha = 1
-            delay = expand_delay + (l-i-1)*0.1
-            TweenLite.to(itm, 0.3, {x: -250, alpha: 0, delay: delay, ease: Power0.easeOut})
+            var itm = this.items[i];
+            itm.visible = true;
+            itm.alpha = 1;
+            delay = expand_delay + (l-i-1)*0.1;
+            TweenLite.to(itm, 0.3, {x: itm_x, alpha: 0, delay: delay, ease: Power0.easeOut})
         }
 
         TweenLite.to(this.close_btn, 0.2, {y: -90, delay: 0})
+        this.menu_cont.visible = false;
         // TweenLite.to(this.close_btn, 0.9, {y: 7, delay: expand_delay + 0.3 + 0.2})
     },
     
     expand: function(expand_delay) {
 
         var expand_delay = expand_delay || 0
-        var delay = 0
+        var delay = 0;
+        this.menu_cont.visible = true;
 
         for (var i=0; i<this.items.length; i++) {
             var itm = this.items[i]
