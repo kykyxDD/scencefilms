@@ -24,6 +24,7 @@
     <script src='js/animated_background.js'></script>
     <script src='js/transition.js'></script>
     <script src='js/main.js'></script>
+    <script src='js/main_mobile.js'></script>
 </head>
 
 <body
@@ -41,43 +42,24 @@
         <h1>{{nameToChange}}</h1>
     </div>
 
-    <div id='content' ng-switch="state.selectedPage">
-
+    <div id='content' ng-switch="state.selectedPage" ng-if='!state.mobile_style' ng-controller="desktopController">
         <div id="intro" ng-switch-when="intro" class="page" ng-controller="introController">
             <div id="intro_bg"></div>
-            <canvas class="screen" ng-mousedown="skip_intro()" ng-class='{mobile_intro:state.mobile_style}'></canvas>
+            <canvas class="screen" ng-mousedown="skip_intro()"></canvas>
         </div>
         
-
-        <div id="home" ng-switch-when="home" ng-if='!state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">            
+        <div id="home" ng-switch-when="home" class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">            
 
             <canvas class="particles"></canvas>
-            <canvas class="screen" ng-class='{mobile_intro: state.mobile_style}'></canvas>
-            <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
+            <canvas class="screen"></canvas>
+            <div id='side_page_right'>
               <div class='cont_rhom_right'></div>
-              <div class="btn_top" ng-if='state.mobile_style' ng-click='goScroll("top")'>
-                  <span class="btn"></span>
-              </div>
             </div>
-            <div id='side_page_left' ng-hide="state.mobile_style">
+            <div id='side_page_left'>
             </div>
         </div>
-
-        <div id="home" ng-switch-when="home" ng-if='state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home', mobile_home:state.mobile_style}" ng-controller="mobileHomeController">
-            <div class="bg_mobile"></div>
-            <canvas class="particles"></canvas>
-            <canvas class="screen" ng-class='{mobile_intro: state.mobile_style}'></canvas>
-            <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
-              <div class='cont_rhom_right'></div>
-              <div class="btn_top" ng-if='state.mobile_style' ng-mousedown='goScroll("top")'>
-                  <span class="btn"></span>
-              </div>
-            </div>
-            <div id='side_page_left' ng-hide="state.mobile_style">
-            </div>
-        </div>
-      
-        <div id="news" ng-switch-when="news" ng-if='!state.mobile_style' class="page" ng-controller="mediaController">
+        
+        <div id="news" ng-switch-when="news" class="page" ng-controller="mediaController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -113,44 +95,8 @@
                 </div>
             </div>
         </div>
-
-        <div id="news" ng-switch-when="news" ng-if='state.mobile_style' class="page" ng-controller="mobileMediaController">
-            <div class="b-content">
-                <div class="b-content_inside">
-                    <div class="w-tab">
-                        <ul class="tab">
-                            <li ng-repeat="itm in state.selectedPageData.types" ng-mousedown="typeMenuClick(itm)">
-                                <a href="#" ng-class="{active: selectedType.type == itm.type}">
-                                    <span>{{itm.label}}</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-news">
-                        <div class="b-news">
-                            <div class="i-news" ng-repeat="item in selectedType.items track by $index">
-                                <div class="i-news__content">
-                                    <div class="img">
-                                        <img alt="img" ng-src="{{item.img}}"/>
-                                    </div>
-                                    <div class="news">
-                                        <h3>{{item.short_desc}}</h3>
-                                        <div class="w-time"><span class="time">{{item.date}}</span></div>
-                                        <p>{{item.full_desc}}</p>
-                                        <a class="btn" href="#">read all</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btn_top" ng-mousedown='goScroll("top")'>
-                                <span class="btn"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="media" ng-switch-when="media" ng-if='!state.mobile_style' class="page" ng-controller="mediaController">
+        
+        <div id="media" ng-switch-when="media" class="page" ng-controller="mediaController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -199,7 +145,115 @@
             </div>
         </div>
 
-        <div id="media" ng-switch-when="media" ng-if='state.mobile_style' class="page" ng-controller="mobileMediaController">
+        <div id="cast" ng-switch-when="cast" class="page w-content" ng-controller="contentController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                        <ul class="tab">
+                            <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
+                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-text">
+                        <div class="b-text">
+                            <div class="t-title">
+                                <h2 animate-text text="selectedItem.name" duration="1"></h2>
+                                <h3 animate-text text="selectedItem.role" duration="1" delay="0.3"></h3>
+                            </div>
+                            <div class="text">
+                                <p animate-text text="selectedItem.desc" duration="2" delay="0.6"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="makers" ng-switch-when="makers" class="page w-content" ng-controller="contentController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                        <ul class="tab">
+                            <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
+                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-text">
+                        <div class="img"></div>
+                        <div class="b-text">
+                            <div class="t-title">
+                                <h2 animate-text text="selectedItem.name" duration="2"></h2>
+                                <h3 animate-text text="selectedItem.role" duration="2" delay="0.3"></h3>
+                            </div>
+                            <div class="text">
+                                <p animate-text text="selectedItem.desc" duration="2" delay="0.6"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id='content' ng-switch="state.selectedPage" ng-if='state.mobile_style' ng-controller="mobileController">
+        <div id="intro" ng-switch-when="intro" class="page" ng-controller="mobileIntroController">
+            <div id="intro_bg"></div>
+            <canvas class="screen" ng-mousedown="skip_intro()" class='mobile_intro'></canvas>
+        </div>
+        
+        <div id="home" ng-switch-when="home" ng-if='state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home', mobile_home:state.mobile_style}" ng-controller="mobileHomeController">
+            <div class="bg_mobile"></div>
+            <canvas class="particles"></canvas>
+            <canvas class="screen" ng-class='{mobile_intro: state.mobile_style}'></canvas>
+            <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
+              <div class='cont_rhom_right'></div>
+              <div class="btn_top" ng-if='state.mobile_style' ng-mousedown='goScroll("top")'>
+                  <span class="btn"></span>
+              </div>
+            </div>
+            <div id='side_page_left' ng-hide="state.mobile_style">
+            </div>
+        </div>
+        
+        <div id="news" ng-switch-when="news" class="page" ng-controller="mobileMediaController">
+            <div class="b-content">
+                <div class="b-content_inside">
+                    <div class="w-tab">
+                        <ul class="tab">
+                            <li ng-repeat="itm in state.selectedPageData.types" ng-mousedown="typeMenuClick(itm)">
+                                <a href="#" ng-class="{active: selectedType.type == itm.type}">
+                                    <span>{{itm.label}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-news">
+                        <div class="b-news">
+                            <div class="i-news" ng-repeat="item in selectedType.items track by $index">
+                                <div class="i-news__content">
+                                    <div class="img">
+                                        <img alt="img" ng-src="{{item.img}}"/>
+                                    </div>
+                                    <div class="news">
+                                        <h3>{{item.short_desc}}</h3>
+                                        <div class="w-time"><span class="time">{{item.date}}</span></div>
+                                        <p>{{item.full_desc}}</p>
+                                        <a class="btn" href="#">read all</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn_top" ng-mousedown='goScroll("top")'>
+                                <span class="btn"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="media" ng-switch-when="media" class="page" ng-controller="mobileMediaController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
@@ -247,32 +301,7 @@
             </div>
         </div>
 
-        <div id="cast" ng-switch-when="cast" ng-if='!state.mobile_style' class="page w-content" ng-controller="contentController">
-            <div class="b-content">
-                <div class="b-content_inside">
-                    <div class="w-tab">
-                        <ul class="tab">
-                            <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-text">
-                        <div class="b-text">
-                            <div class="t-title">
-                                <h2 animate-text text="selectedItem.name" duration="1"></h2>
-                                <h3 animate-text text="selectedItem.role" duration="1" delay="0.3"></h3>
-                            </div>
-                            <div class="text">
-                                <p animate-text text="selectedItem.desc" duration="2" delay="0.6"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="cast" ng-switch-when="cast" ng-if='state.mobile_style' class="page w-content" ng-controller="mobileContentController"> 
+        <div id="cast" ng-switch-when="cast" class="page w-content" ng-controller="mobileContentController"> 
             <div class="w-content">
                 <div class="b-content">
                     <div class="b-content_inside">
@@ -313,34 +342,8 @@
                 </div>
             </div>
         </div>
-
-        <div id="makers" ng-switch-when="makers" ng-if='!state.mobile_style' class="page w-content" ng-controller="contentController">
-            <div class="b-content">
-                <div class="b-content_inside">
-                    <div class="w-tab">
-                        <ul class="tab">
-                            <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-text">
-                        <div class="img"></div>
-                        <div class="b-text">
-                            <div class="t-title">
-                                <h2 animate-text text="selectedItem.name" duration="2"></h2>
-                                <h3 animate-text text="selectedItem.role" duration="2" delay="0.3"></h3>
-                            </div>
-                            <div class="text">
-                                <p animate-text text="selectedItem.desc" duration="2" delay="0.6"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="makers" ng-switch-when="makers" ng-if='state.mobile_style' class="page w-content" ng-controller="mobileContentController">
+        
+        <div id="makers" ng-switch-when="makers" class="page w-content" ng-controller="mobileContentController">
             <div class="b-content">
                 <div class="b-content_inside">
                     <div class="w-tab">
