@@ -268,18 +268,20 @@ body {
 }
 
 #main_menu {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   font-size: 26px;
   font-weight: bold;
   text-transform: uppercase;
 }
-
+#main_menu.mobile_menu{
+  position:absolute;
+}
 .header_cont {
   position: absolute;
-  width: 190px;
-  height: 150px;
+  width: 160px;
+  height: 110px;
   cursor: pointer;
   z-index: 20;
   
@@ -380,6 +382,13 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     margin-left: -100px;
 }
 
+#preloader.mobile_preloader{
+    // position:absolute;
+    // margin-left: -150px;
+    // margin-top: -150px;
+}
+
+
 #preloader .label{
     position: absolute;
     width: 50px;
@@ -410,6 +419,14 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     height: 350px;
     margin-left: -450px;
     margin-top: -175px;
+    -moz-transform: scaleX(0) scaleY(0); /* Для Firefox */
+    -ms-transform: scaleX(0) scaleY(0); /* Для IE */
+    -webkit-transform: scaleX(0) scaleY(0); /* Для Safari, Chrome, iOS */
+    -o-transform: scaleX(0) scaleY(0); /* Для Opera */
+    transform: scaleX(0) scaleY(0);
+}
+#intro{
+  overflow:hidden;
 }
 
 #intro_bg {

@@ -62,8 +62,8 @@
         <div id="news" ng-switch-when="news" class="page" ng-controller="mediaController">
             <div class="b-content">
                 <div class="b-content_inside">
-                    <div class="w-tab">
-                        <ul class="tab">
+                    <div class="w-tab bottom">
+                        <ul class="tab" >
                             <li ng-repeat="itm in state.selectedPageData.types" ng-click="typeMenuClick(itm)" on-complete on-complete-callback="animateMenuItems()">
                                 <a href="#" ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
@@ -99,7 +99,7 @@
         <div id="media" ng-switch-when="media" class="page" ng-controller="mediaController">
             <div class="b-content">
                 <div class="b-content_inside">
-                    <div class="w-tab">
+                    <div class="w-tab  bottom">
                         <ul class="tab">
                             <li ng-repeat="item in state.selectedPageData.types track by $index" on-complete on-complete-callback="animateMenuItems()">
                                 <a href="#" ng-click="typeMenuClick(item)" ng-class="{active: selectedType.type == item.type}"><span>{{item.label}}</span></a>
@@ -200,14 +200,14 @@
     <div id='content' ng-switch="state.selectedPage" ng-if='state.mobile_style' ng-controller="mobileController">
         <div id="intro" ng-switch-when="intro" class="page" ng-controller="mobileIntroController">
             <div id="intro_bg"></div>
-            <canvas class="screen" ng-mousedown="skip_intro()" class='mobile_intro'></canvas>
+            <canvas class="screen mobile_intro" ng-mousedown="skip_intro()" class='mobile_intro'></canvas>
         </div>
         
-        <div id="home" ng-switch-when="home" ng-if='state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home', mobile_home:state.mobile_style}" ng-controller="mobileHomeController">
+        <div id="home" ng-switch-when="home" class="page mobile_home" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="mobileHomeController">
             <div class="bg_mobile"></div>
             <canvas class="particles"></canvas>
-            <canvas class="screen" ng-class='{mobile_intro: state.mobile_style}'></canvas>
-            <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
+            <canvas class="screen mobile_intro"></canvas>
+            <div id='side_page_right' class='mobile_squary'>
               <div class='cont_rhom_right'></div>
               <div class="btn_top" ng-if='state.mobile_style' ng-mousedown='goScroll("top")'>
                   <span class="btn"></span>
@@ -371,7 +371,7 @@
                             <div class="text">
                                 <p>{{selectedMaker.desc}}</p>
                             </div>
-                            <div class="btn_top" ng-click='goScroll("top")'>
+                            <div class="btn_top" ng-mousedown='goScroll("top")'>
                                 <span class="btn"></span>
                             </div>
                         </div>
@@ -439,7 +439,7 @@
         <div class='close_btn' ng-click="closePopups()" >&#10006;</div>
     </div>
 
-    <div id="preloader">
+    <div id="preloader" ng-class='{mobile_preloader: state.mobile_style}'>
         <div class='label'>0%</div>
     </div>
 

@@ -23,11 +23,9 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.transition.show(state.mobile_style)
         v.main_menu.show_header(0.3)
     }
-    
+
     function switch_page() {
-        
-        console.log("mobile switch page")
-        
+
         $window.scrollTo(0, 0);
         v.preloader.hide()
         v.transition.close()
@@ -78,11 +76,9 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var doc = $doc[0];
 
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
-    // v.intro.runRepaint()
     v.intro.repaintCanvas();
     var bg_mobile = doc.querySelector('#home .bg_mobile');
-    console.log(bg_mobile);
-    
+
     ScreenObject.decorate_element.apply(bg_mobile);
     bg_mobile.h = $w.innerHeight*0.9;
 
@@ -93,14 +89,11 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.intro.canvas.top = y_0;
     TweenLite.to(v.intro.canvas, 3, {y: y_1});
 
-    // v.particles.set_canvas(doc.querySelector('#home .particles'))
-    // v.particles.init($w.innerWidth, $w.innerHeight)
-    // v.particles.runRepaint();
-    v.squares.init(state.data.homepage_data)
+    v.squares.init(state.data.homepage_data, state.mobile_style)
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
-    v.squares.show()
-    
+    v.squares.show(state.mobile_style)
+
     on_resize()
     angular.element($w).on('resize', on_resize)
 
@@ -109,9 +102,9 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     
     function on_resize(e) {
         v.squares.resize(state.mobile_style);
-        // v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
         v.intro.canvas.left = $w.innerWidth/2;
         bg_mobile.h = $w.innerHeight*0.9;
+        y_1 = -0.2*$w.innerHeight;
 
         var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
         v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
@@ -119,14 +112,11 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         var y_0 = $w.innerHeight/2;
         v.intro.canvas.top = y_0;
         if(e) v.intro.canvas.y = y_1;
-       
- 
+
     }
 
     function clean_up() {
         angular.element($w).off('resize', on_resize)
-        // v.particles.stopRepaint()
-        // v.intro.stopRepaint()
     }
 }])
 .controller('mobileIntroController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state){
@@ -145,9 +135,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         if (!v.intro.canvas) return
         
         var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
-        var itm_y = $w.innerHeight/2;
         v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
-        v.intro.canvas.y = itm_y;
     }
 
     function clean_up() {
@@ -163,13 +151,14 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.preloader.show()
         v.simulate_page_load(1.5, show_intro_text, false)
 
+
         var drops = []
         var duration = 1000
         var drops_count = 16
         var grid_size = $w.innterWidth
         var delay = duration/drops_count
 
-        setTimeout(makeDrop, delay)
+        // setTimeout(makeDrop, delay)
 
         function makeDrop() {
 

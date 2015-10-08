@@ -14,39 +14,35 @@ function Squares (cont) {
 }
 
 Squares.prototype = {
-	init: function(page){
+	init: function(page, mobile){
 
         this.cont_rhom_right = this.cont.querySelector('#side_page_right');
         this.cont_rhom = this.cont_rhom_right.querySelector('.cont_rhom_right');
         this.cont_rhom_left = this.cont.querySelector('#side_page_left');
-
-        var mobile = false;
-        var win_wid = window.innerWidth;
-        var win_heig = window.innerHeight;
-        var orientation = (win_wid > win_heig) ? 'landscape' : "portrait"; 
-        if((win_wid <= 1024 && orientation == 'landscape' ) || 
-           (win_wid <= 768 && orientation == 'portrait' )){
-            mobile = true;
-        }
-
-        ScreenObject.decorate_element.apply(this.cont_rhom_right);
-        ScreenObject.decorate_element.apply(this.cont_rhom_left);
-        this.cont_rhom_right.style.right = this.rights + 'px';
-        this.cont_rhom_left.style.left = Math.round((-this.sq_width)*0.4) + 'px';
-        this.cont_rhom_left.style.bottom = Math.round((-this.sq_width)*0.4) + 'px';
+        
 
         this.json = page;
-		this.sq_arr_right = page.sq_arr_right;
-		this.sq_arr_left = page.sq_arr_left;
+        this.sq_arr_right = page.sq_arr_right;
+        this.sq_arr_left = page.sq_arr_left;
 
-		for(var k = 0; k < this.sq_arr_right.length; k++){
+        ScreenObject.decorate_element.apply(this.cont_rhom_right);
+        this.cont_rhom_right.style.right = this.rights + 'px';
+
+        for(var k = 0; k < this.sq_arr_right.length; k++){
             this.create_elem(this.cont_rhom, this.sq_arr_right[k]);
             if(!mobile) this.pos_rhom(this.sq_arr_right[k]);
         }
+        
+        ScreenObject.decorate_element.apply(this.cont_rhom_left);
+
+        this.cont_rhom_left.style.left = Math.round((-this.sq_width)*0.4) + 'px';
+        this.cont_rhom_left.style.bottom = Math.round((-this.sq_width)*0.4) + 'px';
+
         for(var k = 0; k < this.sq_arr_left.length; k++){
             this.create_elem(this.cont_rhom_left, this.sq_arr_left[k]);
             if(!mobile) this.pos_rhom(this.sq_arr_left[k]);
         }
+
 
         this.hide();
 
@@ -131,7 +127,6 @@ Squares.prototype = {
     	text.w = sq_width*scape_text;
         text.h = sq_width*scape_text;
 
-
         text.style.bottom = Math.round(-sq_width*0.23) + 'px';
         text.style.right = Math.round(-sq_width*0.23) + 'px';
 
@@ -183,17 +178,22 @@ Squares.prototype = {
         this.cont_rhom_left.visible =  false;
     },
 
-    show: function(){  
+    show: function(mobile){  
         this.cont_rhom_right.visible = true;
-        this.cont_rhom_left.visible = true;
+        this.anim_show(this.sq_arr_right, mobile);
 
-        this.anim_show(this.sq_arr_right);
-        this.anim_show(this.sq_arr_left);
+        if(!mobile){
+            this.cont_rhom_left.visible = true;
+            this.anim_show(this.sq_arr_left);    
+        }
+
+        
     },
 
-    anim_show: function(sq_arr){
+    anim_show: function(sq_arr, mobile){
     	var delay = this.delay;
         var self = this;
+        var num = !mobile ? 0.3 : 0.7;
 
         for (var i = 0; i < sq_arr.length; i++){
 
@@ -208,10 +208,10 @@ Squares.prototype = {
             rhom_after.scaleX = 0;
             rhom_after.scaleY = 0;
 
-            TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: 0.3*i});
-            imgs.onload = (function(rhom, delay){
-                TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: (0.3)+(delay*0.5)});
-            })(rhom_after, delay)
+            TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: num*i});
+            imgs.onload = (function(rhom, delay, inxex){
+                TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: num*inxex+(delay*0.5)});
+            })(rhom_after, delay, i)
         };
     }
 }

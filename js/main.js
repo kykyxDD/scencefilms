@@ -420,7 +420,7 @@ var app = angular.module('app', ['mobile'])
     function on_resize() {
         if (!v.intro.canvas) return
 
-        //v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;
+        v.intro.canvas.scaleX = v.intro.canvas.scaleY = 0.8;
         //v.intro.canvas.y = 0;
     }
 

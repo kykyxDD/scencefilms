@@ -137,6 +137,8 @@ body {
   .w-photo {
     display: table-cell;
     vertical-align: top;
+
+    
   }
 }
 
@@ -145,6 +147,11 @@ body {
   min-width: 210px;
   padding: 0 14px 0 14px;
 
+  &.bottom {
+      vertical-align: middle;
+    }
+
+  
   .tab {
     max-width: 214px;
   }
