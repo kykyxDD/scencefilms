@@ -36,7 +36,7 @@
 
     <a id="top" name="top" ng-show='state.mobile_style'></a>
 
-    <div class="p-title" ng-if='state.mobile_style' ng-show='state.selectedPage == "cast" || state.selectedPage == "makers"'>
+    <div class="p-title" ng-if='state.mobile_style' ng-hide='state.selectedPage == "home"'>
         <h1>{{nameToChange}}</h1>
     </div>
 
@@ -44,7 +44,7 @@
 
         <div id="intro" ng-switch-when="intro" class="page" ng-controller="introController">
             <div id="intro_bg"></div>
-            <canvas class="screen" ng-click="skip_intro()" ng-class='{mobile_intro:state.mobile_style}'></canvas>
+            <canvas class="screen" ng-mousedown="skip_intro()" ng-class='{mobile_intro:state.mobile_style}'></canvas>
         </div>
         
 
@@ -63,12 +63,12 @@
         </div>
 
         <div id="home" ng-switch-when="home" ng-if='state.mobile_style' class="page" ng-class="{selected: state.selectedPage == 'home', mobile_home:state.mobile_style}" ng-controller="mobileHomeController">
-            <div class="bg_mobile" ng-if="state.mobile_style"></div>
+            <div class="bg_mobile"></div>
             <canvas class="particles"></canvas>
             <canvas class="screen" ng-class='{mobile_intro: state.mobile_style}'></canvas>
             <div id='side_page_right' ng-class='{mobile_squary:state.mobile_style}'>
               <div class='cont_rhom_right'></div>
-              <div class="btn_top" ng-if='state.mobile_style' ng-click='goScroll("top")'>
+              <div class="btn_top" ng-if='state.mobile_style' ng-mousedown='goScroll("top")'>
                   <span class="btn"></span>
               </div>
             </div>
@@ -140,7 +140,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="btn_top" ng-click='goScroll("top")'>
+                            <div class="btn_top" ng-mousedown='goScroll("top")'>
                                 <span class="btn"></span>
                             </div>
                         </div>
@@ -236,7 +236,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="btn_top" ng-click='goScroll("top")'>
+                                <div class="btn_top" ng-mousedown='goScroll("top")'>
                                     <span class="btn"></span>
                                 </div>
                             </div>
@@ -300,7 +300,7 @@
                                 <div class="text">
                                     <p>{{selectedItem.desc}}</p>
                                 </div>
-                                <div class="btn_top" ng-click='goScroll("top")'>
+                                <div class="btn_top" ng-mousedown='goScroll("top")'>
                                     <span class="btn"></span>
                                 </div>
                             </div>
@@ -393,7 +393,7 @@
         </div>
         <div class="w-nav">
             <ul class="l-nav">
-                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" ng-click="change_page(page)">
+                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" ng-mousedown="change_page(page)">
                     <span>{{page.name}}</span>
                 </li>
             </ul>
@@ -410,7 +410,7 @@
     </div>
 
     <div id='main_menu' ng-class='{mobile_menu: state.mobile_style}' ng-show="state.interfaceVisible">
-        <div class="header_cont" ng-click="onMenuHeaderClick()">
+        <div class="header_cont" ng-mousedown="onMenuHeaderClick()">
             <div class='lines_cont'>
                 <div class='line'></div>
                 <div class='line'></div>
@@ -419,7 +419,7 @@
             <div class="haeder_label" ng-hide='state.mobile_style'>menu</div>
         </div>
         <div class='menu_cont'></div>
-        <div class='close_btn' ng-click="onMenuCloseClick()" >&#10006;</div>
+        <div class='close_btn' ng-mousedown="onMenuCloseClick()" >&#10006;</div>
     </div>
 
 

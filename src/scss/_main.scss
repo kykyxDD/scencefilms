@@ -64,6 +64,7 @@ body {
   margin: 0 0 80px 0;
   position: absolute;
   top: 146px;
+
   
   h1 {
     font-family: $scadaR;
@@ -72,6 +73,10 @@ body {
     text-transform: uppercase;
     font-weight: normal;
     line-height: 142px;
+    overflow: hidden;
+    // text-overflow: clip;
+    width: 100%;
+  text-overflow: clip;
   }
 }
 

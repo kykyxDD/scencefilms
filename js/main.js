@@ -156,7 +156,7 @@ var app = angular.module('app', [])
                     state.set_selected_page(new_page)
                 }
                 else {
-                    v.main_menu.collapse()
+                    v.main_menu.collapse(state.mobile_style)
                     v.main_menu.hide_header(state.mobile_style)
                     v.transition.open()
                 }
@@ -250,7 +250,7 @@ var app = angular.module('app', [])
 
     $s.onMenuCloseClick = function() {
         v.main_menu.align_header();
-        v.main_menu.collapse();
+        v.main_menu.collapse(state.mobile_style);
         v.main_menu.show_header(0.3);
         v.transition.collapse(state.mobile_style);
     }
@@ -439,11 +439,11 @@ var app = angular.module('app', [])
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
     // v.intro.runRepaint()
     v.intro.repaintCanvas();
-    var home = doc.querySelector('#home');
-    console.log(home.childNodes);
+    var bg_mobile = doc.querySelector('#home .bg_mobile');
+    console.log(bg_mobile);
     
-    // ScreenObject.decorate_element.apply(bg_mobile);
-    // bg_mobile.h = $w.innerHeight*0.9;
+    ScreenObject.decorate_element.apply(bg_mobile);
+    bg_mobile.h = $w.innerHeight*0.9;
 
     var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
     var y_0 = $w.innerHeight/2;
@@ -470,7 +470,7 @@ var app = angular.module('app', [])
         v.squares.resize(state.mobile_style);
         // v.particles.resize(Math.round($w.innerWidth*0.95), Math.round($w.innerHeight*0.95))
         v.intro.canvas.left = $w.innerWidth/2;
-        // bg_mobile.h = $w.innerHeight*0.9;
+        bg_mobile.h = $w.innerHeight*0.9;
 
         var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
         v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
