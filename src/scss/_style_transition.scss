@@ -586,3 +586,45 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     //transform-origin: 0 0 0;
     position: fixed;
 }
+
+#news_popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #ffd800;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#news_popup .popup_bg {
+    position: absolute;
+    background-color: #000000;
+}
+
+#news_popup .popup_img {
+    position: absolute;
+}
+
+#news_popup .popup_content {
+    position: absolute;
+    font-size: 38px;
+}
+
+#news_popup .scroll_cont {
+    overflow: hidden;
+    height: 500px;
+}
+
+#news_popup .title {
+    font-size: 36px;
+}
+
+#news_popup .date {
+    font-size: 22px;
+}
+
+#news_popup .text_cont {
+    color: #ffffff;
+    font-size: 24px;
+}

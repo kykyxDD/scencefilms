@@ -227,6 +227,7 @@ var app = angular.module('app', [])
         v.transition.resize($window.innerWidth, $window.innerHeight, state.mobile_style)
         v.main_menu.resize(state.mobile_style);
         v.background.resize($window.innerWidth, $window.innerHeight)
+        v.news_popup.resize($window.innerWidth, $window.innerHeight)
         v.preloader.set_size(200, 200)
         
         $t(function(){$s.$apply()})
@@ -261,6 +262,10 @@ var app = angular.module('app', [])
         v.main_menu.align_header();
         v.main_menu.show_header(0.3);
         v.transition.close();
+    }
+    
+    $s.closePopups = function() {
+        v.news_popup.hide()
     }
 }])
 .controller("contentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
@@ -317,15 +322,10 @@ var app = angular.module('app', [])
         angular.element($w).off('resize', onResize)
     }
 }])
-.controller("mediaController", ["$scope", "$document", "$window", "$timeout", "appState", function($s, $doc, $w, $t, state) {
+.controller("mediaController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
 
     var doc = $doc[0];
 
-    if(!state.mobile_style){
-        scroll_cont = doc.querySelector(".scrollCont")
-        items_cont = scroll_cont.querySelector(":first-child")
-    }
-   
     var scroll_cont = doc.querySelector(".scrollCont")
     var items_cont = scroll_cont.querySelector(":first-child")
     var media_data = state.selectedPageData
@@ -368,6 +368,16 @@ var app = angular.module('app', [])
         $s.selectedType = type
         $t(onResize)
     }
+    
+    $s.showNewsPopup = function(news_item) {
+        var target = items_cont.querySelector('#news'+news_item.id)
+        
+        console.log(target, news_item)
+        if (target && news_item) {
+            v.news_popup.show(target, news_item)
+        }
+    }
+    
 }])
 .controller("mobileMediaController", ["$scope", "$document", "$window", "$timeout", "appState", function($s, $doc, $w, $t, state) {
 
@@ -679,84 +689,7 @@ var app = angular.module('app', [])
             var text = convert_str($s.text)
             var element = el[0]
             
-            var obj = {
-                
-                update: function() {
-                    this.showLetters(this.index)
-                },
-
-                back_update: function() {
-                    this.showLettersBack(this.index)
-                },
-
-                showLetters: function(n) {
-                    var i
-                    this.field.textContent = ""
-                    
-                    /*
-                    if (n < this.timing_for_minuces) {
-                        
-                        var subLen = Math.ceil(this.text.length*n / this.timing_for_minuces)
-                        
-                        for (i=0;i<subLen;i++) {
-                            this.field.textContent += text.charCodeAt(i) != 13 ? "-" : "\n"
-                        }
-                        
-                        return;
-                    }
-                    */
-                    
-                    if (n >= 1) {
-                        this.field.textContent = this.text
-                        return
-                    }
-                    
-                    var prc = (n-this.timing_for_minuces)/(1-this.timing_for_minuces)
-                    
-                    subLen = Math.ceil(this.text.length*prc)
-                    
-                    this.field.textContent = this.text.substr(0, subLen)
-                    
-                    for(i=0; i<=0; i++) {
-                        this.field.textContent += String.fromCharCode(Math.ceil(Math.random()*40)+60)
-                    }
-                    
-                    /*
-                    for(i=subLen; i<this.text.length;i++) {
-                        this.field.textContent += this.text.charCodeAt(i) != 13 ? "-" : "\n"
-                    }
-                    */
-                },
-
-                showLettersBack: function(n) {
-                    var i
-                    var subLen
-                    this.field.textContent = ""
-
-                    if (n < this.timing_for_minuces) {
-
-                        subLen = Math.ceil(this.text.length*n / this.timing_for_minuces)
-
-                        for (i=0; i<this.text.length; i++) {
-                            var s = i<subLen ? "-" : " "
-                            s = this.text.charCodeAt(i) != 13 ? s : "\n"
-                            this.field.textContent += s
-                        }
-
-                        return;
-                    }
-
-                    var prc = (n-this.timing_for_minuces)/(1-this.timing_for_minuces)
-
-                    subLen = Math.ceil(this.text.length*prc)
-
-                    this.field.textContent = this.text.substr(0, subLen)
-
-                    for(i=0; i<=0; i++) {
-                        this.field.textContent += String.fromCharCode(Math.ceil(Math.random()*40)+60)
-                    }
-                }
-            }
+            var obj = new TextAnimator
 
             obj.index = 0
             obj.text = text
