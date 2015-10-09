@@ -542,7 +542,10 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 .rhom_before{
 	background-color: #000;
 }
-.rhom_after{
+.rhom_after .maska{
+  position:absolute;
+  z-index: 10;
+
 	/*background-color: #000;*/
 	/*opacity: 0;*/
 }

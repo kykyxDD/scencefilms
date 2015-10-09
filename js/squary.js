@@ -84,7 +84,8 @@ Squares.prototype = {
 
     create_content: function(page){
         var text = page.elem.text_rhom;
-        var content
+        var rhom_after = page.elem.rhom_after;
+        var content, maska;
         if(page.type == 'image'){
             content = document.createElement('img');
             content.style.width = '100%';
@@ -94,23 +95,32 @@ Squares.prototype = {
 
         } else if(page.type == 'video'){
             content = document.createElement('div');
+
             content.id = page.id;
             content.className = 'video'
             text.appendChild(content);
+            var maska = document.createElement('div');
+            maska.className = 'maska';
+            rhom_after.appendChild(maska);
+            ScreenObject.decorate_element.apply(maska);
 
             player =  new YT.Player(content, {
-              height: '390',
-              width: '640',
-              videoId: page.src,
-              events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-                // 'onClick': onPlayerClick,
-              }
+                height: '390',
+                width: '640',
+                videoId: page.src,
+                playerVars: {
+                    'controls': '0'
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
             });
             page.player = player;
+            page.elem.maska = maska;
             page.elem.content = player.getIframe();
         }
+        player.addEventListener('tap', onPlayerClick)
 
         ScreenObject.decorate_element.apply(page.elem.content);
 
@@ -122,10 +132,20 @@ Squares.prototype = {
             }
         }
 
+        function onPlayerClick(){
+            console.log(player.onStateChange())
+        }
+
         function onPlayerReady(event) {
-            event.target.playVideo();
-            console.log("hey Im ready");
-        } 
+            event.target.setVolume(0);
+            var elem_player = player.getIframe();
+            maska.addEventListener('mouseover', function(){
+                page.player.playVideo()
+            })
+            maska.addEventListener('mouseout', function(){
+                page.player.pauseVideo()
+            })
+        }
 
         function stopVideo() {
             player.stopVideo();
@@ -175,8 +195,10 @@ Squares.prototype = {
         text.style.bottom = Math.round(-sq_width*0.23) + 'px';
         text.style.right = Math.round(-sq_width*0.23) + 'px';
 
-        itm_elem.w = sq_width;
-        itm_elem.h = sq_width;
+        itm_elem.w = itm_elem.h = sq_width;
+        if(itm_elem.maska){
+            itm_elem.maska.w = itm_elem.maska.h = sq_width;
+        }
 
         itm_elem.x = sq_width*page.i;
         itm_elem.y = sq_width*page.j;
@@ -202,13 +224,16 @@ Squares.prototype = {
             var itm_elem = page.elem;
             var text = page.elem.text_rhom;
             var content = page.elem.content;
-            console.log(content.scaleX)
             ScreenObject.decorate_element.apply(content);
 
             itm_elem.w = wid_elem;
             itm_elem.h = wid_elem;
 
             itm_elem.x = k !== 0 ? (win_wid*0.47)*(k%2) : win_wid*0.15;
+
+            if(itm_elem.maska){
+                itm_elem.maska.w = itm_elem.maska.h = wid_elem;
+            }
 
             if(k == 0){
                 itm_elem.y = 0;
