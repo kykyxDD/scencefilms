@@ -5,9 +5,18 @@ function VideoPopup(cont) {
     
     this.bg = this.cont.querySelector(".popup_bg")
     this.btn = this.cont.querySelector(".close_btn")
+    this.video_cont = this.cont.querySelector(".video_cont")
+    this.video_desc = this.cont.querySelector(".video_desc")
+    this.video_list = this.cont.querySelector(".video_list")
+    this.preloader = this.cont.querySelector(".popup_preloader")
+    this.title = this.cont.querySelector(".title")
     
     ScreenObject.decorate_element.apply(this.bg)
     ScreenObject.decorate_element.apply(this.btn)
+    ScreenObject.decorate_element.apply(this.video_cont)
+    ScreenObject.decorate_element.apply(this.video_desc)
+    ScreenObject.decorate_element.apply(this.video_list)
+    ScreenObject.decorate_element.apply(this.preloader)
     
     this.btn.top = this.btn.left = 0
     
@@ -37,7 +46,37 @@ VideoPopup.prototype = {
         TweenLite.to(this.bg, 0.3, {w: this.w, x: this.bg.sx, delay: 0.6})
         
         this.btn.alpha = 1
-        TweenLite.from(this.btn, 0.5, {alpha: 0, x: this.btn.sx-10, delay: 0.8})
+        TweenLite.from(this.btn, 0.5, {alpha: 0, x: this.btn.sx-10, delay: 1})
+
+        this.video_cont.alpha = 1
+        TweenLite.from(this.video_cont, 0.5, {alpha: 0, x: this.video_cont.sx-10, delay: 0.6})
+        
+        this.video_desc.alpha = 1
+        TweenLite.from(this.video_desc, 0.5, {alpha: 0, x: this.video_desc.sx-10, delay: 0.6})
+
+        this.video_list.alpha = 1
+        TweenLite.from(this.video_list, 0.5, {alpha: 0, x: this.video_list.sx-10, delay: 0.8})
+
+        
+        var preloader = this.preloader
+        this.preloader.alpha = 1
+        
+        this.title.textContent = data.desc
+        
+        var div = this.cont.querySelector('.player')
+        var player = this.player = new YT.Player(div, {
+            width: this.video_cont.w,
+            height: this.video_cont.h,
+            //videoId: '4wUlQDFY2aQ',
+            events: {
+                onReady: function(e) {
+                    console.log(div, this.preloader, preloader)
+                    
+                    TweenLite.to(preloader, 0.5, {alpha: 0})
+                    player.loadVideoByUrl(data.youtube)
+                }
+            }})
+        
     },
 
     hide: function() {
@@ -56,16 +95,38 @@ VideoPopup.prototype = {
 
     resize: function(w, h) {
         
-        this.btn.sx = this.btn.x = (w + this.w)/2 - 25
-        this.btn.sy = this.btn.y = (h - this.h)/2
+        var left = Math.round((w - this.w)/2)
+        var top = Math.round((h - this.h)/2)
         
-        this.bg.sx = this.bg.x = (w - this.w)/2
-        this.bg.sy = this.bg.y = (h - this.h)/2
+        this.btn.sx = Math.round(this.btn.x = (w + this.w)/2 - 25)
+        this.btn.sy = this.btn.y = top
+        
+        this.bg.sx = this.bg.x = left
+        this.bg.sy = this.bg.y = top
         this.bg.w = this.w
         this.bg.h = this.h
+        
+        this.video_cont.sx = this.video_cont.x = Math.round(left + 15)
+        this.video_cont.sy = this.video_cont.y = Math.round(top + 20)
+        this.video_cont.w = this.w - 500
+        this.video_cont.h = this.h - 155
+        
+        this.video_desc.sx = this.video_desc.x = Math.round(this.video_cont.x)
+        this.video_desc.sy = this.video_desc.y = Math.round(this.video_cont.y + this.video_cont.h)
+        this.video_desc.w = this.video_cont.w
+        this.video_desc.h = 130
+
+        this.video_list.sx = this.video_list.x = Math.round(this.video_cont.x + this.video_cont.w + 35)
+        this.video_list.sy = this.video_list.y = this.video_cont.y
+        this.video_list.w = this.w - this.video_cont.w - 35
+        this.video_list.h = this.h - 10
+
     },
     
     destroy: function() {
+        
+        this.player.destroy()
+        
         TweenLite.killTweensOf(bg)
         TweenLite.killTweensOf(this.btn)
     }

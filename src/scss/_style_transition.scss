@@ -740,3 +740,47 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     height: 33px;
     text-align: center;
 }
+
+.popup.video .video_cont, .popup.video .video_desc, .popup.video .video_list {
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.popup.video .video_desc {
+    
+    .title {
+        font-size: 24px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+    
+    .views, .likes {
+        font-size: 18px;
+        color: #ffffff;
+        margin: 10px 10px 0px 0px;
+    }
+    
+    .views::before {
+        content: "";
+        display: inline-block;
+        width: 22px;
+        height: 15px;
+        background-image: inline-image('../image/eye.png');
+    }
+    
+    .likes::before {
+        content: "";
+        display: inline-block;
+        width: 17px;
+        height: 17px;
+        background-image: inline-image('../image/heart.png');
+    }
+}
+
+.popup.video .video_list {
+    padding-top: 55px;
+    
+    .title {
+        font-size: 34px;
+    }
+}

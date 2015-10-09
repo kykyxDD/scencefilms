@@ -8,7 +8,7 @@
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
     <script src='js/lib/iscroll/iscroll.js'></script>
-    <script src='https://www.youtube.com/iframe_api'></script>>
+    <script src='https://www.youtube.com/iframe_api'></script>
     <script src='js/squary.js'></script>
     <script src='js/script.js'></script>
     <script src='js/lib/gs/TweenLite.min.js'></script>
@@ -30,8 +30,7 @@
     <script src='js/main_mobile.js'></script>
 </head>
 
-<body
-    ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
+<body ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
 
     <div id='bg' class="home" ></div>
     
@@ -178,14 +177,17 @@
             <div class="popup video">
                 <div class="popup_semitransparent_bg" ng-click="closePopup()"></div>
                 <div class="popup_bg"></div>
-                <div class="popup_video_cont">
+                <div class="video_cont">
+                    <img class="popup_preloader" src='image/black_preloader.gif'/>
+                    <div class='player'></div>
                 </div>
-                <div class=".video_desc">
-                    <h4>Video Name Tag - Advertise with style!</h4>
-                    <div class='views'></div><div class='likes'></div>
+                <div class="video_desc">
+                    <h3 class="title"></h3>
+                    <span class='views'>1223</span><span class='likes'>47</span>
                 </div>
-                <div class="popup_content">
-                    Video list?
+                <div class="video_list">
+                    <h3 class="title">NEXT VIDEO</h3>
+                    <img src='image/underconst.jpg'/>
                 </div>
                 <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
             </div>
