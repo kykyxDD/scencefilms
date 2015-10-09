@@ -103,21 +103,6 @@ Squares.prototype = {
             maska.className = 'maska';
             rhom_after.appendChild(maska);
             ScreenObject.decorate_element.apply(maska);
-
-            player =  new YT.Player(content, {
-                height: '390',
-                width: '640',
-                videoId: page.src,
-                playerVars: {
-                    controls: 0,
-                    showinfo: 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-            page.player = player;
             page.elem.maska = maska;
             page.elem.content = content;
         }
