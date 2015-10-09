@@ -748,9 +748,16 @@ body {
 //////
 
 @media #{$mediaD} {
+
+  .p-title{
+    padding-top: 15% !important;
+    padding-left: 0 !important;
+    text-align: center;
+  }
   .media,
   .makers{
     .p-title{
+      
       h1{
         font-size: 70px !important;
       }
@@ -1153,6 +1160,12 @@ body {
       float: none;
       width: 100%;
     }
+  }
+}
+
+@media #{$mediaDL} {
+  .p-title{
+    padding-top: 7% !important;
   }
 }
 
