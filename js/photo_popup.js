@@ -48,9 +48,10 @@ PhotoPopup.prototype = {
         this.img_cont.alpha = 1
         TweenLite.from(this.img_cont, 0.5, {alpha: 0, x: this.img_cont.sx-10, delay: 0.8})
         
-        console.log("show photo popup", data.src)
+        console.log("show photo popup", data.src_big)
         
-        this.img.src = data.src
+        this.img.alpha = 0
+        this.img.src = data.src_big
         this.img.onload = angular.bind(this, this.on_image_load)
     },
 
@@ -61,15 +62,21 @@ PhotoPopup.prototype = {
     on_image_load: function() {
         var k = Math.max(this.img_cont.w/this.img.width, this.img_cont.h/this.img.height)
         this.img.scaleX = this.img.scaleY = k
-        this.img.x = (this.img_cont.w - this.img.width)/2
-        this.img.y = (this.img_cont.h - this.img.height)/2
+        this.img.x = (this.img_cont.w - this.img.width*k)/2 - this.img.width*(1-k)/2
+        this.img.y = (this.img_cont.h - this.img.height*k)/2 - this.img.height*(1-k)/2
+        var oversize = 1.1
+        var dx = ((this.img_cont.w - this.img.width*k*oversize)/2 - this.img.x)/2
+        var dy = ((this.img_cont.h - this.img.height*k*oversize)/2 - this.img.y)/2
         
         this.img.alpha = 1
-        TweenLite.from(this.img, 1, {alpha: 0, scaleX: k*1.1, scaleY: k*1.1})
+        TweenLite.from(this.img, 1, {alpha: 0, x: dx, y: dy, scaleX: k*oversize, scaleY: k*oversize})
     },
 
     resize: function(w, h) {
-        
+
+        this.w = Math.min(w*0.95, 1200)
+        this.h = Math.min(h*0.95, 600)
+    
         this.btn.sx = this.btn.x = (w + this.w)/2 - 33
         this.btn.sy = this.btn.y = (h - this.h)/2
         
@@ -85,6 +92,9 @@ PhotoPopup.prototype = {
     },
     
     destroy: function() {
+        
+        this.img.src = ""
+        
         TweenLite.killTweensOf(bg)
         TweenLite.killTweensOf(this.btn)
         TweenLite.killTweensOf(this.img_cont)

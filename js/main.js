@@ -300,7 +300,9 @@ var app = angular.module('app', ['mobile'])
 .controller("contentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
     
     var doc = $doc[0]
-
+    var scroll_cont = doc.querySelector('.scrollCont')
+    console.log(scroll_cont)
+    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
 
     onResize()
     angular.element($w).on('resize', onResize)
@@ -315,6 +317,7 @@ var app = angular.module('app', ['mobile'])
     }
 
     function clean_up() {
+        scroll.destroy()
         angular.element($w).off('resize', onResize)
     }
     
@@ -322,6 +325,9 @@ var app = angular.module('app', ['mobile'])
         $s.selectedItem = sub_page
         v.background.prepare(sub_page.bg_ref)
         v.background.play2()
+        
+        var text = scroll_cont.firstChild
+        scroll.refresh()
     }
     
     $s.animateMenuItems = function() {
@@ -747,6 +753,7 @@ var app = angular.module('app', ['mobile'])
 
             ScreenObject.decorate_element.apply(img)
             img.src = url
+            img.alpha = 0
             img.onload = function() {
 
                 var w = $s.w || div.clientWidth
@@ -754,13 +761,14 @@ var app = angular.module('app', ['mobile'])
             
                 var k = Math.max(w/img.width, h/img.height)
                 img.scaleX = img.scaleY = k
-                img.x = (w - img.width*k)/2
-                img.y = (h - img.height*k)/2
+                img.x = (w - img.width*k)/2 - img.width*(1-k)/2
+                img.y = (h - img.height*k)/2 - img.height*(1-k)/2
                 
                 var oversize = 1.1
-                var dx = ((w - img.width*k*oversize)/2 - img.x)/2 //img.width*k*(oversize - 1)/2
-                var dy = ((h - img.height*k*oversize)/2 - img.y)/2 //img.height*k*(oversize - 1)/2
+                var dx = ((w - img.width*k*oversize)/2 - img.x)/2
+                var dy = ((h - img.height*k*oversize)/2 - img.y)/2
                 
+                img.alpha = 1
                 TweenLite.from(img, duration, {alpha: 0, ease: Linear.easeNone})
                 TweenLite.from(img, duration/2, {x: -dx, y: -dy, scaleX: oversize, scaleY: oversize, ease: Cubic.easeOut})
             }

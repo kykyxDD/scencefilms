@@ -95,6 +95,9 @@ VideoPopup.prototype = {
 
     resize: function(w, h) {
         
+        this.w = Math.min(w*0.95, 1200)
+        this.h = Math.min(h*0.95, 600)
+        
         var left = Math.round((w - this.w)/2)
         var top = Math.round((h - this.h)/2)
         
