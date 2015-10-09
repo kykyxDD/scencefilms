@@ -19,7 +19,6 @@ Squares.prototype = {
         this.cont_rhom_right = this.cont.querySelector('#side_page_right');
         this.cont_rhom = this.cont_rhom_right.querySelector('.cont_rhom_right');
         this.cont_rhom_left = this.cont.querySelector('#side_page_left');
-        
 
         this.json = page;
         this.sq_arr_right = page.sq_arr_right;
@@ -42,7 +41,6 @@ Squares.prototype = {
             this.create_elem(this.cont_rhom_left, this.sq_arr_left[k]);
             if(!mobile) this.pos_rhom(this.sq_arr_left[k]);
         }
-
 
         this.hide();
 
@@ -67,73 +65,90 @@ Squares.prototype = {
         rhom_before.appendChild(rhom_after);
         var text = document.createElement('div');
         text.className = 'text_rhom';
-        var content;
-        
-        if(page.type == 'image'){
-            content = document.createElement('img');
-            
-            content.style.width = '100%';
-            content.style.height = '100%';    
-        } else if(page.type == 'video'){
-            content = document.createElement('iframe');
-            content.className = 'video';
-            content.id = page.id;
-            // content.setAttribute('frameborder', "0")
-            // content.setAttribute('allowfullscreen', 'allowfullscreen')
-            // content.width="560";
-            // content.height="315";
-
-            var player = player = new YT.Player(page.id, {
-                height: '390',
-                width: '640',
-                videoId: page.src,
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-            
-        }
-
-        text.appendChild(content);
-        // img.src = page.imgPath;
-        
-
-
         rhom_after.appendChild(text);
+
         parent.appendChild(itm_elem);
         ScreenObject.decorate_element.apply(itm_elem);
         ScreenObject.decorate_element.apply(rhom_before);
         ScreenObject.decorate_element.apply(rhom_after);
         ScreenObject.decorate_element.apply(text);
-        ScreenObject.decorate_element.apply(content);
 
         page.elem = itm_elem;
         page.elem.rhom_before = rhom_before;
         page.elem.rhom_after = rhom_after;
         page.elem.text_rhom = text;
-        page.elem.content = content;
-        
 
-      // 4. The API will call this function when the video player is ready.
-      function onPlayerReady(event) {
-        event.target.playVideo();
-      }
+        this.create_content(page)
 
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
-      var done = false;
-      function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          done = true;
+    },
+
+    create_content: function(page){
+        var text = page.elem.text_rhom;
+        var rhom_after = page.elem.rhom_after;
+        var content, maska;
+        if(page.type == 'image'){
+            content = document.createElement('img');
+            content.style.width = '100%';
+            content.style.height = '100%';   
+            text.appendChild(content);
+            page.elem.content = content;
+
+        } else if(page.type == 'video'){
+            content = document.createElement('div');
+
+            content.id = page.id;
+            content.className = 'video'
+            text.appendChild(content);
+            var maska = document.createElement('div');
+            maska.className = 'maska';
+            rhom_after.appendChild(maska);
+            ScreenObject.decorate_element.apply(maska);
+
+            player =  new YT.Player(content, {
+                height: '390',
+                width: '640',
+                videoId: page.src,
+                playerVars: {
+                    'controls': '0'
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+            page.player = player;
+            page.elem.maska = maska;
+            page.elem.content = player.getIframe();
         }
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
 
+        ScreenObject.decorate_element.apply(page.elem.content);
+
+        var done = false;
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+              setTimeout(stopVideo, 6000);
+              done = true;
+            }
+        }
+
+        function onPlayerClick(){
+            console.log(player.onStateChange())
+        }
+
+        function onPlayerReady(event) {
+            event.target.setVolume(0);
+            var elem_player = player.getIframe();
+            maska.addEventListener('mouseover', function(){
+                page.player.playVideo()
+            })
+            maska.addEventListener('mouseout', function(){
+                page.player.pauseVideo()
+            })
+        }
+
+        function stopVideo() {
+            player.stopVideo();
+        }
     },
 
     resize: function(mobile){
@@ -171,7 +186,7 @@ Squares.prototype = {
     	var sq_width = this.sq_width;
     	var itm_elem = page.elem;
     	var text = page.elem.text_rhom;
-         var content = page.elem.content;
+        var content = page.elem.content;
 
     	text.w = sq_width*scape_text;
         text.h = sq_width*scape_text;
@@ -179,8 +194,10 @@ Squares.prototype = {
         text.style.bottom = Math.round(-sq_width*0.23) + 'px';
         text.style.right = Math.round(-sq_width*0.23) + 'px';
 
-        itm_elem.w = sq_width;
-        itm_elem.h = sq_width;
+        itm_elem.w = itm_elem.h = sq_width;
+        if(itm_elem.maska){
+            itm_elem.maska.w = itm_elem.maska.h = sq_width;
+        }
 
         itm_elem.x = sq_width*page.i;
         itm_elem.y = sq_width*page.j;
@@ -188,9 +205,8 @@ Squares.prototype = {
         if(page.type == 'video') {
             var scale = text.h/content.height;
             content.scaleX = content.scaleY = scale;
-            
         }
-        
+
     },
 
     resize_mobile: function(){
@@ -207,11 +223,16 @@ Squares.prototype = {
             var itm_elem = page.elem;
             var text = page.elem.text_rhom;
             var content = page.elem.content;
+            ScreenObject.decorate_element.apply(content);
 
             itm_elem.w = wid_elem;
             itm_elem.h = wid_elem;
 
             itm_elem.x = k !== 0 ? (win_wid*0.47)*(k%2) : win_wid*0.15;
+
+            if(itm_elem.maska){
+                itm_elem.maska.w = itm_elem.maska.h = wid_elem;
+            }
 
             if(k == 0){
                 itm_elem.y = 0;
@@ -231,8 +252,6 @@ Squares.prototype = {
                 var scale = text.w/content.height;
                 content.scaleX = content.scaleY = scale;
             }
-            console.log(page)
-
         }
     },
 
@@ -265,10 +284,7 @@ Squares.prototype = {
             var content = sq_arr[i].elem.content;
             if(sq_arr[i].type == 'image'){
                 content.src = sq_arr[i].src;    
-            } else if(sq_arr[i].type == 'video'){
-                // content.src = sq_arr[i].src
             }
-            
 
             rhom_before.scaleX = 0;
             rhom_before.scaleY = 0;
@@ -277,9 +293,9 @@ Squares.prototype = {
             rhom_after.scaleY = 0;
 
             TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: num*i});
-            content.onload = (function(rhom, delay, inxex){
+            content.onload = (function(rhom, delay, inxex, page){
                 TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: num*inxex+(delay*0.5)});
-            })(rhom_after, delay, i)
+            })(rhom_after, delay, i, sq_arr[i])
         };
     }
 }

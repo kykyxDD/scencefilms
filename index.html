@@ -30,7 +30,8 @@
     <script src='js/main_mobile.js'></script>
 </head>
 
-<body ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
+<body
+    ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
 
     <div id='bg' class="home" ></div>
     
@@ -45,7 +46,7 @@
     <div id='content' ng-switch="state.selectedPage" ng-if='!state.mobile_style ' ng-controller="desktopController">
         <div id="intro" ng-switch-when="intro" class="page" ng-controller="introController">
             <div id="intro_bg"></div>
-            <canvas class="screen" ng-mousedown="skip_intro()"></canvas>
+            <canvas class="screen" tap="skip_intro()"></canvas>
         </div>
         
         <div id="home" ng-switch-when="home" class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">            
@@ -64,7 +65,7 @@
                 <div class="b-content_inside">
                     <div class="w-tab bottom">
                         <ul class="tab" >
-                            <li ng-repeat="itm in state.selectedPageData.types" ng-click="typeMenuClick(itm)" on-complete on-complete-callback="animateMenuItems()">
+                            <li ng-repeat="itm in state.selectedPageData.types" tap="typeMenuClick(itm)" on-complete on-complete-callback="animateMenuItems()">
                                 <a href="#" ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
                                 </a>
@@ -84,7 +85,7 @@
                                                 <h3>{{item.short_desc}}</h3>
                                                 <div class="w-time"><span class="time">{{item.date}}</span></div>
                                                 <p>{{item.full_desc}}</p>
-                                                <a class="btn" href="#" ng-click="showNewsPopup(item)">read all</a>
+                                                <a class="btn" href="#" tap="showNewsPopup(item)">read all</a>
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +96,7 @@
                 </div>
             </div>
             <div class="popup news">
-                <div class="popup_semitransparent_bg" ng-click="closePopup()"></div>
+                <div class="popup_semitransparent_bg" tap="closePopup()"></div>
                 <div class="popup_bg"></div>
                 <div class="popup_img_cont">
                     <img class="popup_preloader" src='image/preloader.gif'/>
@@ -114,7 +115,7 @@
                         <div class='ico gp'></div>
                     </div>
                 </div>
-                <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
+                <div class='close_btn' tap="closePopup()" >&#10006;</div>
             </div>
         </div>
         
@@ -191,7 +192,6 @@
                 </div>
                 <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
             </div>
-
         </div>
 
         <div id="cast" ng-switch-when="cast" class="page w-content" ng-controller="contentController">
@@ -200,7 +200,7 @@
                     <div class="w-tab">
                         <ul class="tab">
                             <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
+                                <a href="#" tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
                             </li>
                         </ul>
                     </div>
@@ -249,7 +249,7 @@
     <div id='content' ng-switch="state.selectedPage" ng-if='state.mobile_style' ng-controller="mobileController">
         <div id="intro" ng-switch-when="intro" class="page" ng-controller="mobileIntroController">
             <div id="intro_bg"></div>
-            <canvas class="screen mobile_intro" ng-mousedown="skip_intro()" class='mobile_intro'></canvas>
+            <canvas class="screen mobile_intro" tap="skip_intro()" class='mobile_intro'></canvas>
         </div>
         
         <div id="home" ng-switch-when="home" class="page mobile_home" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="mobileHomeController">
@@ -258,7 +258,7 @@
             <canvas class="screen mobile_intro"></canvas>
             <div id='side_page_right' class='mobile_squary'>
               <div class='cont_rhom_right'></div>
-              <div class="btn_top" ng-if='state.mobile_style' ng-mousedown='goScroll("top")'>
+              <div class="btn_top" ng-if='state.mobile_style' tap='goScroll("top")'>
                   <span class="btn"></span>
               </div>
             </div>
@@ -271,7 +271,7 @@
                 <div class="b-content_inside">
                     <div class="w-tab">
                         <ul class="tab">
-                            <li ng-repeat="itm in state.selectedPageData.types" ng-mousedown="typeMenuClick(itm)">
+                            <li ng-repeat="itm in state.selectedPageData.types" tap="typeMenuClick(itm)">
                                 <a href="#" ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
                                 </a>
@@ -293,7 +293,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="btn_top" ng-mousedown='goScroll("top")'>
+                            <div class="btn_top" tap='goScroll("top")'>
                                 <span class="btn"></span>
                             </div>
                         </div>
@@ -308,7 +308,7 @@
                     <div class="w-tab">
                       <ul class="tab">
                         <li ng-repeat="itm in state.selectedPageData.types track by $index">
-                            <a href="#" ng-mousedown="typeMenuClick(itm)" ng-class="{active: selectedType.type == itm.type}"><span>{{itm.label}}</span></a>
+                            <a href="#" tap="typeMenuClick(itm)" ng-class="{active: selectedType.type == itm.type}"><span>{{itm.label}}</span></a>
                         </li>
                        </ul>
                     </div>
@@ -340,7 +340,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="btn_top" ng-mousedown='goScroll("top")'>
+                                <div class="btn_top" tap='goScroll("top")'>
                                     <span class="btn"></span>
                                 </div>
                             </div>
@@ -357,7 +357,7 @@
                         <div class="w-tab">
                             <ul class="tab">
                                 <li ng-repeat="page in state.selectedPageData.pages">
-                                    <a href='' ng-mousedown='goScroll(page.role)' ng-class="{active: page == selectedItem}" >
+                                    <a href='' tap='goScroll(page.role)' ng-class="{active: page == selectedItem}" >
                                         <span>{{page.title}}</span>
                                     </a>
                                 </li>
@@ -379,7 +379,7 @@
                                 <div class="text">
                                     <p>{{selectedItem.desc}}</p>
                                 </div>
-                                <div class="btn_top" ng-mousedown='goScroll("top")'>
+                                <div class="btn_top" tap='goScroll("top")'>
                                     <span class="btn"></span>
                                 </div>
                             </div>
@@ -398,7 +398,7 @@
                     <div class="w-tab">
                         <ul class="tab">                
                             <li ng-repeat="page in state.selectedPageData.pages">
-                                <a ng-mousedown='goScroll(page.role)' ng-class="{active: page == selectedItem}">
+                                <a tap='goScroll(page.role)' ng-class="{active: page == selectedItem}">
                                     <span>{{page.title}}</span>
                                 </a>
                             </li>
@@ -420,7 +420,7 @@
                             <div class="text">
                                 <p>{{selectedMaker.desc}}</p>
                             </div>
-                            <div class="btn_top" ng-mousedown='goScroll("top")'>
+                            <div class="btn_top" tap='goScroll("top")'>
                                 <span class="btn"></span>
                             </div>
                         </div>
@@ -446,7 +446,7 @@
         </div>
         <div class="w-nav">
             <ul class="l-nav">
-                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" ng-mousedown="change_page(page)">
+                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" tap="change_page(page)">
                     <span>{{page.name}}</span>
                 </li>
             </ul>
@@ -463,7 +463,7 @@
     </div>
 
     <div id='main_menu' ng-class='{mobile_menu: state.mobile_style}' ng-show="state.interfaceVisible">
-        <div class="header_cont" ng-mousedown="onMenuHeaderClick()">
+        <div class="header_cont" tap="onMenuHeaderClick()">
             <div class='lines_cont'>
                 <div class='line'></div>
                 <div class='line'></div>
@@ -472,7 +472,7 @@
             <div class="haeder_label" ng-hide='state.mobile_style'>menu</div>
         </div>
         <div class='menu_cont'></div>
-        <div class='close_btn' ng-mousedown="onMenuCloseClick()" >&#10006;</div>
+        <div class='close_btn' tap="onMenuCloseClick()" >&#10006;</div>
     </div>
 
     <div id="preloader" ng-class='{mobile_preloader: state.mobile_style}'>
