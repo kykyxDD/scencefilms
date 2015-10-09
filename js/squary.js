@@ -120,7 +120,6 @@ Squares.prototype = {
             page.elem.maska = maska;
             page.elem.content = player.getIframe();
         }
-        player.addEventListener('tap', onPlayerClick)
 
         ScreenObject.decorate_element.apply(page.elem.content);
 

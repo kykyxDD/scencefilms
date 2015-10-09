@@ -32,6 +32,7 @@
 
 <body
     ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
+
     <div id='bg' class="home" ></div>
     
     <div id='anim_bg' ng-hide='state.mobile_style'></div>
@@ -177,14 +178,17 @@
             <div class="popup video">
                 <div class="popup_semitransparent_bg" ng-click="closePopup()"></div>
                 <div class="popup_bg"></div>
-                <div class="popup_video_cont">
+                <div class="video_cont">
+                    <img class="popup_preloader" src='image/black_preloader.gif'/>
+                    <div class='player'></div>
                 </div>
-                <div class=".video_desc">
-                    <h4>Video Name Tag - Advertise with style!</h4>
-                    <div class='views'></div><div class='likes'></div>
+                <div class="video_desc">
+                    <h3 class="title"></h3>
+                    <span class='views'>1223</span><span class='likes'>47</span>
                 </div>
-                <div class="popup_content">
-                    Video list?
+                <div class="video_list">
+                    <h3 class="title">NEXT VIDEO</h3>
+                    <img src='image/underconst.jpg'/>
                 </div>
                 <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
             </div>
