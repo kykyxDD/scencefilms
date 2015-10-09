@@ -334,7 +334,7 @@
 
                                 <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by $index">
                                     <div class="i-video" ng-repeat="item in group track by $index">
-                                        <a href="#">
+                                        <a ng-href="{{item.href}}" target="_blank">
                                             <img alt="img" ng-src="{{item.src}}"/>
                                             <span class="text">{{item.desc}}</span>
                                         </a>
