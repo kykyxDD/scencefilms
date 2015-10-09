@@ -174,6 +174,9 @@ var app = angular.module('app', ['mobile'])
 
         var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
+        state.mobile = test_mobile()
+        state.tablet = test_table()
+        
         if((win_wid <= 1024 && orien == 'landscape') || 
            (win_wid <= 768 && orien == 'portrait')){
 
@@ -191,6 +194,39 @@ var app = angular.module('app', ['mobile'])
         v.preloader.set_size(200, 200)
         
         $t(function(){$s.$apply()})
+    }
+    
+    function test_mobile() {
+        
+        var ua = window.navigator.userAgent
+        
+        if (   ua.match(/Mobile/i)
+            || ua.match(/iPhone/i)
+            || ua.match(/iPod/i)
+            || ua.match(/IEMobile/i)
+            || ua.match(/Windows Phone/i)
+            || ua.match(/Android/i)
+            || ua.match(/BlackBerry/i)
+            || ua.match(/webOS/i)) {
+            return true
+        }
+        
+        return false
+    }
+    
+    function test_table() {
+        
+        var ua = window.navigator.userAgent
+        
+        if (   ua.match(/Tablet/i)
+            || ua.match(/iPad/i)
+            || ua.match(/Nexus 7/i)
+            || ua.match(/Nexus 10/i)
+            || ua.match(/KFAPWI/i)) {
+            return true
+        }
+        
+        return false
     }
 
     $s.goScroll = function (eID){          
@@ -366,6 +402,12 @@ var app = angular.module('app', ['mobile'])
         if (target && news_item) {
             v.news_popup.show(target, news_item)
         }
+    }
+    
+    var cache_counter = 0
+    
+    $s.no_cache = function() {
+        return "no_cache" + cache_counter++
     }
     
 }])
@@ -624,19 +666,23 @@ var app = angular.module('app', ['mobile'])
         }
     }
 })
-.directive('animateNewsItem', function() {
+.directive('animateAlphaShiftX', function() {
   
     return {
         scope: {
-            delay: '='
+            delay: '=',
+            shift: '=',
+            duration: '='
         },
         link: function($s, el, attr) {
             
             var div = el[0]
             var delay = $s.delay || 0
+            var shift = $s.shift || 10
+            var duration = $s.duration || 0.3
             
             ScreenObject.decorate_element.apply(div)
-            TweenLite.from(div, 0.3, {alpha: 0, x: "-=10", delay: delay})
+            TweenLite.from(div, duration, {alpha: 0, x: "-="+shift, delay: delay})
 
             $s.$on('$destroy', function() {
                 TweenLite.killTweensOf(div)
@@ -646,3 +692,54 @@ var app = angular.module('app', ['mobile'])
     }
   
 })
+.directive('animateImageLoad', ['$document', function($doc) {
+  
+    return {
+        scope: {
+            w: '=imgW',
+            h: '=imgH',
+            duration: '=',
+            url: '=imgUrl'
+        },
+        link: function($s, el, attr) {
+
+            var div = el[0]
+            var img = div.querySelector("img")
+            var duration = $s.duration || 1
+            var url = $s.url
+            
+            if (!img) {
+                $doc[0].createElement("img")
+                div.appendChild(img)
+            }
+
+            ScreenObject.decorate_element.apply(img)
+            img.src = url
+            img.onload = function() {
+
+                var w = $s.w || div.clientWidth
+                var h = $s.h || div.clientHeight
+            
+                var k = Math.max(w/img.width, h/img.height)
+                img.scaleX = img.scaleY = k
+                img.x = (w - img.width*k)/2
+                img.y = (h - img.height*k)/2
+                console.log(w, h, img.width, img.height)
+                
+                var oversize = 1.1
+                var dx = ((w - img.width*k*oversize)/2 - img.x)/2 //img.width*k*(oversize - 1)/2
+                var dy = ((h - img.height*k*oversize)/2 - img.y)/2 //img.height*k*(oversize - 1)/2
+                
+                TweenLite.from(img, duration, {alpha: 0, ease: Linear.easeNone})
+                TweenLite.from(img, duration/2, {x: -dx, y: -dy, scaleX: oversize, scaleY: oversize, ease: Cubic.easeOut})
+            }
+            
+            $s.$on('$destroy', function() {
+                delete img.onload
+                TweenLite.killTweensOf(img)
+            })
+
+        }
+    }
+  
+}])

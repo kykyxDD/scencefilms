@@ -339,6 +339,7 @@ body {
   img {
     display: block;
     width: 100%;
+    overflow: hidden;
   }
   
   &.i-photo__x {}
@@ -434,7 +435,7 @@ body {
     display: block;
     position: relative;
 
-    &:before {
+    &:after {
       @include pseudo-block($top: 50%, $left: 50%);
       @include oneline-sprite($icons_x2, video, $retina: true);
       width: 86px;
@@ -478,6 +479,11 @@ body {
 
   .i-news__content {
     padding: 0 0 200px 0;
+    
+    .img {
+        overflow: hidden;
+        background-color: #ffffff;
+    }
   }
 
   .w-time {

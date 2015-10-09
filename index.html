@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
     <title>Scent of Rain and Lightning</title>
     <meta charset="utf-8" />
@@ -28,7 +28,6 @@
 </head>
 
 <body
-    ng-app="app"
     ng-controller="appController"
     ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
 
@@ -75,10 +74,10 @@
                         <div class="b-news">
                             <div class="scrollCont">
                                 <div class="newsCont">
-                                    <div class="i-news" ng-repeat="item in selectedType.items" on-complete on-complete-callback="animateContentItems('.newsCont .i-news')">
+                                    <div class="i-news" ng-repeat="item in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
                                         <div class="i-news__content" id="news{{item.id}}">
-                                            <div class="img">
-                                                <img alt="img" ng-src="{{item.img}}" />
+                                            <div class="img" animate-image-load duration="1" img-url="item.img">
+                                                <img alt="img"/>
                                             </div>
                                             <div class="news">
                                                 <h3>{{item.short_desc}}</h3>
@@ -111,10 +110,10 @@
                             <div class="scrollCont">
                                 <div class="mediaCont">
                                     <div ng-switch="selectedType.type">
-                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index" on-complete on-complete-callback="animateContentItems('.mediaCont .i-photo')">
+                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index" animate-alpha-shift-x shift="15" delay="$index*0.1">
                                             <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
-                                                <div class="img">
-                                                    <img alt="img" ng-src="{{item.src}}"/>
+                                                <div class="img" animate-image-load duration="1" img-url="item.src">
+                                                    <img alt="img" />
                                                 </div>
                                                 <div class="w-share">
                                                     <div class="b-share">
@@ -129,9 +128,9 @@
                                         </div>
                                         
                                         <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by $index" on-complete on-complete-callback="animateContentItems('.mediaCont .i-video')">
-                                            <div class="i-video" ng-repeat="item in group track by $index">
+                                            <div class="i-video" ng-repeat="item in group track by $index" animate-image-load duration="1" img-url="item.src">
                                                 <a href="#">
-                                                    <img alt="img" ng-src="{{item.src}}"/>
+                                                    <img alt="img"/>
                                                     <span class="text">{{item.desc}}</span>
                                                 </a>
                                             </div>
