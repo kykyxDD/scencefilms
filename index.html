@@ -41,7 +41,7 @@
         <h1>{{nameToChange}}</h1>
     </div>
 
-    <div id='content' ng-switch="state.selectedPage" ng-if='!state.mobile_style' ng-controller="desktopController">
+    <div id='content' ng-switch="state.selectedPage" ng-if='!state.mobile_style ' ng-controller="desktopController">
         <div id="intro" ng-switch-when="intro" class="page" ng-controller="introController">
             <div id="intro_bg"></div>
             <canvas class="screen" ng-mousedown="skip_intro()"></canvas>

@@ -67,11 +67,26 @@ Squares.prototype = {
         rhom_before.appendChild(rhom_after);
         var text = document.createElement('div');
         text.className = 'text_rhom';
-        var img = document.createElement('img');
+        var content;
+        
+        if(page.type == 'image'){
+            content = document.createElement('img');
+            
+            content.style.width = '100%';
+            content.style.height = '100%';    
+        } else if(page.type == 'video'){
+            content = document.createElement('iframe');
+            content.className = 'video';
+            content.id = page.id;
+            // content.setAttribute('frameborder', "0")
+            // content.setAttribute('allowfullscreen', 'allowfullscreen')
+            // content.width="560";
+            // content.height="315";
+        }
+
+        text.appendChild(content);
         // img.src = page.imgPath;
-        text.appendChild(img);
-        img.style.width = '100%';
-        img.style.height = '100%';
+        
 
 
         rhom_after.appendChild(text);
@@ -80,12 +95,54 @@ Squares.prototype = {
         ScreenObject.decorate_element.apply(rhom_before);
         ScreenObject.decorate_element.apply(rhom_after);
         ScreenObject.decorate_element.apply(text);
+        ScreenObject.decorate_element.apply(content);
 
         page.elem = itm_elem;
         page.elem.rhom_before = rhom_before;
         page.elem.rhom_after = rhom_after;
         page.elem.text_rhom = text;
-        page.elem.img = img;
+        page.elem.content = content;
+/*
+        var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: 'M7lc1UVf-VE',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }*/
+
     },
 
     resize: function(mobile){
@@ -123,6 +180,7 @@ Squares.prototype = {
     	var sq_width = this.sq_width;
     	var itm_elem = page.elem;
     	var text = page.elem.text_rhom;
+         var content = page.elem.content;
 
     	text.w = sq_width*scape_text;
         text.h = sq_width*scape_text;
@@ -136,6 +194,12 @@ Squares.prototype = {
         itm_elem.x = sq_width*page.i;
         itm_elem.y = sq_width*page.j;
         itm_elem.rotation = 0;
+        if(page.type == 'video') {
+            var scale = text.h/content.height;
+            content.scaleX = content.scaleY = scale;
+            
+        }
+        
     },
 
     resize_mobile: function(){
@@ -151,6 +215,7 @@ Squares.prototype = {
             var page = this.sq_arr_right[k];
             var itm_elem = page.elem;
             var text = page.elem.text_rhom;
+            var content = page.elem.content;
 
             itm_elem.w = wid_elem;
             itm_elem.h = wid_elem;
@@ -170,6 +235,13 @@ Squares.prototype = {
             text.style.bottom = Math.round(-wid_elem*0.21) + 'px';
             text.style.right = Math.round(-wid_elem*0.21) + 'px';
             itm_elem.rotation = -45;
+
+            if(page.type == 'video') {
+                var scale = text.w/content.height;
+                content.scaleX = content.scaleY = scale;
+            }
+            console.log(page)
+
         }
     },
 
@@ -199,8 +271,13 @@ Squares.prototype = {
 
             var rhom_before = sq_arr[i].elem.rhom_before;
             var rhom_after = sq_arr[i].elem.rhom_after;
-            var imgs = sq_arr[i].elem.img;
-            imgs.src = sq_arr[i].imgPath;
+            var content = sq_arr[i].elem.content;
+            if(sq_arr[i].type == 'image'){
+                content.src = sq_arr[i].src;    
+            } else if(sq_arr[i].type == 'video'){
+                content.src = sq_arr[i].src
+            }
+            
 
             rhom_before.scaleX = 0;
             rhom_before.scaleY = 0;
@@ -209,7 +286,7 @@ Squares.prototype = {
             rhom_after.scaleY = 0;
 
             TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: num*i});
-            imgs.onload = (function(rhom, delay, inxex){
+            content.onload = (function(rhom, delay, inxex){
                 TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: num*inxex+(delay*0.5)});
             })(rhom_after, delay, i)
         };

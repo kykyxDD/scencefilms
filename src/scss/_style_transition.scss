@@ -276,7 +276,7 @@ body {
   text-transform: uppercase;
 }
 #main_menu.mobile_menu{
-  position:absolute;
+  position:fixed;
 }
 .header_cont {
   position: absolute;
@@ -560,6 +560,14 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     /*background-color: #ffd400;*/
     
 }
+.text_rhom .video{
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -280px;
+  margin-top: -157px;
+}
+
 
 #video-player {
     position: absolute;

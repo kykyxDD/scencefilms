@@ -176,6 +176,7 @@ var app = angular.module('app', ['mobile'])
 
         state.mobile = test_mobile()
         state.tablet = test_table()
+        state.desktop = !state.mobile && !state.tablet;
         
         if((win_wid <= 1024 && orien == 'landscape') || 
            (win_wid <= 768 && orien == 'portrait')){
