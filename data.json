@@ -1,14 +1,14 @@
 {
     "homepage_data": {
         "sq_arr_right": [
-            {"i": 0, "j": 3, "src": "https://www.youtube.com/embed/YclpxGqaL7o", "type": "video", "id": "video_1"},
+            {"i": 0, "j": 3, "src": "YclpxGqaL7o", "type": "video", "id": "video_1"},
             {"i": 2, "j": 3, "src": "image/main/5.jpg", "type": "image"},
             {"i": 0, "j": 2, "src": "image/main/7.jpg", "type": "image"},
-            {"i": 1, "j": 1, "src": "https://www.youtube.com/embed/DKoT8E4COqc", "type": "video", "id": "video_2"},
+            {"i": 1, "j": 1, "src": "DKoT8E4COqc", "type": "video", "id": "video_2"},
             {"i": 1, "j": 5, "src": "image/main/11.jpg", "type": "image"},
             {"i": 1, "j": 2, "src": "image/main/6.jpg", "type": "image"},
             {"i": 1, "j": 4, "src": "image/main/9.jpg", "type": "image"},
-            {"i": 2, "j": 2, "src": "https://www.youtube.com/embed/e-aso34xqe8", "type": "video", "id": "video_3"},
+            {"i": 2, "j": 2, "src": "e-aso34xqe8", "type": "video", "id": "video_3"},
             {"i": 1, "j": 0, "src": "image/main/12.jpg", "type": "image"}
         ],
         "sq_arr_left": [
@@ -328,6 +328,7 @@
                     "type": "video",
                     "src": "image/img/videoa.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/4wUlQDFY2aQ",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -340,6 +341,7 @@
                     "type": "video",
                     "src": "image/img/videob.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/Ktm_JYmOeOc",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -352,6 +354,7 @@
                     "type": "video",
                     "src": "image/img/videoc.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/QnPto9XnvHw",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -364,6 +367,7 @@
                     "type": "video",
                     "src": "image/img/videod.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/YEQR6j14lGY",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -376,6 +380,7 @@
                     "type": "video",
                     "src": "image/img/videoa.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/4wUlQDFY2aQ",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -388,6 +393,7 @@
                     "type": "video",
                     "src": "image/img/videob.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/IyYWTFA3FWA",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -400,6 +406,7 @@
                     "type": "video",
                     "src": "image/img/videoc.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/0yXhKjNWlXE",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -412,6 +419,7 @@
                     "type": "video",
                     "src": "image/img/videod.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/ZcfSaKeuPWc",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},

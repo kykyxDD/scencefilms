@@ -1,25 +1,16 @@
-function NewsPopup(cont) {
+function PhotoPopup(cont) {
     
     this.cont = cont
     this.init()
     
     this.bg = this.cont.querySelector(".popup_bg")
-    this.content = this.cont.querySelector(".popup_content")
-    this.scroll_cont = this.content.querySelector(".scroll_cont")
-    this.text_cont = this.content.querySelector(".text_cont")
-    this.title = this.content.querySelector(".title")
-    this.date = this.content.querySelector(".date")
     this.btn = this.cont.querySelector(".close_btn")
     this.img_cont = this.cont.querySelector(".popup_img_cont")
     this.preloader = this.cont.querySelector(".popup_preloader")
     this.img = this.cont.querySelector(".popup_img")
-    this.icons = this.cont.querySelectorAll(".ico")
-    this.icons = Array.prototype.slice.call(this.icons)
     
     ScreenObject.decorate_element.apply(this.bg)
-    ScreenObject.decorate_element.apply(this.content)
     ScreenObject.decorate_element.apply(this.btn)
-    ScreenObject.decorate_element.apply(this.scroll_cont)
     ScreenObject.decorate_element.apply(this.img_cont)
     ScreenObject.decorate_element.apply(this.preloader)
     ScreenObject.decorate_element.apply(this.img)
@@ -28,15 +19,9 @@ function NewsPopup(cont) {
     
     this.w = 1200
     this.h = 600
-    
-    this.scroll = new IScroll(this.scroll_cont, {useTransition: false, scrollbars: true})
-    
-    this.title_anim = new TextAnimator(this.title, 1, 0)
-    this.date_anim = new TextAnimator(this.date, 1, 0)
-    this.text_anim = new TextAnimator(this.text_cont, 2, 0)
 }
 
-NewsPopup.prototype = {
+PhotoPopup.prototype = {
 
     init: function() {
         this.hide()
@@ -60,35 +45,13 @@ NewsPopup.prototype = {
         this.btn.alpha = 1
         TweenLite.from(this.btn, 0.5, {alpha: 0, x: this.btn.sx-10, delay: 0.8})
         
-        this.content.alpha = 1
-        TweenLite.from(this.content, 0.5, {alpha: 0, x: this.content.sx-10, delay: 0.8})
-        
         this.img_cont.alpha = 1
         TweenLite.from(this.img_cont, 0.5, {alpha: 0, x: this.img_cont.sx-10, delay: 0.8})
         
-        this.text_cont.textContent = data.full_desc
-        this.title.textContent = data.short_desc
-        this.date.textContent = data.date
-        this.scroll.refresh()
+        console.log("show photo popup", data.src)
         
-        this.img.src = data.img
+        this.img.src = data.src
         this.img.onload = angular.bind(this, this.on_image_load)
-        
-        this.update_inner_size()
-        
-        this.title_anim.text = data.short_desc
-        this.date_anim.text = data.date
-        this.text_anim.text = data.full_desc
-
-        this.title_anim.run(0.6)
-        this.date_anim.run(0.6)
-        this.text_anim.run(0.6)
-
-        for (var i=0; i<this.icons.length; i++) {
-            var ico = this.icons[i]
-            ScreenObject.decorate_element.apply(ico)
-            TweenLite.from(ico, 1, {x: "-=10", alpha: 0, delay: 0.6+0.2*i})
-        }
     },
 
     hide: function() {
@@ -107,49 +70,25 @@ NewsPopup.prototype = {
 
     resize: function(w, h) {
         
-        this.btn.sx = this.btn.x = (w + this.w)/2 - 25
+        this.btn.sx = this.btn.x = (w + this.w)/2 - 33
         this.btn.sy = this.btn.y = (h - this.h)/2
         
         this.img_cont.sx = this.img_cont.x = (w - this.w)/2
         this.img_cont.sy = this.img_cont.y = (h - this.h)/2
-        this.img_cont.w = this.w*0.42
+        this.img_cont.w = this.w
         this.img_cont.h = this.h
-        
-        var content_margin_top = 25
-        
-        this.content.sx = this.content.x = Math.round((w - this.w)/2 + this.w*0.45)
-        this.content.sy = this.content.y = Math.round((h - this.h)/2 + content_margin_top)
-        this.content.w = Math.round(this.w*0.53)
-        this.content.h = Math.round(this.h - content_margin_top)
         
         this.bg.sx = this.bg.x = (w - this.w)/2
         this.bg.sy = this.bg.y = (h - this.h)/2
         this.bg.w = this.w
         this.bg.h = this.h
-        
-        this.update_inner_size()
-        this.scroll.refresh()
-    },
-    
-    update_inner_size: function() {
-        
-        var title_h = this.title.clientHeight
-        var date_h = this.date.clientHeight
-        
-        this.scroll_cont.w = this.content.w
-        this.scroll_cont.h = this.content.h - title_h - date_h - 120
     },
     
     destroy: function() {
         TweenLite.killTweensOf(bg)
         TweenLite.killTweensOf(this.btn)
-        TweenLite.killTweensOf(this.cont)
         TweenLite.killTweensOf(this.img_cont)
         
-        this.icons.forEach(TweenLite.killTweensOf)
-        this.title_anim.stop()
-        this.date_anim.stop()
-        this.text_anim.stop()
         delete this.img.onload
-   }
+    }
 }
