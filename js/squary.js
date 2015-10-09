@@ -103,6 +103,10 @@ Squares.prototype = {
             maska.className = 'maska';
             rhom_after.appendChild(maska);
             ScreenObject.decorate_element.apply(maska);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1c54240549627d720c03865842742d9d0ba59803
             page.elem.maska = maska;
             page.elem.content = content;
         }
