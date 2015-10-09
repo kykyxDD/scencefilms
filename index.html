@@ -446,7 +446,7 @@
         </div>
         <div class="w-nav">
             <ul class="l-nav">
-                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" tap="change_page(page)">
+                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" ng-click="change_page(page)">
                     <span>{{page.name}}</span>
                 </li>
             </ul>

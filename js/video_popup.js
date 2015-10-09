@@ -68,6 +68,7 @@ VideoPopup.prototype = {
             width: this.video_cont.w,
             height: this.video_cont.h,
             //videoId: '4wUlQDFY2aQ',
+            playerVars: {controls: 0},
             events: {
                 onReady: function(e) {
                     console.log(div, this.preloader, preloader)

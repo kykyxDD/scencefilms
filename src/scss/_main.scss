@@ -436,7 +436,7 @@ body {
     display: block;
     position: relative;
 
-    &:after {
+    &:before {
       @include pseudo-block($top: 50%, $left: 50%);
       @include oneline-sprite($icons_x2, video, $retina: true);
       width: 86px;
