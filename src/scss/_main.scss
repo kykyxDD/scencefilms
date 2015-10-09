@@ -748,6 +748,15 @@ body {
 //////
 
 @media #{$mediaD} {
+  .media,
+  .makers{
+    .p-title{
+      h1{
+        font-size: 70px !important;
+      }
+    }
+  }
+  
   .i-video {
     a {
       &:before {
@@ -814,6 +823,14 @@ body {
 }
 
 @media #{$mediaE} {
+
+  .media,.makers{
+    .p-title{
+      h1{
+        font-size: 50px !important;
+      }
+    }
+  }
   .i-photo__group {
     width: 100%;
   }
