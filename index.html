@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="app" ng-controller="appController">
 <head>
     <title>Scent of Rain and Lightning</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta ng-if="state.mobile || state.tablet" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <meta content="telephone=no" name="format-detection" />
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
@@ -20,6 +20,8 @@
     <script src='js/intro_text.js'></script>
     <script src='js/text_animator.js'></script>
     <script src='js/news_popup.js'></script>
+    <script src='js/photo_popup.js'></script>
+    <script src='js/video_popup.js'></script>
     <script src='js/background.js'></script>
     <script src='js/animated_background.js'></script>
     <script src='js/transition.js'></script>
@@ -28,7 +30,6 @@
 </head>
 
 <body
-    ng-controller="appController"
     ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
 
     <div id='bg' class="home" ></div>
@@ -93,6 +94,28 @@
                     </div>
                 </div>
             </div>
+            <div class="popup news">
+                <div class="popup_semitransparent_bg" ng-click="closePopup()"></div>
+                <div class="popup_bg"></div>
+                <div class="popup_img_cont">
+                    <img class="popup_preloader" src='image/preloader.gif'/>
+                    <img class="popup_img"/>
+                </div>
+                <div class="popup_content">
+                    <h3 class="title"></h3>
+                    <h5 class="date"></h5>
+                    <div class="scroll_cont">
+                        <div class="text_cont"></div>
+                    </div>
+                    <div class='icons'>
+                        <div class='ico fb'></div>
+                        <div class='ico twitter'></div>
+                        <div class='ico ln'></div>
+                        <div class='ico gp'></div>
+                    </div>
+                </div>
+                <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
+            </div>
         </div>
         
         <div id="media" ng-switch-when="media" class="page" ng-controller="mediaController">
@@ -110,15 +133,15 @@
                             <div class="scrollCont">
                                 <div class="mediaCont">
                                     <div ng-switch="selectedType.type">
-                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index" animate-alpha-shift-x shift="15" delay="$index*0.1">
-                                            <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
+                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
+                                            <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}" id="photo{{item.id}}">
                                                 <div class="img" animate-image-load duration="1" img-url="item.src">
                                                     <img alt="img" />
                                                 </div>
                                                 <div class="w-share">
                                                     <div class="b-share">
                                                         <ul class="l-share">
-                                                            <li><a href="#" class="i-plus"></a></li>
+                                                            <li><a href="#" class="i-plus" tap="showPhotoPopup(item)"></a></li>
                                                             <li><a href="#" class="i-like"></a></li>
                                                             <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
                                                         </ul>
@@ -127,9 +150,9 @@
                                             </div>
                                         </div>
                                         
-                                        <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by $index" on-complete on-complete-callback="animateContentItems('.mediaCont .i-video')">
-                                            <div class="i-video" ng-repeat="item in group track by $index" animate-image-load duration="1" img-url="item.src">
-                                                <a href="#">
+                                        <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
+                                            <div class="i-video" ng-repeat="item in group track by $index" animate-image-load duration="1" img-url="item.src" id="video{{item.id}}">
+                                                <a href="#" tap="showVideoPopup(item)">
                                                     <img alt="img"/>
                                                     <span class="text">{{item.desc}}</span>
                                                 </a>
@@ -142,6 +165,30 @@
                     </div>
                 </div>
             </div>
+            <div class="popup photo">
+                <div class="popup_semitransparent_bg" ng-click="closePopup()"></div>
+                <div class="popup_bg"></div>
+                <div class="popup_img_cont">
+                    <img class="popup_preloader" src='image/preloader.gif'/>
+                    <img class="popup_img"/>
+                </div>
+                <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
+            </div>
+            <div class="popup video">
+                <div class="popup_semitransparent_bg" ng-click="closePopup()"></div>
+                <div class="popup_bg"></div>
+                <div class="popup_video_cont">
+                </div>
+                <div class=".video_desc">
+                    <h4>Video Name Tag - Advertise with style!</h4>
+                    <div class='views'></div><div class='likes'></div>
+                </div>
+                <div class="popup_content">
+                    Video list?
+                </div>
+                <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
+            </div>
+
         </div>
 
         <div id="cast" ng-switch-when="cast" class="page w-content" ng-controller="contentController">
@@ -423,28 +470,6 @@
         </div>
         <div class='menu_cont'></div>
         <div class='close_btn' ng-mousedown="onMenuCloseClick()" >&#10006;</div>
-    </div>
-
-    <div id="news_popup">
-        <div class="popup_bg"></div>
-        <div class="popup_img_cont">
-            <img class="popup_preloader" src='image/preloader.gif'/>
-            <img class="popup_img"/>
-        </div>
-        <div class="popup_content">
-            <h3 class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-            <h5 class="date">today</h5>
-            <div class="scroll_cont">
-                <div class="text_cont">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices erat nec quam mollis tincidunt. Nullam tempor sagittis nunc, quis finibus dui sollicitudin sed. Maecenas at dolor erat. Vivamus elementum faucibus mauris sed ultrices. Aliquam sit amet rutrum eros, sed auctor nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</div>
-            </div>
-            <div class='icons'>
-                <div class='ico fb'></div>
-                <div class='ico twitter'></div>
-                <div class='ico ln'></div>
-                <div class='ico gp'></div>
-            </div>
-        </div>
-        <div class='close_btn' ng-click="closePopups()" >&#10006;</div>
     </div>
 
     <div id="preloader" ng-class='{mobile_preloader: state.mobile_style}'>

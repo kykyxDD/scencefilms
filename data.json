@@ -328,6 +328,7 @@
                     "type": "video",
                     "src": "image/img/videoa.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/4wUlQDFY2aQ",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -340,6 +341,7 @@
                     "type": "video",
                     "src": "image/img/videob.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/Ktm_JYmOeOc",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -352,6 +354,7 @@
                     "type": "video",
                     "src": "image/img/videoc.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/QnPto9XnvHw",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -364,6 +367,7 @@
                     "type": "video",
                     "src": "image/img/videod.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/YEQR6j14lGY",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -376,6 +380,7 @@
                     "type": "video",
                     "src": "image/img/videoa.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/4wUlQDFY2aQ",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -388,6 +393,7 @@
                     "type": "video",
                     "src": "image/img/videob.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/IyYWTFA3FWA",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -400,6 +406,7 @@
                     "type": "video",
                     "src": "image/img/videoc.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/0yXhKjNWlXE",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -412,6 +419,7 @@
                     "type": "video",
                     "src": "image/img/videod.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "youtube": "https://youtu.be/ZcfSaKeuPWc",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},

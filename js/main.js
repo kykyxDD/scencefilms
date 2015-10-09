@@ -8,7 +8,6 @@ var app = angular.module('app', ['mobile'])
     var squares = new Squares(doc);
     var particles = new Particles()
     var intro = new IntroText()
-    var news_popup = new NewsPopup(doc.querySelector('#news_popup'))
     
     return {
         transition: transition,
@@ -18,7 +17,6 @@ var app = angular.module('app', ['mobile'])
         particles: particles,
         intro: intro,
         background: background,
-        news_popup: news_popup,
         
         simulate_page_load: function (duration, callback, reset_preloader) {
 
@@ -190,7 +188,6 @@ var app = angular.module('app', ['mobile'])
         v.transition.resize($window.innerWidth, $window.innerHeight, state.mobile_style)
         v.main_menu.resize(state.mobile_style);
         v.background.resize($window.innerWidth, $window.innerHeight)
-        v.news_popup.resize($window.innerWidth, $window.innerHeight)
         v.preloader.set_size(200, 200)
         
         $t(function(){$s.$apply()})
@@ -249,10 +246,6 @@ var app = angular.module('app', ['mobile'])
         v.main_menu.collapse(state.mobile_style);
         v.main_menu.show_header(0.3);
         v.transition.collapse(state.mobile_style);
-    }
-    
-    $s.closePopups = function() {
-        v.news_popup.hide()
     }
 }])
 .controller("desktopController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
@@ -345,6 +338,7 @@ var app = angular.module('app', ['mobile'])
 
     var doc = $doc[0];
 
+    var popup
     var scroll_cont = doc.querySelector(".scrollCont")
     var items_cont = scroll_cont.querySelector(":first-child")
     var media_data = state.selectedPageData
@@ -357,6 +351,7 @@ var app = angular.module('app', ['mobile'])
     $s.$on('$destroy', clean_up)
     
     function clean_up() {
+        popup && popup.destroy()
         scroll.destroy()
         angular.element($w).off('resize', onResize)
     }
@@ -368,6 +363,7 @@ var app = angular.module('app', ['mobile'])
         scroll_cont.style.width = cont_w + "px"
         items_cont.style.width = content_w + "px"
         scroll.refresh()
+        popup && popup.resize($w.innerWidth, $w.innerHeight)
     }
     
     $s.animateMenuItems = function() {
@@ -400,7 +396,38 @@ var app = angular.module('app', ['mobile'])
         var target = items_cont.querySelector('#news'+news_item.id)
         
         if (target && news_item) {
-            v.news_popup.show(target, news_item)
+            
+            popup && popup.destroy()
+            popup = new NewsPopup(doc.querySelector('.popup.news'))
+            popup.resize($w.innerWidth, $w.innerHeight)
+            
+            popup.show(target, news_item)
+        }
+    }
+    
+    $s.showVideoPopup = function(item) {
+        var target = items_cont.querySelector('#video'+item.id)
+        
+        if (target && item) {
+            
+            popup && popup.destroy()
+            popup = new VideoPopup(doc.querySelector('.popup.video'))
+            popup.resize($w.innerWidth, $w.innerHeight)
+            
+            popup.show(target, item)
+        }
+    }
+    
+    $s.showPhotoPopup = function(item) {
+        var target = items_cont.querySelector('#photo'+item.id)
+        
+        if (target && item) {
+            
+            popup && popup.destroy()
+            popup = new PhotoPopup(doc.querySelector('.popup.photo'))
+            popup.resize($w.innerWidth, $w.innerHeight)
+            
+            popup.show(target, item)
         }
     }
     
@@ -408,6 +435,10 @@ var app = angular.module('app', ['mobile'])
     
     $s.no_cache = function() {
         return "no_cache" + cache_counter++
+    }
+    
+    $s.closePopup = function() {
+        popup.hide()
     }
     
 }])
@@ -724,7 +755,6 @@ var app = angular.module('app', ['mobile'])
                 img.scaleX = img.scaleY = k
                 img.x = (w - img.width*k)/2
                 img.y = (h - img.height*k)/2
-                console.log(w, h, img.width, img.height)
                 
                 var oversize = 1.1
                 var dx = ((w - img.width*k*oversize)/2 - img.x)/2 //img.width*k*(oversize - 1)/2
@@ -742,4 +772,54 @@ var app = angular.module('app', ['mobile'])
         }
     }
   
+}])
+.directive('tap', ['$document', function($doc) {
+    
+    var doc = $doc[0]
+    
+    var x, y
+    
+    function on(e) {
+        e = e.touches ? e.touches[0] : e
+        x = e.pageX
+        y = e.pageY
+    }
+    function off(e) {
+        e = e.changedTouches ? e.changedTouches[0] : e
+        x = Math.abs(e.pageX - x)
+        y = Math.abs(e.pageY - y)
+        if(x <3 && y <3) {
+            var tap = document.createEvent('CustomEvent')
+            tap.initCustomEvent('tap', true, true, e)
+            e.target.dispatchEvent(tap)
+        }
+    }
+    doc.addEventListener('mousedown',  on, true)
+    doc.addEventListener('mouseup',   off, true)
+    doc.addEventListener('touchstart', on, true)
+    doc.addEventListener('touchend',  off, true)
+
+    return {
+        
+        scope: {
+            tap: "&tap"            
+        },
+        
+        link: function($s, elem, attr) {
+            
+            elem.on('tap', on_tap)
+            $s.$on("$destroy", clean_up)
+            
+            function on_tap(e) {
+                $s.tap()
+            }
+            
+            function clean_up() {
+                elem.off('tap', on_tap)
+            }
+            
+        }
+        
+    }
+    
 }])

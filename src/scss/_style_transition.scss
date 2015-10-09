@@ -604,42 +604,49 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     position: fixed;
 }
 
-#news_popup {
+.popup {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     color: #ffd800;
-    background-color: rgba(0, 0, 0, 0.6);
 }
 
-#news_popup .popup_bg {
+.popup .popup_semitransparent_bg {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);    
+    width: 100%;
+    height: 100%;
+}
+
+.popup .popup_bg {
     position: absolute;
     background-color: #000000;
 }
 
-#news_popup .popup_img {
+.popup .popup_img {
     position: absolute;
 }
 
-#news_popup .popup_content {
+.popup .popup_content {
     position: absolute;
     font-size: 38px;
 }
 
-#news_popup .scroll_cont {
+.popup .scroll_cont {
     overflow: hidden;
     position: relative;
 }
 
-#news_popup .title {
+.popup .title {
     font-size: 28px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-#news_popup .date {
+.popup .date {
     font-family: scadaitalic;
     font-size: 17px;
     letter-spacing: 1px;
@@ -650,17 +657,17 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     background-image: inline-image('../image/date_ico.png');
 }
 
-#news_popup .text_cont {
+.popup .text_cont {
     color: #ffffff;
     font-size: 23px;
 }
 
-#news_popup .icons {
+.popup .icons {
     position: absolute;
     bottom: 15px;
 }
 
-#news_popup .ico {
+.popup .ico {
     position: relative;
     width: 54px;
     height: 54px;
@@ -670,7 +677,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     cursor: pointer;
 }
 
-#news_popup .ico:hover::before {
+.popup .ico:hover::before {
     position: absolute;
     width: 46px;
     height: 28px;
@@ -684,26 +691,29 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     background: inline-image('../image/little_bubble.png') no-repeat;
 }
 
-#news_popup .ico.fb {
+.popup .ico.fb {
     background: inline-image('../image/popup_fb_ico.png') no-repeat;
 }
-#news_popup .ico.twitter {
+
+.popup .ico.twitter {
     background: inline-image('../image/popup_twitter_ico.png') no-repeat;
 }
-#news_popup .ico.ln {
+
+.popup .ico.ln {
     background: inline-image('../image/popup_ln_ico.png') no-repeat;
 }
-#news_popup .ico.gp {
+
+.popup .ico.gp {
     background: inline-image('../image/popup_gp_ico.png') no-repeat;
 }
 
-#news_popup .popup_img_cont {
+.popup .popup_img_cont {
     position: absolute;
     background-color: #ffffff;
     overflow: hidden;
 }
 
-#news_popup .popup_preloader {
+.popup .popup_preloader {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -711,6 +721,14 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     margin-top: -15px;
 }
 
-#news_popup .popup_img {
+.popup .popup_img {
     position: absolute;
+}
+
+.popup.photo .close_btn {
+    background-color: #000000;
+    color: #FFD800;
+    width: 33px;
+    height: 33px;
+    text-align: center;
 }
