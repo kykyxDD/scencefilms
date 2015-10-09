@@ -72,6 +72,7 @@ NewsPopup.prototype = {
         this.scroll.refresh()
         
         this.img.src = data.img
+        this.img.alpha = 0
         this.img.onload = angular.bind(this, this.on_image_load)
         
         this.update_inner_size()
@@ -106,6 +107,9 @@ NewsPopup.prototype = {
     },
 
     resize: function(w, h) {
+
+        this.w = Math.min(w*0.95, 1200)
+        this.h = Math.min(h*0.95, 600)
         
         this.btn.sx = this.btn.x = (w + this.w)/2 - 25
         this.btn.sy = this.btn.y = (h - this.h)/2
@@ -151,5 +155,6 @@ NewsPopup.prototype = {
         this.date_anim.stop()
         this.text_anim.stop()
         delete this.img.onload
+        this.img.src = ""
    }
 }

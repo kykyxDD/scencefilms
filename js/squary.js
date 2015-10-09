@@ -109,7 +109,7 @@ Squares.prototype = {
                 width: '640',
                 videoId: page.src,
                 playerVars: {
-                    'controls': '0'
+                    controls: 0
                 },
                 events: {
                     'onReady': onPlayerReady,

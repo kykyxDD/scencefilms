@@ -210,8 +210,8 @@
                                 <h2 animate-text text="selectedItem.name" duration="1"></h2>
                                 <h3 animate-text text="selectedItem.role" duration="1" delay="0"></h3>
                             </div>
-                            <div class="text">
-                                <p animate-text text="selectedItem.desc" duration="2" delay="0"></p>
+                            <div class="text scrollCont">
+                                <div animate-text text="selectedItem.desc" duration="2" delay="0"></div>
                             </div>
                         </div>
                     </div>
@@ -236,7 +236,7 @@
                                 <h2 animate-text text="selectedItem.name" duration="2"></h2>
                                 <h3 animate-text text="selectedItem.role" duration="2" delay="0"></h3>
                             </div>
-                            <div class="text">
+                            <div class="text scrollCont">
                                 <p animate-text text="selectedItem.desc" duration="2" delay="0"></p>
                             </div>
                         </div>
@@ -446,7 +446,7 @@
         </div>
         <div class="w-nav">
             <ul class="l-nav">
-                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" tap="change_page(page)">
+                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" ng-click="change_page(page)">
                     <span>{{page.name}}</span>
                 </li>
             </ul>

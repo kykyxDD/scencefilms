@@ -239,6 +239,7 @@
                     "id": 51,
                     "type": "photo",
                     "src": "image/img/photoa.jpg",
+                    "src_big": "image/img/photoa_big.jpg",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -249,7 +250,8 @@
                 {
                     "id": 52,
                     "type": "photo",
-                    "src": "image/img/photob.jpg",
+                    "src": "image/img/photoc.jpg",
+                    "src_big": "image/img/photoc_big.jpg",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -260,7 +262,8 @@
                 {
                     "id": 53,
                     "type": "photo",
-                    "src": "image/img/photoc.jpg",
+                    "src": "image/img/photof.jpg",
+                    "src_big": "image/img/photof_big.jpg",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -271,7 +274,8 @@
                 {
                     "id": 54,
                     "type": "photo",
-                    "src": "image/img/photod.jpg",
+                    "src": "image/img/photob.jpg",
+                    "src_big": "image/img/photob_big.jpg",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -282,7 +286,8 @@
                 {
                     "id": 55,
                     "type": "photo",
-                    "src": "image/img/photoe.jpg",
+                    "src": "image/img/photod.jpg",
+                    "src_big": "image/img/photod_big.jpg",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -293,7 +298,8 @@
                 {
                     "id": 56,
                     "type": "photo",
-                    "src": "image/img/photof.jpg",
+                    "src": "image/img/photok.jpg",
+                    "src_big": "image/img/photok_big.jpg",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
@@ -305,17 +311,7 @@
                     "id": 57,
                     "type": "photo",
                     "src": "image/img/photog.jpg",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
-                },
-                {
-                    "id": 58,
-                    "type": "photo",
-                    "src": "image/img/photoh.jpg",
+                    "src_big": "image/img/photog_big.jpg",
                     "links": [
                         {"type": "i-twett", "href": "#"},
                         {"type": "i-facebook", "href": "#"},
