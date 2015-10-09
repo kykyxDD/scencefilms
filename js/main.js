@@ -302,7 +302,7 @@ var app = angular.module('app', ['mobile'])
     var doc = $doc[0]
     var scroll_cont = doc.querySelector('.scrollCont')
     console.log(scroll_cont)
-    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
+    //var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
 
     onResize()
     angular.element($w).on('resize', onResize)
@@ -317,7 +317,7 @@ var app = angular.module('app', ['mobile'])
     }
 
     function clean_up() {
-        scroll.destroy()
+        //scroll.destroy()
         angular.element($w).off('resize', onResize)
     }
     
@@ -327,7 +327,7 @@ var app = angular.module('app', ['mobile'])
         v.background.play2()
         
         var text = scroll_cont.firstChild
-        scroll.refresh()
+        //scroll.refresh()
     }
     
     $s.animateMenuItems = function() {
