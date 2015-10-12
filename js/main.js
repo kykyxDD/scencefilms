@@ -326,7 +326,7 @@ var app = angular.module('app', ['mobile'])
         v.background.prepare(sub_page.bg_ref)
         v.background.play2()
         
-        var text = scroll_cont.firstChild
+        //var text = scroll_cont.firstChild
         //scroll.refresh()
     }
     
