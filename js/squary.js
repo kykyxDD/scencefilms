@@ -19,11 +19,15 @@ function Squares (cont) {
         for( var i = 0; i < self.arr_video.length; i++){
             var itm = self.arr_video[i];
             var top = itm.offset;
-            if(scrolled < top.top && top.top < scrolled + window.innerHeight){
-                console.log(itm)
-                console.log(true,scrolled, scrolled+win_heig)
+            if(!top) continue
+            if((scrolled < top.top && top.top  < (scrolled + window.innerHeight)) || 
+                (scrolled < (top.top + top.height) && (top.top + top.height)  < (scrolled + window.innerHeight))){
+                // console.log(itm)
+                // console.log(true,scrolled, scrolled+win_heig)
+                // itm.player.playVideo()
             } else {
-                console.log(false)
+                // itm.player.pauseVideo()
+                // console.log(false)
             }
         }
 
@@ -361,10 +365,30 @@ Squares.prototype = {
             TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
             maska.addEventListener('mouseover', function(){
                 // console.log(text.offsetTop, text, self.getElementPosition(text))
-                page.player.playVideo()
+                // page.player.playVideo()
             })
             maska.addEventListener('mouseout', function(){
-                page.player.pauseVideo()
+                // page.player.pauseVideo()
+            })
+            maska.addEventListener('mousedown', function(){
+                // console.log(page.player)
+                var status = page.player.getPlayerState();
+                if(status == 1){
+                    // page.player.pauseVideo()
+                } else {
+                    // page.player.playVideo()
+                }
+                // console.log(status)
+            })
+            maska.addEventListener('touchstart', function(){
+                // console.log(page.player)
+                var status = page.player.getPlayerState();
+                if(status == 1){
+                    page.player.pauseVideo()
+                } else {
+                    page.player.playVideo()
+                }
+                // console.log(status)
             })
         }
 
