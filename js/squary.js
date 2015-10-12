@@ -5,12 +5,30 @@ function Squares (cont) {
     this.sq_arr_left;
     this.sq_arr_right;
     this.json;
+    this.arr_video = [];
 
     this.sq_width = Math.round(document.body.clientWidth/6);
     this.scape_text = 1.45;
     this.delay = 1;
+    var self = this;
 
     this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
+    window.addEventListener('scroll', function() {
+        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+        var win_heig = document.documentElement.clientHeight;
+        for( var i = 0; i < self.arr_video.length; i++){
+            var itm = self.arr_video[i];
+            var top = itm.offset;
+            if(scrolled < top.top && top.top < scrolled + window.innerHeight){
+                console.log(itm)
+                console.log(true,scrolled, scrolled+win_heig)
+            } else {
+                console.log(false)
+            }
+        }
+
+      // document.getElementById('showScroll').innerHTML = scrolled + 'px';
+    })
 }
 
 Squares.prototype = {
@@ -92,7 +110,6 @@ Squares.prototype = {
             content.style.height = '100%';   
             text.appendChild(content);
             page.elem.content = content;
-
         } else if(page.type == 'video'){
             content = document.createElement('div');
 
@@ -213,7 +230,26 @@ Squares.prototype = {
                 var scale = text.w/content.height;
                 content.scaleX = content.scaleY = scale;
             }
+            // console.log(text.offsetTop, this.getElementPosition(text), text)
         }
+    },
+    getElementPosition: function(elemId) {
+        var elem = elemId;
+      
+        var w = elem.offsetWidth;
+        var h = elem.offsetHeight;
+      
+        var l = 0;
+        var t = 0;
+      
+        while (elem)
+        {
+            l += elem.offsetLeft;
+            t += elem.offsetTop;
+            elem = elem.offsetParent;
+        }
+
+        return {"left":l, "top":t, "width": w, "height":h};
     },
 
     hide: function(){  
@@ -284,9 +320,13 @@ Squares.prototype = {
     },
 
     createVideo: function(page, delay_1){
+
+        this.arr_video.push(page)
         var delay = this.delay;
         var maska = page.elem.maska;
+        var text = page.elem.text_rhom;
         var rhom = page.elem.rhom_after;
+        var self = this;
         var player =  new YT.Player(page.elem.content, {
             height: '390',
             width: '640',
@@ -301,7 +341,8 @@ Squares.prototype = {
             }
         });
         page.elem.content = player.getIframe()
-        page.player = player
+        page.player = player;
+        page.offset = this.getElementPosition(text);
 
         var done = false;
         function onPlayerStateChange(event) {
@@ -319,6 +360,7 @@ Squares.prototype = {
             event.target.setVolume(0);
             TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
             maska.addEventListener('mouseover', function(){
+                // console.log(text.offsetTop, text, self.getElementPosition(text))
                 page.player.playVideo()
             })
             maska.addEventListener('mouseout', function(){
