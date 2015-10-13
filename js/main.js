@@ -323,6 +323,7 @@ var app = angular.module('app', ['mobile'])
     
     $s.subMenuClick = function(sub_page) {
         $s.selectedItem = sub_page
+        $s.$apply()
         v.background.prepare(sub_page.bg_ref)
         v.background.play2()
         
@@ -790,7 +791,6 @@ var app = angular.module('app', ['mobile'])
     var x, y
     
     function on(e) {
-        console.log('on', e.type)
         e = e.touches ? e.touches[0] : e
         x = e.pageX
         y = e.pageY
