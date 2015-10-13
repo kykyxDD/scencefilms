@@ -591,6 +591,8 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 .rhom_after .maska{
   position:absolute;
   z-index: 10;
+  pointer-events:none;
+  display: none;
 
 	/*background-color: #000;*/
 	/*opacity: 0;*/
@@ -615,7 +617,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   top: 50%;
   margin-left: -320px;
   margin-top: -195px;
-  pointer-events: none;
+  // pointer-events: none;
 }
 
 

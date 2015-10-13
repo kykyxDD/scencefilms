@@ -354,38 +354,39 @@ Squares.prototype = {
             event.target.setVolume(0);
             var img = page.elem.querySelector('img.preloader');
             console.log(img)
-            img.parentNode.removeChild(img)
+            img.parentNode.removeChild(img);
+            console.log(page.elem.content)
 
 
             TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
-            maska.addEventListener('mouseover', function(event){
+            page.elem.content.addEventListener('mouseover', function(event){
                 console.log(event.type)
                 // console.log(text.offsetTop, text, self.getElementPosition(text))
                 page.player.playVideo()
             })
-            maska.addEventListener('mouseout', function(event){
+            page.elem.content.addEventListener('mouseout', function(event){
                 console.log(event.type)
                 page.player.pauseVideo()
             })
 
-            maska.addEventListener('mouseover', function(event){
+            page.elem.content.addEventListener('mouseover', function(event){
                 console.log(event.type)
                 // console.log(text.offsetTop, text, self.getElementPosition(text))
                 page.player.playVideo()
             })
-            maska.addEventListener('mouseout', function(event){
+            page.elem.content.addEventListener('mouseout', function(event){
                 console.log(event.type)
                 page.player.pauseVideo()
             })
 
-            maska.addEventListener('tap', function(event){
-                console.log(event.bubbles)
-                var status = page.player.getPlayerState();
-                if(status == 1){
-                    page.player.pauseVideo()
-                } else {
+            page.elem.content.addEventListener('tap', function(event){
+                // console.log(event.bubbles)
+                // var status = page.player.getPlayerState();
+                // if(status == 1){
+                    // page.player.pauseVideo()
+                // } else {
                     page.player.playVideo()
-                }
+                // }
                 console.log(status, event.type)
             })
         }
@@ -393,26 +394,5 @@ Squares.prototype = {
         // function stopVideo() {
         //     player.stopVideo();
         // }
-    },
-
-    scrollHome: function(mobile){
-        console.log('scrollHome',mobile)
-        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
-        var win_heig = document.documentElement.clientHeight;
-        if(!mobile || this.arr_video.length == 0) return
-        for( var i = 0; i < this.arr_video.length; i++){
-            var itm = this.arr_video[i];
-            var top = itm.offset;
-            if(!top || !itm.player || !itm.player.playVideo || !itm.player.pauseVideo) continue
-            if((scrolled < top.top && top.top  < (scrolled + window.innerHeight)) || 
-                (scrolled < (top.top + top.height) && (top.top + top.height)  < (scrolled + window.innerHeight))){
-                // console.log(itm)
-                console.log(true,scrolled, scrolled+win_heig, itm.player.getPlayerState())
-                // itm.player.playVideo()
-            } else {
-                // itm.player.pauseVideo()
-                console.log(false)
-            }
-        }
     }
 }

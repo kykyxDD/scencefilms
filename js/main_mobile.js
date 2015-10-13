@@ -95,10 +95,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     angular.element($w).on('resize', on_resize)
 
     $s.$on('$destroy', clean_up)
-    angular.element($w).bind("scroll", function(){
-        if(state.pageToChange == 'home') v.squares.scrollHome(state.mobile_style);
-    })
-
     
     function on_resize(e) {
         v.squares.resize(state.mobile_style);
