@@ -121,15 +121,15 @@ Anim_menu.prototype = {
     
     show_header: function(show_delay) {
 
-        this.align_header()
+        this.align_header();
 
-        var show_delay = show_delay || 0
+        var show_delay = show_delay || 0;
 
         TweenLite.to(this.header_label, 0.42, {y: 0, delay: show_delay})
 
-        var delay = show_delay + 0.0
-        var l = this.lines.length
-
+        var delay = show_delay + 0.0;
+        var l = this.lines.length;
+        this.header_cont.visible = true;
         for (var i=0; i<l; i++) {
             var line = this.lines[i]
             TweenLite.to(line, 0.17, {x: 0, delay: delay, ease: Power0.easeIn, onStart: function() {this.visible = true}, onStartScope: line})
@@ -141,11 +141,15 @@ Anim_menu.prototype = {
 
     hide_header: function(mobile) {
         var win_width = window.innerWidth;
+        var self = this;
         if(!mobile){
             TweenLite.to(this.header_cont, 0.5, {x: 150, alpha: 0})
         } else {
             TweenLite.to(this.header_cont, 0.5, {x: win_width, alpha: 0})
         }
+        setTimeout(function(){
+           self.header_cont.visible = false;
+        },500)
     },
 
     collapse: function(mobile) {

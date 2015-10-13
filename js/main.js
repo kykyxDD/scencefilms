@@ -237,15 +237,18 @@ var app = angular.module('app', ['mobile'])
     }
 
     $s.onMenuHeaderClick = function() {
+        console.log('onMenuHeaderClick')
         v.main_menu.hide_header(state.mobile_style)
         v.main_menu.expand()
         v.transition.expand(state.mobile_style)
     }
 
     $s.onMenuCloseClick = function() {
-        v.main_menu.align_header();
+        console.log('onMenuCloseClick')
+        
         v.main_menu.collapse(state.mobile_style);
         v.main_menu.show_header(0.3);
+        v.main_menu.align_header();
         v.transition.collapse(state.mobile_style);
     }
 }])

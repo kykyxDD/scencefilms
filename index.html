@@ -3,7 +3,7 @@
 <head>
     <title>Scent of Rain and Lightning</title>
     <meta charset="utf-8" />
-    <meta ng-if="state.mobile || state.tablet" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <meta content="telephone=no" name="format-detection" />
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
@@ -453,16 +453,16 @@
             </ul>
         </div>
     </div>
-
-    <div class="transition rot45deg" ng-class='{mobile_transition: state.mobile_style}' ng-show="state.interfaceVisible">
-        <div id="yellow_part" class="element">
-            <div class="bg yellow"></div>
-        </div>
-        <div id="black_part" class="element">
-            <div class="bg black"></div>
+    <div class='maska_menu'>
+        <div class="transition rot45deg" ng-class='{mobile_transition: state.mobile_style}' ng-show="state.interfaceVisible">
+            <div id="yellow_part" class="element">
+                <div class="bg yellow"></div>
+            </div>
+            <div id="black_part" class="element">
+                <div class="bg black"></div>
+            </div>
         </div>
     </div>
-
     <div id='main_menu' ng-class='{mobile_menu: state.mobile_style}' ng-show="state.interfaceVisible">
         <div class="header_cont" tap="onMenuHeaderClick()">
             <div class='lines_cont'>
@@ -475,6 +475,7 @@
         <div class='menu_cont'></div>
         <div class='close_btn' tap="onMenuCloseClick()" >&#10006;</div>
     </div>
+
 
     <div id="preloader" ng-class='{mobile_preloader: state.mobile_style}'>
         <div class='label'>0%</div>
