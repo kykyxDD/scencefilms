@@ -301,7 +301,6 @@ var app = angular.module('app', ['mobile'])
     
     var doc = $doc[0]
     var scroll_cont = doc.querySelector('.scrollCont')
-    console.log(scroll_cont)
     //var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
 
     onResize()
@@ -476,7 +475,6 @@ var app = angular.module('app', ['mobile'])
     
     function monitor_page_change(new_page, old_page) {
         if (new_page != 'home') {
-            console.log("home page stop animation", new_page, old_page)
             v.particles.stopRepaint()
             v.intro.stopRepaint()
         }

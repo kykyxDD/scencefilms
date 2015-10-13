@@ -32,6 +32,7 @@ VideoPopup.prototype = {
 
     show: function(target, data) {
         
+        this.data = data
         dom.display(this.cont, true)
         var r = target.getBoundingClientRect()
 
@@ -49,7 +50,7 @@ VideoPopup.prototype = {
         TweenLite.from(this.btn, 0.5, {alpha: 0, x: this.btn.sx-10, delay: 1})
 
         this.video_cont.alpha = 1
-        TweenLite.from(this.video_cont, 0.5, {alpha: 0, x: this.video_cont.sx-10, delay: 0.6})
+        TweenLite.from(this.video_cont, 0.5, {alpha: 0, x: this.video_cont.sx-10, delay: 0.6, onComplete: angular.bind(this, this.on_open)})
         
         this.video_desc.alpha = 1
         TweenLite.from(this.video_desc, 0.5, {alpha: 0, x: this.video_desc.sx-10, delay: 0.6})
@@ -57,12 +58,18 @@ VideoPopup.prototype = {
         this.video_list.alpha = 1
         TweenLite.from(this.video_list, 0.5, {alpha: 0, x: this.video_list.sx-10, delay: 0.8})
 
-        
+        this.title.textContent = data.desc
+    },
+
+    hide: function() {
+        dom.display(this.cont, false)
+    },
+    
+    on_open: function() {
+        var data = this.data
         var preloader = this.preloader
         this.preloader.alpha = 1
-        
-        this.title.textContent = data.desc
-        
+
         var div = this.cont.querySelector('.player')
         var player = this.player = new YT.Player(div, {
             width: this.video_cont.w,
@@ -71,17 +78,10 @@ VideoPopup.prototype = {
             playerVars: {controls: 0},
             events: {
                 onReady: function(e) {
-                    console.log(div, this.preloader, preloader)
-                    
                     TweenLite.to(preloader, 0.5, {alpha: 0})
                     player.loadVideoByUrl(data.youtube)
                 }
             }})
-        
-    },
-
-    hide: function() {
-        dom.display(this.cont, false)
     },
     
     on_image_load: function() {
