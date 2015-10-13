@@ -471,6 +471,7 @@ var app = angular.module('app', ['mobile'])
 
     $s.$on('$destroy', clean_up)
     $s.$watch('state.pageToChange', monitor_page_change)
+
     
     function monitor_page_change(new_page, old_page) {
         if (new_page != 'home') {
@@ -789,6 +790,7 @@ var app = angular.module('app', ['mobile'])
     var x, y
     
     function on(e) {
+        console.log('on', e.type)
         e = e.touches ? e.touches[0] : e
         x = e.pageX
         y = e.pageY

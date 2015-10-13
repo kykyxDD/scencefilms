@@ -13,26 +13,7 @@ function Squares (cont) {
     var self = this;
 
     this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
-    window.addEventListener('scroll', function() {
-        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
-        var win_heig = document.documentElement.clientHeight;
-        for( var i = 0; i < self.arr_video.length; i++){
-            var itm = self.arr_video[i];
-            var top = itm.offset;
-            if(!top) continue
-            if((scrolled < top.top && top.top  < (scrolled + window.innerHeight)) || 
-                (scrolled < (top.top + top.height) && (top.top + top.height)  < (scrolled + window.innerHeight))){
-                // console.log(itm)
-                // console.log(true,scrolled, scrolled+win_heig)
-                // itm.player.playVideo()
-            } else {
-                // itm.player.pauseVideo()
-                // console.log(false)
-            }
-        }
 
-      // document.getElementById('showScroll').innerHTML = scrolled + 'px';
-    })
 }
 
 Squares.prototype = {
@@ -99,7 +80,7 @@ Squares.prototype = {
         page.elem.rhom_before = rhom_before;
         page.elem.rhom_after = rhom_after;
         page.elem.text_rhom = text;
-
+// 
         this.create_content(page)
 
     },
@@ -293,11 +274,9 @@ Squares.prototype = {
 
             rhom_after.scaleX = 0;
             rhom_after.scaleY = 0;
-            var delay_1 = num*i+(delay*0.5);
-            
-            if(sq_arr[i].type == 'video') continue
-
+            var delay_1 = num*i+(delay*0.5);  
             TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: num*i});
+            if(sq_arr[i].type == 'video') continue
             content.onload = (function(rhom, delay, delay_1, page){
                 TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
             })(rhom_after, delay, delay_1, sq_arr[i])
@@ -306,25 +285,17 @@ Squares.prototype = {
 
         setTimeout(function(){
             for (var i = 0; i < sq_arr.length; i++){
-
                 if(sq_arr[i].type == 'image') continue
-                self.createVideo(sq_arr[i], delay_1) 
-                var delay_1 = num*i+(delay*0.5);
-                var itm_elem = sq_arr[i].elem;
-                var text = sq_arr[i].elem.text_rhom;
-                var rhom_before = sq_arr[i].elem.rhom_before;
-                var rhom_after = sq_arr[i].elem.rhom_after;
-                var content = sq_arr[i].elem.content;
+                    var itm_elem = sq_arr[i].elem;
                 itm_elem.maska.w = itm_elem.maska.h = itm_elem.w ;
-                var scale = text.w/content.height;
-                content.scaleX = content.scaleY = scale;
-                TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: num*i});
+                self.createVideo(sq_arr[i])
             };
         }, all_delay*700)
     },
 
-    createVideo: function(page, delay_1){
-
+    createVideo: function(page){
+        var delay_1 = this.delay - this.arr_video.length;
+        console.log(delay_1)
         this.arr_video.push(page)
         var delay = this.delay;
         var maska = page.elem.maska;
@@ -346,7 +317,15 @@ Squares.prototype = {
                 'onStateChange': onPlayerStateChange
             }
         });
-        page.elem.content = player.getIframe()
+
+
+        
+        page.elem.content = player.getIframe();
+        ScreenObject.decorate_element.apply(page.elem.content);
+
+        var scale = text.w/page.elem.content.height;
+        console.log(scale)
+        page.elem.content.scaleX = page.elem.content.scaleY = scale;
         page.player = player;
         page.offset = this.getElementPosition(text);
 
@@ -364,18 +343,30 @@ Squares.prototype = {
 
         function onPlayerReady(event) {
             event.target.setVolume(0);
+
             TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
-            maska.addEventListener('mouseover', function(){
+            maska.addEventListener('mouseover', function(event){
+                console.log(event.type)
                 // console.log(text.offsetTop, text, self.getElementPosition(text))
                 page.player.playVideo()
             })
-            maska.addEventListener('mouseout', function(){
+            maska.addEventListener('mouseout', function(event){
+                console.log(event.type)
+                page.player.pauseVideo()
+            })
+
+            maska.addEventListener('mouseover', function(event){
+                console.log(event.type)
+                // console.log(text.offsetTop, text, self.getElementPosition(text))
+                page.player.playVideo()
+            })
+            maska.addEventListener('mouseout', function(event){
+                console.log(event.type)
                 page.player.pauseVideo()
             })
 
             maska.addEventListener('tap', function(event){
-                // console.log(page.player)
-                event.preventDefault();
+                console.log(event.bubbles)
                 var status = page.player.getPlayerState();
                 if(status == 1){
                     page.player.pauseVideo()
@@ -388,6 +379,27 @@ Squares.prototype = {
 
         function stopVideo() {
             player.stopVideo();
+        }
+    },
+
+    scrollHome: function(mobile){
+        console.log('scrollHome',mobile)
+        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+        var win_heig = document.documentElement.clientHeight;
+        if(!mobile || this.arr_video.length == 0) return
+        for( var i = 0; i < this.arr_video.length; i++){
+            var itm = this.arr_video[i];
+            var top = itm.offset;
+            if(!top) continue
+            if((scrolled < top.top && top.top  < (scrolled + window.innerHeight)) || 
+                (scrolled < (top.top + top.height) && (top.top + top.height)  < (scrolled + window.innerHeight))){
+                // console.log(itm)
+                console.log(true,scrolled, scrolled+win_heig, itm.player.getPlayerState())
+                itm.player.playVideo()
+            } else {
+                itm.player.pauseVideo()
+                console.log(false)
+            }
         }
     }
 }
