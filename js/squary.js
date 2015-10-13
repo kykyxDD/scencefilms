@@ -100,7 +100,7 @@ Squares.prototype = {
         } else if(page.type == 'video'){
             content = document.createElement('div');
             var img = document.createElement('img');
-            img.src = 'image/black_preloader.gif';
+            img.src = 'image/preloader_big_black.gif';
             rhom_before.appendChild(img);
             img.className='preloader';
 
@@ -336,12 +336,15 @@ Squares.prototype = {
         page.offset = this.getElementPosition(text);
 
         var done = false;
-        // function onPlayerStateChange(event) {
-        //     if (event.data == YT.PlayerState.PLAYING && !done) {
-        //       setTimeout(stopVideo, 6000);
-        //       done = true;
-        //     }
-        // }
+
+        function onPlayerStateChange(event) {
+            /*
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+              setTimeout(stopVideo, 6000);
+              done = true;
+            }
+            */
+        }
 
         function onPlayerClick(){
             console.log(player.onStateChange())
@@ -349,6 +352,10 @@ Squares.prototype = {
 
         function onPlayerReady(event) {
             event.target.setVolume(0);
+            var img = page.elem.querySelector('img.preloader');
+            console.log(img)
+            img.parentNode.removeChild(img)
+
 
             TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
             maska.addEventListener('mouseover', function(event){

@@ -1,14 +1,14 @@
 {
     "homepage_data": {
         "sq_arr_right": [
-            {"i": 0, "j": 3, "src": "YclpxGqaL7o","bg": "YclpxGqaL7o.jpg", "type": "video", "id": "video_1"},
+            {"i": 0, "j": 3, "src": "YclpxGqaL7o", "type": "video", "id": "video_1"},
             {"i": 2, "j": 3, "src": "image/main/5.jpg", "type": "image"},
             {"i": 0, "j": 2, "src": "image/main/7.jpg", "type": "image"},
-            {"i": 1, "j": 1, "src": "DKoT8E4COqc","bg": "DKoT8E4COqc.jpg", "type": "video", "id": "video_2"},
+            {"i": 1, "j": 1, "src": "DKoT8E4COqc", "type": "video", "id": "video_2"},
             {"i": 1, "j": 5, "src": "image/main/11.jpg", "type": "image"},
             {"i": 1, "j": 2, "src": "image/main/6.jpg", "type": "image"},
             {"i": 1, "j": 4, "src": "image/main/9.jpg", "type": "image"},
-            {"i": 2, "j": 2, "src": "8lXOLMr2vbs","bg": "8lXOLMr2vbs.jpg", "type": "video", "id": "video_3"},
+            {"i": 2, "j": 2, "src": "8lXOLMr2vbs", "type": "video", "id": "video_3"},
             {"i": 1, "j": 0, "src": "image/main/12.jpg", "type": "image"}
         ],
         "sq_arr_left": [
