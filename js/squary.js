@@ -337,7 +337,9 @@ Squares.prototype = {
             videoId: page.src,
             playerVars: {
                 controls: 0,
-                showinfo: 0
+                showinfo: 0,
+                loop: 1,
+                disablekb:1
             },
             events: {
                 'onReady': onPlayerReady,
@@ -365,30 +367,22 @@ Squares.prototype = {
             TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
             maska.addEventListener('mouseover', function(){
                 // console.log(text.offsetTop, text, self.getElementPosition(text))
-                // page.player.playVideo()
+                page.player.playVideo()
             })
             maska.addEventListener('mouseout', function(){
-                // page.player.pauseVideo()
+                page.player.pauseVideo()
             })
-            maska.addEventListener('mousedown', function(){
+
+            maska.addEventListener('tap', function(event){
                 // console.log(page.player)
-                var status = page.player.getPlayerState();
-                if(status == 1){
-                    // page.player.pauseVideo()
-                } else {
-                    // page.player.playVideo()
-                }
-                // console.log(status)
-            })
-            maska.addEventListener('touchstart', function(){
-                // console.log(page.player)
+                event.preventDefault();
                 var status = page.player.getPlayerState();
                 if(status == 1){
                     page.player.pauseVideo()
                 } else {
                     page.player.playVideo()
                 }
-                // console.log(status)
+                console.log(status, event.type)
             })
         }
 

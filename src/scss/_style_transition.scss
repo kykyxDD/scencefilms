@@ -83,7 +83,7 @@ body {
 // }
 .mobile.cast ,
 .mobile.makers {
-  background-image: url('../image/bg/cast_mobile_horiz.jpg');
+  background: url('../image/bg/cast_mobile_horiz.jpg') no-repeat;
   // background-size: auto 500px;  
   background-size: contain;
 }
@@ -94,10 +94,10 @@ body {
     background-size: auto 500px;
   }
 }
-@media only screen and (orientation: portrait) and (max-width: 768px){
+@media only screen and (orientation: portrait) and (max-width: 680px){
   .mobile.cast ,
   .mobile.makers {
-    background-image: url('../image/bg/filmmakers_mobile.jpg');
+    background: url('../image/bg/filmmakers_mobile.jpg') no-repeat;
     background-size: contain;
   }
 }
@@ -587,6 +587,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   top: 50%;
   margin-left: -320px;
   margin-top: -195px;
+  pointer-events: none;
 }
 
 
