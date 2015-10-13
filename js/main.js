@@ -453,9 +453,15 @@ var app = angular.module('app', ['mobile'])
 
     var doc = $doc[0];
 
+    var slogan = doc.querySelector('.slogan')
+    ScreenObject.decorate_element.apply(slogan)
+    
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
     v.intro.runRepaint()
 
+    slogan.x = -300
+    TweenLite.from(slogan, 1, {alpha: 0, x: "-=15", delay: 1.5})
+    
     TweenLite.to(v.intro.canvas, 1, {x: -300})
 
     v.particles.set_canvas(doc.querySelector('#home .particles'))
