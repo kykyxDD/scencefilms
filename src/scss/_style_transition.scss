@@ -118,7 +118,8 @@ body {
 }
 .mobile.news {
   background-image: url('../image/bg/news_mobile.jpg');
-  background-size: cover;
+  background-size: 100% auto;
+  background-color: #000;
 }
 .mobile.media{
   background-image: url('../image/bg/media_mobile.jpg');
