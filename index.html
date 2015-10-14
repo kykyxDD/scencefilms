@@ -403,8 +403,8 @@
                             </div>
                             <div class="b-text">
                                 <div class="t-title">
-                                    <h2>{{selectedItem.name}}</h2>
-                                    <h3>{{selectedItem.role}}</h3>
+                                    <h2 ng-bind-html="selectedItem.name | unsafe"></h2>
+                                    <h3 ng-bind-html="selectedItem.role | unsafe"></h3>
                                 </div>
                                 <div class="text">
                                     <p>{{selectedItem.desc}}</p>
@@ -444,8 +444,8 @@
                         </div>
                         <div class="b-text">
                             <div class="t-title">
-                                <h2>{{selectedMaker.name}}</h2>
-                                <h3>{{selectedMaker.role}}</h3>
+                                <h2 ng-bind-html="selectedMaker.name | unsafe">{{selectedMaker.name}}</h2>
+                                <h3 ng-bind-html="selectedMaker.role | unsafe">{{selectedMaker.role}}</h3>
                             </div>
                             <div class="text">
                                 <p>{{selectedMaker.desc}}</p>
