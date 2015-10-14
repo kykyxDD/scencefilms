@@ -301,7 +301,7 @@ Squares.prototype = {
 
     createVideo: function(page){
         var delay_1 = this.delay*this.arr_video.length;
-        console.log(delay_1)
+        //console.log(delay_1)
         this.arr_video.push(page)
         var delay = this.delay;
         var maska = page.elem.maska;
@@ -310,7 +310,7 @@ Squares.prototype = {
         var self = this;
         var player =  new YT.Player(page.elem.content, {
             height: '390',
-            width: '640',
+            width: '693',
             videoId: page.src,
             playerVars: {
                 controls: 0,
@@ -330,7 +330,7 @@ Squares.prototype = {
         ScreenObject.decorate_element.apply(page.elem.content);
 
         var scale = text.w/page.elem.content.height;
-        console.log(scale)
+        //console.log(scale)
         page.elem.content.scaleX = page.elem.content.scaleY = scale;
         page.player = player;
         page.offset = this.getElementPosition(text);
@@ -347,35 +347,35 @@ Squares.prototype = {
         }
 
         function onPlayerClick(){
-            console.log(player.onStateChange())
+            //console.log(player.onStateChange())
         }
 
         function onPlayerReady(event) {
             event.target.setVolume(0);
             var img = page.elem.querySelector('img.preloader');
-            console.log(img)
+            //console.log(img)
             img.parentNode.removeChild(img);
-            console.log(page.elem.content)
+            //console.log(page.elem.content)
 
 
             TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
             page.elem.content.addEventListener('mouseover', function(event){
-                console.log(event.type)
+                //console.log(event.type)
                 // console.log(text.offsetTop, text, self.getElementPosition(text))
                 page.player.playVideo()
             })
             page.elem.content.addEventListener('mouseout', function(event){
-                console.log(event.type)
+                //console.log(event.type)
                 page.player.pauseVideo()
             })
 
             page.elem.content.addEventListener('mouseover', function(event){
-                console.log(event.type)
+                //console.log(event.type)
                 // console.log(text.offsetTop, text, self.getElementPosition(text))
                 page.player.playVideo()
             })
             page.elem.content.addEventListener('mouseout', function(event){
-                console.log(event.type)
+                //console.log(event.type)
                 page.player.pauseVideo()
             })
 
@@ -387,7 +387,7 @@ Squares.prototype = {
                 // } else {
                     page.player.playVideo()
                 // }
-                console.log(status, event.type)
+                //console.log(status, event.type)
             })
         }
 

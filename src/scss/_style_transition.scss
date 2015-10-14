@@ -615,8 +615,8 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   position:absolute;
   left: 50%;
   top: 50%;
-  margin-left: -320px;
-  margin-top: -195px;
+  margin-left: -343px;
+  margin-top: -190px;
   // pointer-events: none;
 }
 
@@ -834,7 +834,15 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
             .title {
                 font-size: 34px;
             }
+            
+            .video_item {
+                
+                .video_img {
+                    width: 216px;
+                    height: 122px;
+                }
+            
+            }
         }
     }
-
 }
