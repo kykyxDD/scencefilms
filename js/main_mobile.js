@@ -32,11 +32,17 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     }
     $s.read_all = function(itm){
         itm.read = true;
+        $t(function(){
+            $s.goScroll('itm'+itm.id)
+        },300)
         $s.$apply()
     }
     $s.close_all = function(itm){
-        itm.read = false;
-        $s.$apply()
+        itm.read = false;        
+        $s.$apply(); 
+        $t(function(){
+            $s.goScroll('itm'+itm.id)
+        },500)       
     }
 
 }])
