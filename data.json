@@ -324,6 +324,7 @@
                     "type": "video",
                     "src": "image/img/videoa.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "duration": "4:12",
                     "youtube": "https://youtube.com/v/4wUlQDFY2aQ",
                     "href": "https://www.youtube.com/watch?v=4wUlQDFY2aQ",
                     "links": [
@@ -338,6 +339,7 @@
                     "type": "video",
                     "src": "image/img/videob.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "duration": "3:24",
                     "youtube": "https://youtube.com/v/Ktm_JYmOeOc",
                     "href": "https://www.youtube.com/watch?v=Ktm_JYmOeOc",
                     "links": [
@@ -352,6 +354,7 @@
                     "type": "video",
                     "src": "image/img/videoc.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "duration": "2:50",
                     "youtube": "https://youtube.com/v/QnPto9XnvHw",
                     "href": "https://www.youtube.com/watch?v=QnPto9XnvHw",
                     "links": [
@@ -366,6 +369,7 @@
                     "type": "video",
                     "src": "image/img/videod.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "duration": "3:00",
                     "youtube": "https://youtube.com/v/YEQR6j14lGY",
                     "href": "https://www.youtube.com/watch?v=YEQR6j14lGY",
                     "links": [
@@ -380,6 +384,7 @@
                     "type": "video",
                     "src": "image/img/videoa.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "duration": "4:00",
                     "youtube": "https://youtube.com/v/4wUlQDFY2aQ",
                     "href": "https://www.youtube.com/watch?v=4wUlQDFY2aQ",
                     "links": [
@@ -394,6 +399,7 @@
                     "type": "video",
                     "src": "image/img/videob.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "duration": "2:40",
                     "youtube": "https://youtube.com/v/IyYWTFA3FWA",
                     "href": "https://www.youtube.com/watch?v=IyYWTFA3FWA",
                     "links": [
@@ -408,6 +414,7 @@
                     "type": "video",
                     "src": "image/img/videoc.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "duration": "4:12",
                     "youtube": "https://youtube.com/v/0yXhKjNWlXE",
                     "href": "https://www.youtube.com/watch?v=0yXhKjNWlXE",
                     "links": [
@@ -422,6 +429,7 @@
                     "type": "video",
                     "src": "image/img/videod.jpg",
                     "desc": "Video Name Tag offers a cool and colorful way",
+                    "duration": "2:52",
                     "youtube": "https://youtube.com/v/ZcfSaKeuPWc",
                     "href": "https://www.youtube.com/watch?v=ZcfSaKeuPWc",
                     "links": [

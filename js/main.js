@@ -448,6 +448,14 @@ var app = angular.module('app', ['mobile'])
         }
     }
     
+    $s.reloadVideoPopup = function(item) {
+        
+        if (item) {
+            
+            popup.reload(item)
+        }
+    }
+    
     $s.showPhotoPopup = function(item) {
         var target = items_cont.querySelector('#photo'+item.id)
         
