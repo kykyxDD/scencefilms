@@ -779,90 +779,6 @@ body {
   }
 }
 
-
-@media #{$mediaD} {
-
-  .p-title{
-    padding-top:70px !important;
-    padding-left:70px !important;
-    margin-bottom: 20px !important;
-    h1{
-      font-size: 60px !important;
-      line-height: 60px !important;
-    }
-  }
-
-
-  .i-video {
-    a {
-      &:before {
-        @include pseudo-block($top: 50%, $left: 50%);
-        @include oneline-sprite($icons_x2, videom, $retina: true);
-        width: 40px;
-        height: 40px;
-        margin-left: -20px;
-        margin-top: -20px;
-      }
-    }
-
-    .text {
-      line-height: 16px;
-      font-size: 14px;
-      padding: 10px;
-    }
-  }
-
-  .i-news {
-    width: 100%;
-    
-    .news {
-      position: static;
-      margin: 0;
-      padding: 16px;
-
-      &:before {
-        display: none;
-      }
-
-      p {
-        display: block;
-        color: #fff;
-        font-size: 20px;
-        line-height: 24px;
-      }
-
-      h3 {
-        color: #ffd800;
-        
-      }
-
-      .w-time {
-        display: block;
-      }
-    }
-
-    .i-news__content {
-      padding: 0;
-      .btn {
-        display: none;
-      }
-      
-    }
-
-    &:nth-child(even) {
-      .i-news__content {
-        padding: 0;
-      }
-    }
-
-    
-  }
-}
-
-
-
-
-
 @media #{$mediaCP, $mediaD, $mediaCL} {
   .footer {
     background: #000;
@@ -1001,7 +917,7 @@ body {
     .tab {
       clear: both;
       overflow: hidden;
-      padding: 0 10px;
+      padding: 0 20px;
     }
 
     li {
@@ -1033,16 +949,18 @@ body {
     span {
       display: block;
       @include transform(skewX(45deg));
+      @include ellipsis(ellipsis);
     }
   }
 
   .w-text {
     border: none;
     background: #000;
-    
 
     h2 {
       color: #ffd800;
+      //line-height: 42px;
+     // margin-bottom: 10px;
     }
 
     h3 {
@@ -1104,7 +1022,7 @@ body {
 }
 
 
-@media #{$mediaCL} {
+@media #{$mediaC} {
   body {
     /* &:before { */
     /*   content: ''; */
@@ -1143,7 +1061,7 @@ body {
 
     h2 {
       font-size: 38px;
-      margin-bottom: 0;
+      margin-bottom: 10px;
     }
 
     p {
@@ -1215,6 +1133,87 @@ body {
     font-size: 20px;
   }
 }
+
+@media #{$mediaD} {
+
+  .p-title{
+    padding-top:70px !important;
+    padding-left:70px !important;
+    margin-bottom: 20px !important;
+    h1{
+      font-size: 60px !important;
+      line-height: 60px !important;
+    }
+  }
+
+
+  .i-video {
+    a {
+      &:before {
+        @include pseudo-block($top: 50%, $left: 50%);
+        @include oneline-sprite($icons_x2, videom, $retina: true);
+        width: 40px;
+        height: 40px;
+        margin-left: -20px;
+        margin-top: -20px;
+      }
+    }
+
+    .text {
+      line-height: 16px;
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+
+  .i-news {
+    width: 100%;
+    
+    .news {
+      position: static;
+      margin: 0;
+      padding: 16px;
+      height: auto;
+
+      &:before {
+        display: none;
+      }
+
+      p {
+        display: block;
+        color: #fff;
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      h3 {
+        color: #ffd800;
+        
+      }
+
+      .w-time {
+        display: block;
+      }
+    }
+
+    .i-news__content {
+      padding: 0;
+      .btn {
+        display: none;
+      }
+      
+    }
+
+    &:nth-child(even) {
+      .i-news__content {
+        padding: 0;
+      }
+    }
+
+    
+  }
+}
+
 
 @media #{$mediaDP} {
 
@@ -1314,6 +1313,25 @@ body {
     text-align: right;
   }
 }
+
+@media #{$media580} {
+  .w-text h2 {
+    font-size: 28px;
+  }
+
+  .w-text p {
+    line-height: 20px;
+  }
+
+  .b-img__landscape {
+    margin-top: 20px;
+  }
+
+  .w-tab a {
+    font-size: 18px;
+  }
+}
+
 @media #{$mediaE} {
   .media,.makers{
     .p-title{
