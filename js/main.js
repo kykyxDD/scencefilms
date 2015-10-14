@@ -1,4 +1,7 @@
-var app = angular.module('app', ['mobile'])
+var app = angular.module('app', ['mobile', 'ngSanitize'])
+.filter('unsafe', ['$sce', function($sce) {
+    return $sce.trustAsHtml;
+}])
 .service('view', ['$document', function($doc){
     var doc = $doc[0]
     var transition = new Transition(doc.querySelector('.transition'))
