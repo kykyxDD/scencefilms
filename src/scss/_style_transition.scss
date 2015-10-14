@@ -808,34 +808,35 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
             box-sizing: border-box;
         }
 
+        .views, .likes {
+            font-size: 18px;
+            color: #ffffff;
+            margin: 10px 10px 0px 0px;
+        }
+        
+        .views::before {
+            content: "";
+            display: inline-block;
+            width: 22px;
+            height: 15px;
+            margin-right: 10px;
+            background-image: inline-image('../image/eye.png');
+        }
+        
+        .likes::before {
+            content: "";
+            display: inline-block;
+            width: 17px;
+            height: 17px;
+            margin-right: 10px;
+            background-image: inline-image('../image/heart.png');
+        }
+        
         .video_desc {
-            
             .title {
                 font-size: 24px;
                 margin-top: 25px;
                 margin-bottom: 15px;
-            }
-            
-            .views, .likes {
-                font-size: 18px;
-                color: #ffffff;
-                margin: 10px 10px 0px 0px;
-            }
-            
-            .views::before {
-                content: "";
-                display: inline-block;
-                width: 22px;
-                height: 15px;
-                background-image: inline-image('../image/eye.png');
-            }
-            
-            .likes::before {
-                content: "";
-                display: inline-block;
-                width: 17px;
-                height: 17px;
-                background-image: inline-image('../image/heart.png');
             }
         }
 
@@ -844,15 +845,45 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
             
             .title {
                 font-size: 34px;
+                cursor: pointer;
             }
             
             .video_item {
+            
+                clear: both;
+                border-bottom: 1px solid rgba(94,109,129,0.4);
+            
+                .video_img, .desc {
+                    width: 50%;
+                    height: 150px;
+                    box-sizing: border-box;
+                    padding: 20px 0px 10px 0px;
+                    float: left;
+                }
                 
                 .video_img {
-                    width: 216px;
-                    height: 122px;
+                    cursor: pointer;
                 }
+                
+                .desc {
+                    padding: 12px 0px 10px 0px;
+                }
+                
+                .title {
+                    font-size: 16px;
+                }
+                
+                hr {
+                    border-color: rgba(94, 109, 129, 0.4);
+                    margin-top: 8px;
+                    margin-bottom: 20px;
+                }
+            }
             
+            .video_list_scroll {
+                overflow: hidden;
+                width: 95%;
+                position: relative;
             }
         }
     }

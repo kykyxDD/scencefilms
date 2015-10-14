@@ -10,6 +10,8 @@ function VideoPopup(cont) {
     this.video_list = this.cont.querySelector(".video_list")
     this.preloader = this.cont.querySelector(".popup_preloader")
     this.title = this.cont.querySelector(".title")
+    this.list_cont = this.cont.querySelector(".video_list_scroll")
+    this.list = this.cont.querySelector(".video_list_cont")
     
     ScreenObject.decorate_element.apply(this.bg)
     ScreenObject.decorate_element.apply(this.btn)
@@ -17,8 +19,11 @@ function VideoPopup(cont) {
     ScreenObject.decorate_element.apply(this.video_desc)
     ScreenObject.decorate_element.apply(this.video_list)
     ScreenObject.decorate_element.apply(this.preloader)
+    ScreenObject.decorate_element.apply(this.list_cont)
     
     this.btn.top = this.btn.left = 0
+    
+    this.scroll = new IScroll(this.list_cont, {useTransition: false, scrollbars: true})
     
     this.w = 1200
     this.h = 600
@@ -59,6 +64,18 @@ VideoPopup.prototype = {
         TweenLite.from(this.video_list, 0.5, {alpha: 0, x: this.video_list.sx-10, delay: 0.8})
 
         this.title.textContent = data.desc
+        
+        this.scroll.refresh()
+    },
+    
+    reload: function(data) {
+        
+        this.data = data
+        
+        this.title.textContent = data.desc
+        
+        this.player && this.player.destroy()
+        this.on_open()
     },
 
     hide: function() {
@@ -124,7 +141,9 @@ VideoPopup.prototype = {
         this.video_list.sy = this.video_list.y = this.video_cont.y
         this.video_list.w = this.w - this.video_cont.w - 35
         this.video_list.h = this.h - 10
-
+        
+        this.list_cont.h = this.video_list.h - 115
+        this.scroll.refresh()
     },
     
     destroy: function() {
