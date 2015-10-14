@@ -917,7 +917,7 @@ body {
     .tab {
       clear: both;
       overflow: hidden;
-      padding: 0 10px;
+      padding: 0 20px;
     }
 
     li {
@@ -949,16 +949,18 @@ body {
     span {
       display: block;
       @include transform(skewX(45deg));
+      @include ellipsis(ellipsis);
     }
   }
 
   .w-text {
     border: none;
     background: #000;
-    
 
     h2 {
       color: #ffd800;
+      //line-height: 42px;
+     // margin-bottom: 10px;
     }
 
     h3 {
@@ -1059,7 +1061,7 @@ body {
 
     h2 {
       font-size: 38px;
-      margin-bottom: 0;
+      margin-bottom: 10px;
     }
 
     p {
@@ -1311,6 +1313,25 @@ body {
     text-align: right;
   }
 }
+
+@media #{$media580} {
+  .w-text h2 {
+    font-size: 28px;
+  }
+
+  .w-text p {
+    line-height: 20px;
+  }
+
+  .b-img__landscape {
+    margin-top: 20px;
+  }
+
+  .w-tab a {
+    font-size: 18px;
+  }
+}
+
 @media #{$mediaE} {
   .media,.makers{
     .p-title{
