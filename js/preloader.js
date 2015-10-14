@@ -37,6 +37,11 @@ Preloader.prototype = {
         this.hide()
     },
     
+    set_skip_frames: function(n) {
+        this.skip_frames = n
+        this.framesPassed = -1
+    },
+    
     set_size: function(w, h) {
         this.WIDTH = w
         this.HEIGHT = h

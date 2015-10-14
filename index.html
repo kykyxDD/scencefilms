@@ -8,6 +8,7 @@
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
     <script src='js/lib/angular/angular.min.js'></script>
+    <script src='js/lib/angular/angular-sanitize.min.js'></script>
     <script src='js/lib/iscroll/iscroll.js'></script>
     <script src='https://www.youtube.com/iframe_api'></script>
     <script src='js/squary.js'></script>
@@ -192,11 +193,11 @@
                     <div class="video_list_scroll">
                         <div class="video_list_cont" style="height: {{selectedType.all_items.length*120}}px">
                             <div class="video_item" ng-repeat="item in selectedType.all_items">
-                                <div class="video_img" ng-click="reloadVideoPopup(item)" animate-image-load duration="1" img-url="item.src" img-w="216" img-h="112">
-                                    <img />
+                                <div class="video_img" animate-image-load duration="1" img-url="item.src" img-w="216" img-h="112">
+                                    <img tap="reloadVideoPopup(item)" />
                                 </div>
                                 <div class="desc">
-                                    <div class="title" ng-click="reloadVideoPopup(item)">{{item.desc}}</div>
+                                    <div class="title" tap="reloadVideoPopup(item)">{{item.desc}}</div>
                                     <div class="date">{{item.duration}}</div>
                                     <div>
                                         <span class='views'>323</span><span class='likes'>47</span>
@@ -216,7 +217,7 @@
                     <div class="w-tab">
                         <ul class="tab">
                             <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
+                                <a href="#" tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
                             </li>
                         </ul>
                     </div>
@@ -241,7 +242,7 @@
                     <div class="w-tab">
                         <ul class="tab">
                             <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span>{{page.title}}</span></a>
+                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
                             </li>
                         </ul>
                     </div>
@@ -388,7 +389,7 @@
                             <ul class="tab">
                                 <li ng-repeat="page in state.selectedPageData.pages">
                                     <a href='' tap='goScroll(page.role)' ng-class="{active: page == selectedItem}" >
-                                        <span>{{page.title}}</span>
+                                        <span ng-bind-html="page.title | unsafe"></span>
                                     </a>
                                 </li>
                             </ul>
@@ -429,7 +430,7 @@
                         <ul class="tab">                
                             <li ng-repeat="page in state.selectedPageData.pages">
                                 <a tap='goScroll(page.role)' ng-class="{active: page == selectedItem}">
-                                    <span>{{page.title}}</span>
+                                    <span ng-bind-html="page.title | unsafe"></span>
                                 </a>
                             </li>
                         </ul>
