@@ -35,7 +35,6 @@ Squares.prototype = {
             this.create_elem(this.cont_rhom, this.sq_arr_right[k]);
             if(!mobile) this.pos_rhom(this.sq_arr_right[k]);
         }
-        
         ScreenObject.decorate_element.apply(this.cont_rhom_left);
 
         this.cont_rhom_left.style.left = Math.round((-this.sq_width)*0.4) + 'px';
@@ -180,7 +179,6 @@ Squares.prototype = {
     },
 
     resize_mobile: function(){
-
         this.cont_rhom_right.style.right = '';
         var win_wid = document.documentElement.clientWidth;
         var wid_elem = Math.floor(win_wid/1.43);

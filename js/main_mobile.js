@@ -77,7 +77,8 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.intro.repaintCanvas();
     var bg_mobile = doc.querySelector('#home .bg_mobile');
     ScreenObject.decorate_element.apply(bg_mobile);
-    bg_mobile.h = $w.innerHeight*0.9;
+    bg_mobile.h = state.tablet ? $w.innerHeight : $w.innerHeight*0.9;
+    bg_mobile.w = $w.innerWidth;
 
     var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
     var y_0 = $w.innerHeight/2;
@@ -101,7 +102,8 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     function on_resize(e) {
         v.squares.resize(state.mobile_style && !state.tablet);
         v.intro.canvas.left = $w.innerWidth/2;
-        bg_mobile.h = $w.innerHeight*0.9;
+        bg_mobile.h = state.tablet ? $w.innerHeight : $w.innerHeight*0.9;
+        bg_mobile.w = $w.innerWidth;
         y_1 = -0.2*$w.innerHeight;
 
         var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
