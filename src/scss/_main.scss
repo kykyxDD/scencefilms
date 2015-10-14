@@ -199,6 +199,10 @@ body {
         opacity: 1;
       }
     }
+
+    br {
+      display: none;
+    }
   }
 }
 
@@ -953,7 +957,7 @@ body {
     span {
       display: block;
       @include transform(skewX(45deg));
-      //@include ellipsis(ellipsis);
+      @include ellipsis(ellipsis);
     }
   }
 
