@@ -32,13 +32,13 @@ body {
 }
 
 #home .slogan {
-    font-size: 24px;
-    position: absolute;
-    line-height: 25px;
-    margin-top: 135px;
-    margin-left: -273px;
-    left: 50%;
-    top: 50%;
+  font-size: 24px;
+  position: absolute;
+  line-height: 25px;
+  margin-top: 135px;
+  margin-left: -273px;
+  left: 50%;
+  top: 50%;
 }
 
 #home.mobile_home{
@@ -114,7 +114,8 @@ body {
   .mobile.cast ,
   .mobile.makers {
     background: url('../image/bg/filmmakers_mobile.jpg') no-repeat;
-    background-size: contain;
+    background-size: 100% auto;
+     background-color: #000;
   }
 }
 .mobile.news {
@@ -416,88 +417,88 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 
 #content .page {
-    display: table-cell;
-    vertical-align: middle;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 #preloader {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    margin-top: -100px;
-    margin-left: -100px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-top: -100px;
+  margin-left: -100px;
 }
 
 #preloader.mobile_preloader{
-    // position:absolute;
-    // margin-left: -150px;
-    // margin-top: -150px;
+  // position:absolute;
+  // margin-left: -150px;
+  // margin-top: -150px;
 }
 
 
 #preloader .label{
-    position: absolute;
-    width: 50px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    font-size: 12px;
-    font-family: sans-serif;
-    left: 50%;
-    top: 50%;
-    margin-top: -10px;
-    margin-left: -25px;
+  position: absolute;
+  width: 50px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 12px;
+  font-family: sans-serif;
+  left: 50%;
+  top: 50%;
+  margin-top: -10px;
+  margin-left: -25px;
 }
 
 #preloader.white {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 #preloader.black {
-    color: #000000;
+  color: #000000;
 }
 
 .screen {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 900px;
-    height: 350px;
-    margin-left: -450px;
-    margin-top: -175px;
-    -moz-transform: scaleX(0) scaleY(0); /* Для Firefox */
-    -ms-transform: scaleX(0) scaleY(0); /* Для IE */
-    -webkit-transform: scaleX(0) scaleY(0); /* Для Safari, Chrome, iOS */
-    -o-transform: scaleX(0) scaleY(0); /* Для Opera */
-    transform: scaleX(0) scaleY(0);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 900px;
+  height: 350px;
+  margin-left: -450px;
+  margin-top: -175px;
+  -moz-transform: scaleX(0) scaleY(0); /* Для Firefox */
+  -ms-transform: scaleX(0) scaleY(0); /* Для IE */
+  -webkit-transform: scaleX(0) scaleY(0); /* Для Safari, Chrome, iOS */
+  -o-transform: scaleX(0) scaleY(0); /* Для Opera */
+  transform: scaleX(0) scaleY(0);
 }
 #intro{
   overflow:hidden;
 }
 
 #intro_bg {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    background-color: #6e6d6f;
-    overflow: hidden;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #6e6d6f;
+  overflow: hidden;
 }
 
 .waterdrop {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background-repeat: no-repeat;    
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-repeat: no-repeat;    
 }
 
 
 .video_bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  
 }
 
 #side_page_right,
@@ -505,10 +506,10 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 	// background-color: #aaa;
 	position: fixed;
 	-moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 #side_page_right{
@@ -568,9 +569,9 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 
 #side_page_right.mobile_squary .btn_top{
-    position:absolute;
-    bottom: 60px;
-    right: 10%;
+  position:absolute;
+  bottom: 60px;
+  right: 10%;
 }
 .cont_rhom{
 	position: absolute;		
@@ -610,14 +611,14 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 .text_rhom{
 	position: absolute;
 	-moz-transform: rotate(45deg); 
-    -ms-transform: rotate(45deg); 
-    -webkit-transform: rotate(45deg); 
-    -o-transform: rotate(45deg); 
-    transform: rotate(45deg);
-    background-size: auto 100%;
-    background-position-x: center;
-    /*background-color: #ffd400;*/
-    
+  -ms-transform: rotate(45deg); 
+  -webkit-transform: rotate(45deg); 
+  -o-transform: rotate(45deg); 
+  transform: rotate(45deg);
+  background-size: auto 100%;
+  background-position-x: center;
+  /*background-color: #ffd400;*/
+  
 }
 .text_rhom .video{
   position:absolute;
@@ -630,13 +631,13 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 
 
 #video-player {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 1px;
-    height: 1px;
-    // left: 0px;
-    // top: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  // left: 0px;
+  // top: 0px;
 }
 #video-player video{
   margin-top: -540px;
@@ -644,7 +645,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 
 .scrollCont {
-    overflow: hidden;
+  overflow: hidden;
 }
 .mobile.home .footer{
   position:absolute;
@@ -660,233 +661,233 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 
 #anim_bg, #anim_bg * {
-    position: absolute;
+  position: absolute;
 }
 #anim_bg {
-    //overflow: hidden;
-    z-index: -1;
-    //width: 1920px;
-    //height: 1080px;
-    left: 0px;
-    top: 0px;
-    //transform-origin: 0 0 0;
-    position: fixed;
+  //overflow: hidden;
+  z-index: -1;
+  //width: 1920px;
+  //height: 1080px;
+  left: 0px;
+  top: 0px;
+  //transform-origin: 0 0 0;
+  position: fixed;
 }
 
 .popup {
-    display: none;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #ffd800;
+
+  .popup_semitransparent_bg {
     position: absolute;
-    top: 0;
-    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);    
     width: 100%;
     height: 100%;
-    color: #ffd800;
+  }
 
-    .popup_semitransparent_bg {
-        position: absolute;
-        background-color: rgba(0, 0, 0, 0.6);    
-        width: 100%;
-        height: 100%;
+  .popup_bg {
+    position: absolute;
+    background-color: #000000;
+  }
+
+  .popup_img {
+    position: absolute;
+  }
+
+  .popup_content {
+    position: absolute;
+    font-size: 38px;
+  }
+
+  .scroll_cont {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .title {
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .date {
+    font-family: scadaitalic;
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 10px 0px 21px 32px;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 0px 31%;
+    background-image: inline-image('../image/date_ico.png');
+  }
+
+  .text_cont {
+    color: #ffffff;
+    font-size: 23px;
+  }
+
+  .icons {
+    position: absolute;
+    bottom: 15px;
+  }
+
+  .ico {
+    position: relative;
+    width: 54px;
+    height: 54px;
+    float: left;
+    margin-right: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    
+    &:hover::before {
+      position: absolute;
+      width: 46px;
+      height: 28px;
+      top: -30px;
+      left: 6px;
+      content: "122";
+      color: #000000;
+      font-size: 16px;
+      line-height: 23px;
+      text-align: center;
+      background: inline-image('../image/little_bubble.png') no-repeat;
+    }
+    
+    &.fb {
+      background: inline-image('../image/popup_fb_ico.png') no-repeat;
+    }
+    
+    &.twitter {
+      background: inline-image('../image/popup_twitter_ico.png') no-repeat;
     }
 
-    .popup_bg {
-        position: absolute;
-        background-color: #000000;
+    &.ln {
+      background: inline-image('../image/popup_ln_ico.png') no-repeat;
     }
 
-    .popup_img {
-        position: absolute;
+    &.gp {
+      background: inline-image('../image/popup_gp_ico.png') no-repeat;
     }
 
-    .popup_content {
-        position: absolute;
-        font-size: 38px;
+  }
+
+  .popup_img_cont {
+    position: absolute;
+    background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  .popup_preloader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -15px;
+    margin-top: -15px;
+  }
+
+  .popup_img {
+    position: absolute;
+  }
+
+  &.photo .close_btn {
+    background-color: #000000;
+    color: #FFD800;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+  }
+
+  &.video {
+    .video_cont,
+    .video_desc,
+    .video_list {
+      position: absolute;
+      box-sizing: border-box;
     }
 
-    .scroll_cont {
-        overflow: hidden;
-        position: relative;
+    .views, .likes {
+      font-size: 18px;
+      color: #ffffff;
+      margin: 10px 10px 0px 0px;
+    }
+    
+    .views::before {
+      content: "";
+      display: inline-block;
+      width: 22px;
+      height: 15px;
+      margin-right: 10px;
+      background-image: inline-image('../image/eye.png');
+    }
+    
+    .likes::before {
+      content: "";
+      display: inline-block;
+      width: 17px;
+      height: 17px;
+      margin-right: 10px;
+      background-image: inline-image('../image/heart.png');
+    }
+    
+    .video_desc {
+      .title {
+        font-size: 24px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+      }
     }
 
-    .title {
-        font-size: 28px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .date {
-        font-family: scadaitalic;
-        font-size: 17px;
-        letter-spacing: 1px;
-        padding: 10px 0px 21px 32px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        background-position: 0px 31%;
-        background-image: inline-image('../image/date_ico.png');
-    }
-
-    .text_cont {
-        color: #ffffff;
-        font-size: 23px;
-    }
-
-    .icons {
-        position: absolute;
-        bottom: 15px;
-    }
-
-    .ico {
-        position: relative;
-        width: 54px;
-        height: 54px;
-        float: left;
-        margin-right: 8px;
-        margin-top: 10px;
+    .video_list {
+      padding-top: 55px;
+      
+      .title {
+        font-size: 34px;
         cursor: pointer;
+      }
+      
+      .video_item {
         
-        &:hover::before {
-            position: absolute;
-            width: 46px;
-            height: 28px;
-            top: -30px;
-            left: 6px;
-            content: "122";
-            color: #000000;
-            font-size: 16px;
-            line-height: 23px;
-            text-align: center;
-            background: inline-image('../image/little_bubble.png') no-repeat;
-        }
+        clear: both;
+        border-bottom: 1px solid rgba(94,109,129,0.4);
         
-        &.fb {
-            background: inline-image('../image/popup_fb_ico.png') no-repeat;
+        .video_img, .desc {
+          width: 50%;
+          height: 150px;
+          box-sizing: border-box;
+          padding: 20px 0px 10px 0px;
+          float: left;
         }
         
-        &.twitter {
-            background: inline-image('../image/popup_twitter_ico.png') no-repeat;
+        .video_img {
+          cursor: pointer;
         }
-
-        &.ln {
-            background: inline-image('../image/popup_ln_ico.png') no-repeat;
+        
+        .desc {
+          padding: 12px 0px 10px 0px;
         }
-
-        &.gp {
-            background: inline-image('../image/popup_gp_ico.png') no-repeat;
+        
+        .title {
+          font-size: 16px;
         }
-
-    }
-
-    .popup_img_cont {
-        position: absolute;
-        background-color: #ffffff;
+        
+        hr {
+          border-color: rgba(94, 109, 129, 0.4);
+          margin-top: 8px;
+          margin-bottom: 20px;
+        }
+      }
+      
+      .video_list_scroll {
         overflow: hidden;
+        width: 95%;
+        position: relative;
+      }
     }
-
-    .popup_preloader {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -15px;
-        margin-top: -15px;
-    }
-
-    .popup_img {
-        position: absolute;
-    }
-
-    &.photo .close_btn {
-        background-color: #000000;
-        color: #FFD800;
-        width: 33px;
-        height: 33px;
-        text-align: center;
-    }
-
-    &.video {
-        .video_cont,
-        .video_desc,
-        .video_list {
-            position: absolute;
-            box-sizing: border-box;
-        }
-
-        .views, .likes {
-            font-size: 18px;
-            color: #ffffff;
-            margin: 10px 10px 0px 0px;
-        }
-        
-        .views::before {
-            content: "";
-            display: inline-block;
-            width: 22px;
-            height: 15px;
-            margin-right: 10px;
-            background-image: inline-image('../image/eye.png');
-        }
-        
-        .likes::before {
-            content: "";
-            display: inline-block;
-            width: 17px;
-            height: 17px;
-            margin-right: 10px;
-            background-image: inline-image('../image/heart.png');
-        }
-        
-        .video_desc {
-            .title {
-                font-size: 24px;
-                margin-top: 25px;
-                margin-bottom: 15px;
-            }
-        }
-
-        .video_list {
-            padding-top: 55px;
-            
-            .title {
-                font-size: 34px;
-                cursor: pointer;
-            }
-            
-            .video_item {
-            
-                clear: both;
-                border-bottom: 1px solid rgba(94,109,129,0.4);
-            
-                .video_img, .desc {
-                    width: 50%;
-                    height: 150px;
-                    box-sizing: border-box;
-                    padding: 20px 0px 10px 0px;
-                    float: left;
-                }
-                
-                .video_img {
-                    cursor: pointer;
-                }
-                
-                .desc {
-                    padding: 12px 0px 10px 0px;
-                }
-                
-                .title {
-                    font-size: 16px;
-                }
-                
-                hr {
-                    border-color: rgba(94, 109, 129, 0.4);
-                    margin-top: 8px;
-                    margin-bottom: 20px;
-                }
-            }
-            
-            .video_list_scroll {
-                overflow: hidden;
-                width: 95%;
-                position: relative;
-            }
-        }
-    }
+  }
 }
