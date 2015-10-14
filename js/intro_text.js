@@ -1,6 +1,7 @@
-function IntroText(skip_even_frames)
+function IntroText(skip_frames)
 {
-    this.skip_even_frames = skip_even_frames
+    this.skip_frames = skip_frames || 0
+    this.framesPassed = 0
     
     this.distortionField = []
     this.distortionElementsCount = 10;
@@ -157,9 +158,10 @@ IntroText.prototype = {
         
         if (!this.canvas) return
         
-        if (this.skip_even_frames) {
-            this.skip_frame = !this.skip_frame
-            if (this.skip_frame) return
+        if (this.skip_frames) {
+            if (this.framesPassed++ % this.skip_frames > 0) {
+                return
+            }
         }
         
         this.updateDistortionField()        

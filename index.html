@@ -344,7 +344,7 @@
                         <div class="b-photo">
                             <div ng-switch="selectedType.type">
                                 <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index">
-                                    <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
+                                    <div tap="showPictureWindow(item.src_big)" ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
                                         <div class="img">
                                             <img alt="img" ng-src="{{item.src}}"/>
                                         </div>

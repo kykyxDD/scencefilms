@@ -1,5 +1,7 @@
 angular.module('mobile', [])
 app.controller("mobileController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
+
+    v.preloader.skip_frames = 3
     
     v.main_menu.onClick = function(page) {
         if(page.page !== state.selectedPage) {
@@ -67,6 +69,10 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     $s.typeMenuClick = function(type) {
         $s.selectedType = type
         $t(onResize)
+    }
+    
+    $s.showPictureWindow = function(url) {
+        window.open(url, "_blank")
     }
 }])
 .controller('mobileHomeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
@@ -183,6 +189,8 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var doc = $doc[0]
     var intro_bg = doc.querySelector('#intro_bg')
     var screen = doc.querySelector('#intro .screen')
+    
+    v.intro.skip_frames = 3
 
     angular.element($w).on('resize', on_resize)
 
