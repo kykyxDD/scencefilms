@@ -250,6 +250,7 @@ var app = angular.module('app', ['mobile'])
     $s.goScroll = function (eID){          
         anchorSmoothScroll.scrollTo(eID);
     }
+    
 
     $s.change_page = function(data){
         state.pageToChange = data.page;

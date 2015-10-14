@@ -30,6 +30,14 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.preloader.hide()
         v.transition.close()
     }
+    $s.read_all = function(itm){
+        itm.read = true;
+        $s.$apply()
+    }
+    $s.close_all = function(itm){
+        itm.read = false;
+        $s.$apply()
+    }
 
 }])
 .controller("mobileContentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
@@ -147,6 +155,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.intro.canvas.y = 0;
         var x_0 = $w.innerWidth > $w.innerHeight ? -200 : 0;
         slogan.x = x_0;
+        TweenLite.from(slogan, 1, {alpha: 0, x: "-=15", delay: 1.5})
         TweenLite.to(v.intro.canvas, 3, {x: x_0});    
 
     console.log(state.mobile_style, state.mobile, state.tablet)
