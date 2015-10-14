@@ -44,6 +44,11 @@ body {
 #home.mobile_home{
   position:relative;
 }
+.home.tablet #content,
+.home.tablet .maska_menu,
+.home.tablet #main_menu{
+  position:fixed !important;
+}
 
 #home.mobile_home .bg_mobile{
   background: url('../image/bg/bg_mob_main.jpg') center no-repeat;
@@ -320,9 +325,7 @@ body {
   font-weight: bold;
   text-transform: uppercase;
 }
-#main_menu.mobile_menu{
-  position:fixed;
-}
+
 .header_cont {
   position: absolute;
   width: 160px;
