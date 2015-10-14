@@ -1,5 +1,7 @@
 angular.module('mobile', [])
 app.controller("mobileController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
+
+    v.preloader.skip_frames = 3
     
     v.main_menu.onClick = function(page) {
         if(page.page !== state.selectedPage) {
@@ -27,6 +29,14 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         $window.scrollTo(0, 0);
         v.preloader.hide()
         v.transition.close()
+    }
+    $s.read_all = function(itm){
+        itm.read = true;
+        $s.$apply()
+    }
+    $s.close_all = function(itm){
+        itm.read = false;
+        $s.$apply()
     }
 
 }])
@@ -67,6 +77,10 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     $s.typeMenuClick = function(type) {
         $s.selectedType = type
         $t(onResize)
+    }
+    
+    $s.showPictureWindow = function(url) {
+        window.open(url, "_blank")
     }
 }])
 .controller('mobileHomeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
@@ -141,6 +155,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.intro.canvas.y = 0;
         var x_0 = $w.innerWidth > $w.innerHeight ? -200 : 0;
         slogan.x = x_0;
+        TweenLite.from(slogan, 1, {alpha: 0, x: "-=15", delay: 1.5})
         TweenLite.to(v.intro.canvas, 3, {x: x_0});    
 
     console.log(state.mobile_style, state.mobile, state.tablet)
@@ -183,6 +198,8 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var doc = $doc[0]
     var intro_bg = doc.querySelector('#intro_bg')
     var screen = doc.querySelector('#intro .screen')
+    
+    v.intro.skip_frames = 3
 
     angular.element($w).on('resize', on_resize)
 
