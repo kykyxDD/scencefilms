@@ -52,6 +52,11 @@
   padding: 0;
 }
 
+html {
+   -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
 html, body {
   height: 100%;
 }
@@ -934,7 +939,6 @@ body {
       margin: 0;
       @include transform(skewX(-45deg));
       @include border-radius(0);
-
       &:before {
         display: none !important;
       }
@@ -949,7 +953,7 @@ body {
     span {
       display: block;
       @include transform(skewX(45deg));
-      @include ellipsis(ellipsis);
+      //@include ellipsis(ellipsis);
     }
   }
 
@@ -1182,8 +1186,8 @@ body {
       p {
         display: block;
         color: #fff;
-        font-size: 20px;
-        line-height: 24px;
+        font-size: 14px;
+        line-height: 20px;
       }
 
       h3 {
@@ -1357,8 +1361,12 @@ body {
   #makers{
     .w-tab{
       .tab{
+        text-align: center;
+        
         li{
-          width: 100% !important; 
+          width: 100%;
+          float: none;
+          display: block;
         }
       }
     }
