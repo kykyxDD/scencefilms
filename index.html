@@ -189,14 +189,22 @@
                 </div>
                 <div class="video_list">
                     <h3 class="title">NEXT VIDEO</h3>
-                    <div class="video_list_cont">
-                        <div class="video_item" ng-repeat="item in selectedType.all_items">
-                            <div class="video_img" animate-image-load duration="1" img-url="item.src" img-w="216" img-h="112">
-                                <img />
+                    <div class="video_list_scroll">
+                        <div class="video_list_cont" style="height: {{selectedType.all_items.length*120}}px">
+                            <div class="video_item" ng-repeat="item in selectedType.all_items">
+                                <div class="video_img" ng-click="reloadVideoPopup(item)" animate-image-load duration="1" img-url="item.src" img-w="216" img-h="112">
+                                    <img />
+                                </div>
+                                <div class="desc">
+                                    <div class="title" ng-click="reloadVideoPopup(item)">{{item.desc}}</div>
+                                    <div class="date">{{item.duration}}</div>
+                                    <div>
+                                        <span class='views'>323</span><span class='likes'>47</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <img src='image/underconst.jpg'/>
                 </div>
                 <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
             </div>
@@ -299,7 +307,7 @@
                     </div>
                     <div class="w-news">
                         <div class="b-news">
-                            <div class="i-news" ng-repeat="item in selectedType.items track by $index">
+                            <div id='itm{{item.id}}' class="i-news" ng-repeat="item in selectedType.items track by $index" ng-class='{read: item.read}'>
                                 <div class="i-news__content">
                                     <div class="img">
                                         <img alt="img" ng-src="{{item.img}}"/>
@@ -308,7 +316,8 @@
                                         <h3>{{item.short_desc}}</h3>
                                         <div class="w-time"><span class="time">{{item.date}}</span></div>
                                         <p>{{item.full_desc}}</p>
-                                        <a class="btn" href="#">read all</a>
+                                        <a class="btn all" href="#" tap='read_all(item)'>read all</a>
+                                        <a class="btn close" href="#" tap='close_all(item)'>close</a>
                                     </div>
                                 </div>
                                 <div class="btn_top" tap='goScroll("top")'>

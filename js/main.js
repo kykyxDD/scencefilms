@@ -250,6 +250,7 @@ var app = angular.module('app', ['mobile'])
     $s.goScroll = function (eID){          
         anchorSmoothScroll.scrollTo(eID);
     }
+    
 
     $s.change_page = function(data){
         state.pageToChange = data.page;
@@ -445,6 +446,14 @@ var app = angular.module('app', ['mobile'])
             popup.resize($w.innerWidth, $w.innerHeight)
             
             popup.show(target, item)
+        }
+    }
+    
+    $s.reloadVideoPopup = function(item) {
+        
+        if (item) {
+            
+            popup.reload(item)
         }
     }
     

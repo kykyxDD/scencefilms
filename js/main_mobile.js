@@ -28,6 +28,14 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.preloader.hide()
         v.transition.close()
     }
+    $s.read_all = function(itm){
+        itm.read = true;
+        $s.$apply()
+    }
+    $s.close_all = function(itm){
+        itm.read = false;
+        $s.$apply()
+    }
 
 }])
 .controller("mobileContentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
