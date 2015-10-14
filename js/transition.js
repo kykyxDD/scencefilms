@@ -28,11 +28,14 @@ Transition.prototype = {
         this.yellow_part = this.cont.querySelector('#yellow_part')
         this.yellow_part.squary = this.cont.querySelector('.bg.yellow');
         this.black_part = this.cont.querySelector('#black_part')
+        this.maska = document.querySelector('.maska_menu')
+        console.log(this.maska)
         
         ScreenObject.decorate_element.apply(this.cont)
         ScreenObject.decorate_element.apply(this.yellow_part)
         ScreenObject.decorate_element.apply(this.black_part)
         ScreenObject.decorate_element.apply(this.yellow_part.squary)
+        ScreenObject.decorate_element.apply(this.maska)
         
         this.reset()
     },
@@ -54,6 +57,7 @@ Transition.prototype = {
 
             var elem = this.yellow_part.squary
             var vis_w = elem.left + elem.w;
+            this.maska.h = window.innerHeight*0.9;
 
             var scale = window.innerWidth > window.innerHeight ? window.innerWidth/vis_w : window.innerHeight/vis_w; 
             if(this.current_state == 'expanded'){
@@ -68,6 +72,7 @@ Transition.prototype = {
                 this.cont.scaleY = 1;
             }
         } else {
+            this.maska.h = window.innerHeight;
             this.cont.scaleX = 1;
             this.cont.scaleY = 1;
             this.cont.rotation = 45;

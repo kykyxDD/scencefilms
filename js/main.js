@@ -111,6 +111,14 @@ var app = angular.module('app', ['mobile'])
 
     var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
+    if(win_wid <= 1050){
+        state.mobile_style = true; 
+    } else {
+        state.mobile_style = false;
+    }
+
+    /*
+
     if((win_wid <= 1024 && orien == 'landscape') || 
        (win_wid <= 768 && orien == 'portrait')){
         state.orientation = orien;
@@ -118,7 +126,7 @@ var app = angular.module('app', ['mobile'])
     } else {
         state.orientation = 'desktop';
         state.mobile_style = false;
-    }
+    }*/
     
     $s.state = state
     state.load_site_data("data.json", on_site_data)
@@ -175,7 +183,13 @@ var app = angular.module('app', ['mobile'])
         state.mobile = test_mobile()
         state.tablet = test_table()
         state.desktop = !state.mobile && !state.tablet;
-        
+
+        if(win_wid <= 1050){
+            state.mobile_style = true; 
+        } else {
+            state.mobile_style = false;
+        }
+        /*
         if((win_wid <= 1024 && orien == 'landscape') || 
            (win_wid <= 768 && orien == 'portrait')){
 
@@ -184,7 +198,8 @@ var app = angular.module('app', ['mobile'])
         } else {
             state.orientation = 'desktop';
             state.mobile_style = false;
-        }
+        }*/
+        // state.mobile_style = !state.desktop;
         
         v.transition.resize($window.innerWidth, $window.innerHeight, state.mobile_style)
         v.main_menu.resize(state.mobile_style);

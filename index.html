@@ -264,13 +264,13 @@
             <div class="bg_mobile"></div>
             <canvas class="particles"></canvas>
             <canvas class="screen mobile_intro"></canvas>
-            <div id='side_page_right' class='mobile_squary'>
+            <div id='side_page_right' ng-class='{mobile_squary: !state.tablet}'>
               <div class='cont_rhom_right'></div>
-              <div class="btn_top" ng-if='state.mobile_style' tap='goScroll("top")'>
+              <div class="btn_top" ng-if='!state.tablet' tap='goScroll("top")'>
                   <span class="btn"></span>
               </div>
             </div>
-            <div id='side_page_left' ng-hide="state.mobile_style">
+            <div id='side_page_left' ng-hide="!state.tablet">
             </div>
         </div>
         

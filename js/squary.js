@@ -18,6 +18,7 @@ function Squares (cont) {
 
 Squares.prototype = {
 	init: function(page, mobile){
+        console.log('init',mobile)
 
         this.cont_rhom_right = this.cont.querySelector('#side_page_right');
         this.cont_rhom = this.cont_rhom_right.querySelector('.cont_rhom_right');
@@ -221,7 +222,6 @@ Squares.prototype = {
                 var scale = text.w/content.height;
                 content.scaleX = content.scaleY = scale;
             }
-            // console.log(text.offsetTop, this.getElementPosition(text), text)
         }
     },
     getElementPosition: function(elemId) {
@@ -248,7 +248,8 @@ Squares.prototype = {
         this.cont_rhom_left.visible =  false;
     },
 
-    show: function(mobile){  
+    show: function(mobile){ 
+        console.log('show',mobile) 
         this.cont_rhom_right.visible = true;
         this.anim_show(this.sq_arr_right, mobile);
 
@@ -301,7 +302,7 @@ Squares.prototype = {
 
     createVideo: function(page){
         var delay_1 = this.delay*this.arr_video.length;
-        console.log(delay_1)
+        // console.log(delay_1)
         this.arr_video.push(page)
         var delay = this.delay;
         var maska = page.elem.maska;
@@ -330,7 +331,7 @@ Squares.prototype = {
         ScreenObject.decorate_element.apply(page.elem.content);
 
         var scale = text.w/page.elem.content.height;
-        console.log(scale)
+        // console.log(scale)
         page.elem.content.scaleX = page.elem.content.scaleY = scale;
         page.player = player;
         page.offset = this.getElementPosition(text);
@@ -347,46 +348,36 @@ Squares.prototype = {
         }
 
         function onPlayerClick(){
-            console.log(player.onStateChange())
+            // console.log(player.onStateChange())
         }
 
         function onPlayerReady(event) {
             event.target.setVolume(0);
             var img = page.elem.querySelector('img.preloader');
-            console.log(img)
             img.parentNode.removeChild(img);
-            console.log(page.elem.content)
-
 
             TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
             page.elem.content.addEventListener('mouseover', function(event){
-                console.log(event.type)
-                // console.log(text.offsetTop, text, self.getElementPosition(text))
                 page.player.playVideo()
             })
             page.elem.content.addEventListener('mouseout', function(event){
-                console.log(event.type)
                 page.player.pauseVideo()
             })
 
             page.elem.content.addEventListener('mouseover', function(event){
-                console.log(event.type)
-                // console.log(text.offsetTop, text, self.getElementPosition(text))
                 page.player.playVideo()
             })
             page.elem.content.addEventListener('mouseout', function(event){
-                console.log(event.type)
                 page.player.pauseVideo()
             })
 
             page.elem.content.addEventListener('tap', function(event){
-                // console.log(event.bubbles)
-                // var status = page.player.getPlayerState();
-                // if(status == 1){
-                    // page.player.pauseVideo()
-                // } else {
+                var status = page.player.getPlayerState();
+                if(status == 1){
+                    page.player.pauseVideo()
+                } else {
                     page.player.playVideo()
-                // }
+                }
                 console.log(status, event.type)
             })
         }

@@ -86,10 +86,12 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.intro.canvas.top = y_0;
     TweenLite.to(v.intro.canvas, 3, {y: y_1});
 
-    v.squares.init(state.data.homepage_data, state.mobile_style)
+    console.log(state.mobile_style, state.mobile, state.tablet)
+
+    v.squares.init(state.data.homepage_data, state.mobile_style && !state.tablet)
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
-    v.squares.show(state.mobile_style)
+    v.squares.show(state.mobile_style && !state.tablet)
 
     on_resize()
     angular.element($w).on('resize', on_resize)
@@ -97,7 +99,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     $s.$on('$destroy', clean_up)
     
     function on_resize(e) {
-        v.squares.resize(state.mobile_style);
+        v.squares.resize(state.mobile_style && !state.tablet);
         v.intro.canvas.left = $w.innerWidth/2;
         bg_mobile.h = $w.innerHeight*0.9;
         y_1 = -0.2*$w.innerHeight;
