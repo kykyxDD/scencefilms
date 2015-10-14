@@ -44,10 +44,12 @@ body {
 #home.mobile_home{
   position:relative;
 }
-.home.tablet #content,
-.home.tablet .maska_menu,
-.home.tablet #main_menu{
-  position:fixed !important;
+.home.tablet{
+  overflow:hidden;
+}
+.home.tablet #side_page_right,
+.home.tablet #side_page_left{
+  position:absolute !important;
 }
 
 #home.mobile_home .bg_mobile{
@@ -430,13 +432,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     margin-left: -100px;
 }
 
-#preloader.mobile_preloader{
-    // position:absolute;
-    // margin-left: -150px;
-    // margin-top: -150px;
-}
-
-
 #preloader .label{
     position: absolute;
     width: 50px;
@@ -580,7 +575,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 .rhom_before, 
 .rhom_after{
-	/*background-color: #ffd400;*/
 	width: 100%;
 	height: 100%;
 	position: relative;
@@ -593,8 +587,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   position: absolute;
   top: 50%;
   left: 50%;
-  // margin:auto 0;
-  // text-align: center;
   margin-top: -30px;
   margin-left: -30px;
 }
@@ -603,23 +595,18 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   z-index: 10;
   pointer-events:none;
   display: none;
-
-	/*background-color: #000;*/
-	/*opacity: 0;*/
 }
 
 
 .text_rhom{
 	position: absolute;
 	-moz-transform: rotate(45deg); 
-    -ms-transform: rotate(45deg); 
-    -webkit-transform: rotate(45deg); 
-    -o-transform: rotate(45deg); 
-    transform: rotate(45deg);
-    background-size: auto 100%;
-    background-position-x: center;
-    /*background-color: #ffd400;*/
-    
+  -ms-transform: rotate(45deg); 
+  -webkit-transform: rotate(45deg); 
+  -o-transform: rotate(45deg); 
+  transform: rotate(45deg);
+  background-size: auto 100%;
+  background-position-x: center;
 }
 .text_rhom .video{
   position:absolute;
@@ -627,7 +614,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   top: 50%;
   margin-left: -343px;
   margin-top: -190px;
-  // pointer-events: none;
 }
 
 
@@ -637,8 +623,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     left: 50%;
     width: 1px;
     height: 1px;
-    // left: 0px;
-    // top: 0px;
 }
 #video-player video{
   margin-top: -540px;
@@ -652,7 +636,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   position:absolute;
 }
 .mobile.home .footer.footer_tablet{
-  position:fixed;
   background-color:transparent;
   text-align: right;
 }
@@ -665,13 +648,9 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     position: absolute;
 }
 #anim_bg {
-    //overflow: hidden;
     z-index: -1;
-    //width: 1920px;
-    //height: 1080px;
     left: 0px;
     top: 0px;
-    //transform-origin: 0 0 0;
     position: fixed;
 }
 
