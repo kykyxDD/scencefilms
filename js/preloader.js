@@ -1,9 +1,12 @@
 function Point(x, y) { this.x = x || 0; this.y = y || 0; }
 Point.prototype = { length: function() {return Math.sqrt(this.x*this.x + this.y*this.y) }}
 
-function Preloader(cont)
+function Preloader(cont, skip_frames)
 {
     this.cont = cont
+    
+    this.skip_frames = skip_frames || 0
+    this.framesPassed = 0
     
     this.canvas = document.createElement('canvas')
     this.cont.appendChild(this.canvas)
@@ -139,6 +142,12 @@ Preloader.prototype = {
     },
     
     repaintCanvas: function() {
+        
+        if (this.skip_frames) {
+            if (this.framesPassed++ % this.skip_frames > 0) {
+                return
+            }
+        }
         
         this.updateDistortionField();
         

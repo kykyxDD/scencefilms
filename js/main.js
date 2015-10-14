@@ -275,6 +275,8 @@ var app = angular.module('app', ['mobile'])
 }])
 .controller("desktopController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
 
+    v.preloader.skip_frames = 0
+
     v.main_menu.onClick = function(page) {
         if(page.page !== state.selectedPage) {
             $window.scrollTo(0, 0);
@@ -542,6 +544,7 @@ var app = angular.module('app', ['mobile'])
     var doc = $doc[0]
     var intro_bg = doc.querySelector('#intro_bg')
     var screen = doc.querySelector('#intro .screen')
+    v.intro.skip_frames = 0
 
     angular.element($w).on('resize', on_resize)
 
