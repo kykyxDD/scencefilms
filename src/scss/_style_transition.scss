@@ -106,15 +106,17 @@ body {
 // }
 .mobile.cast ,
 .mobile.makers {
-  background: url('../image/bg/cast_mobile_horiz.jpg') no-repeat;
+  background: url('../image/bg/cast_mobile.jpg') no-repeat;
   // background-size: auto 500px;  
-  background-size: contain;
+  background-size: 100% auto;
+  background-color: #000;
 }
 
 @media only screen and (orientation: landscape) and (max-width: 680px){
   .mobile.cast ,
   .mobile.makers {
-    background-size: auto 500px;
+    background-size: 100% auto;
+    background-color: #000;
   }
 }
 @media only screen and (orientation: portrait) and (max-width: 680px){
@@ -127,7 +129,7 @@ body {
 }
 .mobile.news {
   background-image: url('../image/bg/news_mobile.jpg');
-  background-size: cover;
+  background-size: 100% auto;
   background-color: #000;
 }
 .mobile.media{
