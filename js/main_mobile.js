@@ -1,7 +1,7 @@
 angular.module('mobile', [])
 app.controller("mobileController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
 
-    v.preloader.skip_frames = 3
+    v.preloader.set_skip_frames(3)
     
     v.main_menu.onClick = function(page) {
         if(page.page !== state.selectedPage) {
@@ -87,7 +87,9 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
 
     var doc = $doc[0];
 
-    v.intro.set_canvas(doc.querySelector('#home .screen')) 
+    var canv = doc.querySelector('#home .screen')
+    v.intro.set_canvas(canv) 
+    v.intro.set_skip_frames(0)
     v.intro.repaintCanvas();
     var bg_mobile = doc.querySelector('#home .bg_mobile');
     ScreenObject.decorate_element.apply(bg_mobile);
@@ -139,6 +141,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var doc = $doc[0];
 
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
+    v.intro.set_skip_frames(0)
     v.intro.repaintCanvas();
     var bg_mobile = doc.querySelector('#home .bg_mobile');
     var slogan = doc.querySelector('.slogan');
@@ -199,7 +202,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var intro_bg = doc.querySelector('#intro_bg')
     var screen = doc.querySelector('#intro .screen')
     
-    v.intro.skip_frames = 3
+    v.intro.set_skip_frames(3)
 
     angular.element($w).on('resize', on_resize)
 

@@ -17,6 +17,11 @@ IntroText.prototype = {
         this.prepare()
     },
     
+    set_skip_frames: function(n) {
+        this.skip_frames = n
+        this.framesPassed = -1     
+    },
+
     set_canvas: function(canvas) {
         this.canvas = canvas
         ScreenObject.decorate_element.apply(this.canvas)
@@ -159,9 +164,11 @@ IntroText.prototype = {
         if (!this.canvas) return
         
         if (this.skip_frames) {
-            if (this.framesPassed++ % this.skip_frames > 0) {
+            if (this.framesPassed % this.skip_frames > 0) {
+                this.framesPassed++
                 return
             }
+            this.framesPassed++
         }
         
         this.updateDistortionField()        
