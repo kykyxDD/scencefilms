@@ -233,7 +233,7 @@
             "id": 5,
             "page": "media",
             "groupInTypeBy": 2,
-            "types": [{"type": "photo", "label": "photo", "item_width": 450}, {"type": "video", "label": "video", "item_width": 450}],
+            "types": [{"type": "photo", "label": "photo", "item_width": 450}, {"type": "video", "label": "video", "item_width": 480}],
             "pages": [
                 {
                     "id": 51,
