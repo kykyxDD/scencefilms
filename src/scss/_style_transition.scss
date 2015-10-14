@@ -46,7 +46,7 @@ body {
 }
 
 #home.mobile_home .bg_mobile{
-  
+  background: url('../image/bg/bg_mob_main.jpg') center no-repeat;
   
   background-size: cover;
   width: 100%;
@@ -56,14 +56,10 @@ body {
 @media only screen and (orientation: landscape) and (max-width: 1024px) and (min-width:768px){
   #home.mobile_home .bg_mobile{
     background: url('../image/bg/main.jpg') center no-repeat;
+    background-size: auto 100%;
   }
 }
-@media only screen and (orientation: portrait),
-  only screen and (max-width: 768px) {
-  #home.mobile_home .bg_mobile{
-    background: url('../image/bg/bg_mob_main.jpg') center no-repeat;
-  }
-}
+
 #home.mobile_home .particles{
   position:absolute;
   top: 0;
@@ -651,6 +647,11 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 .mobile.home .footer{
   position:absolute;
+}
+.mobile.home .footer.footer_tablet{
+  position:fixed;
+  background-color:transparent;
+  text-align: right;
 }
 
 .screen.mobile_intro{

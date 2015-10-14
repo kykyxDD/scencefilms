@@ -31,7 +31,7 @@
 </head>
 
 <body
-    ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media'}">
+    ng-class="{mobile: state.mobile_style, home: state.selectedPage == 'home', cast: state.selectedPage == 'cast', news: state.selectedPage == 'news', makers: state.selectedPage == 'makers', media: state.selectedPage == 'media', tablet: state.tablet}">
 
     <div id='bg' class="home" ></div>
     
@@ -268,7 +268,7 @@
             <canvas class="screen mobile_intro" tap="skip_intro()" class='mobile_intro'></canvas>
         </div>
         
-        <div id="home" ng-switch-when="home" class="page mobile_home" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="mobileHomeController">
+        <div id="home" ng-switch-when="home" ng-if='!state.tablet' class="page mobile_home" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="mobileHomeController">
             <div class="bg_mobile"></div>
             <canvas class="particles"></canvas>
             <canvas class="screen mobile_intro"></canvas>
@@ -280,6 +280,17 @@
             </div>
             <div id='side_page_left' ng-hide="!state.tablet">
             </div>
+        </div>
+
+        <div id="home" ng-switch-when="home" ng-if='state.tablet' class="page mobile_home" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="mobileTabletHomeController">
+            <div class="bg_mobile"></div>
+            <canvas class="particles"></canvas>
+            <canvas class="screen mobile_intro"></canvas>
+            <div class="slogan">In a small town, there are supposed to be no secrets.</div>
+            <div id='side_page_right' ng-class='{mobile_squary: !state.tablet}'>
+              <div class='cont_rhom_right'></div>
+            </div>
+            <div id='side_page_left'></div>
         </div>
         
         <div id="news" ng-switch-when="news" class="page" ng-controller="mobileMediaController">
@@ -452,7 +463,7 @@
 
     <div id="title_page"></div>
 
-    <div class="footer" ng-show="state.interfaceVisible">
+    <div class="footer" ng-show="state.interfaceVisible" ng-class='{footer_tablet:state.tablet}'>
         <div class="w-share">
             <ul class="l-share">
                 <li><a class="i-facebook" href="#">facebook</a></li>

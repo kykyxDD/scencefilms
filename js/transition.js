@@ -52,12 +52,13 @@ Transition.prototype = {
             this.yellow_part.scaleX = this.yellow_part.scaleY = this.yellow_exp_scale
             this.black_part.scaleX = this.black_part.scaleY = this.black_exp_scale
         }
+        this.maska.h = window.innerHeight;
 
         if(mobile){
 
             var elem = this.yellow_part.squary
             var vis_w = elem.left + elem.w;
-            this.maska.h = window.innerHeight*0.9;
+            
 
             var scale = window.innerWidth > window.innerHeight ? window.innerWidth/vis_w : window.innerHeight/vis_w; 
             if(this.current_state == 'expanded'){
@@ -72,7 +73,7 @@ Transition.prototype = {
                 this.cont.scaleY = 1;
             }
         } else {
-            this.maska.h = window.innerHeight;
+            
             this.cont.scaleX = 1;
             this.cont.scaleY = 1;
             this.cont.rotation = 45;

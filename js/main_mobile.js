@@ -78,13 +78,70 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var bg_mobile = doc.querySelector('#home .bg_mobile');
     ScreenObject.decorate_element.apply(bg_mobile);
     bg_mobile.h = $w.innerHeight*0.9;
+    bg_mobile.w = $w.innerWidth;
 
     var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
     var y_0 = $w.innerHeight/2;
     var y_1 = -0.2*$w.innerHeight;
     v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
-    v.intro.canvas.top = y_0;
+    v.intro.canvas.top = y_0;    
+    v.intro.canvas.x = 0;
     TweenLite.to(v.intro.canvas, 3, {y: y_1});
+
+    v.squares.init(state.data.homepage_data, state.mobile_style && !state.tablet)
+
+    TweenLite.to(v.particles, 2, {kalpha: 3})
+    v.squares.show(state.mobile_style && !state.tablet)
+
+    on_resize()
+    angular.element($w).on('resize', on_resize)
+
+    $s.$on('$destroy', clean_up)
+    
+    function on_resize(e) {
+        v.squares.resize(state.mobile_style && !state.tablet);
+        v.intro.canvas.left = $w.innerWidth/2;
+        bg_mobile.h = $w.innerHeight*0.9;
+        bg_mobile.w = $w.innerWidth;
+        y_1 = -0.2*$w.innerHeight;
+
+        var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
+        v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
+        var y_0 = $w.innerHeight/2;
+        v.intro.canvas.x =  0;
+        v.intro.canvas.top = y_0;
+        if(e) {
+            v.intro.canvas.y = y_1;
+        } 
+
+    }
+
+    function clean_up() {
+        angular.element($w).off('resize', on_resize)
+    }
+}])
+.controller('mobileTabletHomeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
+
+    var doc = $doc[0];
+
+    v.intro.set_canvas(doc.querySelector('#home .screen')) 
+    v.intro.repaintCanvas();
+    var bg_mobile = doc.querySelector('#home .bg_mobile');
+    var slogan = doc.querySelector('.slogan');
+    ScreenObject.decorate_element.apply(bg_mobile);
+    ScreenObject.decorate_element.apply(slogan);
+    bg_mobile.h = $w.innerHeight;
+    bg_mobile.w = $w.innerWidth;
+
+    var scale =  0.7 ;
+    var y_0 = $w.innerHeight/2;
+    var y_1 = -0.2*$w.innerHeight;
+    v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
+    v.intro.canvas.top = y_0;
+        v.intro.canvas.y = 0;
+        var x_0 = $w.innerWidth > $w.innerHeight ? -200 : 0;
+        slogan.x = x_0;
+        TweenLite.to(v.intro.canvas, 3, {x: x_0});    
 
     console.log(state.mobile_style, state.mobile, state.tablet)
 
@@ -101,15 +158,19 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     function on_resize(e) {
         v.squares.resize(state.mobile_style && !state.tablet);
         v.intro.canvas.left = $w.innerWidth/2;
-        bg_mobile.h = $w.innerHeight*0.9;
+        bg_mobile.h = $w.innerHeight;
+        bg_mobile.w = $w.innerWidth;
         y_1 = -0.2*$w.innerHeight;
 
-        var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
+        var scale = 0.7
         v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
-        v.intro.canvas.x = 0;
         var y_0 = $w.innerHeight/2;
         v.intro.canvas.top = y_0;
-        if(e) v.intro.canvas.y = y_1;
+        if(e) {
+            slogan.x = $w.innerWidth > $w.innerHeight ? -200 : 0;
+            v.intro.canvas.x = $w.innerWidth > $w.innerHeight ? -200 : 0;
+            v.intro.canvas.y = 0;
+        } 
 
     }
 
@@ -189,7 +250,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         
         on_resize()
         
-        var scale = ($w.innerWidth/screen.w).toFixed(3)
+        var scale = state.tablet ? 0.7 : ($w.innerWidth/screen.w).toFixed(3)
         screen.scaleX = screen.scaleY = scale;
         screen.y = ($w.innerHeight/2)
         
