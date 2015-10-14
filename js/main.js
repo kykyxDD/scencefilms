@@ -74,13 +74,18 @@ var app = angular.module('app', ['mobile'])
                                             type.items.push(last_group)
                                         }
                                         last_group.push(itm)
+                                        
+                                        if (type.all_items == null) {
+                                            type.all_items = []
+                                        }
+                                        type.all_items.push(itm)
                                     }
                                     else {
                                         if (type.items == null) {
                                             type.items = []
                                         }
                                         type.items.push(itm)
-                                    }                                                                        
+                                    }
                                 }
                             }
                         }
@@ -782,6 +787,7 @@ var app = angular.module('app', ['mobile'])
 
                 var w = $s.w || div.clientWidth
                 var h = $s.h || div.clientHeight
+                console.log("item width, height", div.clientWidth, div.clientHeight)
             
                 var k = Math.max(w/img.width, h/img.height)
                 img.scaleX = img.scaleY = k

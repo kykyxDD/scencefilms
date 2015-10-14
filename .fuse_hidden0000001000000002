@@ -189,9 +189,9 @@
                 </div>
                 <div class="video_list">
                     <h3 class="title">NEXT VIDEO</h3>
-                    <div class="video_list_cont">
-                        <div class="video_item" ng-repeat="item in selectedType.all_items">
-                            <div class="video_img" animate-image-load duration="1" img-url="item.src" img-w="216" img-h="112">
+                    <div class="cont">
+                        <div class="item" ng-repeat="item in selectedType.items">
+                            <div class="img">
                                 <img />
                             </div>
                         </div>

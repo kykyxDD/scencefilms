@@ -647,8 +647,14 @@ body {
     @include box-sizing(border-box);
 
     .news {
-      margin: 5px;
-      height: auto;
+      margin: 0 5px;
+      //height: auto;
+    }
+
+    &:nth-child(even) {
+      .news {
+        margin: 5px 5px 0;
+      }
     }
   }
   

@@ -302,7 +302,7 @@ Squares.prototype = {
 
     createVideo: function(page){
         var delay_1 = this.delay*this.arr_video.length;
-        // console.log(delay_1)
+
         this.arr_video.push(page)
         var delay = this.delay;
         var maska = page.elem.maska;
@@ -311,7 +311,7 @@ Squares.prototype = {
         var self = this;
         var player =  new YT.Player(page.elem.content, {
             height: '390',
-            width: '640',
+            width: '693',
             videoId: page.src,
             playerVars: {
                 controls: 0,
@@ -331,7 +331,7 @@ Squares.prototype = {
         ScreenObject.decorate_element.apply(page.elem.content);
 
         var scale = text.w/page.elem.content.height;
-        // console.log(scale)
+
         page.elem.content.scaleX = page.elem.content.scaleY = scale;
         page.player = player;
         page.offset = this.getElementPosition(text);
@@ -348,7 +348,7 @@ Squares.prototype = {
         }
 
         function onPlayerClick(){
-            // console.log(player.onStateChange())
+            //console.log(player.onStateChange())
         }
 
         function onPlayerReady(event) {
@@ -378,7 +378,6 @@ Squares.prototype = {
                 } else {
                     page.player.playVideo()
                 }
-                console.log(status, event.type)
             })
         }
 
