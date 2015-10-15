@@ -54,7 +54,7 @@
 
             <canvas class="particles"></canvas>
             <canvas class="screen"></canvas>
-            <div class="slogan">In a small town, there are supposed to be no secrets.</div>
+            <div class="slogan">In a small town, there are supposed to be no secrets</div>
             <div id='side_page_right'>
               <div class='cont_rhom_right'></div>
             </div>
@@ -137,14 +137,14 @@
                                 <div class="mediaCont">
                                     <div ng-switch="selectedType.type">
                                         <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
-                                            <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}" id="photo{{item.id}}">
+                                            <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}" id="photo{{item.id}}" tap="showPhotoPopup(item)">
                                                 <div class="img" animate-image-load duration="1" img-url="item.src">
                                                     <img alt="img" />
                                                 </div>
                                                 <div class="w-share">
                                                     <div class="b-share">
                                                         <ul class="l-share">
-                                                            <li><a href="#" class="i-plus" tap="showPhotoPopup(item)"></a></li>
+                                                            <li><a href="#" class="i-plus" ></a></li>
                                                             <li><a href="#" class="i-like"></a></li>
                                                             <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
                                                         </ul>
@@ -287,7 +287,7 @@
             <div class="bg_mobile"></div>
             <canvas class="particles"></canvas>
             <canvas class="screen mobile_intro"></canvas>
-            <div class="slogan">In a small town, there are supposed to be no secrets.</div>
+            <div class="slogan">In a small town, there are supposed to be no secrets</div>
             <div id='side_page_right' ng-class='{mobile_squary: !state.tablet}'>
               <div class='cont_rhom_right'></div>
             </div>
