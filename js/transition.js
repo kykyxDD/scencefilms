@@ -29,7 +29,6 @@ Transition.prototype = {
         this.yellow_part.squary = this.cont.querySelector('.bg.yellow');
         this.black_part = this.cont.querySelector('#black_part')
         this.maska = document.querySelector('.maska_menu')
-        console.log(this.maska)
         
         ScreenObject.decorate_element.apply(this.cont)
         ScreenObject.decorate_element.apply(this.yellow_part)
@@ -156,7 +155,6 @@ Transition.prototype = {
 
         this.current_state = 'expanded';
 
-
         if(!mobile){
             TweenLite.to(this.cont, 0.35*this.time_scale, {y: 350, ease: Power1.easeOut, onComplete: function() {if (this.debug) console.log("onExpanded"); this.onExpanded()}, onCompleteScope: this})
             TweenLite.to(this.cont, 1*this.time_scale, {y: 380, ease: Power1.easeOut, delay: 0.35*this.time_scale})
@@ -175,6 +173,7 @@ Transition.prototype = {
     },
     
     open: function() {
+        this.maska.style.position = 'fixed';
         
         if (this.debug) console.log("open")
         
@@ -187,6 +186,7 @@ Transition.prototype = {
     },
     
     close: function() {
+        this.maska.style.position = '';
     
         if (this.debug) console.log("close")
     

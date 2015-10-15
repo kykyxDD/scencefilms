@@ -153,7 +153,6 @@ Anim_menu.prototype = {
     },
 
     collapse: function(mobile) {
-        console.log('collapse',mobile)
 
         var expand_delay = expand_delay || 0
         var delay = 0;

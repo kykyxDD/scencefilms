@@ -319,6 +319,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
     }
 
     function onPageLoaded() {
+        console.log(v.transition)
         
         $window.scrollTo(0, 0);
 
