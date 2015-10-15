@@ -576,6 +576,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 .cont_rhom{
 	position: absolute;		
 	display: inline-block;
+  overflow: hidden;
 }
 .rhom_before, 
 .rhom_after{
@@ -611,6 +612,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   transform: rotate(45deg);
   background-size: auto 100%;
   background-position-x: center;
+  overflow: hidden;
 
 }
 .text_rhom .video{
