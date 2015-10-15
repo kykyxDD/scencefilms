@@ -319,7 +319,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
     }
 
     function onPageLoaded() {
-        console.log(v.transition)
         
         $window.scrollTo(0, 0);
 
@@ -804,7 +803,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
 
                 var w = $s.w || div.clientWidth
                 var h = $s.h || div.clientHeight
-                console.log("item width, height", div.clientWidth, div.clientHeight)
             
                 var k = Math.max(w/img.width, h/img.height)
                 img.scaleX = img.scaleY = k

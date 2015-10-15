@@ -15,7 +15,7 @@ function NewsPopup(cont) {
     this.img = this.cont.querySelector(".popup_img")
     this.icons = this.cont.querySelectorAll(".ico")
     this.icons = Array.prototype.slice.call(this.icons)
-    
+
     ScreenObject.decorate_element.apply(this.bg)
     ScreenObject.decorate_element.apply(this.content)
     ScreenObject.decorate_element.apply(this.btn)
@@ -43,7 +43,7 @@ NewsPopup.prototype = {
     },
 
     show: function(target, data) {
-        
+
         dom.display(this.cont, true)
         var r = target.getBoundingClientRect()
 
@@ -52,34 +52,33 @@ NewsPopup.prototype = {
         this.bg.w = r.width
         this.bg.h = r.height
         this.bg.alpha = 0
-        
+
         TweenLite.to(this.bg, 0.3, {alpha: 1})
         TweenLite.to(this.bg, 0.3, {h: this.h, y: this.bg.sy, delay: 0.3})
         TweenLite.to(this.bg, 0.3, {w: this.w, x: this.bg.sx, delay: 0.6})
         
         this.btn.alpha = 1
         TweenLite.from(this.btn, 0.5, {alpha: 0, x: this.btn.sx-10, delay: 0.8})
-        
+
         this.content.alpha = 1
         TweenLite.from(this.content, 0.5, {alpha: 0, x: this.content.sx-10, delay: 0.8})
-        
+
         this.img_cont.alpha = 1
         TweenLite.from(this.img_cont, 0.5, {alpha: 0, x: this.img_cont.sx-10, delay: 0.8})
-        
+
         this.text_cont.textContent = data.full_desc
         this.title.textContent = data.short_desc
         this.date.textContent = data.date
-        this.scroll.refresh()
-        
+
         this.img.src = data.img
         this.img.alpha = 0
         this.img.onload = angular.bind(this, this.on_image_load)
-        
-        this.update_inner_size()
-        
+
         this.title_anim.text = data.short_desc
         this.date_anim.text = data.date
         this.text_anim.text = data.full_desc
+        this.update_inner_size()
+        this.scroll.refresh()
 
         this.title_anim.run(0.6)
         this.date_anim.run(0.6)
@@ -90,6 +89,7 @@ NewsPopup.prototype = {
             ScreenObject.decorate_element.apply(ico)
             TweenLite.from(ico, 1, {x: "-=10", alpha: 0, delay: 0.6+0.2*i})
         }
+
     },
 
     hide: function() {
@@ -136,10 +136,10 @@ NewsPopup.prototype = {
     },
     
     update_inner_size: function() {
-        
+
         var title_h = this.title.clientHeight
         var date_h = this.date.clientHeight
-        
+
         this.scroll_cont.w = this.content.w
         this.scroll_cont.h = this.content.h - title_h - date_h - 120
     },
@@ -149,11 +149,12 @@ NewsPopup.prototype = {
         TweenLite.killTweensOf(this.btn)
         TweenLite.killTweensOf(this.cont)
         TweenLite.killTweensOf(this.img_cont)
-        
+
         this.icons.forEach(TweenLite.killTweensOf)
         this.title_anim.stop()
         this.date_anim.stop()
         this.text_anim.stop()
+        this.scroll.destroy();
         delete this.img.onload
         this.img.src = ""
    }
