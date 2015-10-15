@@ -331,8 +331,8 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
 .controller("contentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
     
     var doc = $doc[0]
-    var scroll_cont = doc.querySelector('.scrollCont')
-    //var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
+    var scroll_cont = doc.querySelector('.b-text .text')
+    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
 
     onResize()
     angular.element($w).on('resize', onResize)
@@ -347,7 +347,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
     }
 
     function clean_up() {
-        //scroll.destroy()
+        scroll.destroy()
         angular.element($w).off('resize', onResize)
     }
     
@@ -356,9 +356,11 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
         $s.$apply()
         v.background.prepare(sub_page.bg_ref)
         v.background.play2()
-        
-        //var text = scroll_cont.firstChild
-        //scroll.refresh()
+    }
+    
+    $s.refresh_scroll = function() {
+        console.log("refresh scroll")
+        scroll.refresh()        
     }
     
     $s.animateMenuItems = function() {
@@ -710,7 +712,8 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
         scope: {
             text: "=",
             duration: "=",
-            delay: "="
+            delay: "=",
+            callback: "&textAnimationFinished"
         },
 
         link: function($s, el, attr) {
@@ -728,12 +731,12 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
                 
                 var oh = element.h
                 element.style.height = ""
-                element.textContent = new_text
+                element.innerHTML = new_text
                 var nh = element.clientHeight
-                element.textContent = ""
+                element.innerHTML = ""
                 TweenLite.killTweensOf(element)
                 element.h = oh
-                TweenLite.to(element, 1, {h: nh})
+                TweenLite.to(element, 1, {h: nh, onComplete: $s.callback})
 
                 //obj.delay = 0
                 obj.text = new_text

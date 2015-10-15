@@ -247,6 +247,17 @@ body {
     font-size: 18px;
     line-height: 28px;
   }
+  
+  .b-text {
+    .text {
+        overflow: hidden;
+        height: 500px;
+        
+        a {
+            color: #ffffff;
+        }
+    }
+  }
 }
 
 .footer {
