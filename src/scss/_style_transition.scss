@@ -899,10 +899,11 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
       font-size: 60px;
       top: 25px;
       right: 25px;
-      width: 45px;
+      width: 43px;
       height: 30px;
       text-align: center;
-      padding: 8px 0;
+      line-height: 30px;
+      padding: 7px 0;
       @include transform(rotate(45deg));
     }
     .i-news__content{
