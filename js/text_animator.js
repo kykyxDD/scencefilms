@@ -33,7 +33,7 @@ TextAnimator.prototype = {
 
     showLetters: function(n) {
         var i
-        this.field.textContent = ""
+        this.field.innerHTML = ""
         
         /*
         if (n < this.timing_for_minuces) {
@@ -41,7 +41,7 @@ TextAnimator.prototype = {
             var subLen = Math.ceil(this.text.length*n / this.timing_for_minuces)
             
             for (i=0;i<subLen;i++) {
-                this.field.textContent += text.charCodeAt(i) != 13 ? "-" : "\n"
+                this.field.innerHTML += text.charCodeAt(i) != 13 ? "-" : "\n"
             }
             
             return;
@@ -49,7 +49,7 @@ TextAnimator.prototype = {
         */
         
         if (n >= 1) {
-            this.field.textContent = this.text
+            this.field.innerHTML = this.text
             return
         }
         
@@ -57,15 +57,15 @@ TextAnimator.prototype = {
         
         subLen = Math.ceil(this.text.length*prc)
         
-        this.field.textContent = this.text.substr(0, subLen)
+        this.field.innerHTML = this.text.substr(0, subLen)
         
         for(i=0; i<=0; i++) {
-            this.field.textContent += String.fromCharCode(Math.ceil(Math.random()*40)+60)
+            this.field.innerHTML += String.fromCharCode(Math.ceil(Math.random()*40)+60)
         }
         
         /*
         for(i=subLen; i<this.text.length;i++) {
-            this.field.textContent += this.text.charCodeAt(i) != 13 ? "-" : "\n"
+            this.field.innerHTML += this.text.charCodeAt(i) != 13 ? "-" : "\n"
         }
         */
     },
@@ -73,7 +73,7 @@ TextAnimator.prototype = {
     showLettersBack: function(n) {
         var i
         var subLen
-        this.field.textContent = ""
+        this.field.innerHTML = ""
 
         if (n < this.timing_for_minuces) {
 
@@ -82,7 +82,7 @@ TextAnimator.prototype = {
             for (i=0; i<this.text.length; i++) {
                 var s = i<subLen ? "-" : " "
                 s = this.text.charCodeAt(i) != 13 ? s : "\n"
-                this.field.textContent += s
+                this.field.innerHTML += s
             }
 
             return;
@@ -92,10 +92,10 @@ TextAnimator.prototype = {
 
         subLen = Math.ceil(this.text.length*prc)
 
-        this.field.textContent = this.text.substr(0, subLen)
+        this.field.innerHTML = this.text.substr(0, subLen)
 
         for(i=0; i<=0; i++) {
-            this.field.textContent += String.fromCharCode(Math.ceil(Math.random()*40)+60)
+            this.field.innerHTML += String.fromCharCode(Math.ceil(Math.random()*40)+60)
         }
     }
 }

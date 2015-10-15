@@ -242,7 +242,7 @@
                     <div class="w-tab">
                         <ul class="tab">
                             <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" ng-click="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
+                                <a href="#" tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
                             </li>
                         </ul>
                     </div>
