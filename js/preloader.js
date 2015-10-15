@@ -164,29 +164,29 @@ Preloader.prototype = {
         var c = new Point(this.WIDTH/2, this.HEIGHT/2)
         
         //innerline
-        var path = new Path2D()
+        ctx.beginPath()
         var pn = this.getCoord(0, this.innerRadius)
-        path.moveTo(c.x + pn.x, c.y + pn.y)
+        ctx.moveTo(c.x + pn.x, c.y + pn.y)
         
         for(var i=0; i<=this.segments; i++) {
             pn = this.getCoord(Math.PI/this.segments*i*2, this.innerRadius)
-            path.lineTo(c.x + pn.x, c.y + pn.y)
+            ctx.lineTo(c.x + pn.x, c.y + pn.y)
         }
-        ctx.stroke(path)
+        ctx.stroke()
         
         //outerLine
-        path = new Path2D()
+        ctx.beginPath()
         pn = this.getCoord(0, this.innerRadius + this.circleWidth)
-        path.moveTo(c.x + pn.x, c.y + pn.y)
+        ctx.moveTo(c.x + pn.x, c.y + pn.y)
         
         for(var i=0; i<=this.segments; i++) {
             pn = this.getCoord(Math.PI/this.segments*i*2, this.innerRadius + this.circleWidth)
-            path.lineTo(c.x + pn.x, c.y + pn.y)
+            ctx.lineTo(c.x + pn.x, c.y + pn.y)
         }
-        ctx.stroke(path)
+        ctx.stroke()
         
         //fill
-        path = new Path2D()
+        ctx.beginPath()
         pn = this.getCoord(-Math.PI/2, this.innerRadius + this.lineBorder);
         ctx.fillStyle = this.fillcolor
         ctx.moveTo(c.x + pn.x, c.y + pn.y);
@@ -196,12 +196,12 @@ Preloader.prototype = {
         
         for (var i=1; i<=steps; i++){
             pn = this.getCoord(stepVal*i-Math.PI/2, this.innerRadius + this.lineBorder);
-            path.lineTo(c.x + pn.x, c.y + pn.y);
+            ctx.lineTo(c.x + pn.x, c.y + pn.y);
         }
         for (var i=0; i<=steps; i++){
             pn = this.getCoord(stepVal*(steps-i)-Math.PI/2, this.innerRadius + this.circleWidth - this.lineBorder);
-            path.lineTo(c.x + pn.x, c.y + pn.y);
+            ctx.lineTo(c.x + pn.x, c.y + pn.y);
         }
-        ctx.fill(path)
+        ctx.fill()
     }
 }
