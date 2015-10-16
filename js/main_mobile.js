@@ -4,6 +4,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.preloader.set_skip_frames(3)
     
     v.main_menu.onClick = function(page) {
+        // $window.scrollTo(0, 0);
         if(page.page !== state.selectedPage) {
             $s.change_page(page);
             $s.$apply()

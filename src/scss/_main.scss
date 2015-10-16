@@ -199,10 +199,6 @@ body {
         opacity: 1;
       }
     }
-
-    br {
-      display: none;
-    }
   }
 }
 
@@ -246,17 +242,6 @@ body {
     font-family: $scadaR;
     font-size: 18px;
     line-height: 28px;
-  }
-  
-  .b-text {
-    .text {
-        overflow: hidden;
-        height: 500px;
-        
-        a {
-            color: #ffffff;
-        }
-    }
   }
 }
 
@@ -968,7 +953,7 @@ body {
     span {
       display: block;
       @include transform(skewX(45deg));
-      @include ellipsis(ellipsis);
+      //@include ellipsis(ellipsis);
     }
   }
 
@@ -1382,23 +1367,6 @@ body {
           width: 100%;
           float: none;
           display: block;
-        }
-
-        a {
-          line-height: 30px;
-          height: 30px;
-          position: relative;
-          //-right: 24px;
-        }
-
-        span {
-          position: absolute;
-          left: 0;
-          right: 0;
-          width: 100%;
-          //margin: 0 0 0 12px;
-          //padding-left: 12px;
-          padding-right: 0;
         }
       }
     }

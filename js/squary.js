@@ -89,7 +89,7 @@ Squares.prototype = {
         var text = page.elem.text_rhom;
         var rhom_after = page.elem.rhom_after;
         var rhom_before = page.elem.rhom_before;
-        var content, maska;
+        var content;
         
         if(page.type == 'image'){
             content = document.createElement('img');
@@ -107,11 +107,6 @@ Squares.prototype = {
             content.id = page.id;
             content.className = 'video'
             text.appendChild(content);
-            var maska = document.createElement('div');
-            maska.className = 'maska';
-            rhom_after.appendChild(maska);
-            ScreenObject.decorate_element.apply(maska);
-            page.elem.maska = maska;
             page.elem.content = content;
         }
 
@@ -164,9 +159,6 @@ Squares.prototype = {
         text.style.right = Math.round(-sq_width*0.23) + 'px';
 
         itm_elem.w = itm_elem.h = sq_width;
-        if(itm_elem.maska){
-            itm_elem.maska.w = itm_elem.maska.h = sq_width;
-        }
 
         itm_elem.x = sq_width*page.i;
         itm_elem.y = sq_width*page.j;
@@ -198,9 +190,6 @@ Squares.prototype = {
 
             itm_elem.x = k !== 0 ? (win_wid*0.47)*(k%2) : win_wid*0.15;
 
-            if(itm_elem.maska){
-                itm_elem.maska.w = itm_elem.maska.h = wid_elem;
-            }
 
             if(k == 0){
                 itm_elem.y = 0;
@@ -291,8 +280,6 @@ Squares.prototype = {
         setTimeout(function(){
             for (var i = 0; i < sq_arr.length; i++){
                 if(sq_arr[i].type == 'image') continue
-                    var itm_elem = sq_arr[i].elem;
-                itm_elem.maska.w = itm_elem.maska.h = itm_elem.w ;
                 self.createVideo(sq_arr[i])
             };
         }, all_delay*700)
@@ -303,7 +290,6 @@ Squares.prototype = {
 
         this.arr_video.push(page)
         var delay = this.delay;
-        var maska = page.elem.maska;
         var text = page.elem.text_rhom;
         var rhom = page.elem.rhom_after;
         var self = this;
