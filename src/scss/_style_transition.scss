@@ -875,6 +875,16 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     }
   }
 }
+#news{
+  .popup_img_cont{
+      background-color:#000;
+  }
+  .popup_img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
 
 .i-news{
   @include transition(all 300ms);
