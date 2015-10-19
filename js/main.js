@@ -331,13 +331,15 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
     
     var doc = $doc[0]
     var scroll_cont = doc.querySelector('.b-text .text')
+    var text_cont = scroll_cont.firstElementChild
     var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
 
+    ScreenObject.decorate_element.apply(scroll_cont)
+    
     onResize()
     angular.element($w).on('resize', onResize)
     
     $s.selectedItem = state.selectedPageData.pages[0]
-
     $s.$on('$destroy', clean_up)
     
     function onResize() {
@@ -357,8 +359,12 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
         v.background.play2()
     }
     
+    $s.update_cont_height = function() {
+        var h = Math.min(392, text_cont.clientHeight)
+        TweenLite.to(scroll_cont, 1, {h: h})
+    }
+    
     $s.refresh_scroll = function() {
-        console.log("refresh scroll")
         scroll.refresh()        
     }
     
@@ -712,7 +718,8 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
             text: "=",
             duration: "=",
             delay: "=",
-            callback: "&textAnimationFinished"
+            callback: "&textAnimationFinished",
+            callback2: "&textAnimationBegin"
         },
 
         link: function($s, el, attr) {
@@ -732,6 +739,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
                 element.style.height = ""
                 element.innerHTML = new_text
                 var nh = element.clientHeight
+                $s.callback2()
                 element.innerHTML = ""
                 TweenLite.killTweensOf(element)
                 element.h = oh
