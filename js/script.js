@@ -27,13 +27,14 @@ Anim_menu.prototype = {
 
     init: function(pages, index, mobile) {
 
-        for (var i = index; i < pages.length; i++) {
+        var divs = this.cont.querySelectorAll(".cont_list_menu")
+    
+        for (var i=0; i<pages.length; i++) {
 
             var page = pages[i];
-            var itm = document.createElement("div");
-            itm.className = "cont_list_menu itm_" + page.page;
-            itm.innerHTML = "<div class='label'>" + page.name + "</div><div class='line'></div>";
+            var itm = divs[i]
             itm.line = itm.querySelector('.line');
+            itm.label = itm.querySelector('.label');
             ScreenObject.decorate_element.apply(itm);
             ScreenObject.decorate_element.apply(itm.line);
             itm.line.x = -250; 
@@ -53,15 +54,15 @@ Anim_menu.prototype = {
     create_event: function(elem, page){
 
 		var self = this;
-		elem.addEventListener('mouseover', function(e){
+		elem.label.addEventListener('mouseover', function(e){
 			self.onOver(elem)
 		})
-		elem.addEventListener('mouseout', function(e){
+		elem.label.addEventListener('mouseout', function(e){
 			self.onOut(elem)
 		})
 
 		elem.addEventListener('click', function(e){
-			self.onClick(page)
+			self.onClick && self.onClick(page)
 		})
 	},
 	onOver:function(elem){

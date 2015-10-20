@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app" ng-controller="appController">
+<html ng-app="app" ng-controller="appController" ng-controller="routingController">
 <head>
     <title>Scent of Rain and Lightning</title>
     <meta charset="utf-8" />
@@ -8,6 +8,7 @@
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
     <script src='js/lib/angular/angular.min.js'></script>
+    <script src='js/lib/angular/angular-ui-router.min.js'></script>
     <script src='js/lib/angular/angular-sanitize.min.js'></script>
     <script src='js/lib/iscroll/iscroll.js'></script>
     <script src='https://www.youtube.com/iframe_api'></script>
@@ -489,8 +490,8 @@
         </div>
         <div class="w-nav">
             <ul class="l-nav">
-                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page" ng-click="change_page(page)">
-                    <span>{{page.name}}</span>
+                <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page">
+                    <a ui-sref='{{page.page}}'><span>{{page.name}}</span></a>
                 </li>
             </ul>
         </div>
@@ -514,15 +515,21 @@
             </div>
             <div class="haeder_label" ng-hide='state.mobile_style'>menu</div>
         </div>
-        <div class='menu_cont'></div>
+        <div class='menu_cont'>
+            <div ng-repeat="itm in state.data.pages" on-complete on-complete-callback="init_menu()" class="cont_list_menu itm_{{itm.page}}">
+                <div class='label'><a ui-sref='{{itm.page}}'>{{itm.name}}</a></div>
+                <div class='line'></div>
+            </div>
+        </div>
         <div class='close_btn' tap="onMenuCloseClick()" >&#10006;</div>
     </div>
-
 
     <div id="preloader" ng-class='{mobile_preloader: state.mobile_style}'>
         <div class='label'>0%</div>
     </div>
 
+    <div ui-view style="display: none;"></div>
+    
 </body>
 </html>
 

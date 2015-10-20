@@ -1,7 +1,63 @@
-var app = angular.module('app', ['mobile', 'ngSanitize'])
+var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
 .filter('unsafe', ['$sce', function($sce) {
     return $sce.trustAsHtml;
 }])
+.config(function($stateProvider, $urlRouterProvider){
+    
+    var resolve = {
+
+        data: ['appState', function(appState) {
+            return appState.load()
+        }]
+    }
+    
+    $stateProvider
+    .state('intro', {
+        url: '/intro',
+        template: 'intro',
+        controller: 'routingController',
+        resolve: resolve,
+        data: {page: 'intro'}
+    })
+    .state('home', {
+        url: '/home',
+        template: 'home',
+        controller: 'routingController',
+        resolve: resolve,
+        data: {page: 'home'}
+    })
+    .state('news', {
+        url: '/news',
+        template: 'news',
+        controller: 'routingController',
+        resolve: resolve,
+        data: {page: 'news'}
+    })
+    .state('cast', {
+        url: '/cast',
+        template: 'cast',
+        controller: 'routingController',
+        resolve: resolve,
+        data: {page: 'cast'}
+    })
+    .state('makers', {
+        url: '/makers',
+        template: 'makers',
+        controller: 'routingController',
+        resolve: resolve,
+        data: {page: 'makers'}
+    })
+    .state('media', {
+        url: '/media',
+        template: 'media',
+        controller: 'routingController',
+        resolve: resolve,
+        data: {page: 'media'}
+    })
+    
+    $urlRouterProvider.otherwise('/intro')
+    
+})
 .service('view', ['$document', function($doc){
     var doc = $doc[0]
     var transition = new Transition(doc.querySelector('.transition'))
@@ -39,10 +95,11 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
     }
     
 }])
-.service('appState', ['$http', function($http){
+.service('appState', ['$http', '$q', function($http, $q){
     return {
         selectedPage: '',
         interfaceVisible: false,
+        ready: $q.defer(),
         
         set_selected_page: function(name) {
             this.selectedPage = name
@@ -96,8 +153,20 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
                 }
                 
                 this.data = data
-                callback()
+                this.ready.resolve(data)
+                callback && callback()
             }))
+        },
+        
+        load: function() {
+            var r = this.ready
+            if (!this.data) {
+                this.load_site_data('data.json')
+                return this.ready.promise
+            }
+            else {
+                return this.data
+            }            
         },
         
         get_page: function(name) {
@@ -109,6 +178,43 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
             }
         }
     }
+}])
+.controller('routingController', ['$scope', '$state', 'appState', 'view', function($s, $state, appState, v){
+    
+    console.log("routing controller", $state.$current.data.page)
+    $s.$watch('state.pageToChange', on_page_change)
+    appState.pageToChange = $state.$current.data.page
+    
+    function on_page_change(new_page, old_page) {
+        
+        if (new_page) {
+        
+            if (new_page == 'intro') {
+                appState.set_selected_page('intro')
+
+            }
+            else {
+                
+                if (old_page == 'intro') {
+                    if (!appState.mobile_style) {
+                        v.background.prepare(appState.get_page(new_page).bg_ref)
+                        v.background.play2()
+                    }
+                    v.transition.show(appState.mobile_style)
+                    v.main_menu.show_header(0.3)
+                    appState.set_selected_page(new_page)
+                }
+                else {
+                    v.main_menu.collapse(appState.mobile_style)
+                    v.main_menu.hide_header(appState.mobile_style)
+                    v.transition.open()
+                    v.background.stop()
+                }
+                appState.interfaceVisible = true
+            }
+        }
+    }
+    
 }])
 .controller('appController', ['appState', 'view', '$scope', '$http', '$document', '$location', '$window', 'anchorSmoothScroll', '$timeout', function(state, v, $s, $http, $doc, $loc, $window, anchorSmoothScroll, $t){
 
@@ -146,47 +252,18 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
     }*/
     
     $s.state = state
-    state.load_site_data("data.json", on_site_data)
-    $s.$watch('state.pageToChange', on_page_change)
+    //state.load_site_data("data.json", on_site_data)
     
     onResize()
     angular.element($window).on('resize', onResize)
     
     v.simulate_page_load(30, null, true)
-
-    function on_site_data() {
-        v.background.init(state.data)
-        
-        v.main_menu.init(state.data.pages, 0, state.mobile_style)
-        state.pageToChange = 'intro'
-    }
     
-    function on_page_change(new_page, old_page) {
-        
-        if (new_page) {
-        
-            if (new_page == 'intro') {
-                state.set_selected_page('intro')
-
-            }
-            else {
-                
-                if (old_page == 'intro') {
-                    if (!state.mobile_style) {
-                        v.background.prepare(state.get_page(new_page).bg_ref)
-                        v.background.play2()
-                    }
-                    v.transition.show(state.mobile_style)
-                    v.main_menu.show_header(0.3)
-                    state.set_selected_page(new_page)
-                }
-                else {
-                    v.main_menu.collapse(state.mobile_style)
-                    v.main_menu.hide_header(state.mobile_style)
-                    v.transition.open()
-                    v.background.stop()
-                }
-            }
+    $s.$watch('state.data', on_site_data)
+    
+    function on_site_data(data) {
+        if (data) {
+            v.background.init(state.data)
         }
     }
 
@@ -271,7 +348,10 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
         anchorSmoothScroll.scrollTo(eID);
     }
 
-
+    $s.init_menu = function() {
+        v.main_menu.init(state.data.pages, 0, state.mobile_style)       
+    }
+    
     $s.change_page = function(data){
         state.pageToChange = data.page;
         $s.nameToChange = data.name;
@@ -296,14 +376,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
 .controller("desktopController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
 
     v.preloader.set_skip_frames(0)
-
-    v.main_menu.onClick = function(page) {
-        if(page.page !== state.selectedPage) {
-            $window.scrollTo(0, 0);
-            $s.change_page(page);
-            $s.$apply()
-        }
-    }
 
     v.transition.onOpened = function() {
 
@@ -520,6 +592,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
     ScreenObject.decorate_element.apply(slogan)
     
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
+    v.intro.set_size(900, 350)
     v.intro.runRepaint()
 
     slogan.x = -300
@@ -651,7 +724,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
     function hide_intro() {
         delete $s.skip_intro
         v.intro.stopRepaint()
-        state.interfaceVisible = true
         state.pageToChange = 'home'
         $s.$apply()
     }
