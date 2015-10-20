@@ -119,10 +119,19 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
 
     var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
 
+    state.mobile = test_mobile()
+    state.tablet = test_table()
+    state.desktop = !state.mobile && !state.tablet;
+    
+
     if(win_wid <= 1050){
         state.mobile_style = true; 
     } else {
         state.mobile_style = false;
+    }
+    if(!state.mobile_style && state.mobile){
+        state.tablet = true
+        state.mobile_style = true
     }
 
     /*
@@ -191,12 +200,20 @@ var app = angular.module('app', ['mobile', 'ngSanitize'])
         state.mobile = test_mobile()
         state.tablet = test_table()
         state.desktop = !state.mobile && !state.tablet;
+        
 
         if(win_wid <= 1050){
             state.mobile_style = true; 
         } else {
             state.mobile_style = false;
         }
+        if(!state.mobile_style && state.mobile){
+            state.tablet = true
+            state.mobile_style = true
+        }
+
+        console.log(win_wid)
+
         /*
         if((win_wid <= 1024 && orien == 'landscape') || 
            (win_wid <= 768 && orien == 'portrait')){
