@@ -183,8 +183,8 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     
     $s.$watch('state.pageToChange', on_page_change)
     var data = appState.get_page($state.$current.data.page)
-    appState.pageToChange = data.page
-    appState.nameToChange = data.name;
+    appState.pageToChange = data ? data.page : $state.$current.data.page
+    appState.nameToChange = data ? data.name : "";
     console.log("routing controller", appState.pageToChange, appState.nameToChange)
     
     function on_page_change(new_page, old_page) {
