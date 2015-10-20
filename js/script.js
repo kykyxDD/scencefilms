@@ -62,7 +62,7 @@ Anim_menu.prototype = {
 		})
 
 		elem.addEventListener('click', function(e){
-			//self.onClick(page)
+			self.onClick && self.onClick(page)
 		})
 	},
 	onOver:function(elem){

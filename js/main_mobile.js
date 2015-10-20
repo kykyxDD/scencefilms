@@ -2,13 +2,6 @@ angular.module('mobile', [])
 app.controller("mobileController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
 
     v.preloader.set_skip_frames(3)
-    
-    v.main_menu.onClick = function(page) {
-        if(page.page !== state.selectedPage) {
-            $s.change_page(page);
-            $s.$apply()
-        }
-    }
 
     v.transition.onOpened = function() {
 

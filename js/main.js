@@ -360,14 +360,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
 
     v.preloader.set_skip_frames(0)
 
-    v.main_menu.onClick = function(page) {
-        if(page.page !== state.selectedPage) {
-            $window.scrollTo(0, 0);
-            $s.change_page(page);
-            $s.$apply()
-        }
-    }
-
     v.transition.onOpened = function() {
 
         state.selectedPage = ""
@@ -583,6 +575,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     ScreenObject.decorate_element.apply(slogan)
     
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
+    v.intro.set_size(900, 350)
     v.intro.runRepaint()
 
     slogan.x = -300
