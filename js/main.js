@@ -181,9 +181,11 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
 }])
 .controller('routingController', ['$scope', '$state', 'appState', 'view', function($s, $state, appState, v){
     
-    console.log("routing controller", $state.$current.data.page)
     $s.$watch('state.pageToChange', on_page_change)
-    appState.pageToChange = $state.$current.data.page
+    var data = appState.get_page($state.$current.data.page)
+    appState.pageToChange = data.page
+    appState.nameToChange = data.name;
+    console.log("routing controller", appState.pageToChange, appState.nameToChange)
     
     function on_page_change(new_page, old_page) {
         
@@ -191,7 +193,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         
             if (new_page == 'intro') {
                 appState.set_selected_page('intro')
-
             }
             else {
                 
@@ -337,7 +338,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     
     $s.change_page = function(data){
         state.pageToChange = data.page;
-        $s.nameToChange = data.name;
+        state.nameToChange = data.name;
     }
 
     $s.onMenuHeaderClick = function() {
