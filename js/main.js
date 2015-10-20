@@ -33,22 +33,28 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         resolve: resolve,
         data: {page: 'news'}
     })
+    .state('news.page', {
+        url: '/news/:type/:id',
+        parent: 'news',
+        template: 'news',
+        controller: "mediaController"
+    })
     .state('cast', {
-        url: '/cast',
-        template: 'cast',
+        url: '/cast/:id',
+        template: "",
         controller: 'routingController',
         resolve: resolve,
         data: {page: 'cast'}
     })
     .state('makers', {
-        url: '/makers',
+        url: '/makers/:id',
         template: 'makers',
         controller: 'routingController',
         resolve: resolve,
         data: {page: 'makers'}
     })
     .state('media', {
-        url: '/media',
+        url: '/media/:type/:id',
         template: 'media',
         controller: 'routingController',
         resolve: resolve,
@@ -339,22 +345,14 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     $s.init_menu = function() {
         v.main_menu.init(state.data.pages, 0, state.mobile_style)       
     }
-    
-    $s.change_page = function(data){
-        state.pageToChange = data.page;
-        state.nameToChange = data.name;
-    }
 
     $s.onMenuHeaderClick = function() {
-        console.log('onMenuHeaderClick')
         v.main_menu.hide_header(state.mobile_style)
         v.main_menu.expand()
         v.transition.expand(state.mobile_style)
     }
 
     $s.onMenuCloseClick = function() {
-        console.log('onMenuCloseClick')
-        
         v.main_menu.collapse(state.mobile_style);
         v.main_menu.show_header(0.3);
         v.main_menu.align_header();
@@ -404,24 +402,40 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     }
     
 }])
-.controller("contentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
+.controller("contentController", ["$scope", "$state", "$stateParams", "$document", "$window", "$timeout", "appState", "view", function($s, $state, $stateParams, $doc, $w, $t, appState, v) {
     
-    var doc = $doc[0]
-    var scroll_cont = doc.querySelector('.b-text .text')
-    var text_cont = scroll_cont.firstElementChild
-    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
+    if (!scroll) {
+    
+        var doc = $doc[0]
+        var scroll_cont = doc.querySelector('.b-text .text')
+        var text_cont = scroll_cont.firstElementChild
+        var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
 
-    ScreenObject.decorate_element.apply(scroll_cont)
+        ScreenObject.decorate_element.apply(scroll_cont)
+        
+        onResize()
+        angular.element($w).on('resize', onResize)
+        
+        $s.selectedItem = appState.selectedPageData.pages[0]
+        
+        for (var i=0; i<appState.selectedPageData.pages.length; i++) {
+            var page = appState.selectedPageData.pages[i]
+            if (page.page == $stateParams.id) {
+                $s.selectedItem = page
+                break;
+            }
+            
+        }
+        
+        
+        $s.$on('$destroy', clean_up)
+    }
     
-    onResize()
-    angular.element($w).on('resize', onResize)
-    
-    $s.selectedItem = state.selectedPageData.pages[0]
-    $s.$on('$destroy', clean_up)
+    console.log($stateParams.id)
     
     function onResize() {
         var div = doc.querySelector(".b-content")
-        div.style.width = state.mobile_style ? '' : Math.round($w.innerWidth*0.66) + "px";
+        div.style.width = appState.mobile_style ? '' : Math.round($w.innerWidth*0.66) + "px";
     }
 
     function clean_up() {

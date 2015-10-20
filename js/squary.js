@@ -17,6 +17,7 @@ function Squares (cont) {
 }
 
 Squares.prototype = {
+
 	init: function(page, mobile){
         console.log('init',mobile)
 
@@ -308,8 +309,6 @@ Squares.prototype = {
                 // 'onStateChange': onPlayerStateChange
             }
         });
-
-
         
         page.elem.content = player.getIframe();
         ScreenObject.decorate_element.apply(page.elem.content);
