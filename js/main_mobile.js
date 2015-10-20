@@ -88,7 +88,8 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
 
     var canv = doc.querySelector('#home .screen')
     v.intro.set_canvas(canv) 
-    v.intro.set_skip_frames(0)
+    v.intro.set_size(900, 350)
+    v.intro.set_skip_frames(3)
     v.intro.repaintCanvas();
     var bg_mobile = doc.querySelector('#home .bg_mobile');
     ScreenObject.decorate_element.apply(bg_mobile);
@@ -140,7 +141,8 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var doc = $doc[0];
 
     v.intro.set_canvas(doc.querySelector('#home .screen')) 
-    v.intro.set_skip_frames(0)
+    v.intro.set_size(900, 350)
+    v.intro.set_skip_frames(3)
     v.intro.repaintCanvas();
     var bg_mobile = doc.querySelector('#home .bg_mobile');
     ScreenObject.decorate_element.apply(bg_mobile);
