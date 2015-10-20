@@ -71,6 +71,7 @@ NewsPopup.prototype = {
         this.date.textContent = data.date
 
         this.img.src = data.img
+        this.img.style.width = '100%';
         this.img.alpha = 0
         this.img.onload = angular.bind(this, this.on_image_load)
 
@@ -98,9 +99,11 @@ NewsPopup.prototype = {
     
     on_image_load: function() {
         var k = Math.max(this.img_cont.w/this.img.width, this.img_cont.h/this.img.height)
-        this.img.scaleX = this.img.scaleY = k
-        this.img.x = (this.img_cont.w - this.img.width)/2
-        this.img.y = (this.img_cont.h - this.img.height)/2
+        // this.img.scaleX = this.img.scaleY = k
+        // this.img.x = (this.img_cont.w - this.img.width)/2
+        // this.img.y = (this.img_cont.h - this.img.height)/2
+        this.img.style.marginTop = Math.floor(-this.img_cont.h/2) + 'px';
+        this.img.style.marginLeft = Math.floor(-this.img_cont.w/2) + 'px';
         
         this.img.alpha = 1
         TweenLite.from(this.img, 1, {alpha: 0, scaleX: k*1.1, scaleY: k*1.1})
