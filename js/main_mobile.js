@@ -145,9 +145,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.intro.set_skip_frames(3)
     v.intro.repaintCanvas();
     var bg_mobile = doc.querySelector('#home .bg_mobile');
-    var slogan = doc.querySelector('.slogan');
     ScreenObject.decorate_element.apply(bg_mobile);
-    ScreenObject.decorate_element.apply(slogan);
     bg_mobile.h = $w.innerHeight;
     bg_mobile.w = $w.innerWidth;
 
@@ -158,8 +156,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.intro.canvas.top = y_0;
         v.intro.canvas.y = 0;
         var x_0 = $w.innerWidth > $w.innerHeight ? -200 : 0;
-        slogan.x = x_0;
-        TweenLite.from(slogan, 1, {alpha: 0, x: "-=15", delay: 1.5})
         TweenLite.to(v.intro.canvas, 3, {x: x_0});    
 
     console.log(state.mobile_style, state.mobile, state.tablet)
@@ -186,7 +182,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         var y_0 = $w.innerHeight/2;
         v.intro.canvas.top = y_0;
         if(e) {
-            slogan.x = $w.innerWidth > $w.innerHeight ? -200 : 0;
             v.intro.canvas.x = $w.innerWidth > $w.innerHeight ? -200 : 0;
             v.intro.canvas.y = 0;
         } 
