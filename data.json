@@ -109,16 +109,18 @@
                 {
                     "id": 31,
                     "bg_ref": "maika",
+                    "page": "maika_monroe",
                     "img_port": "image/img/ima.jpg",
                     "img_land": "image/img/imaL.jpg",
-                    "title": "MIAKA MONROE",
+                    "title": "MAIKA MONROE",
                     "role": "Jody",
-                    "name": "MIAKA MONROE",
+                    "name": "MAIKA MONROE",
                     "desc": "Maika Monroe is a professional kiteboarder turned actress who is taking Hollywood by storm. Garnering comparisons to some of the top names in the industry, she made her acting debut in the 2012 film AT ANY PRICE, co-starring Zac Effron and Dennis Quaid. In April 2012, Monroe signed up for the drama LABOR DAY, an adaptation of the hit novel, starring Josh Brolin and Kate Winslet. In June 2013, she joined the cast of the psychological thriller film THE GUEST, which gained almost unprecedented acclaim from audiences after playing at numerous film festivals, including the prestigious Sundance Film Festival. In August 2014, she joined the alien invasion thriller film THE 5TH WAVE, the first in a best-selling series of Young Adult novels of the same name. Most recently, she has garnered critical and audience accolades as the lead in the hit film IT FOLLOWS, placing her firmly on the list as one of Hollywood's next big stars."
 				},
                 {
                     "id": 32,
                     "bg_ref": "patton",
+                    "page": "will_patton",
                     "img_port": "image/img/imb.jpg",
                     "img_land": "image/img/imbL.jpg",
                     "title": "WILL PATTON",
@@ -129,6 +131,7 @@
 				{
                     "id": 33,
                     "bg_ref": "grace",
+                    "page": "maggie_grace",
                     "img_port": "image/img/imc.jpg",
                     "img_land": "image/img/imcL.jpg",
                     "title": "MAGGIE GRACE",
@@ -139,6 +142,7 @@
 				 {
                     "id": 34,
                     "bg_ref": "carter",
+                    "page": "brad_carter",
                     "img_port": "image/img/imd.jpg",
                     "img_land": "image/img/imdL.jpg",
                     "title": "BRAD CARTER",
@@ -149,6 +153,7 @@
                 {
                     "id": 35,
                     "bg_ref": "logan",
+                    "page": "logan_miller",
                     "img_port": "image/img/imi.jpg",
                     "img_land": "image/img/imiL.jpg",
                     "title": "LOGAN MILLER",
@@ -159,6 +164,7 @@
                 {
                     "id": 36,
                     "bg_ref": "bonnie",
+                    "page": "bonnie_bedelia",
                     "img_port": "image/img/imf.jpg",
                     "img_land": "image/img/imfL.jpg",
                     "title": "BONNIE BEDELIA",
@@ -177,6 +183,7 @@
                 {
                     "id": 41,
                     "bg_ref": "blake",
+                    "page": "blake_robbins",
                     "img_port": "image/img/fillf.jpg",
                     "img_land": "image/img/fillfL.jpg",
                     "title": "BLAKE ROBBINS",
@@ -187,6 +194,7 @@
                 {
                     "id": 42,
                     "bg_ref": "jeff",
+                    "page": "jeff_johnson",
                     "img_port": "image/img/fille.jpg",
                     "img_land": "image/img/filleL.jpg",
                     "title": "JEFF JOHNSON",
@@ -197,6 +205,7 @@
                 {
                     "id": 43,
                     "bg_ref": "casey_and_john",
+                    "page": "casey_twenter_and_jeff_robison",
                     "img_port": "image/img/filld.jpg",
                     "img_land": "image/img/filldL.jpg",
                     "title": "CASEY TWENTER & JEFF ROBISON",
@@ -207,6 +216,7 @@
                 {
                     "id": 45,
                     "bg_ref": "embacement",
+                    "page": "embankment_films",
                     "img_port": "image/img/fillh.jpg",
                     "img_land": "image/img/fillhL.jpg",
                     "title": "EMBANKMENT FILMS",
