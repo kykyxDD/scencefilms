@@ -255,7 +255,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     function on_site_data(data) {
         if (data) {
             v.background.init(state.data)
-            v.main_menu.init(state.data.pages, 0, state.mobile_style)
         }
     }
 
@@ -332,7 +331,10 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         anchorSmoothScroll.scrollTo(eID);
     }
 
-
+    $s.init_menu = function() {
+        v.main_menu.init(state.data.pages, 0, state.mobile_style)       
+    }
+    
     $s.change_page = function(data){
         state.pageToChange = data.page;
         $s.nameToChange = data.name;

@@ -515,10 +515,14 @@
             </div>
             <div class="haeder_label" ng-hide='state.mobile_style'>menu</div>
         </div>
-        <div class='menu_cont'></div>
+        <div class='menu_cont'>
+            <div ng-repeat="itm in state.data.pages" on-complete on-complete-callback="init_menu()" class="cont_list_menu itm_{{itm.page}}">
+                <div class='label'><a ui-sref='{{itm.page}}'>{{itm.name}}</a></div>
+                <div class='line'></div>
+            </div>
+        </div>
         <div class='close_btn' tap="onMenuCloseClick()" >&#10006;</div>
     </div>
-
 
     <div id="preloader" ng-class='{mobile_preloader: state.mobile_style}'>
         <div class='label'>0%</div>
