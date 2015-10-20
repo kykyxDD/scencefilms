@@ -230,7 +230,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     state.desktop = !state.mobile && !state.tablet;
     
 
-    if(win_wid <= 1050){
+    if(win_wid <= 1280){
         state.mobile_style = true; 
     } else {
         state.mobile_style = false;
@@ -279,7 +279,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         state.desktop = !state.mobile && !state.tablet;
         
 
-        if(win_wid <= 1050){
+        if(win_wid <= 1280){
             state.mobile_style = true; 
         } else {
             state.mobile_style = false;
@@ -289,19 +289,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
             state.mobile_style = true
         }
 
-        console.log(win_wid)
-
-        /*
-        if((win_wid <= 1024 && orien == 'landscape') || 
-           (win_wid <= 768 && orien == 'portrait')){
-
-            state.orientation = orien;
-            state.mobile_style = true;
-        } else {
-            state.orientation = 'desktop';
-            state.mobile_style = false;
-        }*/
-        // state.mobile_style = !state.desktop;
         
         v.transition.resize($window.innerWidth, $window.innerHeight, state.mobile_style)
         v.main_menu.resize(state.mobile_style);
