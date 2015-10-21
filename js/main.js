@@ -1,69 +1,11 @@
-var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
+var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
+.config(function($locationProvider) {
+    $locationProvider.html5Mode(false)
+    //$locationProvider.hashPrefix('!')
+})
 .filter('unsafe', ['$sce', function($sce) {
     return $sce.trustAsHtml;
 }])
-.config(function($stateProvider, $urlRouterProvider){
-    
-    var resolve = {
-
-        data: ['appState', function(appState) {
-            return appState.load()
-        }]
-    }
-    
-    $stateProvider
-    .state('intro', {
-        url: '/intro',
-        template: 'intro',
-        controller: 'routingController',
-        resolve: resolve,
-        data: {page: 'intro'}
-    })
-    .state('home', {
-        url: '/home',
-        template: 'home',
-        controller: 'routingController',
-        resolve: resolve,
-        data: {page: 'home'}
-    })
-    .state('news', {
-        url: '/news',
-        template: 'news',
-        controller: 'routingController',
-        resolve: resolve,
-        data: {page: 'news'}
-    })
-    .state('news.page', {
-        url: '/news/:type/:id',
-        parent: 'news',
-        template: 'news',
-        controller: "mediaController"
-    })
-    .state('cast', {
-        url: '/cast/:id',
-        template: "",
-        controller: 'routingController',
-        resolve: resolve,
-        data: {page: 'cast'}
-    })
-    .state('makers', {
-        url: '/makers/:id',
-        template: 'makers',
-        controller: 'routingController',
-        resolve: resolve,
-        data: {page: 'makers'}
-    })
-    .state('media', {
-        url: '/media/:type/:id',
-        template: 'media',
-        controller: 'routingController',
-        resolve: resolve,
-        data: {page: 'media'}
-    })
-    
-    $urlRouterProvider.otherwise('/intro')
-    
-})
 .service('view', ['$document', function($doc){
     var doc = $doc[0]
     var transition = new Transition(doc.querySelector('.transition'))
@@ -168,11 +110,8 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
             var r = this.ready
             if (!this.data) {
                 this.load_site_data('data.json')
-                return this.ready.promise
             }
-            else {
-                return this.data
-            }            
+            return this.ready.promise
         },
         
         get_page: function(name) {
@@ -185,44 +124,34 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         }
     }
 }])
-.controller('routingController', ['$scope', '$state', 'appState', 'view', function($s, $state, appState, v){
-    
-    $s.$watch('state.pageToChange', on_page_change)
-    var data = appState.get_page($state.$current.data.page)
-    appState.pageToChange = data ? data.page : $state.$current.data.page
-    appState.nameToChange = data ? data.name : "";
-    
-    function on_page_change(new_page, old_page) {
+
+.service('navigation', ['$location', function($l) {
+    return {
         
-        if (new_page) {
-        
-            if (new_page == 'intro') {
-                appState.set_selected_page('intro')
+        page: function() {
+            var path = $l.path()
+            if (path == "") {
+                return ""
             }
             else {
-                
-                if (old_page == 'intro') {
-                    if (!appState.mobile_style) {
-                        v.background.prepare(appState.get_page(new_page).bg_ref)
-                        v.background.play2()
-                    }
-                    v.transition.show(appState.mobile_style)
-                    v.main_menu.show_header(0.3)
-                    appState.set_selected_page(new_page)
-                }
-                else {
-                    v.main_menu.collapse(appState.mobile_style)
-                    v.main_menu.hide_header(appState.mobile_style)
-                    v.transition.open()
-                    v.background.stop()
-                }
-                appState.interfaceVisible = true
+                var parts = path.split("?")[0].split("/")
+                parts.shift()
+                return parts[0]
             }
+        },
+        
+        params: function(match) {
+            var parts = $l.path().split("?")[0].split("/")
+            parts.shift()
+            if (parts.length > 1) {
+                return parts.splice(1)
+            }
+            return ""
         }
+        
     }
-    
 }])
-.controller('appController', ['appState', 'view', '$scope', '$http', '$document', '$location', '$window', 'anchorSmoothScroll', '$timeout', function(state, v, $s, $http, $doc, $loc, $window, anchorSmoothScroll, $t){
+.controller('appController', ['appState', 'view', '$scope', '$http', '$document', '$location', '$window', 'anchorSmoothScroll', '$timeout', 'navigation', function(state, v, $s, $http, $doc, $loc, $window, anchorSmoothScroll, $t, nav){
 
     var doc = $doc[0];
 
@@ -234,7 +163,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     state.mobile = test_mobile()
     state.tablet = test_table()
     state.desktop = !state.mobile && !state.tablet;
-    
 
     if(win_wid <= 1280){
         state.mobile_style = true;
@@ -255,11 +183,62 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     
     v.simulate_page_load(30, null, true)
     
-    $s.$watch('state.data', on_site_data)
+    $s.$watch('state.pageToChange', on_page_change)
+    //$s.$watch('state.data', on_site_data)
+    
+    state.load().then(on_site_data)
     
     function on_site_data(data) {
-        if (data) {
-            v.background.init(state.data)
+        console.log(data)
+        v.background.init(state.data)
+        
+        
+        var page_name = nav.page()
+        if (page_name) {
+            state.pageToChange = page_name
+        }
+        else {
+            state.pageToChange = 'intro'
+        }
+        
+        $s.$on('$locationChangeSuccess', on_location_change)
+    }
+    
+    function on_location_change(ev) {
+        console.log("location change success", ev.newUrl, $loc.path(), nav.page())
+        if (state.pageToChange != nav.page()) {
+            state.pageToChange = nav.page()
+        }
+    }
+    
+    function on_page_change(new_page, old_page) {
+        if (new_page) {
+        
+            if (new_page == 'intro') {
+                state.set_selected_page('intro')
+            }
+            else {
+                
+                if (old_page == 'intro' || old_page == '') {
+                    if (!state.mobile_style) {
+                        var p = state.get_page(new_page)
+                        if (p.bg_ref) {
+                            v.background.prepare(p.bg_ref)
+                            v.background.play2()
+                        }
+                    }
+                    v.transition.show(state.mobile_style)
+                    v.main_menu.show_header(0.3)
+                    state.set_selected_page(new_page)
+                }
+                else {
+                    v.main_menu.collapse(state.mobile_style)
+                    v.main_menu.hide_header(state.mobile_style)
+                    v.transition.open()
+                    v.background.stop()
+                }
+                state.interfaceVisible = true
+            }
         }
     }
 
@@ -360,11 +339,17 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
 
         v.preloader.show()
         v.preloader.make_white()
-        v.simulate_page_load(30, null, true)
 
         var p = state.get_page(state.pageToChange)
-        v.background.prepare(p.bg_ref, true)
-        v.background.onLoad = angular.bind(this, on_bg_loaded, onPageLoaded)
+        if (p.bg_ref) {
+            v.background.prepare(p.bg_ref, true)
+            v.background.onLoad = angular.bind(this, on_bg_loaded, onPageLoaded)
+            v.simulate_page_load(30, null, true)
+        }
+        else {
+            v.background.clear()
+            v.simulate_page_load(1, onPageLoaded, true)
+        }
     }
 
     v.transition.onClosed = function() {
@@ -392,33 +377,30 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     }
     
 }])
-.controller("contentController", ["$scope", "$state", "$stateParams", "$document", "$window", "$timeout", "appState", "view", function($s, $state, $stateParams, $doc, $w, $t, appState, v) {
+.controller("contentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", "navigation", function($s, $doc, $w, $t, appState, v, nav) {
     
-    if (!scroll) {
+    var doc = $doc[0]
+    var scroll_cont = doc.querySelector('.b-text .text')
+    var text_cont = scroll_cont.firstElementChild
+    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
+    ScreenObject.decorate_element.apply(scroll_cont)
     
-        var doc = $doc[0]
-        var scroll_cont = doc.querySelector('.b-text .text')
-        var text_cont = scroll_cont.firstElementChild
-        var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
-
-        ScreenObject.decorate_element.apply(scroll_cont)
-        
-        onResize()
-        angular.element($w).on('resize', onResize)
-        
-        $s.selectedItem = appState.selectedPageData.pages[0]
-        
-        for (var i=0; i<appState.selectedPageData.pages.length; i++) {
-            var page = appState.selectedPageData.pages[i]
-            if (page.page == $stateParams.id) {
-                $s.selectedItem = page
-                break;
-            }
-            
+    onResize()
+    angular.element($w).on('resize', onResize)
+    
+    selectItem(nav.params()[0])
+    
+    $s.$on('$locationChangeStart', on_location_change)
+    $s.$on('$destroy', clean_up)
+    
+    function on_location_change(ev) {
+        var params = nav.params()
+        console.log('ev', params)
+        if (params) {
+            var id = nav.params()[0]
+            selectItem(id)
+            //ev.preventDefault()
         }
-        
-        
-        $s.$on('$destroy', clean_up)
     }
     
     function onResize() {
@@ -431,10 +413,23 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         angular.element($w).off('resize', onResize)
     }
     
-    $s.subMenuClick = function(sub_page) {
-        $s.selectedItem = sub_page
-        $s.$apply()
-        v.background.prepare(sub_page.bg_ref)
+    function selectItem(sub_page) {
+        
+        if (sub_page) {
+            for (var i=0; i<appState.selectedPageData.pages.length; i++) {
+                var page = appState.selectedPageData.pages[i]
+                if (page.page == sub_page) {
+                    $s.selectedItem = page
+                    break;
+                }
+            }
+        }
+        else {
+            $s.selectedItem = appState.selectedPageData.pages[0]
+        }
+
+        //$s.$apply()
+        v.background.prepare($s.selectedItem.bg_ref)
         v.background.play2()
     }
     
@@ -458,7 +453,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     }
     
 }])
-.controller("mediaController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
+.controller("mediaController", ["$scope", "$document", "$window", "$timeout", "appState", "view", "navigation", function($s, $doc, $w, $t, state, v, nav) {
 
     var doc = $doc[0];
 
@@ -466,18 +461,103 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     var scroll_cont = doc.querySelector(".scrollCont")
     var items_cont = scroll_cont.querySelector(":first-child")
     var media_data = state.selectedPageData
-    $s.selectedType = media_data.types[0]
+    var cache_counter = 0
+
     var scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
     
     angular.element($w).on('resize', onResize)
     $t(onResize)
     
     $s.$on('$destroy', clean_up)
+    $s.$on('$locationChangeStart', on_location_change)
+    
+    on_location_change()
+    
+    function on_location_change(ev) {
+        var params = nav.params()
+        console.log('ev', params)
+        if (params) {
+            var type = params[0]
+            var id = params[1]
+            
+            selectType(type)
+            
+            if (id) {
+                $t(showItemPopup, 0, true, id)
+            }
+            else {
+                popup && popup.hide()
+            }
+            //ev.preventDefault()
+        }
+        else {
+            $s.selectedType = state.selectedPageData.types[0]
+        }
+    }
     
     function clean_up() {
         popup && popup.destroy()
         scroll.destroy()
         angular.element($w).off('resize', onResize)
+    }
+    
+    function popup_factory(type) {
+        if (type == 'news_photo' || type == 'news_video') {
+            return new NewsPopup(doc.querySelector('.popup.news'))
+        }
+        else if (type == 'photo') {
+            return new PhotoPopup(doc.querySelector('.popup.photo'))
+        }
+        else if (type == 'video') {
+            return new VideoPopup(doc.querySelector('.popup.video'))
+        }
+    }
+
+    function selectType(label) {
+        
+        console.log("selectType", label)
+        
+        if (label) {
+            for (var i=0; i<state.selectedPageData.types.length; i++) {
+                var itm = state.selectedPageData.types[i]
+                if (itm.label == label) {
+                    $s.selectedType = itm
+                    break;
+                }
+            }
+        }
+        else {
+            console.log("select default type")
+            $s.selectedType = state.selectedPageData.types[0]
+        }
+        
+        scroll.scrollTo(0)
+        $t(onResize)
+    }
+    
+    function showItemPopup(id) {
+        
+        console.log('show popup', id)
+        
+        if (id) {
+            for (var i=0; i<state.selectedPageData.pages.length; i++) {
+                var itm = state.selectedPageData.pages[i]
+                if (itm.id == id) {
+                    
+                    var target = items_cont.querySelector('#itm'+itm.id)
+        
+                    if (target && itm) {
+                        popup && popup.destroy()
+                        popup = popup_factory(itm.type)
+                        popup.resize($w.innerWidth, $w.innerHeight)
+                        
+                        popup.show(target, itm)
+                    }
+                    
+                    break;
+                }
+            }
+        }
     }
 
     function onResize() {
@@ -510,39 +590,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         }
     }
     
-    $s.typeMenuClick = function(type) {
-        console.log(type)
-        $s.selectedType = type
-        scroll.scrollTo(0)
-        $t(onResize)
-    }
-    
-    $s.showNewsPopup = function(news_item) {
-        var target = items_cont.querySelector('#news'+news_item.id)
-        
-        if (target && news_item) {
-            
-            popup && popup.destroy()
-            popup = new NewsPopup(doc.querySelector('.popup.news'))
-            popup.resize($w.innerWidth, $w.innerHeight)
-            
-            popup.show(target, news_item)
-        }
-    }
-    
-    $s.showVideoPopup = function(item) {
-        var target = items_cont.querySelector('#video'+item.id)
-        
-        if (target && item) {
-            
-            popup && popup.destroy()
-            popup = new VideoPopup(doc.querySelector('.popup.video'))
-            popup.resize($w.innerWidth, $w.innerHeight)
-            
-            popup.show(target, item)
-        }
-    }
-    
     $s.reloadVideoPopup = function(item) {
         
         if (item) {
@@ -550,21 +597,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
             popup.reload(item)
         }
     }
-    
-    $s.showPhotoPopup = function(item) {
-        var target = items_cont.querySelector('#photo'+item.id)
-        
-        if (target && item) {
-            
-            popup && popup.destroy()
-            popup = new PhotoPopup(doc.querySelector('.popup.photo'))
-            popup.resize($w.innerWidth, $w.innerHeight)
-            
-            popup.show(target, item)
-        }
-    }
-    
-    var cache_counter = 0
     
     $s.no_cache = function() {
         return "no_cache" + cache_counter++
@@ -768,203 +800,3 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
 
     };
 })
-.directive('onComplete', function(){
-    return {
-        link: function($s, el, attr) {
-            
-            if ($s.$last) {
-                $s.$evalAsync(attr.onCompleteCallback);
-            }
-        }
-        
-    }
-})
-.directive('animateText', function(){
-    
-	function convert_str(str) {
-		var column = 0
-		
-		var text = str.replace(/[\w\W]/g, function(symbol) {
-			if(++column > 80 && symbol === ' ') symbol = '\n';
-			if(symbol === '\n') column = 0
-			return symbol
-		});
-        
-		return text
-	}
-    
-    return {
-        scope: {
-            text: "=",
-            duration: "=",
-            delay: "=",
-            callback: "&textAnimationFinished",
-            callback2: "&textAnimationBegin"
-        },
-
-        link: function($s, el, attr) {
-
-            var delay = $s.delay || 0
-            var duration = $s.duration || 1
-            var text = convert_str($s.text)
-            var element = el[0]
-            
-            var obj = new TextAnimator(element, duration, delay)
-            obj.text = text
-            ScreenObject.decorate_element.apply(element)
-
-            $s.$watch('text', function(new_text, old_text) {
-                
-                var oh = element.h
-                element.style.height = ""
-                element.innerHTML = new_text
-                var nh = element.clientHeight
-                $s.callback2()
-                element.innerHTML = ""
-                TweenLite.killTweensOf(element)
-                element.h = oh
-                TweenLite.to(element, 1, {h: nh, onComplete: $s.callback})
-
-                //obj.delay = 0
-                obj.text = new_text
-                obj.index = 0
-                obj.run()
-                
-            })
-
-            $s.$on('$destroy', clean_up)
-
-            function clean_up() {
-                obj.stop()
-            }
-        }
-    }
-})
-.directive('animateAlphaShiftX', function() {
-  
-    return {
-        scope: {
-            delay: '=',
-            shift: '=',
-            duration: '='
-        },
-        link: function($s, el, attr) {
-            
-            var div = el[0]
-            var delay = $s.delay || 0
-            var shift = $s.shift || 10
-            var duration = $s.duration || 0.3
-            
-            ScreenObject.decorate_element.apply(div)
-            TweenLite.from(div, duration, {alpha: 0, x: "-="+shift, delay: delay})
-
-            $s.$on('$destroy', function() {
-                TweenLite.killTweensOf(div)
-            })
-            
-        }
-    }
-  
-})
-.directive('animateImageLoad', ['$document', function($doc) {
-  
-    return {
-        scope: {
-            w: '=imgW',
-            h: '=imgH',
-            duration: '=',
-            url: '=imgUrl'
-        },
-        link: function($s, el, attr) {
-
-            var div = el[0]
-            var img = div.querySelector("img")
-            var duration = $s.duration || 1
-            var url = $s.url
-            
-            if (!img) {
-                $doc[0].createElement("img")
-                div.appendChild(img)
-            }
-
-            ScreenObject.decorate_element.apply(img)
-            img.src = url
-            img.alpha = 0
-            img.onload = function() {
-
-                var w = $s.w || div.clientWidth
-                var h = $s.h || div.clientHeight
-            
-                var k = Math.max(w/img.width, h/img.height)
-                img.scaleX = img.scaleY = k
-                img.x = (w - img.width*k)/2 - img.width*(1-k)/2
-                img.y = (h - img.height*k)/2 - img.height*(1-k)/2
-                
-                var oversize = 1.1
-                var dx = ((w - img.width*k*oversize)/2 - img.x)/2
-                var dy = ((h - img.height*k*oversize)/2 - img.y)/2
-                
-                img.alpha = 1
-                TweenLite.from(img, duration, {alpha: 0, ease: Linear.easeNone})
-                TweenLite.from(img, duration/2, {x: -dx, y: -dy, scaleX: oversize, scaleY: oversize, ease: Cubic.easeOut})
-            }
-            
-            $s.$on('$destroy', function() {
-                delete img.onload
-                TweenLite.killTweensOf(img)
-            })
-
-        }
-    }
-  
-}])
-.directive('tap', ['$document', function($doc) {
-    
-    var doc = $doc[0]
-    
-    var x, y
-    
-    function on(e) {
-        e = e.touches ? e.touches[0] : e
-        x = e.pageX
-        y = e.pageY
-    }
-    function off(e) {
-        e = e.changedTouches ? e.changedTouches[0] : e
-        x = Math.abs(e.pageX - x)
-        y = Math.abs(e.pageY - y)
-        if(x <3 && y <3) {
-            var tap = document.createEvent('CustomEvent')
-            tap.initCustomEvent('tap', true, true, e)
-            e.target.dispatchEvent(tap)
-        }
-    }
-    doc.addEventListener('mousedown',  on, true)
-    doc.addEventListener('mouseup',   off, true)
-    doc.addEventListener('touchstart', on, true)
-    doc.addEventListener('touchend',  off, true)
-
-    return {
-        
-        scope: {
-            tap: "&tap"            
-        },
-        
-        link: function($s, elem, attr) {
-            
-            elem.on('tap', on_tap)
-            $s.$on("$destroy", clean_up)
-            
-            function on_tap(e) {
-                $s.tap()
-            }
-            
-            function clean_up() {
-                elem.off('tap', on_tap)
-            }
-            
-        }
-        
-    }
-    
-}])

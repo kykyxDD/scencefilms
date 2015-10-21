@@ -418,6 +418,11 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   top: 15px;
   font-size: 24px;
   cursor: pointer;
+  
+  a {
+    text-decoration: initial;
+    color: inherit;
+  }
 }
 #main_menu.mobile_menu .close_btn{
   left: 25px;
@@ -974,7 +979,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 .close_1{
   display: none !important;
 }
-@media only screen and (orientation: landscape) and (max-width:765px){
+@media only screen and (orientation: landscape) and (max-width:1280px){
   
   body.home.mobile #cont_menu, 
   body.home.mobile #main_menu, 
