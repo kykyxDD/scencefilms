@@ -109,12 +109,15 @@ Background.prototype = {
         while (this.images.length > 2) {
             this.remove_image(this.images.shift())
         }
-
-        var old_img = this.images[0]
-        var new_img = this.images[this.images.length-1]
         
-        old_img.visible = true
-        TweenLite.to(old_img, 0.5, {alpha: 0})
+        if (this.images.length == 2) {
+            var old_img = this.images[0]
+            
+            old_img.visible = true
+            TweenLite.to(old_img, 0.5, {alpha: 0})
+        }
+        
+        var new_img = this.images[this.images.length-1]
         
         if (this.loading) {
             this.delayedPlay = angular.bind(this, this.play2)
@@ -144,6 +147,7 @@ Background.prototype = {
             
             new_img.visible = true
             new_img.alpha = 0
+            TweenLite.killTweensOf(new_img)
             TweenLite.to(new_img, duration, {alpha: 1, delay: delay})
 
         }
