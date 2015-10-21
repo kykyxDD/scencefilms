@@ -154,29 +154,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
 .controller('appController', ['appState', 'view', '$scope', '$http', '$document', '$location', '$window', 'anchorSmoothScroll', '$timeout', 'navigation', function(state, v, $s, $http, $doc, $loc, $window, anchorSmoothScroll, $t, nav){
 
     var doc = $doc[0];
-
-    var win_wid = $window.innerWidth;
-    var win_heig = $window.innerHeight;
-
-    state.orien = (win_wid > win_heig) ? 'landscape' : "portrait";
-
-    state.mobile = test_mobile()
-    state.tablet = test_table()
-    state.desktop = !state.mobile && !state.tablet;
-
-    if(win_wid <= 1280){
-        state.mobile_style = true;
-    } else {
-        state.mobile_style = false;
-    }
-
-    if( 768 <= win_wid && win_wid <= 1280 && state.mobile && !state.tablet){
-        state.tablet = true
-        state.mobile_style = true
-    }
-
     $s.state = state
-    //state.load_site_data("data.json", on_site_data)
     
     onResize()
     angular.element($window).on('resize', onResize)
@@ -184,14 +162,12 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     v.simulate_page_load(30, null, true)
     
     $s.$watch('state.pageToChange', on_page_change)
-    //$s.$watch('state.data', on_site_data)
     
     state.load().then(on_site_data)
     
     function on_site_data(data) {
-        console.log(data)
+
         v.background.init(state.data)
-        
         
         var page_name = nav.page()
         var p = state.get_page(page_name)
@@ -409,11 +385,10 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     
     function on_location_change(ev) {
         var params = nav.params()
-        console.log('ev', params)
+
         if (params) {
             var id = nav.params()[0]
             selectItem(id)
-            //ev.preventDefault()
         }
     }
     
@@ -489,7 +464,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     
     function on_location_change(ev) {
         var params = nav.params()
-        console.log('ev', params)
+
         if (params) {
             var type = params[0]
             var id = params[1]
@@ -529,8 +504,6 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
 
     function selectType(label) {
         
-        console.log("selectType", label)
-        
         if (label) {
             for (var i=0; i<state.selectedPageData.types.length; i++) {
                 var itm = state.selectedPageData.types[i]
@@ -541,7 +514,6 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
             }
         }
         else {
-            console.log("select default type")
             $s.selectedType = state.selectedPageData.types[0]
         }
         
@@ -550,8 +522,6 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     }
     
     function showItemPopup(id) {
-        
-        console.log('show popup', id)
         
         if (id) {
             for (var i=0; i<state.selectedPageData.pages.length; i++) {
