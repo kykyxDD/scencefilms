@@ -286,13 +286,13 @@
             <div class="bg_mobile"></div>
             <canvas class="particles"></canvas>
             <canvas class="screen mobile_intro"></canvas>
-            <div id='side_page_right' ng-class='{mobile_squary: !state.tablet}'>
+            <div id='side_page_right' ng-class='{mobile_squary:state.orien == "portrait"}'>
               <div class='cont_rhom_right'></div>
-              <div class="btn_top" ng-if='!state.tablet' tap='goScroll("top")'>
+              <div class="btn_top" ng-if='state.orien == "portrait"' tap='goScroll("top")'>
                   <span class="btn"></span>
               </div>
             </div>
-            <div id='side_page_left' ng-hide="!state.tablet">
+            <div id='side_page_left' ng-hide="state.orien == 'portrait'">
             </div>
         </div>
 
@@ -300,7 +300,7 @@
             <div class="bg_mobile"></div>
             <canvas class="particles"></canvas>
             <canvas class="screen mobile_intro"></canvas>
-            <div id='side_page_right' ng-class='{mobile_squary: !state.tablet}'>
+            <div id='side_page_right'>
               <div class='cont_rhom_right'></div>
             </div>
             <div id='side_page_left'></div>

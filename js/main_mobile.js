@@ -31,11 +31,11 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         $s.$apply()
     }
     $s.close_all = function(itm){
-        itm.read = false;        
+        itm.read = false;
         $s.$apply(); 
         $t(function(){
             $s.goScroll('itm'+itm.id)
-        },500)       
+        },500)
     }
 
 }])
@@ -77,7 +77,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         $s.selectedType = type
         $t(onResize)
     }
-    
+
     $s.showPictureWindow = function(url) {
         window.open(url, "_blank")
     }
@@ -93,18 +93,20 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.intro.repaintCanvas();
     var bg_mobile = doc.querySelector('#home .bg_mobile');
     ScreenObject.decorate_element.apply(bg_mobile);
-    bg_mobile.h = $w.innerHeight*0.9;
+    bg_mobile.h = state.orien == 'portrait' ? $w.innerHeight*0.9 : $w.innerHeight;
     bg_mobile.w = $w.innerWidth;
 
-    var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
+    var scale = state.orien == 'portrait' ?($w.innerWidth/v.intro.canvas.w).toFixed(3) : (($w.innerHeight/v.intro.canvas.h)*0.45).toFixed(3);
     var y_0 = $w.innerHeight/2;
-    var y_1 = -0.2*$w.innerHeight;
+    var x_1 = state.orien == 'portrait' ? 0 : -80;
+    var y_1 = state.orien == 'portrait' ? -0.2*$w.innerHeight : 0;
+
     v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
     v.intro.canvas.top = y_0;    
     v.intro.canvas.x = 0;
-    TweenLite.to(v.intro.canvas, 3, {y: y_1});
+    TweenLite.to(v.intro.canvas, 3, {x: x_1, y: y_1});
 
-    v.squares.init(state.data.homepage_data, state.mobile_style && !state.tablet)
+    v.squares.init(state.data.homepage_data, state.mobile_style, state.tablet, state.orien)
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
     v.squares.show(state.mobile_style && !state.tablet)
@@ -115,19 +117,22 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     $s.$on('$destroy', clean_up)
     
     function on_resize(e) {
-        v.squares.resize(state.mobile_style && !state.tablet);
-        v.intro.canvas.left = $w.innerWidth/2;
-        bg_mobile.h = $w.innerHeight*0.9;
-        bg_mobile.w = $w.innerWidth;
-        y_1 = -0.2*$w.innerHeight;
 
-        var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3)
+        v.squares.resize(state.mobile_style, state.tablet, state.orien);
+        v.intro.canvas.left = $w.innerWidth/2;
+        bg_mobile.h = state.orien == 'portrait' ? $w.innerHeight*0.9 : $w.innerHeight;
+        bg_mobile.w = $w.innerWidth;
+        x_1 = state.orien == 'portrait' ? 0 : -80;
+        y_1 = state.orien == 'portrait' ? -0.2*$w.innerHeight : 0;
+
+        var scale = state.orien == 'portrait' ?($w.innerWidth/v.intro.canvas.w).toFixed(3) : (($w.innerHeight/v.intro.canvas.h)*0.45).toFixed(3);
         v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
         var y_0 = $w.innerHeight/2;
-        v.intro.canvas.x =  0;
         v.intro.canvas.top = y_0;
         if(e) {
-            v.intro.canvas.y = y_1;
+            TweenLite.killTweensOf(v.intro.canvas)
+            v.intro.canvas.x = x_1;
+            v.intro.canvas.y = y_1 ;
         } 
 
     }
@@ -156,11 +161,9 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.intro.canvas.top = y_0;
         v.intro.canvas.y = 0;
         var x_0 = $w.innerWidth > $w.innerHeight ? -200 : 0;
-        TweenLite.to(v.intro.canvas, 3, {x: x_0});    
+        TweenLite.to(v.intro.canvas, 3, {x: x_0});
 
-    console.log(state.mobile_style, state.mobile, state.tablet)
-
-    v.squares.init(state.data.homepage_data, state.mobile_style && !state.tablet)
+    v.squares.init(state.data.homepage_data, state.mobile_style, state.tablet)
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
     v.squares.show(state.mobile_style && !state.tablet)
@@ -171,7 +174,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     $s.$on('$destroy', clean_up)
     
     function on_resize(e) {
-        v.squares.resize(state.mobile_style && !state.tablet);
+        v.squares.resize(state.mobile_style, state.tablet, state.orien);
         v.intro.canvas.left = $w.innerWidth/2;
         bg_mobile.h = $w.innerHeight;
         bg_mobile.w = $w.innerWidth;
@@ -208,8 +211,10 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
 
     function on_resize() {
         if (!v.intro.canvas) return
-        
-        var scale = ($w.innerWidth/v.intro.canvas.w).toFixed(3);
+        scale = 0.7; 
+        if(!state.tablet){
+            scale = state.orien == 'portrait' ?($w.innerWidth/v.intro.canvas.w).toFixed(3) : (($w.innerHeight/v.intro.canvas.h)*0.45).toFixed(3);
+        }
         v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
     }
 
@@ -225,33 +230,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     function play_intro() {
         v.preloader.show()
         v.simulate_page_load(1.5, show_intro_text, false)
-
-
-        var drops = []
-        var duration = 1000
-        var drops_count = 16
-        var grid_size = $w.innterWidth
-        var delay = duration/drops_count
-
-        // setTimeout(makeDrop, delay)
-
-        function makeDrop() {
-
-            var border = 100
-            var rnd_x = border + ($w.innerWidth - border*2) * Math.random()
-            var rnd_y = border + ($w.innerHeight - border*2) * Math.random()
-
-            var drop = doc.createElement("div")
-            drop.style.background = "url('image/waterdrops/$.png') no-repeat".replace("$", 1+drops_count%14)
-            drop.style.left = Math.round(rnd_x) + "px"
-            drop.style.top = Math.round(rnd_y) + "px"
-            drop.className = "waterdrop"
-            intro_bg.appendChild(drop)
-
-            if (--drops_count > 0) {
-                setTimeout(makeDrop, delay)
-            }
-        }
     }
     
     function show_intro_text() {
@@ -265,8 +243,12 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.intro.runRepaint()
         
         on_resize()
-        
-        var scale = state.tablet ? 0.7 : ($w.innerWidth/screen.w).toFixed(3)
+
+        var scale = 0.7; 
+        if(!state.tablet){
+            scale = state.orien == 'portrait' ?($w.innerWidth/v.intro.canvas.w).toFixed(3) : (($w.innerHeight/v.intro.canvas.h)*0.45).toFixed(3);
+        }
+
         screen.scaleX = screen.scaleY = scale;
         screen.y = ($w.innerHeight/2)
         

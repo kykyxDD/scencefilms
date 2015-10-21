@@ -230,7 +230,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     var win_wid = $window.innerWidth;
     var win_heig = $window.innerHeight;
 
-    var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+    state.orien = (win_wid > win_heig) ? 'landscape' : "portrait";
 
     state.mobile = test_mobile()
     state.tablet = test_table()
@@ -242,7 +242,8 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     } else {
         state.mobile_style = false;
     }
-    if( 768 <= win_wid && win_wid<=1280 && state.mobile && !state.tablet){
+
+    if( 768 <= win_wid && win_wid <= 1280 && state.mobile && !state.tablet){
         state.tablet = true
         state.mobile_style = true
     }
@@ -268,31 +269,31 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         var win_wid = $window.innerWidth;
         var win_heig = $window.innerHeight;
 
-        var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+        state.orien = (win_wid > win_heig) ? 'landscape' : "portrait";
 
         state.mobile = test_mobile()
         state.tablet = test_table()
         state.desktop = !state.mobile && !state.tablet;
-        
 
         if(win_wid <= 1280){
             state.mobile_style = true; 
         } else {
             state.mobile_style = false;
         }
-        if( 768 <= win_wid && win_wid<=1280 && state.mobile && !state.tablet){
+
+        if( 768 <= win_wid && win_wid <= 1280 && state.mobile && !state.tablet){
             state.tablet = true
             state.mobile_style = true
         }
-        
+
         v.transition.resize($window.innerWidth, $window.innerHeight, state.mobile_style)
         v.main_menu.resize(state.mobile_style);
         v.background.resize($window.innerWidth, $window.innerHeight)
         v.preloader.set_size(200, 200)
-        
+
         $t(function(){$s.$apply()})
     }
-    
+
     function test_mobile() {
         
         var ua = window.navigator.userAgent
@@ -326,7 +327,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         return false
     }
 
-    $s.goScroll = function (eID){          
+    $s.goScroll = function (eID){
         anchorSmoothScroll.scrollTo(eID);
     }
 
@@ -511,6 +512,7 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     }
     
     $s.typeMenuClick = function(type) {
+        console.log(type)
         $s.selectedType = type
         scroll.scrollTo(0)
         $t(onResize)
