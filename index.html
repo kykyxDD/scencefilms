@@ -312,7 +312,7 @@
                     <div class="w-tab">
                         <ul class="tab">
                             <li ng-repeat="itm in state.selectedPageData.types" tap="typeMenuClick(itm)">
-                                <a href="#" ng-class="{active: selectedType.type == itm.type}">
+                                <a ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
                                 </a>
                             </li>
@@ -351,7 +351,7 @@
                     <div class="w-tab">
                       <ul class="tab">
                         <li ng-repeat="itm in state.selectedPageData.types track by $index">
-                            <a href="#" tap="typeMenuClick(itm)" ng-class="{active: selectedType.type == itm.type}"><span>{{itm.label}}</span></a>
+                            <a tap="typeMenuClick(itm)" ng-class="{active: selectedType.type == itm.type}"><span>{{itm.label}}</span></a>
                         </li>
                        </ul>
                     </div>
@@ -481,7 +481,7 @@
     <div class="footer" ng-show="state.interfaceVisible" ng-class='{footer_tablet:state.tablet}'>
         <div class="w-share">
             <ul class="l-share">
-                <li><a class="i-facebook" href="#">facebook</a></li>
+                <li><a class="i-facebook" href="https://www.facebook.com/thescentofrainandlightning" target="_blank">facebook</a></li>
                 <li><a class="i-twitter" href="#">twitter</a></li>
                 <li><a class="i-instagram" href="#">instagram</a></li>
                 <li><a class="i-google_plus" href="#">google plus</a></li>

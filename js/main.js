@@ -342,10 +342,12 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     }
 
     $s.onMenuCloseClick = function() {
-        v.main_menu.collapse(state.mobile_style);
-        v.main_menu.show_header(0.3);
-        v.main_menu.align_header();
         v.transition.collapse(state.mobile_style);
+        v.main_menu.collapse(state.mobile_style);
+
+        $t(function(){
+            v.main_menu.show_header(0.3);
+        },200)
     }
 }])
 .controller("desktopController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {

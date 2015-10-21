@@ -37,6 +37,19 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
             $s.goScroll('itm'+itm.id)
         },500)
     }
+    angular.element($window).bind("scroll", function() {
+        console.log('scroll', v.transition.current_state)
+
+        if(v.transition.current_state == 'expanded'){
+            v.transition.collapse(state.mobile_style)
+            v.main_menu.collapse(state.mobile_style);
+
+            $t(function(){
+                v.main_menu.show_header(0.3);
+            },200)
+        }
+    });
+
 
 }])
 .controller("mobileContentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {

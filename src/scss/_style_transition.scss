@@ -967,8 +967,11 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 .close_1{
   display: none !important;
 }
-@media only screen and (orientation: landscape){
-  #cont_menu, #main_menu, .transition.mobile_transition{
+@media only screen and (orientation: landscape) and (max-width:765px){
+  
+  body.home.mobile #cont_menu, 
+  body.home.mobile #main_menu, 
+  body.home.mobile .transition.mobile_transition{
     position:fixed !important;
   }
   body.home.mobile{
