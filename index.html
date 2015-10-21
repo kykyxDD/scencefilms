@@ -68,8 +68,8 @@
                 <div class="b-content_inside">
                     <div class="w-tab bottom">
                         <ul class="tab" >
-                            <li ng-repeat="itm in state.selectedPageData.types" tap="typeMenuClick(itm)" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" ng-class="{active: selectedType.type == itm.type}">
+                            <li ng-repeat="itm in state.selectedPageData.types" on-complete on-complete-callback="animateMenuItems()">
+                                <a href="#news/{{itm.label}}" ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
                                 </a>
                             </li>
@@ -80,7 +80,7 @@
                             <div class="scrollCont">
                                 <div class="newsCont">
                                     <div class="i-news" ng-repeat="item in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
-                                        <div class="i-news__content" id="news{{item.id}}">
+                                        <div class="i-news__content" id="itm{{item.id}}">
                                             <div class="img" animate-image-load duration="1" img-url="item.img">
                                                 <img alt="img"/>
                                             </div>
@@ -88,7 +88,7 @@
                                                 <h3>{{item.short_desc}}</h3>
                                                 <div class="w-time"><span class="time">{{item.date}}</span></div>
                                                 <p>{{item.full_desc}}</p>
-                                                <a class="btn" href="#" tap="showNewsPopup(item)">read all</a>
+                                                <a class="btn" ng-href="#news/{{selectedType.label}}/{{item.id}}">read all</a>
                                             </div>
                                         </div>
                                     </div>
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="popup news">
-                <div class="popup_semitransparent_bg" tap="closePopup()"></div>
+                <a ng-href="#news/{{selectedType.label}}"><div class="popup_semitransparent_bg"></div></a>
                 <div class="popup_bg"></div>
                 <div class="popup_img_cont">
                     <img class="popup_preloader" src='image/preloader.gif'/>
@@ -118,7 +118,7 @@
                         <div class='ico gp'></div>
                     </div>
                 </div>
-                <div class='close_btn' tap="closePopup()" >&#10006;</div>
+                <div class='close_btn'><a ng-href="#news/{{selectedType.label}}">&#10006;</a></div>
             </div>
         </div>
         
@@ -128,7 +128,7 @@
                     <div class="w-tab  bottom">
                         <ul class="tab">
                             <li ng-repeat="item in state.selectedPageData.types track by $index" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" ng-click="typeMenuClick(item)" ng-class="{active: selectedType.type == item.type}"><span>{{item.label}}</span></a>
+                                <a href="#" ng-href="#media/{{item.label}}" ng-class="{active: selectedType.type == item.type}"><span>{{item.label}}</span></a>
                             </li>
                         </ul>
                     </div>
@@ -138,15 +138,15 @@
                                 <div class="mediaCont">
                                     <div ng-switch="selectedType.type">
                                         <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
-                                            <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}" id="photo{{item.id}}" tap="showPhotoPopup(item)">
+                                            <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}" id="itm{{item.id}}">
                                                 <div class="img" animate-image-load duration="1" img-url="item.src">
                                                     <img alt="img" />
                                                 </div>
                                                 <div class="w-share">
                                                     <div class="b-share">
                                                         <ul class="l-share">
-                                                            <li><a href="#" class="i-plus" ></a></li>
-                                                            <li><a href="#" class="i-like"></a></li>
+                                                            <li><a ng-href="#media/{{selectedType.label}}/{{item.id}}" class="i-plus" ></a></li>
+                                                            <li><a class="i-like"></a></li>
                                                             <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
                                                         </ul>
                                                     </div>
@@ -155,8 +155,8 @@
                                         </div>
                                         
                                         <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
-                                            <div class="i-video" ng-repeat="item in group track by $index" animate-image-load duration="1" img-url="item.src" id="video{{item.id}}">
-                                                <a href="#" tap="showVideoPopup(item)">
+                                            <div class="i-video" ng-repeat="item in group track by $index" animate-image-load duration="1" img-url="item.src" id="itm{{item.id}}">
+                                                <a href="#media/{{selectedType.label}}/{{item.id}}">
                                                     <img alt="img"/>
                                                     <span class="text">{{item.desc}}</span>
                                                 </a>
@@ -170,16 +170,16 @@
                 </div>
             </div>
             <div class="popup photo">
-                <div class="popup_semitransparent_bg" ng-click="closePopup()"></div>
+                <a ng-href="#media/{{selectedType.label}}"><div class="popup_semitransparent_bg"></div></a>
                 <div class="popup_bg"></div>
                 <div class="popup_img_cont">
                     <img class="popup_preloader" src='image/preloader.gif'/>
                     <img class="popup_img"/>
                 </div>
-                <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
+                <div class='close_btn'><a ng-href="#media/{{selectedType.label}}">&#10006;</a></div>
             </div>
             <div class="popup video">
-                <div class="popup_semitransparent_bg" ng-click="closePopup()"></div>
+                <a ng-href="#media/{{selectedType.label}}"><div class="popup_semitransparent_bg"></div></a>
                 <div class="popup_bg"></div>
                 <div class="video_cont">
                     <img class="popup_preloader" src='image/black_preloader.gif'/>
@@ -208,7 +208,7 @@
                         </div>
                     </div>
                 </div>
-                <div class='close_btn' ng-click="closePopup()" >&#10006;</div>
+                <div class='close_btn'><a ng-href="#media/{{selectedType.label}}">&#10006;</a></div>
             </div>
         </div>
 
@@ -218,7 +218,7 @@
                     <div class="w-tab">
                         <ul class="tab">
                             <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
+                                <a ng-href="#cast/{{page.page}}" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
                             </li>
                         </ul>
                     </div>
@@ -249,7 +249,7 @@
                     <div class="w-tab">
                         <ul class="tab">
                             <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
+                                <a ng-href="#makers/{{page.page}}"  ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
                             </li>
                         </ul>
                     </div>
@@ -490,7 +490,7 @@
         <div class="w-nav">
             <ul class="l-nav">
                 <li ng-repeat='page in state.data.pages' class='footer_menu' ng-show="state.selectedPage != page.page">
-                    <a ui-sref='{{page.page}}'><span>{{page.name}}</span></a>
+                    <a ng-href='#{{page.page}}'><span>{{page.name}}</span></a>
                 </li>
             </ul>
         </div>
@@ -516,7 +516,7 @@
         </div>
         <div class='menu_cont'>
             <div ng-repeat="itm in state.data.pages" on-complete on-complete-callback="init_menu()" class="cont_list_menu itm_{{itm.page}}">
-                <div class='label'><a ui-sref='{{itm.page}}'>{{itm.name}}</a></div>
+                <div class='label'><a ng-href='#{{itm.page}}'>{{itm.name}}</a></div>
                 <div class='line'></div>
             </div>
         </div>
@@ -527,8 +527,6 @@
         <div class='label'>0%</div>
     </div>
 
-    <div ui-view style="display: none;"></div>
-    
 </body>
 </html>
 

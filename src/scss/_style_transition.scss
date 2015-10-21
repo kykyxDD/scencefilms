@@ -416,6 +416,11 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   top: 15px;
   font-size: 24px;
   cursor: pointer;
+  
+  a {
+    text-decoration: initial;
+    color: inherit;
+  }
 }
 #main_menu.mobile_menu .close_btn{
   left: 25px;

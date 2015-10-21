@@ -188,6 +188,12 @@ Background.prototype = {
         while (this.images.length) {
             this.remove_image(this.images.pop())
         }
+    },
+    
+    clear: function() {
+        this.anim.clearCanvas()
+        this.stop()
+        this.remove_all_images()
     }
 
 }
