@@ -191,7 +191,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
     var data = appState.get_page($state.$current.data.page)
     appState.pageToChange = data ? data.page : $state.$current.data.page
     appState.nameToChange = data ? data.name : "";
-    console.log("routing controller", appState.pageToChange, appState.nameToChange)
     
     function on_page_change(new_page, old_page) {
         
@@ -421,8 +420,6 @@ var app = angular.module('app', ['mobile', 'ngSanitize', 'ui.router'])
         
         $s.$on('$destroy', clean_up)
     }
-    
-    console.log($stateParams.id)
     
     function onResize() {
         var div = doc.querySelector(".b-content")

@@ -81,6 +81,13 @@ body {
   background-size: auto 100%;
 }
 
+#cast .text div[animate-text],
+#makers .text div[animate-text],
+#cast .tab li,
+#makers .tab li{
+  cursor: pointer;
+}
+
 #bg.news_all {
   background-image: url('../image/bg/');
 }
@@ -597,14 +604,13 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 .rhom_before{
   background-color: #000;
-}
-
-.rhom_before img.preloader{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -30px;
-  margin-left: -30px;
+  img.preloader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -30px;
+    margin-left: -30px;
+  }
 }
 
 .text_rhom{
@@ -618,13 +624,13 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   background-position-x: center;
   overflow: hidden;
 
-}
-.text_rhom .video{
-  position:absolute;
-  left: 50%;
-  top: 50%;
-  margin-left: -343px;
-  margin-top: -190px;
+ .video{
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -343px;
+    margin-top: -190px;
+  }
 }
 
 #video-player {
@@ -723,6 +729,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   .text_cont {
     color: #ffffff;
     font-size: 23px;
+    cursor: pointer;
   }
 
   .icons {

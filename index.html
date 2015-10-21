@@ -69,7 +69,7 @@
                     <div class="w-tab bottom">
                         <ul class="tab" >
                             <li ng-repeat="itm in state.selectedPageData.types" tap="typeMenuClick(itm)" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" ng-class="{active: selectedType.type == itm.type}">
+                                <a ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
                                 </a>
                             </li>
@@ -88,7 +88,7 @@
                                                 <h3>{{item.short_desc}}</h3>
                                                 <div class="w-time"><span class="time">{{item.date}}</span></div>
                                                 <p>{{item.full_desc}}</p>
-                                                <a class="btn" href="#" tap="showNewsPopup(item)">read all</a>
+                                                <a class="btn" tap="showNewsPopup(item)">read all</a>
                                             </div>
                                         </div>
                                     </div>
@@ -128,7 +128,7 @@
                     <div class="w-tab  bottom">
                         <ul class="tab">
                             <li ng-repeat="item in state.selectedPageData.types track by $index" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" ng-click="typeMenuClick(item)" ng-class="{active: selectedType.type == item.type}"><span>{{item.label}}</span></a>
+                                <a ng-click="typeMenuClick(item)" ng-class="{active: selectedType.type == item.type}"><span>{{item.label}}</span></a>
                             </li>
                         </ul>
                     </div>
@@ -156,7 +156,7 @@
                                         
                                         <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
                                             <div class="i-video" ng-repeat="item in group track by $index" animate-image-load duration="1" img-url="item.src" id="video{{item.id}}">
-                                                <a href="#" tap="showVideoPopup(item)">
+                                                <a tap="showVideoPopup(item)">
                                                     <img alt="img"/>
                                                     <span class="text">{{item.desc}}</span>
                                                 </a>
@@ -218,7 +218,7 @@
                     <div class="w-tab">
                         <ul class="tab">
                             <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
+                                <a tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
                             </li>
                         </ul>
                     </div>
@@ -249,7 +249,7 @@
                     <div class="w-tab">
                         <ul class="tab">
                             <li ng-repeat="page in state.selectedPageData.pages" on-complete on-complete-callback="animateMenuItems()">
-                                <a href="#" tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
+                                <a tap="subMenuClick(page)" ng-class="{active: page == selectedItem}"><span ng-bind-html="page.title | unsafe"></span></a>
                             </li>
                         </ul>
                     </div>
@@ -329,9 +329,9 @@
                                         <h3>{{item.short_desc}}</h3>
                                         <div class="w-time"><span class="time">{{item.date}}</span></div>
                                         <p>{{item.full_desc}}</p>
-                                        <a class="btn all" href="#" tap='read_all(item)'>read all</a>
-                                        <a class="btn close" href="#" tap='close_all(item)'>close</a>
-                                        <a class="btn close_1" href="#" tap='close_all(item)'>+</a>
+                                        <a class="btn all" tap='read_all(item)'>read all</a>
+                                        <a class="btn close" tap='close_all(item)'>close</a>
+                                        <a class="btn close_1" tap='close_all(item)'>+</a>
                                     </div>
                                 </div>
                                 <div class="btn_top" tap='goScroll("top")'>

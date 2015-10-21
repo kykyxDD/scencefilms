@@ -88,6 +88,7 @@ body {
 .btn_top {
   text-align: center;
   display: none;
+  cursor: pointer;
   
   .btn {
     display: inline-block;
@@ -516,6 +517,7 @@ body {
       background: #ffd800;
       bottom: 30px;
       @include transition(opacity 300ms);
+      cursor:pointer;
 
       &:hover {
         opacity: 0.8;
