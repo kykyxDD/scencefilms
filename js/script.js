@@ -157,10 +157,10 @@ Anim_menu.prototype = {
 
         var expand_delay = expand_delay || 0
         var delay = 0;
+        var self = this;
 
         for (var i=0, l=this.items.length; i<l; i++) {
             var itm = this.items[i];
-            // itm.visible = false;
             itm.alpha = 1;
             delay = expand_delay + (l-i-1)*0.1;
             TweenLite.to(itm, 0.3, {x: -250, alpha: 0, delay: delay, ease: Power0.easeOut});
@@ -170,8 +170,10 @@ Anim_menu.prototype = {
         }
 
         TweenLite.to(this.close_btn, 0.2, {y: -90, delay: 0})
-        this.menu_cont.visible = false;
-        // TweenLite.to(this.close_btn, 0.9, {y: 7, delay: expand_delay + 0.3 + 0.2})
+
+        setTimeout(function(){
+            self.menu_cont.visible = false;
+        }, 1000)
     },
     
     expand: function(expand_delay) {

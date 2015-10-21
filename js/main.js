@@ -157,7 +157,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     var win_wid = $window.innerWidth;
     var win_heig = $window.innerHeight;
 
-    var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+    state.orien = (win_wid > win_heig) ? 'landscape' : "portrait";
 
     state.mobile = test_mobile()
     state.tablet = test_table()
@@ -168,7 +168,8 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     } else {
         state.mobile_style = false;
     }
-    if( 768 <= win_wid && win_wid<=1280 && state.mobile && !state.tablet){
+
+    if( 768 <= win_wid && win_wid <= 1280 && state.mobile && !state.tablet){
         state.tablet = true
         state.mobile_style = true
     }
@@ -245,31 +246,31 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
         var win_wid = $window.innerWidth;
         var win_heig = $window.innerHeight;
 
-        var orien = (win_wid > win_heig) ? 'landscape' : "portrait"; 
+        state.orien = (win_wid > win_heig) ? 'landscape' : "portrait";
 
         state.mobile = test_mobile()
         state.tablet = test_table()
         state.desktop = !state.mobile && !state.tablet;
-        
 
         if(win_wid <= 1280){
             state.mobile_style = true; 
         } else {
             state.mobile_style = false;
         }
-        if( 768 <= win_wid && win_wid<=1280 && state.mobile && !state.tablet){
+
+        if( 768 <= win_wid && win_wid <= 1280 && state.mobile && !state.tablet){
             state.tablet = true
             state.mobile_style = true
         }
-        
+
         v.transition.resize($window.innerWidth, $window.innerHeight, state.mobile_style)
         v.main_menu.resize(state.mobile_style);
         v.background.resize($window.innerWidth, $window.innerHeight)
         v.preloader.set_size(200, 200)
-        
+
         $t(function(){$s.$apply()})
     }
-    
+
     function test_mobile() {
         
         var ua = window.navigator.userAgent
@@ -303,7 +304,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
         return false
     }
 
-    $s.goScroll = function (eID){          
+    $s.goScroll = function (eID){
         anchorSmoothScroll.scrollTo(eID);
     }
 
@@ -318,10 +319,12 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     }
 
     $s.onMenuCloseClick = function() {
-        v.main_menu.collapse(state.mobile_style);
-        v.main_menu.show_header(0.3);
-        v.main_menu.align_header();
         v.transition.collapse(state.mobile_style);
+        v.main_menu.collapse(state.mobile_style);
+
+        $t(function(){
+            v.main_menu.show_header(0.3);
+        },200)
     }
 }])
 .controller("desktopController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
@@ -457,6 +460,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     var scroll_cont = doc.querySelector(".scrollCont")
     var items_cont = scroll_cont.querySelector(":first-child")
     var media_data = state.selectedPageData
+    var cache_counter = 0
 
     var scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
     
@@ -592,8 +596,6 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
             popup.reload(item)
         }
     }
-    
-    var cache_counter = 0
     
     $s.no_cache = function() {
         return "no_cache" + cache_counter++

@@ -121,7 +121,6 @@ Transition.prototype = {
     
         if (this.debug) console.log("show")
 
-    
         this.current_state = 'collapsed';
         this.cont.scaleX = 1;
         this.cont.scaleY = 1;
@@ -134,7 +133,6 @@ Transition.prototype = {
     },
     
     collapse: function(mobile) {
-
         if (this.debug) console.log("collapse")
 
         this.current_state = 'collapsed';
