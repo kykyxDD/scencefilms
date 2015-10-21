@@ -194,6 +194,8 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
         
         
         var page_name = nav.page()
+        var p = state.get_page(page_name)
+        
         if (page_name) {
             state.pageToChange = page_name
         }
@@ -201,13 +203,25 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
             state.pageToChange = 'intro'
         }
         
+        if (p) {
+            state.nameToChange = p.name
+        }
+
         $s.$on('$locationChangeSuccess', on_location_change)
     }
     
     function on_location_change(ev) {
-        console.log("location change success", ev.newUrl, $loc.path(), nav.page())
-        if (state.pageToChange != nav.page()) {
-            state.pageToChange = nav.page()
+        var new_page = nav.page()
+        
+        if (state.pageToChange != new_page) {
+            
+            var p = state.get_page(new_page)
+
+            if (p) {
+                state.nameToChange = p.name
+            }
+
+            state.pageToChange = new_page
         }
     }
     
