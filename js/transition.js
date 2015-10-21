@@ -93,8 +93,8 @@ Transition.prototype = {
         
         this.exp_rad = Math.max(projection_a, projection_b)
         var half_size = this.SQUARE_SIZE/2
-        this.yellow_exp_scale = this.exp_rad*2 / half_size
-        this.black_exp_scale = (488+this.exp_rad) / half_size
+        this.yellow_exp_scale = (this.exp_rad*2 / half_size)*1.2
+        this.black_exp_scale = ((488+this.exp_rad) / half_size)*1.2
     },
     
     reset: function() {
@@ -189,8 +189,8 @@ Transition.prototype = {
         if (this.debug) console.log("close")
     
         this.current_state = 'closed'
-        var yellow_tx = this.yellow_exp_scale * this.SQUARE_SIZE/2
-        var black_tx = this.black_exp_scale * this.SQUARE_SIZE/2 + 488
+        var yellow_tx = (this.yellow_exp_scale * this.SQUARE_SIZE/2)*1.5;
+        var black_tx = (this.black_exp_scale * this.SQUARE_SIZE/2 + 488)*1.5;
     
         TweenLite.to(this.yellow_part, 0.5*this.time_scale, {scaleX: 0, scaleY: 4, x: yellow_tx})
         TweenLite.to(this.black_part, 0.5*this.time_scale, {scaleX: 0, scaleY: 4, x: black_tx, onComplete: function(){this.reset(); if (this.debug) console.log("onClose"); this.onClosed()}, onCompleteScope: this})
