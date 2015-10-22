@@ -7,8 +7,10 @@
     <meta content="telephone=no" name="format-detection" />
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
+    <link rel="stylesheet" href="css/angular-social.css">
     <script src='js/lib/angular/angular.min.js'></script>
     <script src='js/lib/angular/angular-sanitize.min.js'></script>
+    <script src='js/lib/angular/angular-social.js'></script>
     <script src='js/lib/iscroll/iscroll.js'></script>
     <script src='https://www.youtube.com/iframe_api'></script>
     <script src='js/directives.js'></script>
@@ -122,10 +124,19 @@
                         <div class="text_cont"></div>
                     </div>
                     <div class='icons'>
-                        <div class='ico fb'></div>
-                        <div class='ico twitter'></div>
-                        <div class='ico ln'></div>
-                        <div class='ico gp'></div>
+                        <ul ng-social-buttons
+                             data-url="site_url + '#news/' + selectedType.label + '/ + selectedItem.id"
+                             data-title="selectedItem.short_desc"
+                             data-description="selectedItem.full_desc"
+                             data-image="site_url + selectedItem.img"
+                             showcounts="true">
+                            <li>Share:</li>
+                            <li class="ng-social-facebook">Facebook</li>
+                            <li class="ng-social-google-plus">Google+</li>
+                            <li class="ng-social-twitter">Twitter</li>
+                            <li class="ng-social-pinterest">Pinterest</li>
+                            <li class="ng-social-linkedin">LinkedIn</li>
+                        </ul>
                     </div>
                 </div>
                 <div class='close_btn'><a ng-href="#news/{{selectedType.label}}">&#10006;</a></div>
@@ -185,6 +196,8 @@
                     <img class="popup_preloader" src='image/preloader.gif'/>
                     <img class="popup_img"/>
                 </div>
+                <div>
+                </div>
                 <div class='close_btn'><a ng-href="#media/{{selectedType.label}}">&#10006;</a></div>
             </div>
             <div class="popup video">
@@ -196,7 +209,19 @@
                 </div>
                 <div class="video_desc">
                     <h3 class="title"></h3>
-                    <span class='views'>1223</span><span class='likes'>47</span>
+                    <ul ng-social-buttons
+                         data-url="site_url + '#news/' + selectedType.label + '/ + selectedItem.id"
+                         data-title="selectedItem.short_desc"
+                         data-description="selectedItem.full_desc"
+                         data-image="site_url + selectedItem.img"
+                         showcounts="true">
+                        <li>Share:</li>
+                        <li class="ng-social-facebook">Facebook</li>
+                        <li class="ng-social-google-plus">Google+</li>
+                        <li class="ng-social-twitter">Twitter</li>
+                        <li class="ng-social-pinterest">Pinterest</li>
+                        <li class="ng-social-linkedin">LinkedIn</li>
+                    </ul>
                 </div>
                 <div class="video_list">
                     <h3 class="title">NEXT VIDEO</h3>
