@@ -303,6 +303,10 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
         v.main_menu.init(state.data.pages, 0, state.mobile_style)       
     }
 
+    $s.init_squary = function() {
+        v.squares.init(state.data.homepage_data, state.mobile_style, state.tablet, state.orien)
+    }
+
     $s.onMenuHeaderClick = function() {
         v.main_menu.hide_header(state.mobile_style)
         v.main_menu.expand()
@@ -610,10 +614,8 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     v.particles.set_canvas(doc.querySelector('#home .particles'))
     v.particles.init($w.innerWidth, $w.innerHeight)
     v.particles.runRepaint();
-    v.squares.init(state.data.homepage_data)
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
-    v.squares.show()
     
     on_resize()
     angular.element($w).on('resize', on_resize)
@@ -645,6 +647,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
         angular.element($w).off('resize', on_resize)
         v.particles.stopRepaint()
         v.intro.stopRepaint()
+        v.squares.destroy()
     }
 }])
 .controller('introController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state){

@@ -7,7 +7,7 @@ function Squares (cont) {
     this.json;
     this.arr_video = [];
 
-    this.sq_width = Math.round(document.body.clientWidth/6);
+    this.sq_width = Math.round(document.body.clientWidth/7);
     this.scape_text = 1.45;
     this.delay = 1;
     var self = this;
@@ -21,19 +21,17 @@ Squares.prototype = {
 	init: function(page, mobile, tablet, orien){
 
         this.cont_rhom_right = this.cont.querySelector('#side_page_right');
-        this.cont_rhom = this.cont_rhom_right.querySelector('.cont_rhom_right');
         this.cont_rhom_left = this.cont.querySelector('#side_page_left');
 
         this.json = page;
-        this.sq_arr_right = page.sq_arr_right;
-        this.sq_arr_left = page.sq_arr_left;
-
+        this.sq_arr_right = page.side_page_right;
+        this.sq_arr_left = page.side_page_left;
         ScreenObject.decorate_element.apply(this.cont_rhom_right);
         var right = mobile && !tablet && orien == 'landscape' ? this.rights*0.75 : this.rights;
         this.cont_rhom_right.style.right = right + 'px';
 
         for(var k = 0; k < this.sq_arr_right.length; k++){
-            this.create_elem(this.cont_rhom, this.sq_arr_right[k]);
+            this.search_elem(this.cont_rhom_right, this.sq_arr_right, k);
             if(!mobile || (mobile && (tablet || (!tablet && orien == 'landscape')))) this.pos_rhom(this.sq_arr_right[k]);
         }
         ScreenObject.decorate_element.apply(this.cont_rhom_left);
@@ -42,47 +40,39 @@ Squares.prototype = {
         this.cont_rhom_left.style.bottom = Math.round((-this.sq_width)*0.4) + 'px';
 
         for(var k = 0; k < this.sq_arr_left.length; k++){
-            this.create_elem(this.cont_rhom_left, this.sq_arr_left[k]);
+            this.search_elem(this.cont_rhom_left, this.sq_arr_left, k);
             if(!mobile || (mobile && (tablet || (!tablet && orien == 'landscape')))) this.pos_rhom(this.sq_arr_left[k]);
         }
-
-        this.hide();
 
         if(mobile && !tablet && orien == 'portrait'){
             this.resize_mobile();
         }
+
+        this.show(mobile, tablet, orien)
 	},
 
-	create_elem: function(parent, page){
+	search_elem: function(parent, page, index){
 		var scape_text = this.scape_text;
 		var sq_width = this.sq_width;
-        var delay = this.delay
+        var delay = this.delay;
+        var itm = page[index];
 
-        var itm_elem = document.createElement('div');
-        itm_elem.className = 'cont_rhom';
-        var rhom_before = document.createElement('div');
-        rhom_before.className = 'rhom_before';
-        itm_elem.appendChild(rhom_before);
-        var rhom_after =  document.createElement('div');
-        var className = 'rhom_after';
-        rhom_after.className = className; 
-        rhom_before.appendChild(rhom_after);
-        var text = document.createElement('div');
-        text.className = 'text_rhom';
-        rhom_after.appendChild(text);
+        var itm_elem = parent.querySelector('div[index="'+index+'"]');
+        var rhom_before = itm_elem.querySelector('.rhom_before');
+        var rhom_after =  itm_elem.querySelector('.rhom_after');
+        var text_rhom = itm_elem.querySelector('.text_rhom');
 
-        parent.appendChild(itm_elem);
         ScreenObject.decorate_element.apply(itm_elem);
         ScreenObject.decorate_element.apply(rhom_before);
         ScreenObject.decorate_element.apply(rhom_after);
-        ScreenObject.decorate_element.apply(text);
+        ScreenObject.decorate_element.apply(text_rhom);
 
-        page.elem = itm_elem;
-        page.elem.rhom_before = rhom_before;
-        page.elem.rhom_after = rhom_after;
-        page.elem.text_rhom = text;
+        itm.elem = itm_elem;
+        itm.elem.rhom_before = rhom_before;
+        itm.elem.rhom_after = rhom_after;
+        itm.elem.text_rhom = text_rhom;
 // 
-        this.create_content(page)
+        this.create_content(itm)
 
     },
 
@@ -93,27 +83,16 @@ Squares.prototype = {
         var content;
         
         if(page.type == 'image'){
-            content = document.createElement('img');
+            content = text.querySelector('img');
             content.style.width = '100%';
             content.style.height = '100%';   
-            text.appendChild(content);
+            // text.appendChild(content);
             page.elem.content = content;
         } else if(page.type == 'video'){
-            content = document.createElement('div');
-            var img = document.createElement('img');
-            img.src = 'image/preloader_big_black.gif';
-            rhom_before.appendChild(img);
-            img.className='preloader';
-
-            content.id = page.id;
-            content.className = 'video'
-            text.appendChild(content);
+            content = page.elem.querySelector("#"+page.id);            
             page.elem.content = content;
         }
-
         ScreenObject.decorate_element.apply(page.elem.content);
-
-        
     },
 
     resize: function(mobile, tablet, orien){
@@ -130,7 +109,7 @@ Squares.prototype = {
         this.cont_rhom_right.y = '';
         this.cont_rhom_right.rotation = '';
 
-        this.sq_width = Math.round(document.body.clientWidth/6);
+        this.sq_width = Math.round(document.body.clientWidth/7);
         this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
         var right = mobile && !tablet && orien == 'landscape' ? this.rights*0.75 : this.rights;
 
@@ -153,18 +132,18 @@ Squares.prototype = {
     	var itm_elem = page.elem;
     	var text = page.elem.text_rhom;
         var content = page.elem.content;
+        itm_elem.w = itm_elem.h = sq_width;
+
+        itm_elem.x = sq_width*page.i;
+        itm_elem.y = sq_width*page.j;
+        itm_elem.rotation = 0;
 
     	text.w = sq_width*scape_text;
         text.h = sq_width*scape_text;
 
         text.style.bottom = Math.round(-sq_width*0.23) + 'px';
         text.style.right = Math.round(-sq_width*0.23) + 'px';
-
-        itm_elem.w = itm_elem.h = sq_width;
-
-        itm_elem.x = sq_width*page.i;
-        itm_elem.y = sq_width*page.j;
-        itm_elem.rotation = 0;
+        
         if(page.type == 'video') {
             var scale = text.h/content.height;
             content.scaleX = content.scaleY = scale;
@@ -240,7 +219,7 @@ Squares.prototype = {
         this.cont_rhom_right.visible = true;
         this.anim_show(this.sq_arr_right, mobile);
 
-        if(!mobile || (mobile && !tablet && orien == 'landscape')){
+        if(!mobile || tablet ||(mobile && !tablet && orien == 'landscape')){
             this.cont_rhom_left.visible = true;
             this.anim_show(this.sq_arr_left);    
         }
@@ -303,7 +282,6 @@ Squares.prototype = {
             },
             events: {
                 'onReady': onPlayerReady,
-                // 'onStateChange': onPlayerStateChange
             }
         });
         
@@ -315,19 +293,6 @@ Squares.prototype = {
         page.elem.content.scaleX = page.elem.content.scaleY = scale;
         page.player = player;
         page.offset = this.getElementPosition(text);
-
-        function onPlayerStateChange(event) {
-            /*
-            if (event.data == YT.PlayerState.PLAYING && !done) {
-              setTimeout(stopVideo, 6000);
-              done = true;
-            }
-            */
-        }
-
-        function onPlayerClick(){
-            //console.log(player.onStateChange())
-        }
 
         function onPlayerReady(event) {
             event.target.setVolume(0);
@@ -358,9 +323,14 @@ Squares.prototype = {
                 }
             })
         }
+    },
+    destroy: function(){
+        for(var i = 0; i < this.sq_arr_right.length; i++){
+            if(this.sq_arr_right[i].type == 'video'){
+                var itm = this.sq_arr_right[i];
+                itm.player.destroy();
+            }
 
-        // function stopVideo() {
-        //     player.stopVideo();
-        // }
+        }
     }
 }

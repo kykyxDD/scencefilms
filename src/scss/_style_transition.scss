@@ -524,7 +524,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 
 #side_page_right,
 #side_page_left{
-  // background-color: #aaa;
   position: fixed;
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
@@ -542,8 +541,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   position:relative;
   top: -55px;
   bottom:auto;
-  // overflow-x: hidden;
-  // overflow-y: visible;
   background: url('../image/main/bg_page.jpg');
   background-size:cover;
   -moz-transform: rotate(0deg);
@@ -584,28 +581,23 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   position:absolute;
   top: 0px;
 }
-#side_page_right .cont_rhom_right{
-  width: 100%;
-  height: 100%;
-  overflow:hidden;
-}
 
-#side_page_right.mobile_squary .btn_top{
+
+#home .btn_top{
   position:absolute;
-  bottom: 60px;
+  bottom: 100px;
   right: 10%;
 }
 .cont_rhom{
   position: absolute;   
   display: inline-block;
-  overflow: hidden;
 }
 .rhom_before, 
 .rhom_after{
   width: 100%;
   height: 100%;
-  position: relative;
   overflow: hidden;
+  opacity: 0.99;
 }
 .rhom_before{
   background-color: #000;
@@ -617,6 +609,9 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     margin-left: -30px;
   }
 }
+.rhom_after{
+  position:relative
+}
 
 .text_rhom{
 	position: absolute;
@@ -627,7 +622,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   transform: rotate(45deg);
   background-size: auto 100%;
   background-position-x: center;
-  overflow: hidden;
+  opacity: 0.99;
 
  .video{
     position:absolute;
@@ -639,7 +634,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 
 #video-player {
-
     position: absolute;
     top: 50%;
     left: 50%;
