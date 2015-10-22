@@ -53,18 +53,28 @@
             <canvas class="screen" tap="skip_intro()"></canvas>
         </div>
         
-        <div id="home" ng-switch-when="home" class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController">            
+        <div id="home" ng-switch-when="home" class="page" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="homeController"> 
 
             <canvas class="particles"></canvas>
             <canvas class="screen"></canvas>
             <div class="slogan">In a small town, there are supposed to be no secrets</div>
-            <div id='side_page_right'>
-              <div class='cont_rhom_right'></div>
-            </div>
-            <div id='side_page_left'>
+            <div ng-repeat="(key, item) in state.data.homepage_data" on-complete on-complete-callback="init_squary()" id='{{key}}' >
+                <div class='cont_rhom' ng-repeat="itm in item" index="{{$index}}">
+                  <div class='rhom_before'>
+                    <div class="rhom_after" >
+                      <div class='text_rhom' ng-switch="itm.type">
+                          <img ng-switch-when="image"/>
+                          <div class='video' id='{{itm.id}}'
+                            ng-switch-when="video">
+                          </div>
+                      </div>
+                    </div>
+                    <img ng-if='itm.type == "video"' class='preloader' ng-src='image/preloader_big_black.gif'>
+                  </div>
+                </div>
             </div>
         </div>
-        
+
         <div id="news" ng-switch-when="news" class="page" ng-controller="mediaController">
             <div class="b-content">
                 <div class="b-content_inside">
@@ -164,7 +174,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                         <div ng-switch-when="video" class="i-video__group" ng-repeat="group in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
                                             <div class="i-video" ng-repeat="item in group track by $index" animate-image-load duration="1" img-url="item.src" id="itm{{item.id}}">
                                                 <a href="#media/{{selectedType.label}}/{{item.id}}">
@@ -306,18 +315,29 @@
             <div id="intro_bg"></div>
             <canvas class="screen mobile_intro" tap="skip_intro()" class='mobile_intro'></canvas>
         </div>
-        
+
         <div id="home" ng-switch-when="home" ng-if='!state.tablet' class="page mobile_home" ng-class="{selected: state.selectedPage == 'home'}" ng-controller="mobileHomeController">
             <div class="bg_mobile"></div>
             <canvas class="particles"></canvas>
             <canvas class="screen mobile_intro"></canvas>
-            <div id='side_page_right' ng-class='{mobile_squary:state.orien == "portrait"}'>
-              <div class='cont_rhom_right'></div>
-              <div class="btn_top" ng-if='state.orien == "portrait"' tap='goScroll("top")'>
-                  <span class="btn"></span>
-              </div>
+
+            <div ng-repeat="(key, item) in state.data.homepage_data" on-complete on-complete-callback="init_squary()" id='{{key}}' ng-class='{mobile_squary:state.orien == "portrait"}' ng-hide="key=='side_page_left'">
+                <div class='cont_rhom' ng-repeat="itm in item" index="{{$index}}">
+                  <div class='rhom_before'>
+                    <div class="rhom_after" >
+                      <div class='text_rhom' ng-switch="itm.type">
+                          <img ng-switch-when="image"/>
+                          <div class='video' id='{{itm.id}}'
+                            ng-switch-when="video">
+                          </div>
+                      </div>
+                    </div>
+                    <img ng-if='itm.type == "video"' class='preloader' ng-src='image/preloader_big_black.gif'>
+                  </div>
+                </div>
             </div>
-            <div id='side_page_left' ng-hide="state.orien == 'portrait'">
+            <div class="btn_top" ng-if='state.orien == "portrait"' tap='goScroll("top")'>
+                <span class="btn"></span>
             </div>
         </div>
 
@@ -325,12 +345,23 @@
             <div class="bg_mobile"></div>
             <canvas class="particles"></canvas>
             <canvas class="screen mobile_intro"></canvas>
-            <div id='side_page_right'>
-              <div class='cont_rhom_right'></div>
+            <div ng-repeat="(key, item) in state.data.homepage_data" on-complete on-complete-callback="init_squary()" id='{{key}}' >
+                <div class='cont_rhom' ng-repeat="itm in item" index="{{$index}}">
+                  <div class='rhom_before'>
+                    <div class="rhom_after" >
+                      <div class='text_rhom' ng-switch="itm.type">
+                          <img ng-switch-when="image"/>
+                          <div class='video' id='{{itm.id}}'
+                            ng-switch-when="video">
+                          </div>
+                      </div>
+                    </div>
+                    <img ng-if='itm.type == "video"' class='preloader' ng-src='image/preloader_big_black.gif'>
+                  </div>
+                </div>
             </div>
-            <div id='side_page_left'></div>
         </div>
-        
+
         <div id="news" ng-switch-when="news" class="page" ng-controller="mobileMediaController">
             <div class="b-content">
                 <div class="b-content_inside">

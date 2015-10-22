@@ -1,6 +1,6 @@
 {
     "homepage_data": {
-        "sq_arr_right": [
+        "side_page_right": [
             {"i": 0, "j": 3, "src": "YclpxGqaL7o", "type": "video", "id": "video_1"},
             {"i": 2, "j": 3, "src": "image/main/5.jpg", "type": "image"},
             {"i": 0, "j": 2, "src": "image/main/7.jpg", "type": "image"},
@@ -11,7 +11,7 @@
             {"i": 2, "j": 2, "src": "8lXOLMr2vbs", "type": "video", "id": "video_3"},
             {"i": 1, "j": 0, "src": "image/main/12.jpg", "type": "image"}
         ],
-        "sq_arr_left": [
+        "side_page_left": [
             {"i": 0, "j": 0, "src": "image/main/10.jpg", "type": "image"}, 
             {"i": 1, "j": 0, "src": "image/main/3.jpg", "type": "image"},
             {"i": 1, "j": 1, "src": "image/main/8.jpg", "type": "image"} 

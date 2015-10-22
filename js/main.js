@@ -304,19 +304,26 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
         v.main_menu.init(state.data.pages, 0, state.mobile_style)       
     }
 
+    $s.init_squary = function() {
+        v.squares.init(state.data.homepage_data, state.mobile_style, state.tablet, state.orien)
+    }
+
     $s.onMenuHeaderClick = function() {
-        v.main_menu.hide_header(state.mobile_style)
-        v.main_menu.expand()
-        v.transition.expand(state.mobile_style)
+        if(v.transition.current_state == 'collapsed'){
+            v.main_menu.hide_header(state.mobile_style)
+            v.main_menu.expand()
+            v.transition.expand(state.mobile_style)
+        }
     }
 
     $s.onMenuCloseClick = function() {
-        v.transition.collapse(state.mobile_style);
-        v.main_menu.collapse(state.mobile_style);
-
-        $t(function(){
-            v.main_menu.show_header(0.3);
-        },200)
+        if(v.transition.current_state == 'expanded'){
+            v.transition.collapse(state.mobile_style);
+            v.main_menu.collapse(state.mobile_style);
+            $t(function(){
+                v.main_menu.show_header(0.3);
+            },200)
+        }
     }
 }])
 .controller("desktopController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
@@ -612,10 +619,8 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     v.particles.set_canvas(doc.querySelector('#home .particles'))
     v.particles.init($w.innerWidth, $w.innerHeight)
     v.particles.runRepaint();
-    v.squares.init(state.data.homepage_data)
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
-    v.squares.show()
     
     on_resize()
     angular.element($w).on('resize', on_resize)
@@ -647,6 +652,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
         angular.element($w).off('resize', on_resize)
         v.particles.stopRepaint()
         v.intro.stopRepaint()
+        v.squares.destroy()
     }
 }])
 .controller('introController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state){

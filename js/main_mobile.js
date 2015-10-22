@@ -4,7 +4,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.preloader.set_skip_frames(3)
 
     v.transition.onOpened = function() {
-
         state.set_selected_page(state.pageToChange)
         $s.$apply();
 
@@ -117,10 +116,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.intro.canvas.x = 0;
     TweenLite.to(v.intro.canvas, 3, {x: x_1, y: y_1});
 
-    v.squares.init(state.data.homepage_data, state.mobile_style, state.tablet, state.orien)
-
     TweenLite.to(v.particles, 2, {kalpha: 3})
-    v.squares.show(state.mobile_style && !state.tablet)
 
     on_resize()
     angular.element($w).on('resize', on_resize)
@@ -150,6 +146,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
 
     function clean_up() {
         angular.element($w).off('resize', on_resize)
+        v.squares.destroy()
     }
 }])
 .controller('mobileTabletHomeController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state) {
@@ -170,14 +167,12 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var y_1 = -0.2*$w.innerHeight;
     v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
     v.intro.canvas.top = y_0;
-        v.intro.canvas.y = 0;
-        var x_0 = $w.innerWidth > $w.innerHeight ? -200 : 0;
-        TweenLite.to(v.intro.canvas, 3, {x: x_0});
+    v.intro.canvas.y = 0;
+    var x_0 = $w.innerWidth > $w.innerHeight ? -200 : 0;
+    TweenLite.to(v.intro.canvas, 3, {x: x_0});
 
-    v.squares.init(state.data.homepage_data, state.mobile_style, state.tablet)
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
-    v.squares.show(state.mobile_style && !state.tablet)
 
     on_resize()
     angular.element($w).on('resize', on_resize)
@@ -204,6 +199,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
 
     function clean_up() {
         angular.element($w).off('resize', on_resize)
+        v.squares.destroy()
     }
 }])
 .controller('mobileIntroController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state){

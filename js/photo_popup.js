@@ -48,8 +48,6 @@ PhotoPopup.prototype = {
         this.img_cont.alpha = 1
         TweenLite.from(this.img_cont, 0.5, {alpha: 0, x: this.img_cont.sx-10, delay: 0.8})
         
-        console.log("show photo popup", data.src_big)
-        
         this.img.alpha = 0
         this.img.src = data.src_big
         this.img.onload = angular.bind(this, this.on_image_load)
