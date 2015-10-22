@@ -584,30 +584,29 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   position:absolute;
   top: 0px;
 }
-#side_page_right .cont_rhom_right{
-  width: 100%;
-  height: 100%;
-  overflow:hidden;
-}
 
-#side_page_right.mobile_squary .btn_top{
+
+#home .btn_top{
   position:absolute;
-  bottom: 60px;
+  bottom: 100px;
   right: 10%;
 }
 .cont_rhom{
   position: absolute;   
   display: inline-block;
-  overflow: hidden;
+  // overflow: hidden;
+
 }
 .rhom_before, 
 .rhom_after{
   width: 100%;
   height: 100%;
-  position: relative;
+  // position: relative;
   overflow: hidden;
+  opacity: 0.99;
 }
 .rhom_before{
+  // position:relative;
   background-color: #000;
   img.preloader{
     position: absolute;
@@ -616,6 +615,9 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     margin-top: -30px;
     margin-left: -30px;
   }
+}
+.rhom_after{
+  position:relative
 }
 
 .text_rhom{
@@ -627,7 +629,8 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   transform: rotate(45deg);
   background-size: auto 100%;
   background-position-x: center;
-  overflow: hidden;
+  // overflow: hidden;
+  opacity: 0.99;
 
  .video{
     position:absolute;
