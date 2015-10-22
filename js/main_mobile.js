@@ -4,7 +4,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.preloader.set_skip_frames(3)
 
     v.transition.onOpened = function() {
-
         state.set_selected_page(state.pageToChange)
         $s.$apply();
 

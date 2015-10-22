@@ -154,19 +154,17 @@ Anim_menu.prototype = {
     },
 
     collapse: function(mobile) {
-
-        var expand_delay = expand_delay || 0
         var delay = 0;
         var self = this;
 
         for (var i=0, l=this.items.length; i<l; i++) {
             var itm = this.items[i];
             itm.alpha = 1;
-            delay = expand_delay + (l-i-1)*0.1;
+            delay = (l-i-1)*0.1;
             TweenLite.to(itm, 0.3, {x: -250, alpha: 0, delay: delay, ease: Power0.easeOut});
-            setTimeout(function(itm){
+            itm.anim = setTimeout(function(itm){
                 itm.visible = false;
-            }, 300, itm)
+            }, 300*(l-i), itm)
         }
 
         TweenLite.to(this.close_btn, 0.2, {y: -90, delay: 0})
@@ -183,9 +181,13 @@ Anim_menu.prototype = {
         this.menu_cont.visible = true;
 
         for (var i=0; i<this.items.length; i++) {
-            var itm = this.items[i]
+            var itm = this.items[i];
+            if(itm.anim){
+                clearTimeout(itm.anim)
+            }
             itm.visible = true
             itm.alpha = 0
+
             delay = expand_delay + i*0.1
             TweenLite.to(itm, 0.3, {x: 0, alpha: 1, delay: delay, ease: Power0.easeOut})
         }

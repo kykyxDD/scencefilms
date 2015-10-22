@@ -308,18 +308,21 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
     }
 
     $s.onMenuHeaderClick = function() {
-        v.main_menu.hide_header(state.mobile_style)
-        v.main_menu.expand()
-        v.transition.expand(state.mobile_style)
+        if(v.transition.current_state == 'collapsed'){
+            v.main_menu.hide_header(state.mobile_style)
+            v.main_menu.expand()
+            v.transition.expand(state.mobile_style)
+        }
     }
 
     $s.onMenuCloseClick = function() {
-        v.transition.collapse(state.mobile_style);
-        v.main_menu.collapse(state.mobile_style);
-
-        $t(function(){
-            v.main_menu.show_header(0.3);
-        },200)
+        if(v.transition.current_state == 'expanded'){
+            v.transition.collapse(state.mobile_style);
+            v.main_menu.collapse(state.mobile_style);
+            $t(function(){
+                v.main_menu.show_header(0.3);
+            },200)
+        }
     }
 }])
 .controller("desktopController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
