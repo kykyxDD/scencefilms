@@ -131,11 +131,11 @@
                              data-image="site_url + selectedItem.img"
                              showcounts="true">
                             <li>Share:</li>
-                            <li class="ng-social-facebook">Facebook</li>
-                            <li class="ng-social-google-plus">Google+</li>
-                            <li class="ng-social-twitter">Twitter</li>
-                            <li class="ng-social-pinterest">Pinterest</li>
-                            <li class="ng-social-linkedin">LinkedIn</li>
+                            <li ng-social-facebook class="ng-social-facebook">Facebook</li>
+                            <li ng-social-google-plus class="ng-social-google-plus">Google+</li>
+                            <li ng-social-twitter class="ng-social-twitter">Twitter</li>
+                            <li ng-social-pinterest class="ng-social-pinterest">Pinterest</li>
+                            <li ng-social-linkedin class="ng-social-linkedin">LinkedIn</li>
                         </ul>
                     </div>
                 </div>
@@ -165,10 +165,17 @@
                                                 </div>
                                                 <div class="w-share">
                                                     <div class="b-share">
-                                                        <ul class="l-share">
-                                                            <li><a ng-href="#media/{{selectedType.label}}/{{item.id}}" class="i-plus" ></a></li>
-                                                            <li><a class="i-like"></a></li>
-                                                            <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
+                                                        <ul class="l-share" ng-social-buttons
+                                                                 data-url="site_url + '#media/' + selectedType.label + '/ + item.id"
+                                                                 data-title="'Scent of Rain and Lighntning Photo'"
+                                                                 data-description="''"
+                                                                 data-image="site_url + item.src"
+                                                                 showcounts="true">
+                                                                 
+                                                                <li><a ng-href="#media/{{selectedType.label}}/{{item.id}}" class="i-plus" ></a></li>
+                                                                <li ng-social-facebook customclass="i-facebook"></li>
+                                                                <li ng-social-google-plus customclass="i-google_plus"></li>
+                                                                <li ng-social-twitter customclass="i-twett"></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -216,11 +223,11 @@
                          data-image="site_url + selectedItem.img"
                          showcounts="true">
                         <li>Share:</li>
-                        <li class="ng-social-facebook">Facebook</li>
-                        <li class="ng-social-google-plus">Google+</li>
-                        <li class="ng-social-twitter">Twitter</li>
-                        <li class="ng-social-pinterest">Pinterest</li>
-                        <li class="ng-social-linkedin">LinkedIn</li>
+                        <li ng-social-facebook class="ng-social-facebook">Facebook</li>
+                        <li ng-social-google-plus class="ng-social-google-plus">Google+</li>
+                        <li ng-social-twitter class="ng-social-twitter">Twitter</li>
+                        <li ng-social-pinterest class="ng-social-pinterest">Pinterest</li>
+                        <li ng-social-linkedin class="ng-social-linkedin">LinkedIn</li>
                     </ul>
                 </div>
                 <div class="video_list">

@@ -129,17 +129,16 @@ angular.module('ngSocial', [])
     }
   };
   return {
-    restrict: 'C',
     require: '^?ngSocialButtons',
     scope: true,
     replace: true,
     transclude: true,
     template: '<li> \
-                    <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" class="ng-social-button"> \
-                        <span class="ng-social-icon"></span> \
-                        <span class="ng-social-text" ng-transclude></span> \
+                    <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" class="{{button_class}}"> \
+                        <span ng-show="!has_customclass" class="ng-social-icon"></span> \
+                        <span ng-show="!has_customclass" class="ng-social-text" ng-transclude></span> \
                     </a> \
-                    <span ng-show="count" class="ng-social-counter">{{ count }}</span> \
+                    <span ng-show="count && !has_customclass" class="ng-social-counter">{{ count }}</span> \
                    </li>',
     link: function (scope, element, attrs, ctrl) {
       element.addClass('ng-social-pinterest');
@@ -151,6 +150,8 @@ angular.module('ngSocial', [])
         title: $parse(attrs.title)(scope),
         image: $parse(attrs.image)(scope)
       };
+      scope.button_class = attrs.customclass || 'ng-social-button'
+      scope.has_customclass = Boolean(attrs.customclass)
       scope.options = options;
       scope.ctrl = ctrl;
       ctrl.init(scope, element, options);
@@ -205,6 +206,8 @@ angular.module('ngSocial', [])
               title: $parse(attrs.title)(scope),
               description: $parse(attrs.description)(scope)
             };
+            scope.button_class = attrs.customclass || 'ng-social-button'
+            scope.has_customclass = Boolean(attrs.customclass)
             scope.options = options;
             scope.ctrl = ctrl;
             ctrl.init(scope, element, options);
