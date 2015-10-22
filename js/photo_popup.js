@@ -67,8 +67,6 @@ PhotoPopup.prototype = {
         this.img.y = (this.img_cont.h - this.img.height*k)/2 - this.img.height*(1-k)/2
         
         var oversize = 1.25
-        //var dx = ((this.img_cont.w - this.img.width*k*oversize)/2 - this.img.x)/2
-        //var dy = ((this.img_cont.h - this.img.height*k*oversize)/2 - this.img.y)/2
         
         this.img.alpha = 1
         TweenLite.from(this.img, 1, {alpha: 0, scaleX: k*oversize, scaleY: k*oversize})
