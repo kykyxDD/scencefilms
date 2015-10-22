@@ -1,4 +1,4 @@
-var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
+var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial'])
 .config(function($locationProvider) {
     $locationProvider.html5Mode(false)
     //$locationProvider.hashPrefix('!')
@@ -155,6 +155,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
 
     var doc = $doc[0];
     $s.state = state
+    $s.site_url = $loc.absUrl().replace($loc.url(), "").replace("#", "")
     
     onResize()
     angular.element($window).on('resize', onResize)
@@ -535,6 +536,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize'])
                         popup = popup_factory(itm.type)
                         popup.resize($w.innerWidth, $w.innerHeight)
                         
+                        $s.selectedItem = itm
                         popup.show(target, itm)
                     }
                     
