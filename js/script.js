@@ -142,20 +142,16 @@ Anim_menu.prototype = {
 
     hide_header: function(mobile) {
         var win_width = window.innerWidth;
-        var self = this;
         if(!mobile){
             TweenLite.to(this.header_cont, 0.5, {x: 150, alpha: 0})
         } else {
             TweenLite.to(this.header_cont, 0.5, {x: win_width, alpha: 0})
         }
-        setTimeout(function(){
-           self.header_cont.visible = false;
-        },500)
+        this.header_cont.visible = false;
     },
 
     collapse: function(mobile) {
         var delay = 0;
-        var self = this;
 
         for (var i=0, l=this.items.length; i<l; i++) {
             var itm = this.items[i];
@@ -166,12 +162,10 @@ Anim_menu.prototype = {
                 itm.visible = false;
             }, 300*(l-i), itm)
         }
-
+        TweenLite.killTweensOf(this.close_btn);
         TweenLite.to(this.close_btn, 0.2, {y: -90, delay: 0})
 
-        setTimeout(function(){
-            self.menu_cont.visible = false;
-        }, 1000)
+        this.menu_cont.visible = false;
     },
     
     expand: function(expand_delay) {
@@ -191,7 +185,7 @@ Anim_menu.prototype = {
             delay = expand_delay + i*0.1
             TweenLite.to(itm, 0.3, {x: 0, alpha: 1, delay: delay, ease: Power0.easeOut})
         }
-
+        TweenLite.killTweensOf(this.close_btn);
         TweenLite.to(this.close_btn, 0.2, {y: 0, delay: expand_delay + 0.3})
         TweenLite.to(this.close_btn, 0.9, {y: 7, delay: expand_delay + 0.3 + 0.2})
     },

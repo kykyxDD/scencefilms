@@ -139,6 +139,8 @@ Transition.prototype = {
         this.cont.scaleX = 1;
         this.cont.scaleY = 1;
 
+        TweenLite.killTweensOf(this.cont);
+
         if(!mobile){
             TweenLite.to(this.cont, 0.35*this.time_scale, {y: 167, ease: Power1.easeOut, onComplete: function(){ if (this.debug) console.log("onCollapsed"); this.onCollapsed()}, onCompleteScope: this})
             TweenLite.to(this.cont, 1*this.time_scale, {y: 152, ease: Power1.easeOut, delay: 0.35*this.time_scale})
@@ -152,6 +154,7 @@ Transition.prototype = {
         if (this.debug) console.log("expand")
 
         this.current_state = 'expanded';
+        TweenLite.killTweensOf(this.cont);
 
         if(!mobile){
             TweenLite.to(this.cont, 0.35*this.time_scale, {y: 350, ease: Power1.easeOut, onComplete: function() {if (this.debug) console.log("onExpanded"); this.onExpanded()}, onCompleteScope: this})
