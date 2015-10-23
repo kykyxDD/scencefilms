@@ -134,6 +134,7 @@ angular.module('ngSocial', [])
     scope: true,
     replace: true,
     transclude: true,
+    /*
     template: '<li> \
                     <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" class="ng-social-button"> \
                         <span class="ng-social-icon"></span> \
@@ -141,6 +142,10 @@ angular.module('ngSocial', [])
                     </a> \
                     <span ng-show="count" class="ng-social-counter">{{ count }}</span> \
                    </li>',
+    */
+    template: '<li> \
+                    <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" ng-transclude></a> \
+              </li>',
     link: function (scope, element, attrs, ctrl) {
       element.addClass('ng-social-pinterest');
       if (!ctrl) {
@@ -188,6 +193,7 @@ angular.module('ngSocial', [])
         scope: true,
         replace: true,
         transclude: true,
+        /*
         template: '<li> \
                     <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" class="ng-social-button"> \
                         <span class="ng-social-icon"></span> \
@@ -195,6 +201,11 @@ angular.module('ngSocial', [])
                     </a> \
                     <span ng-show="count" class="ng-social-counter">{{ count }}</span> \
                    </li>',
+        */
+        template: '<li> \
+                        <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" ng-transclude></a> \
+                  </li>',
+
         link: function(scope, element, attrs, ctrl) {
             element.addClass('ng-social-linkedin');
             if (!ctrl) {
@@ -253,6 +264,7 @@ angular.module('ngSocial', [])
     scope: true,
     replace: true,
     transclude: true,
+    /*
     template: '<li> \
                     <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" class="ng-social-button"> \
                         <span class="ng-social-icon"></span> \
@@ -260,6 +272,11 @@ angular.module('ngSocial', [])
                     </a> \
                     <span ng-show="count" class="ng-social-counter">{{ count }}</span> \
                    </li>',
+    */
+    template: '<li> \
+                    <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" ng-transclude></a> \
+              </li>',
+
     link: function (scope, element, attrs, ctrl) {
       element.addClass('ng-social-google-plus');
       if (!ctrl) {
@@ -305,6 +322,7 @@ angular.module('ngSocial', [])
     scope: true,
     replace: true,
     transclude: true,
+    /*
     template: '<li> \
                     <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" class="ng-social-button"> \
                         <span class="ng-social-icon"></span> \
@@ -312,6 +330,10 @@ angular.module('ngSocial', [])
                     </a> \
                     <span ng-show="count" class="ng-social-counter">{{ count }}</span> \
                    </li>',
+    */
+    template: '<li> \
+                    <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" ng-transclude></a> \
+              </li>',
     link: function (scope, element, attrs, ctrl) {
       element.addClass('ng-social-twitter');
       if (!ctrl) {
@@ -358,6 +380,7 @@ angular.module('ngSocial', [])
     scope: true,
     replace: true,
     transclude: true,
+    /*
     template: '<li>' +
     '<a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)"' +
     ' class="ng-social-button">' +
@@ -366,6 +389,10 @@ angular.module('ngSocial', [])
     '</a>' +
     '<span ng-show="count" class="ng-social-counter">{{ count }}</span>' +
     '</li>',
+    */
+    template: '<li> \
+                    <a ng-href="{{ctrl.link(options)}}" target="_blank" ng-click="ctrl.clickShare($event, options)" ng-transclude></a> \
+              </li>',
     link: function (scope, element, attrs, ctrl) {
       element.addClass('ng-social-facebook');
       if (!ctrl) {

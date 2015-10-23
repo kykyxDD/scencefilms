@@ -432,6 +432,10 @@ body {
     @include oneline-sprite($icons_x2, instagramB, $retina: true);
   }
 
+  .i-pinterest {
+    @include oneline-sprite($icons_x2, pinterestB, $retina: true);
+  }
+
   .i-google_plus {
     @include oneline-sprite($icons_x2, googlePlusB, $retina: true);
   }

@@ -9,7 +9,6 @@
     <meta content="telephone=no" name="format-detection" />
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
-    <link rel="stylesheet" href="css/angular-social.css">
     <script src='js/lib/angular/angular.min.js'></script>
     <script src='js/lib/angular/angular-sanitize.min.js'></script>
     <script src='js/lib/angular/angular-social.js'></script>
@@ -132,12 +131,10 @@
                              data-description="selectedItem.full_desc"
                              data-image="site_url + selectedItem.img"
                              showcounts="true">
-                            <li>Share:</li>
-                            <li class="ng-social-facebook">Facebook</li>
-                            <li class="ng-social-google-plus">Google+</li>
-                            <li class="ng-social-twitter">Twitter</li>
-                            <li class="ng-social-pinterest">Pinterest</li>
-                            <li class="ng-social-linkedin">LinkedIn</li>
+                            <li class="ng-social-facebook"><div class="ico fb"></div></li>
+                            <li class="ng-social-google-plus"><div class="ico gp"></div></li>
+                            <li class="ng-social-twitter"><div class="ico twitter"></div></li>
+                            <li class="ng-social-linkedin"><div class="ico ln"></div></li>
                         </ul>
                     </div>
                 </div>
@@ -167,10 +164,19 @@
                                                 </div>
                                                 <div class="w-share">
                                                     <div class="b-share">
-                                                        <ul class="l-share">
-                                                            <li><a ng-href="#media/{{selectedType.label}}/{{item.id}}" class="i-plus" ></a></li>
-                                                            <li><a class="i-like"></a></li>
-                                                            <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
+                                                        <ul class="l-share" ng-social-buttons
+                                                                 data-url="site_url + '#media/' + selectedType.label + '/ + item.id"
+                                                                 data-title="'Scent of Rain and Lighntning Photo'"
+                                                                 data-description="''"
+                                                                 data-image="site_url + item.src"
+                                                                 showcounts="true">
+                                                                 
+                                                                <li><a ng-href="#media/{{selectedType.label}}/{{item.id}}" class="i-plus" ></a></li>
+                                                                <li class="ng-social-facebook"><a class="i-facebook"></a></li>
+                                                                <li class="ng-social-google-plus"><a class="i-google_plus"></a></li>
+                                                                <li class="ng-social-twitter"><a class="i-twett"></a></li>
+                                                                <li class="ng-social-pinterest"><a class="i-pinterest"></a></li>
+
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -212,17 +218,15 @@
                 <div class="video_desc">
                     <h3 class="title"></h3>
                     <ul ng-social-buttons
-                         data-url="site_url + '#news/' + selectedType.label + '/ + selectedItem.id"
-                         data-title="selectedItem.short_desc"
-                         data-description="selectedItem.full_desc"
-                         data-image="site_url + selectedItem.img"
+                         data-url="site_url + '#media/' + selectedType.label + '/ + selectedItem.id"
+                         data-title="selectedItem.desc"
+                         data-image="site_url + selectedItem.src"
                          showcounts="true">
-                        <li>Share:</li>
-                        <li class="ng-social-facebook">Facebook</li>
-                        <li class="ng-social-google-plus">Google+</li>
-                        <li class="ng-social-twitter">Twitter</li>
-                        <li class="ng-social-pinterest">Pinterest</li>
-                        <li class="ng-social-linkedin">LinkedIn</li>
+                        <li class="ng-social-facebook"><div class="ico fb"></div></li>
+                        <li class="ng-social-google-plus"><div class="ico gp"></div></li>
+                        <li class="ng-social-twitter"><div class="ico twitter"></div></li>
+                        <li class="ng-social-linkedin"><div class="ico ln"></div></li>
+                        <li class="ng-social-pinterest"><div class="ico pinterest"></div></li>
                     </ul>
                 </div>
                 <div class="video_list">
