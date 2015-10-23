@@ -7,7 +7,6 @@
     <meta content="telephone=no" name="format-detection" />
     <meta content="address=no" name="format-detection" />
     <link rel="stylesheet" type="text/css" href="css/screen.css">
-    <link rel="stylesheet" href="css/angular-social.css">
     <script src='js/lib/angular/angular.min.js'></script>
     <script src='js/lib/angular/angular-sanitize.min.js'></script>
     <script src='js/lib/angular/angular-social.js'></script>
@@ -130,12 +129,10 @@
                              data-description="selectedItem.full_desc"
                              data-image="site_url + selectedItem.img"
                              showcounts="true">
-                            <li>Share:</li>
-                            <li ng-social-facebook class="ng-social-facebook">Facebook</li>
-                            <li ng-social-google-plus class="ng-social-google-plus">Google+</li>
-                            <li ng-social-twitter class="ng-social-twitter">Twitter</li>
-                            <li ng-social-pinterest class="ng-social-pinterest">Pinterest</li>
-                            <li ng-social-linkedin class="ng-social-linkedin">LinkedIn</li>
+                            <li class="ng-social-facebook"><div class="ico fb"></div></li>
+                            <li class="ng-social-google-plus"><div class="ico gp"></div></li>
+                            <li class="ng-social-twitter"><div class="ico twitter"></div></li>
+                            <li class="ng-social-linkedin"><div class="ico ln"></div></li>
                         </ul>
                     </div>
                 </div>
@@ -173,9 +170,11 @@
                                                                  showcounts="true">
                                                                  
                                                                 <li><a ng-href="#media/{{selectedType.label}}/{{item.id}}" class="i-plus" ></a></li>
-                                                                <li ng-social-facebook customclass="i-facebook"></li>
-                                                                <li ng-social-google-plus customclass="i-google_plus"></li>
-                                                                <li ng-social-twitter customclass="i-twett"></li>
+                                                                <li class="ng-social-facebook"><a class="i-facebook"></a></li>
+                                                                <li class="ng-social-google-plus"><a class="i-google_plus"></a></li>
+                                                                <li class="ng-social-twitter"><a class="i-twett"></a></li>
+                                                                <li class="ng-social-pinterest"><a class="i-pinterest"></a></li>
+
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -217,17 +216,15 @@
                 <div class="video_desc">
                     <h3 class="title"></h3>
                     <ul ng-social-buttons
-                         data-url="site_url + '#news/' + selectedType.label + '/ + selectedItem.id"
-                         data-title="selectedItem.short_desc"
-                         data-description="selectedItem.full_desc"
-                         data-image="site_url + selectedItem.img"
+                         data-url="site_url + '#media/' + selectedType.label + '/ + selectedItem.id"
+                         data-title="selectedItem.desc"
+                         data-image="site_url + selectedItem.src"
                          showcounts="true">
-                        <li>Share:</li>
-                        <li ng-social-facebook class="ng-social-facebook">Facebook</li>
-                        <li ng-social-google-plus class="ng-social-google-plus">Google+</li>
-                        <li ng-social-twitter class="ng-social-twitter">Twitter</li>
-                        <li ng-social-pinterest class="ng-social-pinterest">Pinterest</li>
-                        <li ng-social-linkedin class="ng-social-linkedin">LinkedIn</li>
+                        <li class="ng-social-facebook"><div class="ico fb"></div></li>
+                        <li class="ng-social-google-plus"><div class="ico gp"></div></li>
+                        <li class="ng-social-twitter"><div class="ico twitter"></div></li>
+                        <li class="ng-social-linkedin"><div class="ico ln"></div></li>
+                        <li class="ng-social-pinterest"><div class="ico pinterest"></div></li>
                     </ul>
                 </div>
                 <div class="video_list">
