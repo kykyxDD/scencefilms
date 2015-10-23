@@ -136,9 +136,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
             TweenLite.killTweensOf(v.intro.canvas)
             v.intro.canvas.x = x_1;
             v.intro.canvas.y = y_1;
-            if(state.orien == 'landscape' && state.selectedPage == 'home'){
-                $w.scrollTo(0, 0);
-            }
         } 
     }
 

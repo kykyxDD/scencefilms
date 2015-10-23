@@ -421,16 +421,24 @@
                         <div class="b-photo">
                             <div ng-switch="selectedType.type">
                                 <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by $index">
-                                    <div tap="showPictureWindow(item.src_big)" ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
+                                    <div  ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}">
                                         <div class="img">
                                             <img alt="img" ng-src="{{item.src}}"/>
                                         </div>
                                         <div class="w-share">
                                             <div class="b-share">
-                                                <ul class="l-share">
-                                                    <li><a href="#" class="i-plus"></a></li>
-                                                    <li><a href="#" class="i-like"></a></li>
-                                                    <li ng-repeat="link in item.links"><a ng-href="{{link.href}}" class="{{link.type}}"></a></li>
+                                                <ul class="l-share" ng-social-buttons
+                                                         data-url="site_url + '#media/' + selectedType.label + '/ + item.id"
+                                                         data-title="'Scent of Rain and Lighntning Photo'"
+                                                         data-description="''"
+                                                         data-image="site_url + item.src"
+                                                         showcounts="true">
+                                                        <li><a class="i-plus" ng-href="{{item.src_big}}" target="_blank"></a></li>
+                                                        <li class="ng-social-facebook"><a class="i-facebook"></a></li>
+                                                        <li class="ng-social-google-plus"><a class="i-google_plus"></a></li>
+                                                        <li class="ng-social-twitter"><a class="i-twett"></a></li>
+                                                        <li class="ng-social-pinterest"><a class="i-pinterest"></a></li>
+
                                                 </ul>
                                             </div>
                                         </div>
