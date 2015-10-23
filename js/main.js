@@ -376,7 +376,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     var doc = $doc[0]
     var scroll_cont = doc.querySelector('.b-text .text')
     var text_cont = scroll_cont.firstElementChild
-    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true})
+    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: false})
     ScreenObject.decorate_element.apply(scroll_cont)
     
     onResize()
