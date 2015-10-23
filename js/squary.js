@@ -349,7 +349,10 @@ Squares.prototype = {
             } while (next_id == id)
 
             if(arr[id] && arr[next_id] && arr[id].player && arr[next_id].player){
-                arr[id].player.pauseVideo()
+                var status = arr[id].player.getPlayerState();
+                if(status == 1){
+                    arr[id].player.pauseVideo()
+                }
                 arr[next_id].player.playVideo()
                 id = next_id;
             }
