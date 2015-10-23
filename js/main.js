@@ -223,8 +223,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
                     state.set_selected_page(new_page)
                 }
                 else {
-                    v.main_menu.collapse(state.mobile_style)
-                    v.main_menu.hide_header(state.mobile_style)
+                    v.main_menu.collapse(state.mobile_style, 'hide')
                     v.transition.open()
                     v.background.stop()
                 }
@@ -319,10 +318,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     $s.onMenuCloseClick = function() {
         if(v.transition.current_state == 'expanded'){
             v.transition.collapse(state.mobile_style);
-            v.main_menu.collapse(state.mobile_style);
-            $t(function(){
-                v.main_menu.show_header(0.3);
-            },200)
+            v.main_menu.collapse(state.mobile_style, 'show');
         }
     }
 }])

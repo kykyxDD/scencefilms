@@ -39,11 +39,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     angular.element($window).bind("scroll", function() {
         if(v.transition.current_state == 'expanded'){
             v.transition.collapse(state.mobile_style)
-            v.main_menu.collapse(state.mobile_style);
-
-            $t(function(){
-                v.main_menu.show_header(0.3);
-            },200)
+            v.main_menu.collapse(state.mobile_style, 'show');
         }
     });
 
@@ -139,9 +135,11 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         if(e) {
             TweenLite.killTweensOf(v.intro.canvas)
             v.intro.canvas.x = x_1;
-            v.intro.canvas.y = y_1 ;
+            v.intro.canvas.y = y_1;
+            if(state.orien == 'landscape' && state.selectedPage == 'home'){
+                $w.scrollTo(0, 0);
+            }
         } 
-
     }
 
     function clean_up() {
