@@ -751,7 +751,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
       height: 28px;
       top: -30px;
       left: 6px;
-      content: "122";
+      content: attr(data-content);
       color: #000000;
       font-size: 16px;
       line-height: 23px;
