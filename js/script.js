@@ -150,8 +150,12 @@ Anim_menu.prototype = {
         this.header_cont.visible = false;
     },
 
-    collapse: function(mobile) {
+    collapse: function(mobile, header) {
         var delay = 0;
+        var self = this;
+        if(this.anim_header){
+            clearTimeout(this.anim_header)
+        }
 
         for (var i=0, l=this.items.length; i<l; i++) {
             var itm = this.items[i];
@@ -166,6 +170,15 @@ Anim_menu.prototype = {
         TweenLite.to(this.close_btn, 0.2, {y: -90, delay: 0})
 
         this.menu_cont.visible = false;
+
+        this.anim_header = setTimeout(function(){
+            if(header == 'show'){
+                self.show_header()
+            } else if(header == 'hide'){
+                self.hide_header()
+            }
+        }, 200)
+
     },
     
     expand: function(expand_delay) {
@@ -204,6 +217,5 @@ Anim_menu.prototype = {
             this.menu_cont.style.left = '27px' 
             this.menu_cont.style.top = '65px'
         }
-
     }
-} 
+}

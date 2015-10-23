@@ -264,7 +264,6 @@ Squares.prototype = {
     },
 
     createVideo: function(page){
-        var delay_1 = this.delay*this.arr_video.length;
 
         var delay = this.delay;
         var text = page.elem.text_rhom;
@@ -300,7 +299,7 @@ Squares.prototype = {
             var img = page.elem.querySelector('img.preloader');
             img.parentNode.removeChild(img);
 
-            TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
+            TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay});
             page.elem.content.addEventListener('mouseover', function(event){
                 page.player.playVideo()
             })
@@ -329,7 +328,7 @@ Squares.prototype = {
         for(var i = 0; i < this.sq_arr_right.length; i++){
             if(this.sq_arr_right[i].type == 'video'){
                 var itm = this.sq_arr_right[i];
-                itm.player.destroy();
+                if(itm.player) itm.player.destroy();
             }
         }
     },
@@ -349,7 +348,10 @@ Squares.prototype = {
             } while (next_id == id)
 
             if(arr[id] && arr[next_id] && arr[id].player && arr[next_id].player){
-                arr[id].player.pauseVideo()
+                var status = arr[id].player.getPlayerState();
+                if(status == 1){
+                    arr[id].player.pauseVideo()
+                }
                 arr[next_id].player.playVideo()
                 id = next_id;
             }
