@@ -82,11 +82,14 @@ body {
   background-size: auto 100%;
 }
 
-#cast .text div[animate-text],
-#makers .text div[animate-text],
 #cast .tab li,
 #makers .tab li{
   cursor: pointer;
+}
+
+#cast .text,
+#makers .text {
+    position: relative;
 }
 
 #bg.news_all {

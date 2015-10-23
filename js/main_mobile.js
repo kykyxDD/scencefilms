@@ -132,14 +132,14 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.intro.canvas.scaleX = v.intro.canvas.scaleY = scale;
         var y_0 = $w.innerHeight/2;
         v.intro.canvas.top = y_0;
-        if(e) {
+        if (e) {
             TweenLite.killTweensOf(v.intro.canvas)
             v.intro.canvas.x = x_1;
             v.intro.canvas.y = y_1;
-            if(state.orien == 'landscape' && state.selectedPage == 'home'){
+            if (state.orien == 'landscape' && state.selectedPage == 'home'){
                 $w.scrollTo(0, 0);
             }
-        } 
+        }
     }
 
     function clean_up() {
