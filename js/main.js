@@ -621,6 +621,8 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     v.particles.runRepaint();
 
     TweenLite.to(v.particles, 2, {kalpha: 3})
+
+    v.squares.player_desktop();
     
     on_resize()
     angular.element($w).on('resize', on_resize)
@@ -653,6 +655,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
         v.particles.stopRepaint()
         v.intro.stopRepaint()
         v.squares.destroy()
+        v.squares.destroy_desktop()
     }
 }])
 .controller('introController', ['$scope', 'view', '$window', '$document', 'appState', function($s, v, $w, $doc, state){

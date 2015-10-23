@@ -11,9 +11,9 @@ function Squares (cont) {
     this.scape_text = 1.45;
     this.delay = 1;
     var self = this;
+    this.interval;
 
     this.rights = Math.round((this.sq_width*this.scape_text*3)*0.95);
-
 }
 
 Squares.prototype = {
@@ -71,7 +71,7 @@ Squares.prototype = {
         itm.elem.rhom_before = rhom_before;
         itm.elem.rhom_after = rhom_after;
         itm.elem.text_rhom = text_rhom;
-// 
+
         this.create_content(itm)
 
     },
@@ -85,11 +85,10 @@ Squares.prototype = {
         if(page.type == 'image'){
             content = text.querySelector('img');
             content.style.width = '100%';
-            content.style.height = '100%';   
-            // text.appendChild(content);
+            content.style.height = '100%';
             page.elem.content = content;
         } else if(page.type == 'video'){
-            content = page.elem.querySelector("#"+page.id);            
+            content = page.elem.querySelector("#"+page.id);
             page.elem.content = content;
         }
         ScreenObject.decorate_element.apply(page.elem.content);
@@ -143,7 +142,7 @@ Squares.prototype = {
 
         text.style.bottom = Math.round(-sq_width*0.23) + 'px';
         text.style.right = Math.round(-sq_width*0.23) + 'px';
-        
+
         if(page.type == 'video') {
             var scale = text.h/content.height;
             content.scaleX = content.scaleY = scale;
@@ -232,12 +231,12 @@ Squares.prototype = {
         var all_delay = num*sq_arr.length+(delay*0.5) + delay;
 
         for (var i = 0; i < sq_arr.length; i++){
-
-            var rhom_before = sq_arr[i].elem.rhom_before;
-            var rhom_after = sq_arr[i].elem.rhom_after;
-            var content = sq_arr[i].elem.content;
-            if(sq_arr[i].type == 'image'){
-                content.src = sq_arr[i].src;
+            var itm = sq_arr[i];
+            var rhom_before = itm.elem.rhom_before;
+            var rhom_after = itm.elem.rhom_after;
+            var content = itm.elem.content;
+            if(itm.type == 'image'){
+                content.src = itm.src;
             }
 
             rhom_before.scaleX = 0;
@@ -247,11 +246,13 @@ Squares.prototype = {
             rhom_after.scaleY = 0;
             var delay_1 = num*i+(delay*0.5);  
             TweenLite.to(rhom_before, delay, {scaleX: 1 , scaleY: 1 , delay: num*i});
-            if(sq_arr[i].type == 'video') continue
-            content.onload = (function(rhom, delay, delay_1, page){
-                TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
-            })(rhom_after, delay, delay_1, sq_arr[i])
-
+            if(itm.type == 'video') {
+                this.arr_video.push(itm)
+            } else {
+                content.onload = (function(rhom, delay, delay_1, page){
+                    TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay_1});
+                })(rhom_after, delay, delay_1, itm)
+            }
         };
 
         setTimeout(function(){
@@ -265,11 +266,11 @@ Squares.prototype = {
     createVideo: function(page){
         var delay_1 = this.delay*this.arr_video.length;
 
-        this.arr_video.push(page)
         var delay = this.delay;
         var text = page.elem.text_rhom;
         var rhom = page.elem.rhom_after;
         var self = this;
+
         var player =  new YT.Player(page.elem.content, {
             height: '390',
             width: '693',
@@ -284,7 +285,7 @@ Squares.prototype = {
                 'onReady': onPlayerReady,
             }
         });
-        
+
         page.elem.content = player.getIframe();
         ScreenObject.decorate_element.apply(page.elem.content);
 
@@ -330,7 +331,32 @@ Squares.prototype = {
                 var itm = this.sq_arr_right[i];
                 itm.player.destroy();
             }
-
         }
+    },
+
+    player_desktop: function(){
+        var delay = 10000;
+        var self = this;
+        var arr = this.arr_video;
+        var id = 0;
+        var next_id = 0;
+        var max_id = 2;
+        var min_id = 0;
+
+        this.interval = setInterval(function(){
+            do{
+                next_id = Math.floor(Math.random() * (max_id - min_id + 1)) + min_id;
+            } while (next_id == id)
+
+            if(arr[id] && arr[next_id] && arr[id].player && arr[next_id].player){
+                arr[id].player.pauseVideo()
+                arr[next_id].player.playVideo()
+                id = next_id;
+            }
+        }, delay)
+    },
+    destroy_desktop:function(){
+        var self = this;
+        if(this.interval) clearInterval(this.interval)
     }
 }
