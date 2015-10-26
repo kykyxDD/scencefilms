@@ -24,7 +24,7 @@ Transition.prototype = {
         this.black_exp_scale = 1
         this.time_scale = 1.25
         this.exp_rad = 2000
-    
+
         this.yellow_part = this.cont.querySelector('#yellow_part')
         this.yellow_part.squary = this.cont.querySelector('.bg.yellow');
         this.black_part = this.cont.querySelector('#black_part')
@@ -35,7 +35,7 @@ Transition.prototype = {
         ScreenObject.decorate_element.apply(this.black_part)
         ScreenObject.decorate_element.apply(this.yellow_part.squary)
         ScreenObject.decorate_element.apply(this.maska)
-        
+
         this.reset()
     },
     
@@ -57,7 +57,6 @@ Transition.prototype = {
 
             var elem = this.yellow_part.squary
             var vis_w = elem.left + elem.w;
-            
 
             var scale = window.innerWidth > window.innerHeight ? window.innerWidth/vis_w : window.innerHeight/vis_w; 
             if(this.current_state == 'expanded'){
@@ -90,7 +89,7 @@ Transition.prototype = {
 
         var tan_b = this.WIDTH / this.HEIGHT
         var projection_b = Math.cos(Math.atan(tan_b)) * this.HEIGHT
-        
+
         this.exp_rad = Math.max(projection_a, projection_b)
         var half_size = this.SQUARE_SIZE/2
         this.yellow_exp_scale = (this.exp_rad*2 / half_size)*1.2
@@ -98,11 +97,11 @@ Transition.prototype = {
     },
     
     reset: function() {
-        
+
         if (this.debug) console.log("reset")
-        
+
         this.current_state = 'closed'
-    
+
         this.yellow_part.x = 0
         this.yellow_part.y = 0
         this.yellow_part.scaleX = this.yellow_part.scaleY = 1
@@ -114,12 +113,12 @@ Transition.prototype = {
         this.cont.rotation = 45
         this.cont.x = 0
         this.cont.y = 0
-        
     },
 
     show: function(mobile) {
     
         if (this.debug) console.log("show")
+        this.maska.style.position = '';
 
         this.current_state = 'collapsed';
         this.cont.scaleX = 1;
@@ -185,17 +184,17 @@ Transition.prototype = {
         TweenLite.to(this.black_part, 0.5*this.time_scale, {scaleX: this.black_exp_scale*0.9, scaleY: this.black_exp_scale*0.9, delay: 0.2*this.time_scale, onComplete: function(){ this.onOpened(); if (this.debug) console.log("onOpened");}, onCompleteScope: this})
         TweenLite.to(this.black_part, 2*this.time_scale, {scaleX: this.black_exp_scale, scaleY: this.black_exp_scale, delay: 0.7*this.time_scale})
     },
-    
+
     close: function() {
-        this.maska.style.position = '';
-    
+
         if (this.debug) console.log("close")
     
         this.current_state = 'closed'
         var yellow_tx = (this.yellow_exp_scale * this.SQUARE_SIZE/2)*1.5;
         var black_tx = (this.black_exp_scale * this.SQUARE_SIZE/2 + 488)*1.5;
-    
+
         TweenLite.to(this.yellow_part, 0.5*this.time_scale, {scaleX: 0, scaleY: 4, x: yellow_tx})
         TweenLite.to(this.black_part, 0.5*this.time_scale, {scaleX: 0, scaleY: 4, x: black_tx, onComplete: function(){this.reset(); if (this.debug) console.log("onClose"); this.onClosed()}, onCompleteScope: this})
+
     }
 }

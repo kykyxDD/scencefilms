@@ -310,7 +310,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     $s.onMenuHeaderClick = function() {
         if(v.transition.current_state == 'collapsed'){
             v.main_menu.hide_header(state.mobile_style)
-            v.main_menu.expand()
+            v.main_menu.expand(0.3)
             v.transition.expand(state.mobile_style)
         }
     }

@@ -299,7 +299,7 @@ Squares.prototype = {
             var img = page.elem.querySelector('img.preloader');
             img.parentNode.removeChild(img);
 
-            TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay});
+            TweenLite.to(rhom, delay, {scaleX: 1 , scaleY: 1 , delay: delay*page.i*0.5});
             page.elem.content.addEventListener('mouseover', function(event){
                 page.player.playVideo()
             })

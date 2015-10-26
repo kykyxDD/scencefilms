@@ -156,6 +156,9 @@ Anim_menu.prototype = {
         if(this.anim_header){
             clearTimeout(this.anim_header)
         }
+        if(header == 'hide'){
+            this.hide_header()
+        }
 
         for (var i=0, l=this.items.length; i<l; i++) {
             var itm = this.items[i];
@@ -171,13 +174,11 @@ Anim_menu.prototype = {
 
         this.menu_cont.visible = false;
 
-        this.anim_header = setTimeout(function(){
-            if(header == 'show'){
+        if(header == 'show'){
+            this.anim_header = setTimeout(function(){
                 self.show_header()
-            } else if(header == 'hide'){
-                self.hide_header()
-            }
-        }, 200)
+            }, 500)
+        }
 
     },
     
@@ -225,6 +226,9 @@ Anim_menu.prototype = {
         this.menu_cont.visible = false;
         this.header_cont.visible = false;
         this.header_label.visible = false;
+        if(this.anim_header){
+            clearTimeout(this.anim_header)
+        }
 
         for (var i=0; i<this.lines.length; i++) {
             var line = this.lines[i]
