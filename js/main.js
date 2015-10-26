@@ -154,15 +154,18 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
 .controller('appController', ['appState', 'view', '$scope', '$http', '$document', '$location', '$window', 'anchorSmoothScroll', '$timeout', 'navigation', function(state, v, $s, $http, $doc, $loc, $window, anchorSmoothScroll, $t, nav){
 
     var doc = $doc[0];
+    $s.w = $window
     $s.state = state
     $s.site_url = $loc.absUrl().replace($loc.url(), "").replace("#", "")
     
     onResize()
     angular.element($window).on('resize', onResize)
+    angular.element($window).on('orientationchange', onResize)
     
     v.simulate_page_load(30, null, true)
     
     $s.$watch('state.pageToChange', on_page_change)
+    $s.$watch('w.innerWidth', onResize)
     
     state.load().then(on_site_data)
     
@@ -233,7 +236,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     }
 
     function onResize(e) {
-
+        
         var win_wid = $window.innerWidth;
         var win_heig = $window.innerHeight;
 
