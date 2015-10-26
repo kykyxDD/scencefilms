@@ -141,6 +141,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
                 $w.scrollTo(0, 0);
             }
         }
+    }
 
     function clean_up() {
         angular.element($w).off('resize', on_resize)
