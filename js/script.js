@@ -225,7 +225,6 @@ Anim_menu.prototype = {
         TweenLite.killTweensOf(this.header_label)
         this.menu_cont.visible = false;
         this.header_cont.visible = false;
-        this.header_label.visible = false;
         if(this.anim_header){
             clearTimeout(this.anim_header)
         }
@@ -253,6 +252,5 @@ Anim_menu.prototype = {
         this.header_label.x = 0
         this.header_cont.x = 0
         this.header_cont.y = -6
-        this.header_cont.alpha = 1
     }
 }
