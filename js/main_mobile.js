@@ -6,6 +6,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     v.transition.onOpened = function() {
         state.set_selected_page(state.pageToChange)
         $s.$apply();
+        v.main_menu.stopAll();
 
         v.preloader.show()
         v.preloader.make_white()

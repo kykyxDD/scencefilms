@@ -217,5 +217,38 @@ Anim_menu.prototype = {
             this.menu_cont.style.left = '27px' 
             this.menu_cont.style.top = '65px'
         }
+    },
+    stopAll: function(){
+        TweenLite.killTweensOf(this.close_btn);
+        TweenLite.killTweensOf(this.header_cont)
+        TweenLite.killTweensOf(this.header_label)
+        this.menu_cont.visible = false;
+        this.header_cont.visible = false;
+        this.header_label.visible = false;
+
+        for (var i=0; i<this.lines.length; i++) {
+            var line = this.lines[i]
+            line.x = -30
+            line.visible = false
+            TweenLite.killTweensOf(line);
+        }
+
+        for (var i=0; i<this.items.length; i++) {
+            var itm = this.items[i];
+            TweenLite.killTweensOf(itm)
+            if(itm.anim){
+                clearTimeout(itm.anim)
+            }
+            itm.visible = false
+            itm.x = -250;
+        }
+
+        this.close_btn.y = -90
+        this.close_btn.x = 0
+        this.header_label.y = -66
+        this.header_label.x = 0
+        this.header_cont.x = 0
+        this.header_cont.y = -6
+        this.header_cont.alpha = 1
     }
 }
