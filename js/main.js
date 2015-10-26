@@ -330,6 +330,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
 
         state.selectedPage = ""
         $s.$apply();
+        v.main_menu.stopAll();
 
         v.preloader.show()
         v.preloader.make_white()
