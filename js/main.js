@@ -246,7 +246,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
         state.tablet = test_table()
         state.desktop = !state.mobile && !state.tablet;
 
-        if(win_wid <= 1280){
+        if(win_wid <= 1280 && !state.desktop){
             state.mobile_style = true; 
         } else {
             state.mobile_style = false;
@@ -380,7 +380,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     var doc = $doc[0]
     var scroll_cont = doc.querySelector('.b-text .text')
     var text_cont = scroll_cont.firstElementChild
-    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: false})
+    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: false, mouseWheel: true})
     ScreenObject.decorate_element.apply(scroll_cont)
     
     onResize()
@@ -460,7 +460,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     var media_data = state.selectedPageData
     var cache_counter = 0
 
-    var scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false})
+    var scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false, mouseWheel: true})
     
     angular.element($w).on('resize', onResize)
     $t(onResize)

@@ -23,7 +23,7 @@ function VideoPopup(cont) {
     
     this.btn.top = this.btn.left = 0
     
-    this.scroll = new IScroll(this.list_cont, {useTransition: false, scrollbars: true})
+    this.scroll = new IScroll(this.list_cont, {useTransition: false, scrollbars: true, mouseWheel: true})
     
     this.w = 1200
     this.h = 600

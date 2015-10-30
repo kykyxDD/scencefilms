@@ -29,7 +29,7 @@ function NewsPopup(cont) {
     this.w = 1200
     this.h = 600
     
-    this.scroll = new IScroll(this.scroll_cont, {useTransition: false, scrollbars: true})
+    this.scroll = new IScroll(this.scroll_cont, {useTransition: false, scrollbars: true, mouseWheel: true})
     
     this.title_anim = new TextAnimator(this.title, 1, 0)
     this.date_anim = new TextAnimator(this.date, 1, 0)
