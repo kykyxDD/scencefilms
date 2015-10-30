@@ -31,7 +31,7 @@
             "name": "NEWS",
             "bg_ref": "news",
             "id": 2,
-            "types": [{"type": "news_photo", "label": "photo", "item_width": 460}, {"type": "news_video", "label": "video", "item_width": 460}, {"type": "*", "label": "all", "item_width": 460}],
+            "types": [{"type": "news_photo", "label": "photo", "item_width": 460}],
             "page": "news",
             "pages": [
                 {
@@ -65,38 +65,6 @@
                     "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
                     "date": "20.09.2015",
                     "img": "image/img/newd.jpg"
-                },
-                {
-                    "id": 25,
-                    "type": "news_video",
-                    "short_desc": "‘The Scent Of Rain And Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
-                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
-                    "date": "1.10.2015",
-                    "img": "image/img/videoa.jpg"
-                },
-                {
-                    "id": 26,
-                    "type": "news_video",
-                    "short_desc": "‘The Scent Of Rain And Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
-                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
-                    "date": "28.09.2015",
-                    "img": "image/img/videob.jpg"
-                },
-                {
-                    "id": 27,
-                    "type": "news_video",
-                    "short_desc": "‘The Scent Of Rain And Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
-                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
-                    "date": "26.09.2015",
-                    "img": "image/img/videoc.jpg"
-                },
-                {
-                    "id": 28,
-                    "type": "news_video",
-                    "short_desc": "‘The Scent Of Rain And Lightning’ Adds Maggie Grace, Brad Carter, Maika Monroe",
-                    "full_desc": "Embankment Films provide individually tailored solutions for filmmakers to finance their films. Specialising in financing of quality and award-winning films, the company procures pre-sales, tax-credit facilities, equity, mezzanine film assets. Embankment acquires and packages projects that have targeted audiences, and offers international distributors first class marketing and technical delivery. Founded in 2012 by Tim Haslam and Hugo Grumbar – the management",
-                    "date": "20.09.2015",
-                    "img": "image/img/videod.jpg"
                 }
             ]
         },

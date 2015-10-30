@@ -79,8 +79,8 @@
         <div id="news" ng-switch-when="news" class="page" ng-controller="mediaController">
             <div class="b-content">
                 <div class="b-content_inside">
-                    <div class="w-tab bottom">
-                        <ul class="tab" >
+                    <div class="w-tab bottom" ng-if="state.selectedPageData.types.length > 1">
+                        <ul class="tab">
                             <li ng-repeat="itm in state.selectedPageData.types" on-complete on-complete-callback="animateMenuItems()">
                                 <a href="#news/{{itm.label}}" ng-class="{active: selectedType.type == itm.type}">
                                     <span>{{itm.label}}</span>
@@ -88,7 +88,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="w-news">
+                    <div class="w-news" ng-class="{'no-border': state.selectedPageData.types.length <= 1}">
                         <div class="b-news">
                             <div class="scrollCont">
                                 <div class="newsCont">
@@ -371,7 +371,7 @@
         <div id="news" ng-switch-when="news" class="page" ng-controller="mobileMediaController">
             <div class="b-content">
                 <div class="b-content_inside">
-                    <div class="w-tab">
+                    <div class="w-tab" ng-if="state.selectedPageData.types.length > 1">
                         <ul class="tab">
                             <li ng-repeat="itm in state.selectedPageData.types" tap="typeMenuClick(itm)">
                                 <a ng-class="{active: selectedType.type == itm.type}">
