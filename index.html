@@ -396,12 +396,14 @@
                                         <a class="btn close_1" tap='close_all(item)'>+</a>
                                     </div>
                                 </div>
-                                <div class="btn_top" tap='goScroll("top")'>
-                                    <span class="btn"></span>
-                                </div>
+                                
                             </div>
                             
                         </div>
+                    </div>
+
+                    <div class="btn_top" tap='goScroll("top")' ng-show="state.btn_show">
+                        <span class="btn"></span>
                     </div>
                 </div>
             </div>
