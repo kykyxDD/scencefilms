@@ -23,6 +23,27 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.preloader.hide()
         v.transition.close()
     }
+    function fun_btn_top_show(show){
+        var elem = $doc[0].querySelector('.btn_top')
+        if(show){
+            state.btn_show = show
+            $s.$apply();
+            elem.alpha = 0;
+            ScreenObject.decorate_element.apply(elem)
+            TweenLite.to(elem, 0.5, {alpha:1});
+        } else {
+            elem.alpha = 1;
+            ScreenObject.decorate_element.apply(elem)
+            TweenLite.to(elem, 0.5, {alpha:0});
+            state.btn_show = show
+            $t(function(){
+                
+                $s.$apply();
+            },1000)
+        }
+        console.log('fun_btn_top_show',show)
+        
+    }
     $s.read_all = function(itm){
         itm.read = true;
         $t(function(){
@@ -41,6 +62,16 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         if(v.transition.current_state == 'expanded'){
             v.transition.collapse(state.mobile_style)
             v.main_menu.collapse(state.mobile_style, 'show');
+        }
+
+        if(state.selectedPage == 'news'){
+            var scrollTop = $window.pageYOffset || $doc[0].documentElement.scrollTop;
+            console.log(true, scrollTop)
+            var show = scrollTop > 100 ? true : false;
+            if(state.btn_show !== show){
+                fun_btn_top_show(show)
+            }
+            
         }
     });
 
@@ -67,6 +98,7 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var doc = $doc[0];
     var media_data = state.selectedPageData
     $s.selectedType = media_data.types[0]
+    state.btn_show = false
     
     angular.element($w).on('resize', onResize)
     $t(onResize)
