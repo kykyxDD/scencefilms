@@ -246,7 +246,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
         state.tablet = test_table()
         state.desktop = !state.mobile && !state.tablet;
 
-        if(win_wid <= 1280 && !state.desktop){
+        if(win_wid <= 1050){
             state.mobile_style = true; 
         } else {
             state.mobile_style = false;
