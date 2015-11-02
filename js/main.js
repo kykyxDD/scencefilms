@@ -380,7 +380,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     var doc = $doc[0]
     var scroll_cont = doc.querySelector('.b-text .text')
     var text_cont = scroll_cont.firstElementChild
-    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: false, mouseWheel: true})
+    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true, mouseWheel: true})
     ScreenObject.decorate_element.apply(scroll_cont)
     
     onResize()
@@ -402,7 +402,9 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     
     function onResize() {
         var div = doc.querySelector(".b-content")
-        div.style.width = appState.mobile_style ? '' : Math.round($w.innerWidth*0.66) + "px";
+        div.style.width = Math.round($w.innerWidth*0.66) + "px";
+        
+        text_cont.style.width = Math.round($w.innerWidth - dom.offset(text_cont).x - 60) + "px"
     }
 
     function clean_up() {

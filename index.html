@@ -94,7 +94,7 @@
                                 <div class="newsCont">
                                     <div class="i-news" ng-repeat="item in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
                                         <div class="i-news__content" id="itm{{item.id}}">
-                                            <div class="img" animate-image-load duration="1" img-url="item.img">
+                                            <div class="img" animate-image-load duration="1" img-url="item.img" img-w="448" img-h="286">
                                                 <img alt="img"/>
                                             </div>
                                             <div class="news">
@@ -390,7 +390,7 @@
                                     <div class="news">
                                         <h3>{{item.short_desc}}</h3>
                                         <div class="w-time"><span class="time">{{item.date}}</span></div>
-                                        <p>{{item.full_desc}}</p>
+                                        <p class="mobile_text_cont" ng-bind-html="item.full_desc | unsafe"></p>
                                         <a class="btn all" tap='read_all(item)'>read all</a>
                                         <a class="btn close" tap='close_all(item)'>close</a>
                                         <a class="btn close_1" tap='close_all(item)'>+</a>
@@ -552,9 +552,8 @@
         <div class="w-share">
             <ul class="l-share">
                 <li><a class="i-facebook" href="https://www.facebook.com/thescentofrainandlightning" target="_blank">facebook</a></li>
-                <li><a class="i-twitter" href="#">twitter</a></li>
-                <li><a class="i-instagram" href="#">instagram</a></li>
-                <li><a class="i-google_plus" href="#">google plus</a></li>
+                <li><a class="i-twitter" href="https://twitter.com/scentrainlight" target="_blank">twitter</a></li>
+                <li><a class="i-instagram" href="https://instagram.com/TheScentOfRain" target="_blank">instagram</a></li>
             </ul>
         </div>
         <div class="w-nav">

@@ -125,6 +125,9 @@ angular.module('directives', [])
 
                 var w = $s.w || div.clientWidth
                 var h = $s.h || div.clientHeight
+                
+                div.style.width = w + "px"
+                div.style.height = h + "px"
             
                 var k = Math.max(w/img.width, h/img.height)
                 img.scaleX = img.scaleY = k

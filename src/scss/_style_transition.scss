@@ -1033,3 +1033,10 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 .no-border {
     border-style: none;
 }
+
+.text_cont p, .mobile_text_cont p {
+    margin-bottom: 1em;
+}
+.text_cont a, .mobile_text_cont a {
+    color: #ffffff;
+}

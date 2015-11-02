@@ -66,7 +66,7 @@ NewsPopup.prototype = {
         this.img_cont.alpha = 1
         TweenLite.from(this.img_cont, 0.5, {alpha: 0, x: this.img_cont.sx-10, delay: 0.8})
 
-        this.text_cont.textContent = data.full_desc
+        this.text_cont.innerHTML = data.full_desc
         this.title.textContent = data.short_desc
         this.date.textContent = data.date
 
