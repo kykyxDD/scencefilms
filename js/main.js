@@ -452,7 +452,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     }
     
 }])
-.controller("mediaController", ["$scope", "$document", "$window", "$timeout", "appState", "view", "navigation", function($s, $doc, $w, $t, state, v, nav) {
+.controller("mediaController", ["$scope", "$document", "$window", "$timeout", "appState", "view", "navigation", "$location", function($s, $doc, $w, $t, state, v, nav, $l) {
 
     var doc = $doc[0];
 

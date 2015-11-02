@@ -213,213 +213,56 @@
             "id": 5,
             "page": "media",
             "groupInTypeBy": 2,
-            "types": [{"type": "photo", "label": "photo", "item_width": 450}, {"type": "video", "label": "video", "item_width": 480}],
+            "types": [{"type": "photo", "label": "photo", "item_width": 450}],
             "pages": [
                 {
                     "id": 51,
                     "type": "photo",
-                    "src": "image/img/photoa.jpg",
-                    "src_big": "image/img/photoa_big.jpg",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
+                    "src": "image/img/media_01.sml.jpg",
+                    "src_big": "image/img/media_01.jpg"
                 },
                 {
                     "id": 52,
                     "type": "photo",
-                    "src": "image/img/photoc.jpg",
-                    "src_big": "image/img/photoc_big.jpg",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
+                    "src": "image/img/media_02.sml.jpg",
+                    "src_big": "image/img/media_02.jpg"
                 },
                 {
                     "id": 53,
                     "type": "photo",
-                    "src": "image/img/photof.jpg",
-                    "src_big": "image/img/photof_big.jpg",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
+                    "src": "image/img/media_03.sml.jpg",
+                    "src_big": "image/img/media_03.jpg"
                 },
                 {
                     "id": 54,
                     "type": "photo",
-                    "src": "image/img/photob.jpg",
-                    "src_big": "image/img/photob_big.jpg",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
+                    "src": "image/img/media_04.sml.jpg",
+                    "src_big": "image/img/media_04.jpg"
                 },
                 {
                     "id": 55,
                     "type": "photo",
-                    "src": "image/img/photod.jpg",
-                    "src_big": "image/img/photod_big.jpg",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
+                    "src": "image/img/media_05.sml.jpg",
+                    "src_big": "image/img/media_05.jpg"
                 },
                 {
                     "id": 56,
                     "type": "photo",
-                    "src": "image/img/photok.jpg",
-                    "src_big": "image/img/photok_big.jpg",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
+                    "src": "image/img/media_06.sml.jpg",
+                    "src_big": "image/img/media_06.jpg"
                 },
                 {
                     "id": 57,
                     "type": "photo",
-                    "src": "image/img/photog.jpg",
-                    "src_big": "image/img/photog_big.jpg",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
+                    "src": "image/img/media_07.sml.jpg",
+                    "src_big": "image/img/media_07.jpg"
                 },
                 {
-                    "id": 59,
-                    "type": "video",
-                    "src": "image/img/videoa.jpg",
-                    "desc": "Video Name Tag offers a cool and colorful way",
-                    "duration": "4:12",
-                    "youtube": "https://youtube.com/v/4wUlQDFY2aQ",
-                    "href": "https://www.youtube.com/watch?v=4wUlQDFY2aQ",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
-                },
-                {
-                    "id": 61,
-                    "type": "video",
-                    "src": "image/img/videob.jpg",
-                    "desc": "Video Name Tag offers a cool and colorful way",
-                    "duration": "3:24",
-                    "youtube": "https://youtube.com/v/Ktm_JYmOeOc",
-                    "href": "https://www.youtube.com/watch?v=Ktm_JYmOeOc",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
-                },
-                {
-                    "id": 62,
-                    "type": "video",
-                    "src": "image/img/videoc.jpg",
-                    "desc": "Video Name Tag offers a cool and colorful way",
-                    "duration": "2:50",
-                    "youtube": "https://youtube.com/v/QnPto9XnvHw",
-                    "href": "https://www.youtube.com/watch?v=QnPto9XnvHw",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
-                },
-                {
-                    "id": 63,
-                    "type": "video",
-                    "src": "image/img/videod.jpg",
-                    "desc": "Video Name Tag offers a cool and colorful way",
-                    "duration": "3:00",
-                    "youtube": "https://youtube.com/v/YEQR6j14lGY",
-                    "href": "https://www.youtube.com/watch?v=YEQR6j14lGY",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
-                },
-                {
-                    "id": 64,
-                    "type": "video",
-                    "src": "image/img/videoa.jpg",
-                    "desc": "Video Name Tag offers a cool and colorful way",
-                    "duration": "4:00",
-                    "youtube": "https://youtube.com/v/4wUlQDFY2aQ",
-                    "href": "https://www.youtube.com/watch?v=4wUlQDFY2aQ",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
-                },
-                {
-                    "id": 65,
-                    "type": "video",
-                    "src": "image/img/videob.jpg",
-                    "desc": "Video Name Tag offers a cool and colorful way",
-                    "duration": "2:40",
-                    "youtube": "https://youtube.com/v/IyYWTFA3FWA",
-                    "href": "https://www.youtube.com/watch?v=IyYWTFA3FWA",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
-                },
-                {
-                    "id": 66,
-                    "type": "video",
-                    "src": "image/img/videoc.jpg",
-                    "desc": "Video Name Tag offers a cool and colorful way",
-                    "duration": "4:12",
-                    "youtube": "https://youtube.com/v/0yXhKjNWlXE",
-                    "href": "https://www.youtube.com/watch?v=0yXhKjNWlXE",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
-                },
-                {
-                    "id": 67,
-                    "type": "video",
-                    "src": "image/img/videod.jpg",
-                    "desc": "Video Name Tag offers a cool and colorful way",
-                    "duration": "2:52",
-                    "youtube": "https://youtube.com/v/ZcfSaKeuPWc",
-                    "href": "https://www.youtube.com/watch?v=ZcfSaKeuPWc",
-                    "links": [
-                        {"type": "i-twett", "href": "#"},
-                        {"type": "i-facebook", "href": "#"},
-                        {"type": "i-instagram", "href": "#"},
-                        {"type": "i-google_plus", "href": "#"}
-                    ]
+                    "id": 58,
+                    "type": "photo",
+                    "src": "image/img/media_08.sml.jpg",
+                    "src_big": "image/img/media_08.jpg"
                 }
-
             ]
         }
     ],
