@@ -126,7 +126,7 @@
                     </div>
                     <div class='icons'>
                         <ul ng-social-buttons
-                             data-url="site_url + '#news/' + selectedType.label + '/ + selectedItem.id"
+                             data-url="site_url + '#news/' + selectedType.label + '/' + selectedItem.id"
                              data-title="selectedItem.short_desc"
                              data-description="selectedItem.full_desc"
                              data-image="site_url + selectedItem.img"
@@ -145,14 +145,14 @@
         <div id="media" ng-switch-when="media" class="page" ng-controller="mediaController">
             <div class="b-content">
                 <div class="b-content_inside">
-                    <div class="w-tab  bottom">
+                    <div class="w-tab  bottom" ng-if="state.selectedPageData.types.length > 1">
                         <ul class="tab">
                             <li ng-repeat="item in state.selectedPageData.types track by $index" on-complete on-complete-callback="animateMenuItems()">
                                 <a ng-href="#media/{{item.label}}" ng-class="{active: selectedType.type == item.type}"><span>{{item.label}}</span></a>
                             </li>
                         </ul>
                     </div>
-                    <div class="w-photo">
+                    <div class="w-photo" ng-class="{'no-border': state.selectedPageData.types.length <= 1}">
                         <div class="b-photo">
                             <div class="scrollCont">
                                 <div class="mediaCont">
@@ -165,7 +165,7 @@
                                                 <div class="w-share">
                                                     <div class="b-share">
                                                         <ul class="l-share" ng-social-buttons
-                                                                 data-url="site_url + '#media/' + selectedType.label + '/ + item.id"
+                                                                 data-url="site_url + '#media/' + selectedType.label + '/' + item.id"
                                                                  data-title="'Scent of Rain and Lighntning Photo'"
                                                                  data-description="''"
                                                                  data-image="site_url + item.src"
@@ -218,7 +218,7 @@
                 <div class="video_desc">
                     <h3 class="title"></h3>
                     <ul ng-social-buttons
-                         data-url="site_url + '#media/' + selectedType.label + '/ + selectedItem.id"
+                         data-url="site_url + '#media/' + selectedType.label + '/' + selectedItem.id"
                          data-title="selectedItem.desc"
                          data-image="site_url + selectedItem.src"
                          showcounts="true">
@@ -430,7 +430,7 @@
                                         <div class="w-share">
                                             <div class="b-share">
                                                 <ul class="l-share" ng-social-buttons
-                                                         data-url="site_url + '#media/' + selectedType.label + '/ + item.id"
+                                                         data-url="site_url + '#media/' + selectedType.label + '/' + item.id"
                                                          data-title="'Scent of Rain and Lighntning Photo'"
                                                          data-description="''"
                                                          data-image="site_url + item.src"

@@ -15,7 +15,7 @@ angular.module('ngSocial', [])
     return {
         restrict: 'A',
         scope: {
-            'url': '=dataUrl',
+            'url': '=',
             'title': '=',
             'description': '=',
             'image': '=',
