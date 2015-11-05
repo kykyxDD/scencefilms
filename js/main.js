@@ -694,7 +694,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
         v.simulate_page_load(1.5, show_intro_text, false)
 
         var drops = []
-        var duration = 1000
+        var duration = 2000
         var drops_count = 16
         var grid_size = $w.innterWidth
         var delay = duration/drops_count
@@ -708,10 +708,9 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
             var rnd_y = border + ($w.innerHeight - border*2) * Math.random()
 
             var drop = doc.createElement("div")
-            drop.style.background = "url('image/waterdrops/$.png') no-repeat".replace("$", 1+drops_count%14)
             drop.style.left = Math.round(rnd_x) + "px"
             drop.style.top = Math.round(rnd_y) + "px"
-            drop.className = "waterdrop"
+            drop.className = "waterdrop type$".replace("$", 1+drops_count%14)
             intro_bg.appendChild(drop)
 
             if (--drops_count > 0) {

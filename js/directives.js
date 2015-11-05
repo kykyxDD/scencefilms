@@ -153,11 +153,11 @@ angular.module('directives', [])
   
 }])
 .directive('tap', ['$document', function($doc) {
-    
+
     var doc = $doc[0]
-    
+
     var x, y
-    
+
     function on(e) {
         e = e.touches ? e.touches[0] : e
         x = e.pageX
@@ -179,26 +179,44 @@ angular.module('directives', [])
     doc.addEventListener('touchend',  off, true)
 
     return {
-        
+
         scope: {
-            tap: "&tap"            
+            tap: "&tap"
         },
-        
+
         link: function($s, elem, attr) {
-            
+
             elem.on('tap', on_tap)
             $s.$on("$destroy", clean_up)
-            
+
             function on_tap(e) {
                 $s.tap()
             }
-            
+
             function clean_up() {
                 elem.off('tap', on_tap)
             }
-            
         }
-        
     }
-    
+
+}])
+.directive('navigateOnClick', ['$window', function($w){
+    return {
+        link: function($s, el, attr) {
+            el[0].addEventListener('mousedown', click)
+            $s.$on('$destroy', clean_up)
+            
+            function click(e) {
+                if (e.currentTarget == e.target) {
+                    console.log(e.currentTarget, e.target, e.currentTarget == e.target, attr.navigateOnClick)
+                    //$l.path(attr.navigateOnClick)
+                    $w.location.href = attr.navigateOnClick
+                }
+            }
+            
+            function clean_up() {
+                el[0].removeEventListener('mousedown', click)
+            }
+        }
+    }
 }])

@@ -20,9 +20,9 @@ $scadaR  : 'scadaregular';
 $scadaB  : 'scadabold';
 $scadaBI : 'scadabold_italic';
 $scadaI  : 'scadaitalic';
-//$icons: sprite-map("smart_sprite/*.png", $layout: 'smart');
 
-$icons_x2: sprite-map("icon_x2/*.png", $layout: 'smart');
+$icons_x2: sprite-map("icon_x2/*.png", $layout: 'horizontal', $spacing: 2px);
+$waterdrops: sprite-map("waterdrops/*.png", $layout: 'horizontal');
 
 $retina-media: "only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio : 1.5)";
 

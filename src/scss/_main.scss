@@ -348,6 +348,7 @@ body {
   position: relative;
   &:hover {
     .w-share {
+      cursor: pointer;
       display: block;
       opacity: 1;
       visibility: visible;

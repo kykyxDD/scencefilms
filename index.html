@@ -64,7 +64,7 @@
                   <div class='rhom_before'>
                     <div class="rhom_after" >
                       <div class='text_rhom' ng-switch="itm.type">
-                          <img ng-switch-when="image"/>
+                          <div ng-switch-when="image"><a ng-href='{{itm.url}}'><img/></a></div>
                           <div class='video' id='{{itm.id}}'
                             ng-switch-when="video">
                           </div>
@@ -99,8 +99,7 @@
                                             </div>
                                             <div class="news">
                                                 <h3>{{item.short_desc}}</h3>
-                                                <div class="w-time"><span class="time">{{item.date}}</span></div>
-                                                <p>{{item.full_desc}}</p>
+                                                <div class="date">{{item.date}}</div>
                                                 <a class="btn" ng-href="#news/{{selectedType.label}}/{{item.id}}">read all</a>
                                             </div>
                                         </div>
@@ -162,7 +161,7 @@
                                                 <div class="img" animate-image-load duration="1" img-url="item.src">
                                                     <img alt="img" />
                                                 </div>
-                                                <div class="w-share">
+                                                <div class="w-share" navigate-on-click="{{site_url + '#media/' + selectedType.label + '/' + item.id}}">
                                                     <div class="b-share">
                                                         <ul class="l-share" ng-social-buttons
                                                                  data-url="site_url + '#media/' + selectedType.label + '/' + item.id"
@@ -332,9 +331,8 @@
                   <div class='rhom_before'>
                     <div class="rhom_after" >
                       <div class='text_rhom' ng-switch="itm.type">
-                          <img ng-switch-when="image"/>
-                          <div class='video' id='{{itm.id}}'
-                            ng-switch-when="video">
+                          <div ng-switch-when="image"><a href='{{itm.url}}'><img/></a></div>
+                          <div class='video' id='{{itm.id}}' ng-switch-when="video">
                           </div>
                       </div>
                     </div>
@@ -356,7 +354,7 @@
                   <div class='rhom_before'>
                     <div class="rhom_after" >
                       <div class='text_rhom' ng-switch="itm.type">
-                          <img ng-switch-when="image"/>
+                          <div ng-switch-when="image"><a href='{{itm.url}}'><img/></a></div>
                           <div class='video' id='{{itm.id}}'
                             ng-switch-when="video">
                           </div>

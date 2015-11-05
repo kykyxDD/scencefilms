@@ -27,7 +27,6 @@ body {
 
 
 #home{
-  //background-image: url('../image/bg/main.jpg');
   background-repeat:no-repeat;
   background-size: auto 100%;
 }
@@ -70,14 +69,12 @@ body {
 }
 
 #news {
-  //background-image: url('../image/news_1.jpg');
   background-repeat:no-repeat;
   background-size: auto 100%;
 }
 
 //news_all.jpg
 #cast{
-  //background-image: url('../image/bg/cast_grace.jpg');
   background-repeat:no-repeat;
   background-size: auto 100%;
 }
@@ -92,28 +89,9 @@ body {
     position: relative;
 }
 
-#bg.news_all {
-  background-image: url('../image/bg/');
-}
-
-#bg.cast_grace {
-  background-image: url('../image/bg/cast_grace.jpg');
-}
-
-#bg.cast_carter {
-  background-image: url('../image/bg/cast_carter.jpg');
-}
-
-#bg.cast_maika {
-  background-image: url('../image/bg/cast_maika.jpg');
-}
-// .mobile{
-//   background-size: cover;
-// }
 .mobile.cast ,
 .mobile.makers {
   background: url('../image/bg/cast_mobile.jpg') no-repeat;
-  // background-size: auto 500px;  
   background-size: 100% auto;
   background-color: #000;
 }
@@ -145,18 +123,11 @@ body {
 
 
 #media {
-  //background-image: url('../image/multimedia_video.jpg');
   background-repeat:no-repeat;
   background-size: auto 100%;
 }
 
-//multimedia_photo.jpg
-#bg.filmmakers{
-	background-image: url('../image/filmmakers.png');
-}
-
 #makers {
-  //background-image: url('../image/bg/filmmakers_blake.jpg');
   background-repeat:no-repeat;
   background-size: auto 100%;
 }
@@ -513,9 +484,53 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 
 .waterdrop {
   position: absolute;
-  width: 80px;
-  height: 80px;
-  background-repeat: no-repeat;    
+  background-repeat: no-repeat;
+  
+  &.type1 {
+    @include oneline-sprite-box($waterdrops, 1);
+  }
+  &.type2 {
+    @include oneline-sprite-box($waterdrops, 2);
+  }
+  &.type3 {
+    @include oneline-sprite-box($waterdrops, 2);
+  }
+  &.type4 {
+    @include oneline-sprite-box($waterdrops, 4);
+  }
+  &.type5 {
+    @include oneline-sprite-box($waterdrops, 5);
+  }
+  &.type6 {
+    @include oneline-sprite-box($waterdrops, 6);
+  }
+  &.type7 {
+    @include oneline-sprite-box($waterdrops, 7);
+  }
+  &.type8 {
+    @include oneline-sprite-box($waterdrops, 8);
+  }
+  &.type9 {
+    @include oneline-sprite-box($waterdrops, 9);
+  }
+  &.type10 {
+    @include oneline-sprite-box($waterdrops, 10);
+  }
+  &.type11 {
+    @include oneline-sprite-box($waterdrops, 11);
+  }
+  &.type12 {
+    @include oneline-sprite-box($waterdrops, 12);
+  }
+  &.type13 {
+    @include oneline-sprite-box($waterdrops, 13);
+  }
+  &.type14 {
+    @include oneline-sprite-box($waterdrops, 14);
+  }
+  &.type15 {
+    @include oneline-sprite-box($waterdrops, 15);
+  }
 }
 
 
@@ -545,7 +560,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   position:relative;
   top: -55px;
   bottom:auto;
-  background: url('../image/main/bg_page.jpg');
+  background: url('bg/bg_page.jpg');
   background-size:cover;
   -moz-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
@@ -560,7 +575,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   left: 0;
   width: 39%;
   height: 25%;
-  background:url('../image/main/imgoL.png') no-repeat;
+  background: inline-image('imgoL.png') no-repeat;
   background-size: 100% auto;
   background-position: left top;
 
@@ -572,7 +587,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   right: 0;
   width: 39%;
   height: 25%;
-  background:url('../image/main/imgoR.png') no-repeat;
+  background: inline-image('imgoR.png') no-repeat;
   background-position: right top;
   background-size: 100% auto;
   z-index: -1;
@@ -725,17 +740,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     letter-spacing: 1px;
   }
 
-  .date {
-    font-family: scadaitalic;
-    font-size: 17px;
-    letter-spacing: 1px;
-    padding: 10px 0px 21px 32px;
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    background-position: 0px 31%;
-    background-image: inline-image('../image/date_ico.png');
-  }
-
   .text_cont {
     color: #ffffff;
     font-size: 23px;
@@ -767,27 +771,27 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
       font-size: 16px;
       line-height: 23px;
       text-align: center;
-      background: inline-image('../image/little_bubble.png') no-repeat;
+      @include oneline-sprite($icons_x2, little_bubble);
     }
     
     &.fb {
-      background: inline-image('../image/popup_fb_ico.png') no-repeat;
+      @include oneline-sprite($icons_x2, popup_fb_ico);
     }
     
     &.twitter {
-      background: inline-image('../image/popup_twitter_ico.png') no-repeat;
+      @include oneline-sprite($icons_x2, popup_twitter_ico);
     }
 
     &.ln {
-      background: inline-image('../image/popup_ln_ico.png') no-repeat;
+      @include oneline-sprite($icons_x2, popup_ln_ico);
     }
 
     &.gp {
-      background: inline-image('../image/popup_gp_ico.png') no-repeat;
+      @include oneline-sprite($icons_x2, popup_gp_ico);
     }
 
     &.pinterest {
-      background: inline-image('../image/popup_pinterest_ico.png') no-repeat;
+      @include oneline-sprite($icons_x2, popup_pinterest_ico);
     }
 
   }
@@ -838,7 +842,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
       width: 22px;
       height: 15px;
       margin-right: 10px;
-      background-image: inline-image('../image/eye.png');
+      @include oneline-sprite($icons_x2, eye);
     }
     
     .likes::before {
@@ -847,7 +851,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
       width: 17px;
       height: 17px;
       margin-right: 10px;
-      background-image: inline-image('../image/heart.png');
+      @include oneline-sprite($icons_x2, heart);
     }
     
     .video_desc {
@@ -950,9 +954,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
         margin: 0 0;
         height: auto;
         position:static;
-        &:before{
-          display: none;
-        }
         .w-time{
           padding-left: 35px;
           position:relative;
@@ -1477,4 +1478,27 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     }
 
   }
+}
+
+.date {
+    font-family: scadaitalic;
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 10px 0px 21px 0px;
+    &::before {
+        content: " ";
+        display: inline-block;
+        margin-right: 10px;
+        position: relative;
+        top: 4px;
+        @include oneline-sprite-box($icons_x2, date_ico)
+    }
+}
+
+.i-news__content .news .date {
+    font-size: 15px;
+    position: absolute;
+    bottom: 12px;
+    right: 163px;
+    color: #ffd800;
 }
