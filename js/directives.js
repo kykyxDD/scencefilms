@@ -203,7 +203,7 @@ angular.module('directives', [])
 .directive('navigateOnClick', ['$window', function($w){
     return {
         link: function($s, el, attr) {
-            el[0].addEventListener('mousedown', click)
+            el[0].addEventListener('tap', click)
             $s.$on('$destroy', clean_up)
             
             function click(e) {
@@ -215,7 +215,7 @@ angular.module('directives', [])
             }
             
             function clean_up() {
-                el[0].removeEventListener('mousedown', click)
+                el[0].removeEventListener('tap', click)
             }
         }
     }
