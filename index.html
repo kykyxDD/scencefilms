@@ -471,14 +471,14 @@
                         <div class="w-tab">
                             <ul class="tab">
                                 <li ng-repeat="page in state.selectedPageData.pages">
-                                    <a href='' tap='goScroll(page.role)' ng-class="{active: page == selectedItem}" >
+                                    <a ng-click='search_page(page.page)' ng-class="{active: page == selectedItem}" >
                                         <span ng-bind-html="page.title | unsafe"></span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="w-text" ng-repeat="selectedItem in state.selectedPageData.pages">
-                            <a id="{{selectedItem.role}}"></a>
+                            <a id="{{selectedItem.page}}"></a>
                             <div class="w-img w-img__portrait">
                                 <img alt="img" ng-src="{{selectedItem.img_port}}"/>
                             </div>
@@ -512,14 +512,14 @@
                     <div class="w-tab">
                         <ul class="tab">                
                             <li ng-repeat="page in state.selectedPageData.pages">
-                                <a tap='goScroll(page.role)' ng-class="{active: page == selectedItem}">
+                                <a ng-click='search_page(page.page)' ng-class="{active: page == selectedItem}">
                                     <span ng-bind-html="page.title | unsafe"></span>
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="w-text" ng-repeat="selectedMaker in state.selectedPageData.pages">
-                        <a id="{{selectedMaker.role}}"></a>
+                        <a id="{{selectedMaker.page}}"></a>
                         <div class="w-img w-img__portrait">
                             <img alt="img" ng-src="{{selectedMaker.img_port}}"/>
                         </div>

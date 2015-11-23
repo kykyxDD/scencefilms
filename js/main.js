@@ -373,7 +373,6 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     }
 
     function onPageLoaded() {
-        
         $window.scrollTo(0, 0);
 
         v.preloader.hide()

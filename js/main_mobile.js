@@ -1,5 +1,5 @@
 angular.module('mobile', [])
-app.controller("mobileController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
+app.controller("mobileController", ["$scope", "$document", "$window", "$timeout", "appState", "view","navigation", function($s, $doc, $window, $t, state, v, nav) {
 
     v.preloader.set_skip_frames(3)
 
@@ -17,12 +17,50 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         v.transition.show(state.mobile_style)
         v.main_menu.show_header(0.3)
     }
+    function offset_top(eID) {
+        var elm = document.getElementById(eID);
+        var y = elm.offsetTop;
+        var node = elm;
+        while (node.offsetParent && node.offsetParent != document.body) {
+            node = node.offsetParent;
+            y += node.offsetTop;
+        } return y;
+    }
 
     function switch_page() {
-        $window.scrollTo(0, 0);
+        var params = nav.params();
+        if((state.pageToChange === 'cast' || state.pageToChange === 'makers') && params !== ''){
+            var top = offset_top(params);
+            $window.scrollTo(0, top);
+        } else if((state.pageToChange === 'news') && params !== ''){
+            var top = offset_top('itm'+params);
+            parseInt(params)
+            var data = state.data.pages;
+            data.forEach(function(elem){
+                if(elem.page == 'news'){
+                    elem.pages.forEach(function(pages){
+                        if(pages.id == params){
+                            pages.read = true;
+
+                            $s.$apply();
+                            $t(function(){
+                                var top = offset_top('itm'+params)
+                                $window.scrollTo(0, top);
+                            },300)
+                            
+                        }
+                    })
+                }
+            })
+
+        } else {
+            $window.scrollTo(0, 0);
+        }
+
         v.preloader.hide()
         v.transition.close()
     }
+
     function fun_btn_top_show(show){
         var elem = $doc[0].querySelector('.btn_top')
         if(show){
@@ -37,15 +75,14 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
             TweenLite.to(elem, 0.5, {alpha:0});
             state.btn_show = show
             $t(function(){
-                
                 $s.$apply();
             },1000)
         }
-        console.log('fun_btn_top_show',show)
-        
     }
     $s.read_all = function(itm){
         itm.read = true;
+        console.log(itm)
+        $window.location.hash = '#/'+state.pageToChange+'/'+itm.id;
         $t(function(){
             $s.goScroll('itm'+itm.id)
         },300)
@@ -66,18 +103,16 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
 
         if(state.selectedPage == 'news'){
             var scrollTop = $window.pageYOffset || $doc[0].documentElement.scrollTop;
-            console.log(true, scrollTop)
             var show = scrollTop > 100 ? true : false;
             if(state.btn_show !== show){
                 fun_btn_top_show(show)
             }
-            
         }
     });
 
 
 }])
-.controller("mobileContentController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $w, $t, state, v) {
+.controller("mobileContentController", ["$scope", "$document", "$window", "$timeout", "appState", "view","navigation", function($s, $doc, $w, $t, state, v, nav) {
     
     var doc = $doc[0]
 
@@ -85,7 +120,13 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     angular.element($w).on('resize', onResize)
     
     $s.$on('$destroy', clean_up)
-    
+
+    $s.search_page = function(id){
+        $s.goScroll(id)
+        var hash = '#/'+state.pageToChange+'/'+id;
+        $w.location.hash = hash;
+    }
+
     function onResize() {
     }
 
@@ -99,7 +140,6 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     var media_data = state.selectedPageData
     $s.selectedType = media_data.types[0]
     state.btn_show = false
-    
     angular.element($w).on('resize', onResize)
     $t(onResize)
     
@@ -107,6 +147,14 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     
     function clean_up() {
         angular.element($w).off('resize', onResize)
+        var data = state.data.pages;
+        data.forEach(function(elem){
+            if(elem.page == 'news'){
+                elem.pages.forEach(function(pages){
+                    pages.read = false;
+                })
+            }
+        })
     }
 
     function onResize() {
