@@ -638,8 +638,8 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
 }
 
 .text_rhom{
-	position: absolute;
-	-moz-transform: rotate(45deg); 
+  position: absolute;
+  -moz-transform: rotate(45deg); 
   -ms-transform: rotate(45deg); 
   -webkit-transform: rotate(45deg); 
   -o-transform: rotate(45deg); 
@@ -647,6 +647,13 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   background-size: auto 100%;
   background-position-x: center;
   opacity: 0.99;
+  transition: 0.3s transform cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  
+  &:hover {
+    transform: rotate(45deg) scale(1.05);
+    transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  }
 
  .video{
     position:absolute;

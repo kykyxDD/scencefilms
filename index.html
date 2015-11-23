@@ -8,12 +8,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta content="telephone=no" name="format-detection" />
     <meta content="address=no" name="format-detection" />
+    <link rel="icon" href="image/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/screen.css">
     <script src='js/lib/angular/angular.min.js'></script>
     <script src='js/lib/angular/angular-sanitize.min.js'></script>
     <script src='js/lib/angular/angular-social.js'></script>
     <script src='js/lib/iscroll/iscroll.js'></script>
-    <script src='https://www.youtube.com/iframe_api'></script>
     <script src='js/directives.js'></script>
     <script src='js/squary.js'></script>
     <script src='js/script.js'></script>
@@ -33,6 +33,7 @@
     <script src='js/transition.js'></script>
     <script src='js/main.js'></script>
     <script src='js/main_mobile.js'></script>
+    <script src='https://www.youtube.com/iframe_api'></script>
 </head>
 
 <body
@@ -62,7 +63,7 @@
             <div ng-repeat="(key, item) in state.data.homepage_data" on-complete on-complete-callback="init_squary()" id='{{key}}' >
                 <div class='cont_rhom' ng-repeat="itm in item" index="{{$index}}">
                   <div class='rhom_before'>
-                    <div class="rhom_after" >
+                    <div class="rhom_after">
                       <div class='text_rhom' ng-switch="itm.type">
                           <div ng-switch-when="image"><a ng-href='{{itm.url}}'><img/></a></div>
                           <div class='video' id='{{itm.id}}'
@@ -95,7 +96,7 @@
                                     <div class="i-news" ng-repeat="item in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
                                         <div class="i-news__content" id="itm{{item.id}}">
                                             <div class="img" animate-image-load duration="1" img-url="item.img" img-w="448" img-h="286">
-                                                <img alt="img"/>
+                                                <a ng-href="#news/{{selectedType.label}}/{{item.id}}"><img alt="img"/></a>
                                             </div>
                                             <div class="news">
                                                 <h3>{{item.short_desc}}</h3>
