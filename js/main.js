@@ -328,6 +328,10 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
 .controller("desktopController", ["$scope", "$document", "$window", "$timeout", "appState", "view", function($s, $doc, $window, $t, state, v) {
 
     v.preloader.set_skip_frames(0)
+    
+    var title = $doc[0].querySelector(".p-title h1")
+    var title_animator = new TextAnimator(title, 1.4, 0)
+    console.log("title", title)
 
     v.transition.onOpened = function() {
 
@@ -351,14 +355,16 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     }
 
     v.transition.onClosed = function() {
-        
+
         state.set_selected_page(state.pageToChange)
         $s.$apply();
-        
+
         v.transition.show(state.mobile_style)
         v.main_menu.show_header(0.3)
 
         v.background.play()
+        
+        console.log("transition closed")
     }
     
     function on_bg_loaded(callback) {
@@ -372,6 +378,9 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
 
         v.preloader.hide()
         v.transition.close()
+        
+        title_animator.text = state.nameToChange
+        title_animator.run(0.5)
     }
     
 }])
@@ -454,6 +463,8 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
 }])
 .controller("mediaController", ["$scope", "$document", "$window", "$timeout", "appState", "view", "navigation", "$location", function($s, $doc, $w, $t, state, v, nav, $l) {
 
+    console.log("media controller restart")
+
     var doc = $doc[0];
 
     var popup
@@ -463,21 +474,27 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     var cache_counter = 0
 
     var scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false, mouseWheel: true})
-    
+
     angular.element($w).on('resize', onResize)
     $t(onResize)
+
+    $s.selectedType = {}
     
     $s.$on('$destroy', clean_up)
-    $s.$on('$locationChangeStart', on_location_change)
-    
+    $s.$on('$locationChangeSuccess', on_location_change)
+
     on_location_change()
-    
+
     function on_location_change(ev) {
         var params = nav.params()
+        
+        console.log("on_location_change", params)
 
         if (params) {
             var type = params[0]
             var id = params[1]
+            
+            console.log("type", type, "id", id)
             
             selectType(type)
             
@@ -514,21 +531,24 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
 
     function selectType(label) {
         
-        if (label) {
-            for (var i=0; i<state.selectedPageData.types.length; i++) {
-                var itm = state.selectedPageData.types[i]
-                if (itm.label == label) {
-                    $s.selectedType = itm
-                    break;
+        if ($s.selectedType.label != label) {        
+        
+            if (label) {
+                for (var i=0; i<state.selectedPageData.types.length; i++) {
+                    var itm = state.selectedPageData.types[i]
+                    if (itm.label == label) {
+                        $s.selectedType = itm
+                        break;
+                    }
                 }
             }
+            else {
+                $s.selectedType = state.selectedPageData.types[0]
+            }
+            
+            scroll.scrollTo(0)
+            $t(onResize)
         }
-        else {
-            $s.selectedType = state.selectedPageData.types[0]
-        }
-        
-        scroll.scrollTo(0)
-        $t(onResize)
     }
     
     function showItemPopup(id) {

@@ -19,7 +19,8 @@ TextAnimator.prototype = {
         
         TweenLite.killTweensOf(this)
         that.index = 0
-        that.update()
+        this.field.innerHTML = ""
+        //that.update()
         TweenLite.to(that, that.duration, {index: 1, onUpdate: function() { that.update()}, delay: that.delay + additional_delay})
     },
     

@@ -208,7 +208,6 @@ angular.module('directives', [])
             
             function click(e) {
                 if (e.currentTarget == e.target) {
-                    console.log(e.currentTarget, e.target, e.currentTarget == e.target, attr.navigateOnClick)
                     //$l.path(attr.navigateOnClick)
                     $w.location.href = attr.navigateOnClick
                 }

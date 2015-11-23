@@ -45,7 +45,7 @@
 
     <a id="top" name="top" ng-show='state.mobile_style'></a>
 
-    <div class="p-title" ng-if='state.mobile_style' ng-hide='state.selectedPage == "home" || state.selectedPage == "intro"'>
+    <div class="p-title" ng-hide='state.selectedPage == "home" || state.selectedPage == "intro" || state.pageToChange == "home" || state.pageToChange == "intro"'>
         <h1>{{state.nameToChange}}</h1>
     </div>
 
@@ -96,7 +96,7 @@
                                     <div class="i-news" ng-repeat="item in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
                                         <div class="i-news__content" id="itm{{item.id}}">
                                             <div class="img" animate-image-load duration="1" img-url="item.img" img-w="448" img-h="286">
-                                                <a ng-href="#news/{{selectedType.label}}/{{item.id}}"><img alt="img"/></a>
+                                                <img alt="img" navigate-on-click="#news/{{selectedType.label}}/{{item.id}}"/>
                                             </div>
                                             <div class="news">
                                                 <h3>{{item.short_desc}}</h3>
