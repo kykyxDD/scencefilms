@@ -87,6 +87,7 @@ body {
 #cast .text,
 #makers .text {
     position: relative;
+    padding-right: 15px;
 }
 
 .mobile.cast ,
@@ -750,7 +751,6 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   .text_cont {
     color: #ffffff;
     font-size: 23px;
-    cursor: pointer;
   }
 
   .icons {
@@ -1508,4 +1508,8 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
     bottom: 12px;
     right: 163px;
     color: #ffd800;
+}
+
+.iScrollIndicator {
+    cursor: pointer;
 }

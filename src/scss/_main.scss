@@ -355,14 +355,48 @@ body {
     }
   }
   
-  img {
+  .img {
     display: block;
     width: 100%;
     overflow: hidden;
-    background-color: #ffffff
+    background-color: #000000;
+    position: relative;
+    
+    .preloader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -15px 0 0 -15px;
+    }
   }
   
-  &.i-photo__x {}
+  .typeB &.i-photo__x {
+    .img {
+      width: 432px;
+      height: 174px;
+    }
+  }
+  
+  .typeB &.i-photo__xx {
+    .img {
+      width: 432px;
+      height: 296px;
+    }
+  }
+
+  .typeA &.i-photo__x {
+    .img {
+      width: 432px;
+      height: 296px;
+    }
+  }
+  
+  .typeA &.i-photo__xx {
+    .img {
+      width: 432px;
+      height: 174px;
+    }
+  }
 
   &:first-child {
     margin: 0 0 10px 0;
@@ -508,8 +542,8 @@ body {
     .img {
       overflow: hidden;
       width: 100%;
-      // height: 286px;
-      background-color: #ffffff;
+      height: 286px;
+      background-color: #000000;
     }
     .btn {
       text-transform: uppercase;
@@ -599,11 +633,16 @@ body {
     }
   }
   
-  img {
-    display: block;
-    width: 100%;
-    max-width: 100%;
+  .img {
     cursor: pointer;
+    position: relative;
+    
+    .preloader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -15px 0 0 -15px;
+    }
   }
 
   
@@ -1411,4 +1450,23 @@ body {
     font-size: 14px;
     line-height: 20px;
   }
+}
+
+.btn-scroll {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 100px;
+    margin-top: -50px;
+    cursor: pointer;
+}
+
+.btn-scroll.left {
+    left: 30px;
+    @include oneline-sprite($icons_x2, imgoL, $retina: true);
+}
+
+.btn-scroll.right {
+    right: 30px;
+    @include oneline-sprite($icons_x2, imgoR, $retina: true);
 }

@@ -79,6 +79,8 @@
 
         <div id="news" ng-switch-when="news" class="page" ng-controller="mediaController">
             <div class="b-content">
+                <div class="btn-scroll left" ng-click="scroll_left()" ng-show="show_scroll_left"></div>
+                <div class="btn-scroll right" ng-click="scroll_right()" ng-show="show_scroll_right"></div>
                 <div class="b-content_inside">
                     <div class="w-tab bottom" ng-if="state.selectedPageData.types.length > 1">
                         <ul class="tab">
@@ -97,6 +99,7 @@
                                         <div class="i-news__content" id="itm{{item.id}}">
                                             <div class="img" animate-image-load duration="1" img-url="item.img" img-w="448" img-h="286">
                                                 <img alt="img" navigate-on-click="#news/{{selectedType.label}}/{{item.id}}"/>
+                                                <img class="preloader" src="image/preloader_small_black.gif" />
                                             </div>
                                             <div class="news">
                                                 <h3>{{item.short_desc}}</h3>
@@ -130,7 +133,7 @@
                              data-title="selectedItem.short_desc"
                              data-description="selectedItem.full_desc"
                              data-image="site_url + selectedItem.img"
-                             showcounts="true">
+                             showcounts="false">
                             <li class="ng-social-facebook"><div class="ico fb" data-content="12"></div></li>
                             <li class="ng-social-google-plus"><div class="ico gp" data-content="416"></div></li>
                             <li class="ng-social-twitter"><div class="ico twitter" data-content="22"></div></li>
@@ -144,6 +147,8 @@
         
         <div id="media" ng-switch-when="media" class="page" ng-controller="mediaController">
             <div class="b-content">
+                <div class="btn-scroll left" ng-click="scroll_left()" ng-show="show_scroll_left"></div>
+                <div class="btn-scroll right" ng-click="scroll_right()" ng-show="show_scroll_right"></div>
                 <div class="b-content_inside">
                     <div class="w-tab  bottom" ng-if="state.selectedPageData.types.length > 1">
                         <ul class="tab">
@@ -157,10 +162,11 @@
                             <div class="scrollCont">
                                 <div class="mediaCont">
                                     <div ng-switch="selectedType.type">
-                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1">
+                                        <div ng-switch-when="photo" class="i-photo__group" ng-repeat="group in selectedType.items track by no_cache()" animate-alpha-shift-x shift="15" delay="$index*0.1" ng-class="{typeA: $even, typeB: $odd}">
                                             <div ng-repeat="item in group track by $index" class="i-photo" ng-class="{'i-photo__xx': $even, 'i-photo__x': $odd}" id="itm{{item.id}}">
                                                 <div class="img" animate-image-load duration="1" img-url="item.src">
                                                     <img alt="img" />
+                                                    <img class="preloader" src="image/preloader_small_black.gif" />
                                                 </div>
                                                 <div class="w-share" navigate-on-click="{{site_url + '#media/' + selectedType.label + '/' + item.id}}">
                                                     <div class="b-share">
@@ -169,7 +175,7 @@
                                                                  data-title="'Scent of Rain and Lighntning Photo'"
                                                                  data-description="''"
                                                                  data-image="site_url + item.src"
-                                                                 showcounts="true">
+                                                                 showcounts="false">
                                                                  
                                                                 <li><a ng-href="#media/{{selectedType.label}}/{{item.id}}" class="i-plus" ></a></li>
                                                                 <li class="ng-social-facebook"><a class="i-facebook"></a></li>
@@ -221,7 +227,7 @@
                          data-url="site_url + '#media/' + selectedType.label + '/' + selectedItem.id"
                          data-title="selectedItem.desc"
                          data-image="site_url + selectedItem.src"
-                         showcounts="true">
+                         showcounts="false">
                         <li class="ng-social-facebook"><div class="ico fb"></div></li>
                         <li class="ng-social-google-plus"><div class="ico gp"></div></li>
                         <li class="ng-social-twitter"><div class="ico twitter"></div></li>
@@ -433,7 +439,7 @@
                                                          data-title="'Scent of Rain and Lighntning Photo'"
                                                          data-description="''"
                                                          data-image="site_url + item.src"
-                                                         showcounts="true">
+                                                         showcounts="false">
                                                         <li><a class="i-plus" ng-href="{{item.src_big}}" target="_blank"></a></li>
                                                         <li class="ng-social-facebook"><a class="i-facebook"></a></li>
                                                         <li class="ng-social-google-plus"><a class="i-google_plus"></a></li>

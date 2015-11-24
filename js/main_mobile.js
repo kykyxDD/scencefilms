@@ -355,4 +355,4 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
         state.pageToChange = 'home'
         $s.$apply()
     }
-}])
+}]);

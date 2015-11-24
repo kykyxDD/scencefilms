@@ -1,4 +1,4 @@
-﻿(function() {
+﻿!function() {
 
 	ScreenObject = {
 	
@@ -256,4 +256,5 @@
 		}
 	}
 
-})()
+}();
+

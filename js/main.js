@@ -331,7 +331,6 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     
     var title = $doc[0].querySelector(".p-title h1")
     var title_animator = new TextAnimator(title, 1.4, 0)
-    console.log("title", title)
 
     v.transition.onOpened = function() {
 
@@ -363,8 +362,6 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
         v.main_menu.show_header(0.3)
 
         v.background.play()
-        
-        console.log("transition closed")
     }
     
     function on_bg_loaded(callback) {
@@ -388,7 +385,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     var doc = $doc[0]
     var scroll_cont = doc.querySelector('.b-text .text')
     var text_cont = scroll_cont.firstElementChild
-    var scroll = new IScroll(scroll_cont, {useTransition: false, scrollbars: true, mouseWheel: true})
+    var scroll = new IScroll(scroll_cont, {useTransition: false, interactiveScrollbars: true, scrollbars: true, mouseWheel: true})
     ScreenObject.decorate_element.apply(scroll_cont)
     
     onResize()
@@ -460,9 +457,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     }
     
 }])
-.controller("mediaController", ["$scope", "$document", "$window", "$timeout", "appState", "view", "navigation", "$location", function($s, $doc, $w, $t, state, v, nav, $l) {
-
-    console.log("media controller restart")
+.controller("mediaController", ["$scope", "$document", "$window", "$timeout", "$interval", "appState", "view", "navigation", "$location", function($s, $doc, $w, $t, $i, state, v, nav, $l) {
 
     var doc = $doc[0];
 
@@ -471,13 +466,16 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     var items_cont = scroll_cont.querySelector(":first-child")
     var media_data = state.selectedPageData
     var cache_counter = 0
+    var update_buttons = $i(update_scroll_buttons, 100)
 
     var scroll = new IScroll(scroll_cont, {scrollX: true, useTransition: false, mouseWheel: true})
 
     angular.element($w).on('resize', onResize)
     $t(onResize)
-
+    
     $s.selectedType = {}
+    $s.show_scroll_left = false
+    $s.show_scroll_right = false
     
     $s.$on('$destroy', clean_up)
     $s.$on('$locationChangeSuccess', on_location_change)
@@ -487,13 +485,9 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     function on_location_change(ev) {
         var params = nav.params()
         
-        console.log("on_location_change", params)
-
         if (params) {
             var type = params[0]
             var id = params[1]
-            
-            console.log("type", type, "id", id)
             
             selectType(type)
             
@@ -514,6 +508,7 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
         popup && popup.destroy()
         scroll.destroy()
         angular.element($w).off('resize', onResize)
+        $i.cancel(update_buttons)
     }
     
     function popup_factory(type) {
@@ -581,7 +576,28 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
         scroll_cont.style.width = cont_w + "px"
         items_cont.style.width = content_w + "px"
         scroll.refresh()
+        update_scroll_buttons()
         popup && popup.resize($w.innerWidth, $w.innerHeight)
+    }
+    
+    function scroll_by(dx) {
+        
+        var w = $s.selectedType.item_width
+        var tx = scroll.x + dx
+        if (tx > 0) tx = 0
+        else if (tx < scroll.maxScrollX) tx = scroll.maxScrollX
+        
+        scroll.scrollTo(tx, 0, 1000)
+    }
+    
+    function update_scroll_buttons() {
+        if (scroll.wrapperWidth < scroll.scrollerWidth) {
+            $s.show_scroll_left = scroll.x < 0
+            $s.show_scroll_right = scroll.x > scroll.maxScrollX
+        }
+        else {
+            $s.show_scroll_left = $s.show_scroll_right = false
+        }
     }
     
     $s.animateMenuItems = function() {
@@ -618,6 +634,14 @@ var app = angular.module('app', ['mobile', 'directives', 'ngSanitize', 'ngSocial
     
     $s.closePopup = function() {
         popup.hide()
+    }
+    
+    $s.scroll_left = function() {
+        scroll_by($s.selectedType.item_width)
+    }
+    
+    $s.scroll_right = function() {
+        scroll_by(-$s.selectedType.item_width)
     }
     
 }])

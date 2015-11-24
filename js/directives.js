@@ -110,11 +110,12 @@ angular.module('directives', [])
 
             var div = el[0]
             var img = div.querySelector("img")
+            var preloader = div.querySelector(".preloader")
             var duration = $s.duration || 1
             var url = $s.url
             
             if (!img) {
-                $doc[0].createElement("img")
+                img = $doc[0].createElement("img")
                 div.appendChild(img)
             }
 
@@ -141,6 +142,10 @@ angular.module('directives', [])
                 img.alpha = 1
                 TweenLite.from(img, duration, {alpha: 0, ease: Linear.easeNone})
                 TweenLite.from(img, duration/2, {x: -dx, y: -dy, scaleX: oversize, scaleY: oversize, ease: Cubic.easeOut})
+                
+                if (preloader) {
+                    preloader.style.display = "none"                    
+                }
             }
             
             $s.$on('$destroy', function() {
