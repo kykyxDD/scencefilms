@@ -20,7 +20,6 @@ TextAnimator.prototype = {
         TweenLite.killTweensOf(this)
         that.index = 0
         this.field.innerHTML = ""
-        //that.update()
         TweenLite.to(that, that.duration, {index: 1, onUpdate: function() { that.update()}, delay: that.delay + additional_delay})
     },
     
@@ -36,19 +35,6 @@ TextAnimator.prototype = {
         var i
         this.field.innerHTML = ""
         
-        /*
-        if (n < this.timing_for_minuces) {
-            
-            var subLen = Math.ceil(this.text.length*n / this.timing_for_minuces)
-            
-            for (i=0;i<subLen;i++) {
-                this.field.innerHTML += text.charCodeAt(i) != 13 ? "-" : "\n"
-            }
-            
-            return;
-        }
-        */
-        
         if (n >= 1) {
             this.field.innerHTML = this.text
             return
@@ -63,12 +49,6 @@ TextAnimator.prototype = {
         for(i=0; i<=0; i++) {
             this.field.innerHTML += String.fromCharCode(Math.ceil(Math.random()*40)+60)
         }
-        
-        /*
-        for(i=subLen; i<this.text.length;i++) {
-            this.field.innerHTML += this.text.charCodeAt(i) != 13 ? "-" : "\n"
-        }
-        */
     },
 
     showLettersBack: function(n) {

@@ -1,18 +1,16 @@
-extract=":JOIN /anchor/ { s/.*\[\(.*\)\]/\\1/; t TRIM; N; b JOIN; :TRIM; s/^\s*'\|',\?$$//gm; p }"
-scripts=$(shell sed -n "$(shell echo $(extract) | sed 's/anchor/scripts.html5/')" index.html)
+extract=":JOIN /anchor/ { s/.*<!-- start of common.js -->\(.*\)<!-- end of common.js -->/\\1/; t TRIM; N; b JOIN; :TRIM; s/<script//gm; s/<\/script>//gm; s/src='//gm; s/'>//gm; p }"
+scripts=$(shell sed -n "$(shell echo $(extract) | sed 's/anchor/<!-- start of common.js -->/')" index.html)
 
-build: build/index.html build/common.js
+build: build/index.html build/css/screen.css build/common.js
 
-build/index.html: index.html
+build/index.html:
 	cp index.html $@
-	sed -i ':JOIN /scripts.html5/ { s/\[.*\]/["common.js"]/; t END; N; b JOIN }; :END' $@
+	sed -i ':JOIN /<!-- start of common.js -->/ { s:<!-- start of common.js -->.*<!-- end of common.js -->:<script src="common.js"></script>:; t END; N; b JOIN }; :END' $@
+
+build/css/screen.css:
+	cp css/screen.css $@
 
 build/common.js: $(scripts)
-	uglifyjs $^ --compress --mangle --output $@ 
-	# uglifyjs puts "use strict" to start of resulting file - make troubles
-	sed -i 's/^"use strict";//' $@
-	# and removes not used variables - IE gets bleeding on setter without arguments
-	sed -i 's/\(set \w\+\)()/\1(_)/' $@
-
+	uglifyjs $^ --output $@
 
 .PHONY: build
