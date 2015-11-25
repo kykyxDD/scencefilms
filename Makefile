@@ -2,6 +2,7 @@ extract=":JOIN /anchor/ { s/.*<!-- start of common.js -->\(.*\)<!-- end of commo
 scripts=$(shell sed -n "$(shell echo $(extract) | sed 's/anchor/<!-- start of common.js -->/')" index.html)
 
 build: build/index.html build/css/screen.css build/common.js
+	mkdir build -p
 
 build/index.html:
 	cp index.html $@
