@@ -424,6 +424,9 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   display: table-cell;
   vertical-align: middle;
 }
+body.mobile #content .page {
+  display: block;
+}
 
 #preloader {
   position: fixed;
@@ -561,7 +564,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   position:relative;
   top: -55px;
   bottom:auto;
-  background: url('bg/bg_page.jpg');
+  background: url('../image/bg/bg_page.jpg');
   background-size:cover;
   -moz-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
@@ -576,7 +579,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   left: 0;
   width: 39%;
   height: 25%;
-  background: inline-image('imgoL.png') no-repeat;
+  background: url('../image/icon_x2/imgoR.png') no-repeat;
   background-size: 100% auto;
   background-position: left top;
 
@@ -588,7 +591,7 @@ body.makers .menu_cont .cont_list_menu.itm_makers{
   right: 0;
   width: 39%;
   height: 25%;
-  background: inline-image('imgoR.png') no-repeat;
+  background: url('../image/icon_x2/imgoL.png') no-repeat;
   background-position: right top;
   background-size: 100% auto;
   z-index: -1;
