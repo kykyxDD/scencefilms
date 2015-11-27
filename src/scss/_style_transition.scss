@@ -573,13 +573,15 @@ body.mobile #content .page {
   transform: rotate(0deg);
 }
 #side_page_right.mobile_squary:before{
-  @include oneline-sprite($icons_x2, imgoR, $retina: true);
-  background-position:-498px 0;
+  background: url('../image/imgoL.png') no-repeat;
+  // @include oneline-sprite($icons_x2, imgoR, $retina: true);
+  // background-position:-498px 0;
   left: 0;
 }
 #side_page_right.mobile_squary:after{
-  @include oneline-sprite($icons_x2, imgoL, $retina: true);
-  background-position:-428px 0;
+  background: url('../image/imgoR.png') no-repeat;
+  // @include oneline-sprite($icons_x2, imgoL, $retina: true);
+  // background-position:-428px 0;
   z-index: -1;
   right: 0;
 }
@@ -588,11 +590,13 @@ body.mobile #content .page {
 #side_page_right.mobile_squary:after{
   content: '';
   position:absolute;
-  @include transform(scale(1.8));
-  background-size: auto !important;
-  top:0;
+  // @include transform(scale(1.8));
+  // background-size: auto !important;
+  background-size: contain;
+
+  top:-7%;
   
-  width: 32%;
+  width: 39%;
   height: 25%;
 }
 
