@@ -573,13 +573,14 @@ body.mobile #content .page {
   transform: rotate(0deg);
 }
 #side_page_right.mobile_squary:before{
-  background: url('../image/imgoL.png') no-repeat;
+
+  background: inline-image('../image/imgoL.png');
   // @include oneline-sprite($icons_x2, imgoR, $retina: true);
   // background-position:-498px 0;
   left: 0;
 }
 #side_page_right.mobile_squary:after{
-  background: url('../image/imgoR.png') no-repeat;
+  background: inline-image('../image/imgoR.png');
   // @include oneline-sprite($icons_x2, imgoL, $retina: true);
   // background-position:-428px 0;
   z-index: -1;
@@ -593,8 +594,9 @@ body.mobile #content .page {
   // @include transform(scale(1.8));
   // background-size: auto !important;
   background-size: contain;
+  background-repeat:no-repeat;
 
-  top:-7%;
+  top:-7.6%;
   
   width: 39%;
   height: 25%;
