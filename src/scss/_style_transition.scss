@@ -573,29 +573,29 @@ body.mobile #content .page {
   transform: rotate(0deg);
 }
 #side_page_right.mobile_squary:before{
-  content: '';
-  position:absolute;
-  top:-7%;
+  @include oneline-sprite($icons_x2, imgoR, $retina: true);
+  background-position:-498px 0;
   left: 0;
-  width: 39%;
-  height: 25%;
-  background: url('../image/icon_x2/imgoR.png') no-repeat;
-  background-size: 100% auto;
-  background-position: left top;
-
 }
+#side_page_right.mobile_squary:after{
+  @include oneline-sprite($icons_x2, imgoL, $retina: true);
+  background-position:-428px 0;
+  z-index: -1;
+  right: 0;
+}
+
+#side_page_right.mobile_squary:before,
 #side_page_right.mobile_squary:after{
   content: '';
   position:absolute;
-  top:-7%;
-  right: 0;
-  width: 39%;
+  @include transform(scale(1.8));
+  background-size: auto !important;
+  top:0;
+  
+  width: 32%;
   height: 25%;
-  background: url('../image/icon_x2/imgoL.png') no-repeat;
-  background-position: right top;
-  background-size: 100% auto;
-  z-index: -1;
 }
+
 
 #side_page_right.mobile_squary .cont_rhom{
   position: static;
