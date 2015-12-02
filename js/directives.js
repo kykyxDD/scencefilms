@@ -224,3 +224,29 @@ angular.module('directives', [])
         }
     }
 }])
+.directive('fitTextToSize', ['$document', '$window', function($doc, $w) {
+    
+    return {
+
+        link: function($s, $el, $attr) {
+
+            var el = $el[0]
+            var def_style = $w.getComputedStyle(el)
+            var def_size = parseInt(def_style.fontSize)
+        
+            var watcher = function (newValue, oldValue) {
+                for (var i=0; el.scrollHeight > el.clientHeight; i++) {
+                    el.style.fontSize = (def_size-i) + "px"
+                }
+            }
+
+            var expr = function() {
+                return el.textContent
+            }
+
+            $s.$watch(expr, watcher)
+        }
+        
+    }
+    
+}])
