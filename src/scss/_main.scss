@@ -1394,6 +1394,10 @@ body {
   .w-tab a {
     font-size: 18px;
   }
+  #news .i-news.read .close,
+  #news .i-news.read .close_1{
+    display: none !important;
+  }
 }
 
 @media #{$mediaE} {
