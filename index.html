@@ -398,7 +398,7 @@
                                         <h3>{{item.short_desc}}</h3>
                                         <div class="w-time"><span class="time">{{item.date}}</span></div>
                                         <p class="mobile_text_cont" ng-bind-html="item.full_desc | unsafe"></p>
-                                        <a class="btn all" tap='read_all(item)'>read all</a>
+                                        <a class="btn all" tap='read_all(item, "photo")'>read all</a>
                                         <a class="btn close" tap='close_all(item)'>close</a>
                                         <a class="btn close_1" tap='close_all(item)'>+</a>
                                     </div>

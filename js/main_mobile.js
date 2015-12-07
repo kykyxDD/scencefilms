@@ -19,32 +19,37 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
     }
     function offset_top(eID) {
         var elm = document.getElementById(eID);
-        var y = elm.offsetTop;
-        var node = elm;
-        while (node.offsetParent && node.offsetParent != document.body) {
-            node = node.offsetParent;
-            y += node.offsetTop;
-        } return y;
+        if (elm) {
+            var y = elm.offsetTop;
+            var node = elm;
+            while (node.offsetParent && node.offsetParent != document.body) {
+                node = node.offsetParent;
+                y += node.offsetTop;
+            } return y;
+        }
+        
+        return 0
     }
 
     function switch_page() {
         var params = nav.params();
         if((state.pageToChange === 'cast' || state.pageToChange === 'makers') && params !== ''){
-            var top = offset_top(params);
+            var top = offset_top(params.pop());
             $window.scrollTo(0, top);
         } else if((state.pageToChange === 'news') && params !== ''){
-            var top = offset_top('itm'+params);
-            parseInt(params)
+            var id = params.pop()
+            var top = offset_top('itm'+id);
+
             var data = state.data.pages;
             data.forEach(function(elem){
                 if(elem.page == 'news'){
                     elem.pages.forEach(function(pages){
-                        if(pages.id == params){
+                        if(pages.id == id){
                             pages.read = true;
 
                             $s.$apply();
                             $t(function(){
-                                var top = offset_top('itm'+params)
+                                var top = offset_top('itm'+id)
                                 $window.scrollTo(0, top);
                             },300)
                             
@@ -79,10 +84,10 @@ app.controller("mobileController", ["$scope", "$document", "$window", "$timeout"
             },1000)
         }
     }
-    $s.read_all = function(itm){
+    $s.read_all = function(itm, type){
         itm.read = true;
-        console.log(itm)
-        $window.location.hash = '#/'+state.pageToChange+'/'+itm.id;
+        var hash_parts = []
+        $window.location.hash = '#/' + state.pageToChange + (type ? '/'+type : '') + '/' + itm.id;
         $t(function(){
             $s.goScroll('itm'+itm.id)
         },300)
