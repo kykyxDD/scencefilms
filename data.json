@@ -219,6 +219,17 @@
                     "desc": "A Kansas City native, Jeff Johnson is a successful business entrepreneur with his hands in the medical, internet, real estate and sales industries. In addition, he has experience in banking and lending throughout the Kansas City market. <br/><br/> In 2012, Jeff met writers, Casey Twenter and Jeff Robison, and financed their debut film, The Jogger. The Jogger went on to win many awards for Best Narrative film in many film festivals nationwide. Afterwards, Jeff was producer on Rudderless, the directorial film debut by William H, Macy. Rudderless debuted at Sundance in 2014 with a theatrical release later that year. <br/><br/> Due to their collaboration with The Jogger, Jeff, along with Casey Twenter an Jeff Robison, launched a new production company, No Coast Entertainment. This new venture allows Jeff to offer a wealth of business experience and expertise in the many aspects of film production."
                 },
                 {
+                    "id": 46,
+                    "bg_ref": "kevin",
+                    "page": "kevin_waller",
+                    "img_port": "image/img/fillh.jpg",
+                    "img_land": "image/img/fillhL.jpg",
+                    "title": "KEVIN WALLER",
+                    "role": "Producer",
+                    "name": "KEVIN WALLER",
+                    "desc": "Kevin Waller is the President and owner of Gerson Productions and Gerson Capital. Through and related to his companies, he has raised money for small business ventures; consulted, created, and prepared financial projections for companies preparing for sale and/or seeking investment capital or strategic alliances, as well as consulted in the evaluation and strategic processes of the purchase and sale of companies and their assets. Having worked with many deal structures, Kevin provides the skillset necessary to navigate the deal specifics of any venture from an operational, managerial, practical, and financial standpoint.<br/><br/>After earning his degree from the University of Oklahoma, Kevin emerged as an entrepreneur engaging in several business ventures. During his tenure, he has served as an owner and President of two insurance entities, one specializing in commercial business concerns, as well as a start-up venture created to deliver healthcare benefits to Vietnamese and Philippine Nationals. Kevin was privileged to interact and associate with several distinguished government dignitaries, including the honor of serving on the same board as former Chairman of the Joint Chiefs of Staff, Admiral William (James) Crowe (Jr).<br/><br/>Kevin’s entrepreneurial ventures led him to the entertainment industry where he just recently produced, alongside NoCoast Entertainment, the Indie mystery drama THE SCENT OF RAIN AND LIGHTNING based on the book by Nancy Pickard and directed by Blake Robbins.<br/><br/>He is most currently producing MISSION BLACKIST, a movie based on the similarly titled book “Mission: Black List #1” by Eric Maddox with Davin Seay, the real-life story about the interrogator who tracked down Saddam Hussein.”  The screenplay was adapted by Erik Jendresen (Band Of Brothers), Dylan Kussman and Trace Sheehan.  With Rodrigo Cortes (Buried) set to direct, the project is currently casting and set to shoot in 2017.<br/><br/>Kevin also has several projects in development, both scripted and non-scripted, including a second collaboration with the No Coast Entertainment team as a producer on the adult coming of age drama, THE SWIMMING LESSON; currently casting."
+                },
+                {
                     "id": 45,
                     "bg_ref": "embacement",
                     "page": "embankment_films",
@@ -571,6 +582,21 @@
             "img": "image/bg/filmmakers_debora.jpg"
         },
         
+        "kevin": {
+            "lines": [
+                [715.35,288.7,681.15,271.6,639.45,265.2,580.65,262,518.6,270.55,464.1,280.15,405.25,294.05,345.4,305.8,297.25,321.85,286.55,201.05,300.5,145.45,322.95,116.55,344.3,100.5,384.95,77,455.5,48.1,502.55,37.45,598.8,54.55,655.5,85.55,688.65,117.6,715.35,145.45,730.35,173.25,723.9,198.9,707.9,219.2,718.55,247,719.65,278,716.45,289.8,731.4,316.5,746.4,341.1,748.5,360.35,734.6,358.2,695.05,335.75,646.95,327.2,593.45,327.2,528.25,341.1,474.75,355,439.5,362.5,395.65,361.45,362.5,342.2,344.3,321.85],
+                [343.25,383.9,319.7,342.2,298.35,327.2,272.65,320.8,265.2,332.55,264.1,356.1,257.7,364.65,247,384.95,240.6,414.9,248.1,442.7,266.25,471.55,291.9,489.75,310.1,486.55,320.8,481.2,334.7,467.3,335.75,448.05,343.25,487.6,352.85,529.3,376.4,575.3,421.3,637.3,458.75,679,490.8,712.15,530.4,741.05,572.1,747.45,597.75,741.05,626.6,716.45,648,685.45,654.4,646.95,660.85,609.5,671.5,571,675.8,535.7,684.35,504.7,690.75,478,708.95,475.85,725,457.65,739.95,414.9,741.05,388.15,732.5,371.05,715.35,364.65,705.75,365.7],
+                [5.35,683.3,39.55,695.05,91.95,697.2,127.25,688.65,159.35,675.8,188.2,672.6,218.15,679,219.2,662.95,234.2,646.95,236.3,637.3,226.7,602,248.1,577.45,285.5,557.1,320.8,546.4,350.75,552.85,365.7,609.5,363.55,645.85,366.75,673.65,377.45,707.9,398.85,738.9,425.6,770.95,453.4,789.15,475.85,809.45,496.15,811.6,522.9,818,545.35,833,568.85,881.1,584.9,921.75,595.6,1025.45,593.45,1072.5],
+                [584.9,886.45,598.8,853.3,617,811.6,630.9,772.05,653.35,728.2,679,704.65,700.4,679,722.85,666.2,725,642.65,715.35,612.7,705.75,583.85,684.35,561.4,671.5,556.05],
+                [266.25,353.95,266.25,353.95,283.35,349.65,307.95,356.1,321.85,376.4,332.55,399.9,338.95,426.65,345.4,438.4,361.45,453.4,375.35,488.65,389.25,532.5,401,558.2,414.9,582.75,422.4,608.45,428.8,627.7,446.95,646.95,463,659.75,465.15,623.4,467.3,595.6,484.4,567.8,515.4,551.75,537.85,542.15,537.85,542.15,537.85,542.15,577.45,552.85,593.45,548.55,606.3,540,623.4,543.2,641.6,569.95,654.4,609.5,655.5,636.25],
+                [433.05,384.95,460.85,374.25,485.45,374.25,515.4,382.8,537.85,396.7,550.7,413.8,559.25,441.6,571,466.2,574.2,490.8,561.4,515.4,565.65,533.6,581.7,547.5],
+                [745.3,679,781.65,679,825.5,683.3,898.2,695.05,968.8,698.25,1159.15,697.2,1319.5,695.05,1535.5,692.9,1595.4,691.85,1590.05,669.4,1683.1,660.85,1688.45,671.5,1844.55,671.5,1925.8,669.4,1920.5,730.35,1687.35,741.05,1698.05,1029.75],
+                [1468.15,1032.95,1458.55,779.5,1596.5,778.45,1602.9,1034,1469.25,1034],
+                [1292.8,781.65,1411.5,778.45,1420.05,1038.3,1300.3,1038.3,1293.85,783.8,1298.15,1042.55,1283.15,1001.95,1267.15,983.75,1251.1,943.15,1227.55,920.65,1180.5,902.5,1140.95,889.65,1126,857.6,1107.8,829.8,1078.95,809.45,1037.25,790.2,1037.25,790.2,1037.25,790.2,1015.85,766.7,933.5,712.15,895,691.85]
+            ],
+            "img": "image/bg/filmmakers_kev.jpg"
+        },
+        
         "embacement": {
             "lines": [[678,16,684,79,692,156,700,254,712,364,723,476,732,548,742,637,757,719,768,775,775,811,793,874,804,907,821,938,831,947,844,948,861,942,878,916,895,879,906,840,918,796,928,741,942,644,946,558,950,475],
                 [869,133,853,160,840,209,834,241,826,299,819,356,813,409,808,462,805,512,803,537,798,594,793,641,787,687,779,723,772,747,767,762],
@@ -629,10 +655,6 @@
                 [438,787,448,773,460,761,469,753,478,747,484,738]
             ],
             "img": "image/bg/filmmakers_jeff.jpg"
-        },
-        
-        "kevin": {
-            "img": "image/bg/filmmakers_kevin.jpg"
         },
         
         "scott": {
