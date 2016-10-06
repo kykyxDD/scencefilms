@@ -230,6 +230,17 @@
                     "desc": "Kevin Waller is the President and owner of Gerson Productions and Gerson Capital. Through and related to his companies, he has raised money for small business ventures; consulted, created, and prepared financial projections for companies preparing for sale and/or seeking investment capital or strategic alliances, as well as consulted in the evaluation and strategic processes of the purchase and sale of companies and their assets. Having worked with many deal structures, Kevin provides the skillset necessary to navigate the deal specifics of any venture from an operational, managerial, practical, and financial standpoint.<br/><br/>After earning his degree from the University of Oklahoma, Kevin emerged as an entrepreneur engaging in several business ventures. During his tenure, he has served as an owner and President of two insurance entities, one specializing in commercial business concerns, as well as a start-up venture created to deliver healthcare benefits to Vietnamese and Philippine Nationals. Kevin was privileged to interact and associate with several distinguished government dignitaries, including the honor of serving on the same board as former Chairman of the Joint Chiefs of Staff, Admiral William (James) Crowe (Jr).<br/><br/>Kevin’s entrepreneurial ventures led him to the entertainment industry where he just recently produced, alongside NoCoast Entertainment, the Indie mystery drama THE SCENT OF RAIN AND LIGHTNING based on the book by Nancy Pickard and directed by Blake Robbins.<br/><br/>He is most currently producing MISSION BLACKIST, a movie based on the similarly titled book “Mission: Black List #1” by Eric Maddox with Davin Seay, the real-life story about the interrogator who tracked down Saddam Hussein.”  The screenplay was adapted by Erik Jendresen (Band Of Brothers), Dylan Kussman and Trace Sheehan.  With Rodrigo Cortes (Buried) set to direct, the project is currently casting and set to shoot in 2017.<br/><br/>Kevin also has several projects in development, both scripted and non-scripted, including a second collaboration with the No Coast Entertainment team as a producer on the adult coming of age drama, THE SWIMMING LESSON; currently casting."
                 },
                 {
+                    "id": 47,
+                    "bg_ref": "dan",
+                    "page": "dan_koetting",
+                    "img_port": "image/img/dan.jpg",
+                    "img_land": "image/img/danL.jpg",
+                    "title": "DAN KOETTING",
+                    "role": "Producer",
+                    "name": "DAN KOETTING  PRODUCER",
+                    "desc": " Dan Koetting is a multifaceted business entrepreneur. He owns and operates several companies in the Financial, Real estate and Insurance industries. He is involved with and sits on the board of several charitable foundations and non-profit businesses. <br/><br/>Originally from Kansas city MO, Dan joined the U.S. Army at age 18 and then went on to school at the University of Missouri. After college, Dan moved from the Midwest to California. His love of the Arts and passion for film led him to his newest endeavor, the creation of an entertainment company called KP’s Remain. <br/>Together with No Coast Entertainment, he produced the feature film, THE SCENT OF RAIN AND LIGHTNING, which is the first film on his shingle.<br/><br/>Dan currently resides in Southern California with his wife and three children."
+                },
+                {
                     "id": 45,
                     "bg_ref": "embacement",
                     "page": "embankment_films",
@@ -597,6 +608,24 @@
             "img": "image/bg/filmmakers_kev.jpg"
         },
         
+        "dan": {
+            "lines": [
+                [220.3,1061.8,194.6,1019.05,170,960.25,146.5,901.45,136.85,850.1,134.75,819.1,140.1,784.85,151.85,733.55,157.2,700.4,159.35,686.5,154,675.8,157.2,660.85,170,638.4,182.85,597.75,211.7,533.6,234.2,483.35,249.15,456.6,268.4,441.6,305.8,418.1,343.25,399.9,377.45,382.8,405.25,367.85,415.95,363.55,411.7,342.2,409.55,318.65,393.5,282.3,388.15,243.8,387.1,209.6,390.3,160.4,395.65,134.75,407.4,108,423.45,89.8,451.25,72.7,483.35,62,522.9,68.45,546.4,79.15,563.5,99.45,577.45,121.9,582.75,158.25,586,179.65,584.9,192.5,591.35,187.15,597.75,191.4,596.65,213.85,598.8,230.95,597.75,248.1,591.35,260.9,582.75,271.6,572.1,270.55,573.15,295.15,578.5,329.35,595.6,335.75,634.1,347.5,679,361.45,714.3,373.2,757.05,388.15,774.2,399.9,790.2,420.25,812.65,466.2,828.7,496.15,840.5,531.45,855.45,564.6,867.2,590.25,875.75,604.15,878.95,619.15,890.75,674.75,903.55,727.15,907.85,758.15,908.9,769.9,913.2,784.85,906.75,816.95,890.75,881.1,876.85,931.35,852.25,984.85,838.35,1018,837.25,1047.9],
+                [276.95,1004.1,280.15,964.5,286.55,927.1,286.55,886.45,299.4,858.65,291.9,836.2,299.4,808.4,297.25,774.2,290.85,717.5,270.55,765.6,252.35,808.4,242.75,831.9,244.85,853.3,249.15,887.5,255.55,927.1,265.2,968.8,279.1,1006.2,291.9,1030.8,310.1,1038.3,324,1058.6,328.3,1067.15],
+                [701.45,1054.35,733.55,1041.5,744.25,1022.25,765.6,999.8,778.45,953.8,790.2,892.85,793.45,857.6,797.7,833,803.05,796.65,790.2,768.85,778.45,744.25,767.75,728.2,765.6,772.05,773.1,820.15,770.95,874.7,764.55,920.65,760.3,941,757.05,973.05,752.8,1014.75],
+                [413.8,363.55,413.8,379.6,420.25,395.65,433.05,409.55,452.3,422.4,476.9,429.85,501.5,427.7,529.3,418.1,549.6,406.35,563.5,392.45,579.55,374.25,587.05,358.2,591.35,343.25,588.1,331.5],
+                [159.35,688.65,171.1,700.4,193.55,714.3,217.05,727.15,243.8,736.75,267.35,737.8,281.25,734.6],
+                [752.8,686.5,775.25,680.1,802,669.4,827.65,654.4,847.95,642.65,858.65,637.3,869.35,626.6,878.95,617],
+                [386,196.75,398.85,185,418.1,182.85,443.75,182.85,468.35,182.85,495.1,181.8,520.75,180.7,538.95,186.05,545.35,197.8,547.5,210.65,540,227.75,527.15,237.4,511.15,236.3,494,230.95,482.25,218.15,474.75,206.4,474.75,195.7,475.85,188.2,458.75,191.4,455.5,205.3,448.05,223.5,435.2,236.3,413.8,239.5,398.85,232.05,387.1,216,387.1,196.75,387.1,195.7],
+                [408.5,317.6,419.15,329.35,441.6,345.4,459.8,355,471.55,352.85,495.1,355,518.6,345.4,541.05,327.2,552.85,309.05,559.25,294.05,572.1,269.45],
+                [788.1,412.75,844.75,438.4,889.65,417.05,943.15,394.55,974.15,383.9,997.65,386,1038.3,405.25,1071.45,413.8,1104.6,410.6,1154.85,399.9,1194.4,396.7,1223.3,397.8,1251.1,395.65,1277.8,397.8,1331.3,411.7,1392.25,428.8,1438.2,439.5,1471.35,433.05,1508.8,434.15,1543,438.4,1565.45,433.05,1601.8,414.9,1680.95,435.2,1714.1,442.7,1754.75,453.4,1805,464.1,1838.15,474.75,1874.5,474.75,1909.8,475.85,1920.5,476.9],
+                [882.2,644.8,896.1,615.9,912.1,629.8,923.9,617,935.65,646.95,948.5,619.15,960.25,643.7,977.35,611.65,982.7,624.5,983.75,606.3,1009.45,642.65,1020.1,611.65,1053.25,653.35,1090.7,605.25,1111,628.75,1134.55,624.5,1168.75,633.05,1200.85,652.3,1209.4,624.5,1237.2,652.3,1257.5,628.75,1278.9,644.8,1300.3,631.95,1314.2,644.8,1316.3,628.75,1331.3,653.35,1331.3,653.35,1331.3,653.35,1351.6,641.6,1367.65,667.25,1393.3,684.35,1489.55,686.5,1566.55,690.75,1629.6,687.55,1710.9,687.55,1796.45,690.75,1863.8,690.75,1911.9,688.65,1918.35,689.7],
+                [5.35,328.3,35.3,325.05,84.5,330.4,148.65,344.3,181.8,357.15,219.2,372.1,254.5,387.1,302.6,395.65,336.85,397.8,346.45,398.85],
+                [8.55,604.15,31,607.35,57.75,609.5,99.45,611.65,132.6,603.1,132.6,603.1,171.1,604.15,179.65,607.35],
+                [583.85,191.4,573.15,194.6,558.2,197.8,545.35,197.8]
+            ],
+            "img": "image/bg/filmmakers_dan.jpg"
+        },
         "embacement": {
             "lines": [[678,16,684,79,692,156,700,254,712,364,723,476,732,548,742,637,757,719,768,775,775,811,793,874,804,907,821,938,831,947,844,948,861,942,878,916,895,879,906,840,918,796,928,741,942,644,946,558,950,475],
                 [869,133,853,160,840,209,834,241,826,299,819,356,813,409,808,462,805,512,803,537,798,594,793,641,787,687,779,723,772,747,767,762],
